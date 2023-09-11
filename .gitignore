@@ -1,6 +1,11 @@
+# vscode
 History/
 globalStorage/
+workspaceStorage/
+
+# npm
 node_modules/
 package-lock.json
+
+# ts
 ts_compiled/
-workspaceStorage/
