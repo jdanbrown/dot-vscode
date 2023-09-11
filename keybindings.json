@@ -1,0 +1,571 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+
+  // Workspace
+  {"key": "ctrl+shift+r", "command": "workbench.action.reloadWindow"},
+  {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
+  {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
+  {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"},
+  {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
+  {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
+  {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
+  {
+    "key": "cmd+r",
+    "command": "workbench.action.gotoSymbol",
+    "when": "!inSearchEditor"
+  },
+  {"key": "shift+cmd+j", "command": "-workbench.action.search.toggleQueryDetails", "when": "inSearchEditor || searchViewletFocus"},
+  {"key": "shift+cmd+j", "command": "workbench.action.togglePanel"},
+
+  // Files
+  {"key": "cmd+o", "command": "-workbench.action.files.openFileFolder"},
+  {"key": "cmd+o", "command": "-workbench.action.files.openLocalFileFolder", "when": "remoteFileDialogVisible"},
+  // XXX advancedOpenFile can't open symlinks, and no longer appears more useful than the default openFile cmd 🤷
+  // {"key": "cmd+o", "command": "extension.advancedOpenFile"},
+  {"key": "cmd+o", "command": "workbench.action.files.openFile"},
+  {"key": "shift+cmd+backspace", "command": "fileutils.removeFile", "when": "editorFocus"},
+  {"key": "shift+cmd+c", "command": "-workbench.action.terminal.openNativeConsole", "when": "!terminalFocus"},
+  {"key": "shift+cmd+c", "command": "copyFilePath"},
+  {"key": "ctrl+cmd+c", "command": "search.action.copyPath", "when": "fileMatchOrFolderMatchWithResourceFocus"},
+
+  // Panes ("editors" and "panels")
+  {"key": "ctrl+tab", "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"},
+  {"key": "ctrl+tab", "command": "workbench.action.nextEditorInGroup"},
+  {"key": "ctrl+shift+tab", "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"},
+  {"key": "ctrl+shift+tab", "command": "workbench.action.previousEditorInGroup"},
+  {"key": "cmd+h", "command": "workbench.action.focusLeftGroup"},
+  {"key": "cmd+k", "command": "-workbench.action.terminal.clear", "when": "terminalFocus && terminalProcessSupported"},
+  {"key": "cmd+k", "command": "workbench.action.focusAboveGroup"},
+  {"key": "cmd+j", "command": "-workbench.action.togglePanel"},
+  {"key": "cmd+j", "command": "workbench.action.focusBelowGroup"},
+  {"key": "cmd+l", "command": "-expandLineSelection", "when": "textInputFocus"},
+  {"key": "cmd+l", "command": "workbench.action.focusRightGroup"},
+  {"key": "ctrl+alt+cmd+l", "command": "workbench.action.splitEditorRight"},
+  {"key": "ctrl+alt+cmd+h", "command": "workbench.action.splitEditorLeft"},
+  {"key": "ctrl+alt+cmd+j", "command": "workbench.action.splitEditorDown"},
+  {"key": "ctrl+alt+cmd+k", "command": "workbench.action.splitEditorUp"},
+  {"key": "cmd+1", "command": "workbench.action.openEditorAtIndex1"},
+  {"key": "cmd+2", "command": "workbench.action.openEditorAtIndex2"},
+  {"key": "cmd+3", "command": "workbench.action.openEditorAtIndex3"},
+  {"key": "cmd+4", "command": "workbench.action.openEditorAtIndex4"},
+  {"key": "cmd+5", "command": "workbench.action.openEditorAtIndex5"},
+  {"key": "cmd+6", "command": "workbench.action.openEditorAtIndex6"},
+  {"key": "cmd+7", "command": "workbench.action.openEditorAtIndex7"},
+  {"key": "cmd+8", "command": "workbench.action.openEditorAtIndex8"},
+  {"key": "ctrl+1", "command": "-workbench.action.openEditorAtIndex1"},
+  {"key": "ctrl+2", "command": "-workbench.action.openEditorAtIndex2"},
+  {"key": "ctrl+3", "command": "-workbench.action.openEditorAtIndex3"},
+  {"key": "ctrl+4", "command": "-workbench.action.openEditorAtIndex4"},
+  {"key": "ctrl+5", "command": "-workbench.action.openEditorAtIndex5"},
+  {"key": "ctrl+6", "command": "-workbench.action.openEditorAtIndex6"},
+  {"key": "ctrl+7", "command": "-workbench.action.openEditorAtIndex7"},
+  {"key": "ctrl+8", "command": "-workbench.action.openEditorAtIndex8"},
+  {"key": "ctrl+9", "command": "-workbench.action.openEditorAtIndex9"},
+  {"key": "alt+cmd+k", "command": "workbench.action.moveEditorToAboveGroup"},
+  {"key": "alt+cmd+j", "command": "workbench.action.moveEditorToBelowGroup"},
+  {"key": "alt+cmd+h", "command": "workbench.action.moveEditorToLeftGroup"},
+  {"key": "alt+cmd+l", "command": "workbench.action.moveEditorToRightGroup"},
+  {"key": "ctrl+cmd+h", "command": "workbench.action.moveEditorLeftInGroup"},
+  {"key": "ctrl+cmd+l", "command": "workbench.action.moveEditorRightInGroup"},
+  {"key": "ctrl+cmd+z", "command": "workbench.action.toggleEditorWidths"}, // Zoom
+  {"key": "alt+cmd+t", "command": "-workbench.action.closeOtherEditors"}, // Dangerous, disable
+
+  // Lists
+  {"key": "ctrl+e", "command": "list.scrollDown", "when": "listFocus && !inputFocus"},
+  {"key": "ctrl+y", "command": "list.scrollUp", "when": "listFocus && !inputFocus"},
+  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "listFocus"},
+  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "listFocus"},
+
+  // vim
+  {"key": "ctrl+r", "command": "-workbench.action.openRecent"}, // Unshadow vim redo
+
+  // Symbols
+  {"key": "shift+cmd+r", "command": "workbench.action.showAllSymbols"},
+
+  // Multi-cursor
+  {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus"},
+  {"key": "alt+cmd+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus"},
+  {
+    "key": "cmd+u",
+    "command": "-cursorUndo",
+    "when": "textInputFocus"
+  },
+
+  // Search Editor
+  {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
+  {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
+  {
+    "key": "backspace",
+    "command": "search.searchEditor.action.deleteFileResults",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && inSearchEditor"},
+
+  // Project Manager
+  {"key": "ctrl+shift+p", "command": "projectManager.listProjectsNewWindow"},
+  {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
+
+  // Terminal
+  {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
+  {"key": "alt+cmd+t", "command": "workbench.action.terminal.new", "when": "terminalProcessSupported"},
+  {"key": "cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+
+  // Jupyter/notebook
+  {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "cmd+]", "command": "-editor.action.indentLines", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "shift+cmd+]", "command": "-workbench.action.nextEditor"},
+  {"key": "shift+cmd+[", "command": "-workbench.action.previousEditor"},
+  {"key": ", ,", "command": "workbench.action.files.save", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
+  {"key": "shift+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl"},
+  {"key": "i", "command": "notebook.cell.edit", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "shift+i", "command": "multiCommand.notebook.cell.edit.InsertMode", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "cmd+]", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "cmd+[", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "cmd+]", "command": "list.focusDown", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "cmd+[", "command": "list.focusUp", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus"},
+  //  - Kernel management
+  //    - TODO TODO YOU ARE HERE (these maybe all work now? try and see)
+  {"key": "ctrl+cmd+k", "command": "jupyter.switchKernel", "when": "notebookEditorFocused"},
+  {"key": "ctrl+c", "command": "jupyter.notebookeditor.interruptkernel", "when": "notebookEditorFocused"},
+  {"key": "0 0", "command": "jupyter.notebookeditor.restartkernel", "when": "notebookEditorFocused && !inputFocus"},
+  //  - Code reference for notebookEditorCursorAtBoundary
+  //    - https://github.com/microsoft/vscode/blob/f25f1abf/src/vs/workbench/contrib/notebook/common/notebookCommon.ts#L687-L688
+  {"key": "j", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'bottom'"},
+  {"key": "j", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'both'"},
+  {"key": "k", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'top'"},
+  {"key": "k", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'both'"},
+  //  - FIXME These stop working if you scrollDown/scrollUp while editing a cell and cause the cell to become off screen by ~half a page
+  //    - Looks like the problem is that all keyboard input stops working in this case (until you click/scroll to bring it back)
+  //    - This isn't a problem when you aren't editing a cell (i.e. list view works fine)
+  {"key": "ctrl+e", "command": "multiCommand:notebook.cell.quitEdit;list.scrollDown", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "ctrl+y", "command": "multiCommand:notebook.cell.quitEdit;list.scrollUp", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "ctrl+d", "command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageDown", "when": "notebookEditorFocused && listFocus && inputFocus"},
+  {
+    "key": "ctrl+u",
+    "command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp",
+    "when": "notebookEditorFocused && listFocus && inputFocus"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "markdown-checkbox.markCheckbox",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+enter",
+    "command": "-markdown-checkbox.markCheckbox",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "editor.action.toggleWordWrap"
+  },
+  {
+    "key": "alt+z",
+    "command": "-editor.action.toggleWordWrap"
+  },
+  {
+    "key": "shift+cmd+\\",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "sideBarFocus"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "shift+cmd+\\",
+    "command": "workbench.view.explorer",
+    "when": "!sideBarFocus"
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "-workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextSideBarView",
+    "when": "sideBarFocus"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousSideBarView",
+    "when": "sideBarFocus"
+  },
+  {
+    "key": "cmd+0",
+    "command": "workbench.action.zoomReset"
+  },
+  {
+    "key": "cmd+numpad0",
+    "command": "-workbench.action.zoomReset"
+  },
+  {
+    "key": "m",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "enter",
+    "command": "-renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "enter",
+    "command": "explorer.openAndPassFocus",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "key": "cmd+down",
+    "command": "-explorer.openAndPassFocus",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "cmd+]",
+    "command": "jupyter.gotoNextCellInFile",
+    "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+alt+]",
+    "command": "-jupyter.gotoNextCellInFile",
+    "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"
+  },
+  {
+    "key": "cmd+[",
+    "command": "jupyter.gotoPrevCellInFile",
+    "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+alt+[",
+    "command": "-jupyter.gotoPrevCellInFile",
+    "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+cmd+r",
+    "command": "jupyter.notebookeditor.runallcells"
+  },
+  {
+    "key": "ctrl+cmd+r",
+    "command": "jupyter.runallcells"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "jupyter.runcell"
+  },
+  {
+    "key": "ctrl+cmd+a",
+    "command": "jupyter.runallcellsabove.palette"
+  },
+  {
+    "key": "ctrl+cmd+b",
+    "command": "jupyter.runcurrentcellandallbelow.palette"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "jupyter.runcurrentcell",
+    "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-jupyter.runcurrentcell",
+    "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "shift+cmd+enter",
+    "command": "jupyter.runcurrentcelladvance",
+    "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-jupyter.runcurrentcelladvance",
+    "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "jupyter.notebookeditor.runselectedcell"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "l",
+    "command": "breadcrumbs.focusNextWithPicker",
+    "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+  },
+  {
+    "key": "h",
+    "command": "breadcrumbs.focusPreviousWithPicker",
+    "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+;",
+    "command": "-breadcrumbs.focus",
+    "when": "breadcrumbsPossible"
+  },
+  {
+    "key": "shift+cmd+o",
+    "command": "-workbench.action.gotoSymbol"
+  },
+  {
+    "key": "shift+cmd+o",
+    "command": "breadcrumbs.focusAndSelect",
+    "when": "breadcrumbsPossible"
+  },
+  {
+    "key": "shift+cmd+o",
+    "command": "breadcrumbs.selectEditor",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-editor.action.joinLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "editor.action.insertCursorAbove",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+cmd+up",
+    "command": "-editor.action.insertCursorAbove",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+cmd+m",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+m",
+    "command": "editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+f8",
+    "command": "-editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+cmd+m",
+    "command": "editor.action.marker.prev",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+alt+f8",
+    "command": "-editor.action.marker.prev",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+alt+cmd+m",
+    "command": "editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+f8",
+    "command": "-editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+cmd+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+down",
+    "command": "-editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+cmd+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+up",
+    "command": "-editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.action.findInFiles"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "search.action.openNewEditorToSide"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.view.search",
+    "when": "!searchViewletVisible"
+  },
+  {
+    "key": "j",
+    "command": "search.action.focusNextSearchResult",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "k",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "shift+f4",
+    "command": "-search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "/",
+    "command": "search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+/",
+    "command": "toggleSearchEditorRegex",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "alt+cmd+r",
+    "command": "-toggleSearchEditorRegex",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "toggleSearchEditorCaseSensitive",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "alt+cmd+c",
+    "command": "-toggleSearchEditorCaseSensitive",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "toggleSearchEditorWholeWord",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "alt+cmd+w",
+    "command": "-toggleSearchEditorWholeWord",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "decreaseSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "alt+-",
+    "command": "-decreaseSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "=",
+    "command": "increaseSearchEditorContextLines",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "alt+=",
+    "command": "-increaseSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "o",
+    "command": "search.action.openResult",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+o",
+    "command": "search.action.openResultToSide",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+=",
+    "command": "increaseSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "cmd+f",
+    "command": "search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "f4",
+    "command": "-search.action.focusNextSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "escape",
+    "command": "search.action.focusNextSearchResult",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "shift+cmd+backspace",
+    "command": "-search.searchEditor.action.deleteFileResults",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "r",
+    "command": "rerunSearchEditorSearch",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "-rerunSearchEditorSearch",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "-",
+    "command": "decreaseSearchEditorContextLines",
+    "when": "inSearchEditor && !searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "search.action.focusNextSearchResult",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "cmd+r",
+    "command": "rerunSearchEditorSearch",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+cmd+m",
+    "command": "fileutils.moveFile"
+  },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "-markdown-checkbox.createCheckbox",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+8",
+    "command": "highlightwords.addHighlight"
+  }
+]
