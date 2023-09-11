@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@types/crypto-js": "^4.0.2",
+    "@types/lodash": "^4.14.177",
+    "@types/node": "^16.11.11",
+    "@types/vscode": "^1.62.0",
+    "crypto-js": "^4.1.1"
+  }
+}
