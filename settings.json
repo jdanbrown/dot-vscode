@@ -1371,7 +1371,6 @@
   "markdown-checkbox.typeOfBulletPoint": "-",
   "scm.diffDecorationsGutterVisibility": "hover",
   "editor.wordBasedSuggestionsMode": "allDocuments",
-  "jupyter.interactiveWindowMode": "perFile",
   "explorer.openEditors.visible": 0,
   "breadcrumbs.symbolPath": "off",
   "dart.previewLsp": true,
@@ -1415,5 +1414,6 @@
   "update.mode": "manual",
   "git.openRepositoryInParentFolders": "never",
   "workbench.activityBar.visible": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
 
 }
