@@ -20,9 +20,10 @@
   // Files
   {"key": "cmd+o", "command": "-workbench.action.files.openFileFolder"},
   {"key": "cmd+o", "command": "-workbench.action.files.openLocalFileFolder", "when": "remoteFileDialogVisible"},
-  // XXX advancedOpenFile can't open symlinks, and no longer appears more useful than the default openFile cmd 🤷
-  // {"key": "cmd+o", "command": "extension.advancedOpenFile"},
-  {"key": "cmd+o", "command": "workbench.action.files.openFile"},
+  // advancedOpenFile can't open symlinks, and no longer appears more useful than the default openFile cmd 🤷
+  //  - Actually, it's still the easiest way to create new files by name, so let's keep it around
+  {"key": "cmd+o", "command": "extension.advancedOpenFile"},
+  {"key": "ctrl+cmd+o", "command": "workbench.action.files.openFile"},
   {"key": "shift+cmd+backspace", "command": "fileutils.removeFile", "when": "editorFocus"},
   {"key": "shift+cmd+c", "command": "-workbench.action.terminal.openNativeConsole", "when": "!terminalFocus"},
   {"key": "shift+cmd+c", "command": "copyFilePath"},
