@@ -1,0 +1,6 @@
+History/
+globalStorage/
+node_modules/
+package-lock.json
+ts_compiled/
+workspaceStorage/
