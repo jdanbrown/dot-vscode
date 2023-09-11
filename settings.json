@@ -1415,5 +1415,6 @@
   "git.openRepositoryInParentFolders": "never",
   "workbench.activityBar.visible": false,
   "jupyter.interactiveWindow.creationMode": "perFile",
+  "python.terminal.activateEnvironment": false,
 
 }
