@@ -1,0 +1,160 @@
+# Can I be productive yet?
+- https://paper.dropbox.com/doc/atom-vscode--A_t~s6bd0hoZRqU1QhPOpRxBAg-h1pVZyCsdouFUaDxCTofw
+
+# FIXME Multiple things broke between 2022-08 and 2021-01 due to vscode upgrades — back to atom for now
+- [ ] customize-ui
+  - No longer supportable: https://github.com/iocave/customize-ui/issues/156
+  - They say this other one still works: https://github.com/be5invis/vscode-custom-css
+    - I tried it in the past and liked it less, but maybe it's workable enough? Give it a shot
+- [ ] vim
+  - Doesn't activate...
+  - No leads yet (haven't tried very hard)
+- [ ] advanced-open-file
+  - Says command not found when I do cmd-o
+  - Maybe it changed id? This one looks alive: https://marketplace.visualstudio.com/items?itemName=jit-y.vscode-advanced-open-file
+
+# Workspace
+- [x] Disable font smoothing
+  - (See: settings.json -> customizeUI.stylesheet)
+- [x] Hide scroll bars
+  - (See: settings.json -> scrollBar)
+  - https://github.com/microsoft/vscode/issues/35454 — Disable fading scrollbars
+  - https://github.com/microsoft/vscode/issues/66000 — Scroll bar visibility should be configurable
+  - https://github.com/microsoft/vscode/issues/98632 — Add option `editor.scrollbar.vertical/horizontal` as official
+- [ ] Zoom current pane/editor
+  - Partial workaround: https://github.com/microsoft/vscode/issues/16927 — Maximize current file/tab/editor
+- [ ] How to interactively try vscode commands?
+  - Hack approach:
+    - https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-commands
+  - A dump of vscode.commands.getCommands()
+    - https://gist.github.com/jdanbrown/a38a0b0c894b91eddb77d0a359694602
+    - https://github.com/microsoft/vscode-docs/issues/683 — Documentation for the whole list of available commands
+
+# Terminal
+- [x] Terminals like editor tabs
+  - https://github.com/microsoft/vscode/issues/10546 — Tabs for integrated terminal
+    - https://github.com/microsoft/vscode/issues/10546#issuecomment-597237621 — summary of current state
+  - https://github.com/mmis1000/Vscode-terminal-tab
+    - Installed manually! (see ~/hack/vscode/Vscode-terminal-tab/README-vsce-package.md)
+- [x] Reattach each terminal to its tmux session on vscode restart
+  - Use `>Launch a tmux baked terminal tab here`
+- [ ] Style: tmux copy-mode visual select is missing its background color
+- [ ] Fix: lost focus on new tab / switch to tab
+- [ ] Fix: can't ctrl-h/l from a terminal tab (to switch to next/previous tab)
+
+# Editor
+- [ ] How to copy to osx clipboard
+
+# Style
+- Theme
+  - [ ] How far can we get with `workbench.colorCustomizations`? https://code.visualstudio.com/api/references/theme-color
+- Custom CSS
+  - [x] Install https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui
+  - [x] Hide title bar
+  - [ ] Small-mono font in Explorer (shift-cmd-e)
+  - [ ] Small-mono font in tab bar
+  - [ ] Hide/shrink gutter (by default, with key to toggle back on because probably very useful)
+- Filetypes
+  - *
+    - [x] Don't underline links in editor
+  - *.md
+    - [ ] Highlight `...` code expressions
+
+# Keybindings
+- General
+  - [ ] Use https://code.visualstudio.com/docs/getstarted/keybindings#_troubleshooting-keybindings
+  - [ ] Mimic keybindings from ~/.atom/keymap.cson
+  - [ ] See for examples: https://code.visualstudio.com/docs/getstarted/keybindings
+  - [ ] See for examples: https://github.com/Microsoft/vscode-atom-keybindings#what-keyboard-shortcuts-are-included
+- Workspace
+  - [ ] Toggle Acitivty Bar Visibility
+  - [ ] How to switch tabs only within a tab group? (by default jumps across groups)
+  - [ ] Force opt-cmd-i to work for Help -> Toggle Developer Tools
+- Terminal
+  - [ ] cmd-t = `>Launch a tmux baked terminal tab here`
+- Editor
+  - [ ] tab = >>, shift-tab = <<
+  - [ ] `[`/`]` for jump up/down
+  - [ ] How to vim-surround
+    - https://github.com/VSCodeVim/Vim
+    - https://github.com/tpope/vim-surround
+  - [ ] Toggle gutter (possible?)
+
+# Jupyter notebooks
+- All issues
+  - https://github.com/microsoft/vscode-jupyter/issues
+- Roadmap for stable release of new native notebooks
+  - https://github.com/microsoft/vscode-jupyter/issues/1231 — Ship Native Notebook MVP with Webview parity
+  - https://github.com/microsoft/vscode/issues/91987 — Notebook Backlog
+- p0: Blockers
+  - [x] How to enable vim in cells?
+    - Have to enable insider channel for vscode + python extension
+    - https://devblogs.microsoft.com/python/notebooks-are-getting-revamped/
+  - [x] Pull fix for spurious error on save ("Canceled"): https://github.com/microsoft/vscode/pull/110344 (6d ago)
+  - [ ] Are remote kernels usable?
+    - Can I connect/reconnect?
+    - Does vscode try to kill them on close/exit? (looks like no: https://github.com/microsoft/vscode-jupyter/issues/1654#issuecomment-722622266)
+    - Do ipywidgets work with remote kernels? (https://github.com/microsoft/vscode-jupyter/issues/1647 — IPyWidgets does not work in remote sessions)
+  - [ ] Do (remote) kernels reconnect after sleep/wake?
+    - e.g. https://github.com/microsoft/vscode-jupyter/issues/1654 — Remote jupyter doesn't reconnect after computer sleeps
+  - [ ] Are large cells usable?
+    - e.g. https://github.com/microsoft/vscode-jupyter/issues/1596 — Notebook jittery when editing a large cell
+  - [ ] Are large notebooks usable?
+    - e.g. https://github.com/microsoft/vscode-jupyter/issues/1646 — Notebook files larger than usual due to saving SVG's for plotviewer
+    - e.g. https://github.com/microsoft/vscode-jupyter/issues/1622 — Jupyter notebooks after a while become very slow
+      - Consider: `"python.dataScience.enablePlotViewer": false`
+    - e.g. https://github.com/microsoft/vscode-jupyter/issues/1692 — Blank View with Long Jupyter Notebook
+- p1: Want
+  - [ ] Do Bookmarks work across notebook cells?
+  - https://github.com/microsoft/vscode/issues/85682 — Api for editor insets
+    - https://github.com/microsoft/vscode/issues/3220 — Custom peek widgets
+  - https://github.com/microsoft/vscode/issues/16927 — Maximize current file/tab/editor
+    - To zoom images (once we can show them in their own editor)
+- p2: Interesting to track
+  - https://github.com/microsoft/vscode/issues/106679 — Explore notebook "sub"-keymap support
+  - https://github.com/microsoft/vscode/issues/103661 — Reduce vertical space between output data
+  - https://github.com/microsoft/vscode/issues/110671 — Show Outline for Jupyter Notebooks based on Markdown headers
+  - https://github.com/microsoft/vscode/issues/106744 — Notebook API evolution
+  - https://github.com/microsoft/vscode/issues/106741 — Interrupting a kernel vs Cancelling cell execution
+  - https://github.com/microsoft/vscode/issues/105933 — Code cell vs markdown cell
+  - https://github.com/microsoft/vscode/issues/97341 — Notebook cell queued status
+  - https://github.com/microsoft/vscode/issues/94740 — Create a data science "working group"
+  - https://github.com/microsoft/vscode/issues/93265 — 📢 Notebook API announcements
+  - https://github.com/microsoft/vscode/issues/110766 — Allow an output to go into full-screen mode
+  - https://github.com/microsoft/vscode/issues/108551 — Math support in native notebook markdown cells
+  - https://github.com/microsoft/vscode/issues/110274 — The native notebook UI doesn't allow user to click links on the last line of a markdown cell
+  - https://github.com/microsoft/vscode/issues/108618 — Scroll jank on deleting cells
+  - https://github.com/microsoft/vscode/issues/107919 — Setting to follow to running cells in a notebook
+  - https://github.com/microsoft/vscode/issues/105847 — Notebook cell execution model
+  - https://github.com/microsoft/vscode/issues/108675 — Cannot pick tabs vs spaces in notebook
+    - Is this related to why I can't (seem to) set 4-space tabs instead of 2-space tabs in notebook code cells?
+  - https://github.com/microsoft/vscode-jupyter/issues/1446 — Split Jupyter Cell
+  - https://github.com/microsoft/vscode-jupyter/issues/1631 — Ctrl-C should interrupt the kernel for notebooks and interactive window
+- [unorganized]
+  - https://github.com/microsoft/vscode-jupyter/issues/1402 — Turn on custom editor support for stable VS code release
+  - https://github.com/microsoft/vscode-jupyter/issues/1326 — Make use of VS Code custom editor support
+  - https://github.com/microsoft/vscode-jupyter/issues/1541 — Request for 'Create New View For Output` like Jupyterlab for Interactive Window and Notebook
+    - https://github.com/microsoft/vscode-jupyter/issues/1120 — Add support for sidecar or tear-off style widgets (Support for separate windows for output rather than inline)
+  - https://github.com/microsoft/vscode-jupyter/issues/1182 — Jupyter Notebook: add access to cell metadata
+  - https://github.com/microsoft/vscode-jupyter/issues/1190 — Can't copy cell output with preview notebook editor
+  - https://github.com/microsoft/vscode-jupyter/issues/1207 — Custom Editor and Native notebook aren't possible at the same time
+  - https://github.com/microsoft/vscode-jupyter/issues/1229 — Native Notebook Kernel Issues
+  - https://github.com/microsoft/vscode/issues/98282 — Allow extensions to call cell commands with cell arguments
+  - https://github.com/microsoft/vscode-jupyter/issues/1350 — Create TOC for Notebooks
+    - https://github.com/microsoft/vscode-jupyter/issues/1348 — Table of Contents (TOC) for Jupyter Notebooks
+    - https://github.com/microsoft/vscode-jupyter/issues/1349 — DS: Outline feature in jupyter notebook mode
+  - https://github.com/microsoft/vscode-jupyter/issues/1470 — Allow copying an image result from Python Interactive window
+    - https://github.com/microsoft/vscode-jupyter/issues/1534 — Make saving images from Interactive window easier
+  - https://github.com/microsoft/vscode-jupyter/issues/1497 — Tolerance of ipython cell magics in source code cells
+  - https://github.com/microsoft/vscode-jupyter/issues/1506 — Native Editor - doesn't scroll as output is computed
+    - https://github.com/microsoft/vscode-jupyter/issues/1511 — Auto Scroll in the Jupyter output
+  - https://github.com/microsoft/vscode-jupyter/issues/1550 — Open notebook to where I left off
+  - https://github.com/microsoft/vscode-jupyter/issues/1588 — Editing a large notebook file can result in lots of constant IO happening (bad for power and battery)
+  - https://github.com/microsoft/vscode-jupyter/issues/1596 — Notebook jittery when editing a large cell
+  - https://github.com/microsoft/vscode-jupyter/issues/1626 — VSCode leaves several running processes after exit
+  - https://github.com/microsoft/vscode-jupyter/issues/1636 — Kernel restart and clear cells commands via keyboard shorcuts don't work from editor
+  - https://github.com/microsoft/vscode-jupyter/issues/1646 — Notebook files larger than usual due to saving SVG's for plotviewer
+  - https://github.com/microsoft/vscode-jupyter/issues/1647 — IPyWidgets does not work in remote sessions
+  - https://github.com/microsoft/vscode-jupyter/issues/1654 — Remote jupyter doesn't reconnect after computer sleeps
+  - https://github.com/microsoft/vscode-jupyter/issues/1670 — Changing Jupyter server connection requires a workspace-based session
+  - https://github.com/microsoft/vscode-jupyter/issues/1692 — Blank View with Long Jupyter Notebook
