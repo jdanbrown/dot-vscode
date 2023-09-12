@@ -959,6 +959,13 @@
     ".monaco-workbench .xterm":                                                                                                                                                                                                      "padding-right: 3px",
     //  - Hide ruler
     ".xterm-decoration-overview-ruler": "display: none !important",
+    //  - Hide scrollbar
+    //    - https://stackoverflow.com/a/38994837/397334
+    ".xterm-viewport::-webkit-scrollbar": "display: none",
+    //  - TODO Remove the focusAccessibleBuffer padding-left:10px to align with terminal padding
+    //    - [Started at 2am, quit before figuring it out -- probalby not hard!]
+    // ".monaco-workbench .terminal-accessible-widget": "padding-left: 0px",
+    // ".monaco-workbench .terminal-accessible-widget .margin": "display: none",
 
     // Disable underline for detected links
     ".monaco-editor .detected-link":        "text-decoration: inherit",
