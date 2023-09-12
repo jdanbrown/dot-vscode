@@ -154,6 +154,11 @@
     },
   ],
 
+  // GitLens
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.currentLine.enabled": false,
+
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://github.com/VSCodeVim/Vim#key-remapping
