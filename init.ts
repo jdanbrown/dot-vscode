@@ -52,9 +52,9 @@ export async function init(context: vscode.ExtensionContext) {
     // output.appendLine(`termUid: ${termUid}`);
     // vscode.window.showInformationMessage(`termUid: ${termUid}`);
     vscode.window.createTerminal({
+      // shellPath: 'bash', shellArgs: ['-l'], // XXX Debug
       shellPath: 'tmux-new-or-attach-vscode-term-uid', // NOTE Requires "terminal.integrated.inheritEnv":true (default)
       env: {VSCODE_TERM_UID: termUid}, // For tmux-new-or-attach-vscode-term-uid
-      iconPath: vscode.Uri.file(''), // No icon
     });
   });
 

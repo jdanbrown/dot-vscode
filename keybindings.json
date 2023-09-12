@@ -17,6 +17,10 @@
   {"key": "shift+cmd+j", "command": "-workbench.action.search.toggleQueryDetails", "when": "inSearchEditor || searchViewletFocus"},
   {"key": "shift+cmd+j", "command": "workbench.action.togglePanel"},
 
+  // Require shift+cmd+w to close a window
+  //  - Default: Allow just cmd+w when no editors remaining
+  {"key": "cmd+w", "command": "-workbench.action.closeWindow", "when": "!editorIsOpen && !multipleEditorGroups"},
+
   // Files
   {"key": "cmd+o", "command": "-workbench.action.files.openFileFolder"},
   {"key": "cmd+o", "command": "-workbench.action.files.openLocalFileFolder", "when": "remoteFileDialogVisible"},
@@ -108,8 +112,24 @@
 
   // Terminal
   {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
-  {"key": "alt+cmd+t", "command": "workbench.action.terminal.new", "when": "terminalProcessSupported"},
-  {"key": "cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+  //  - Whether or not to use our custom userInitTs.terminal.new cmd (in init.ts) that uses `tmux-new-or-attach`
+  //    - Currently thinking no, let's try vscode's default terminal and see if we can learn to like it
+  // {"key": "cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+  // {"key": "alt+cmd+t", "command": "workbench.action.terminal.new", "when": "terminalProcessSupported"},
+  {"key": "alt+cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+  {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
+  //  - Disable cmd+w to close terminals, only editors
+  //    - cmd+w on terminals is too dangerous because we can no longer do shift+cmd+t to reopen an accidentally closed terminal (^D the shell instead)
+  {"key": "cmd+w", "command": "-workbench.action.terminal.killEditor", "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated && resourceScheme == 'vscode-terminal' || terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'"},
+  {"key": "cmd+w", "command": "-workbench.action.closeActiveEditor"},
+  {"key": "cmd+w", "command": "workbench.action.closeActiveEditor", "when": "!terminalFocus"},
+  //  - Replacement for tmux ^K with normal vscode terminals
+  //    - https://github.com/microsoft/vscode/issues/181390
+  //    - https://code.visualstudio.com/docs/editor/accessibility#_terminal-accessibility -> focusAccessibleBuffer
+  //    - This is pretty cool -- turns the whole terminal into a normal editor buffer, for easy copy/paste
+  //    - Like tmux ^K but actually maybe better? (assuming it works on big scrollbacks!)
+  //    - NOTE Had to remove accessibilityModeEnabled from the `when`, because enabling editor.accessibilitySupport would probably affect a lot of things
+  {"key": "ctrl+k", "command": "workbench.action.terminal.focusAccessibleBuffer", "when": "terminalFocus && terminalHasBeenCreated && terminalTabFocusMode || terminalFocus && terminalHasBeenCreated && !terminalAccessibleBufferFocus || terminalFocus && terminalProcessSupported && terminalTabFocusMode || terminalFocus && terminalProcessSupported && !terminalAccessibleBufferFocus"},
 
   // Jupyter/notebook
   {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
@@ -568,5 +588,6 @@
   {
     "key": "ctrl+8",
     "command": "highlightwords.addHighlight"
-  }
+  },
+
 ]

@@ -1,5 +1,271 @@
 {
 
+  // Fonts
+  "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
+  "editor.fontSize": 11,
+  "editor.lineHeight": 13,
+  "editor.fontFamily": "Consolas",
+  // "editor.fontWeight": "bold",
+
+  // Indent/tabs
+  //  - https://code.visualstudio.com/docs/editor/codebasics#_indentation
+  "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // Completions
+  //  - https://github.com/microsoft/vscode/issues/76322
+  "editor.wordBasedSuggestions": true, // Complete on any word -- only if no other provider has a completion
+  "editor.quickSuggestions": {
+    "comments": true, // Complete in comments
+    "strings": true, // Complete in strings
+    "other": true, // ?
+  },
+
+  // Hide gutter (editor left margin)
+  //  - https://github.com/microsoft/vscode/issues/30795
+  //  - https://github.com/microsoft/vscode/issues/12543
+  "editor.lineNumbers": "off",
+  "editor.glyphMargin": false,
+  "git.decorations.enabled": false,
+  "editor.folding": false,
+  "editor.lineNumbersMinChars": 0,  // Undocumented
+  "editor.lineDecorationsWidth": 3, // Undocumented
+
+  // Hide scrollbars + some bits of overview ruler
+  //  - https://github.com/microsoft/vscode/issues/35454 — Disable fading scrollbars
+  //  - https://github.com/microsoft/vscode/issues/66000 — Scroll bar visibility should be configurable
+  //  - https://github.com/microsoft/vscode/issues/98632 — Add option `editor.scrollbar.vertical/horizontal` as official
+  //  - https://github.com/microsoft/vscode/issues/28653 — Feature: Setting to hide Vertical Scroll-Bar when the Minimap is Visible
+  //  - https://github.com/microsoft/vscode/issues/85418 — Disable overview ruler entirely
+  // "editor.scrollbar.verticalScrollbarSize": 0, // Hides scrollbar, but also hides overview ruler
+  // "editor.scrollbar.horizontalScrollbarSize": 0,
+  "editor.scrollbar.vertical": "hidden", // Hides scrollbar and leaves overview ruler shown
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.hideCursorInOverviewRuler": true,
+  // "editor.overviewRulerBorder": false,
+  // "terminal.integrated.scrollbar.vertical": "hidden", // NOTE No such setting, handled in css
+
+  // Disable decorating colors values (#rgb) with color swatches
+  //  - Because it's slow to open the editor, or even to add/remove text around them
+  "editor.colorDecorators": false,
+
+  // Terminal
+  "terminal.integrated.defaultLocation": "editor", // Woo!
+  // NOTE This all moved to init.ts
+  // "terminal.integrated.defaultProfile.osx": "tmux-new-or-attach-vscode-term-uid",
+  // "terminal.integrated.profiles.osx": {
+  //   "tmux-new-or-attach-vscode-term-uid": {
+  //     "path": "tmux-new-or-attach-vscode-term-uid", // NOTE Requires "terminal.integrated.inheritEnv":true (default)
+  //     "args": [],
+  //   },
+  // },
+  "terminal.integrated.fontSize": 11,
+  "terminal.integrated.fontWeight": "bold",
+  // "terminal.integrated.fontWeightBold": "bold",
+  "terminal.integrated.allowChords": false,
+  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.tabs.title": "${cwdFolder}/",
+  // "terminal.integrated.tabs.title": "${cwd}",
+  // "terminal.integrated.tabs.title": "${process}",
+  // "terminal.integrated.tabs.title": "term",
+  // "terminal.integrated.tabs.title": "bash",
+  // "terminal.integrated.tabs.title": "#",
+  // "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
+  "terminal.integrated.tabs.description": "",
+  "terminal.integrated.confirmOnKill": "always",
+  "terminal.integrated.confirmOnExit": "always",
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.persistentSessionScrollback": 10000,
+
+  // Recommended by dart
+  //  - https://dartcode.org/docs/recommended-settings/
+  "debug.openDebug": "openOnDebugBreak",
+  "dart.closingLabels": false,
+  "dart.lineLength": 120,
+  "dart.showTodos": false,
+
+  // Filetypes
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.wordWrap": "off",
+    "editor.wrappingIndent": "indent"
+  },
+  "[jupyter]": {
+    "editor.tabSize": 4,
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+  },
+  "[dart]": {
+    //
+    // From [where? -- did I add these?]
+    //
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.suggest.insertMode": "replace",
+    //
+    // From dart: https://dartcode.org/docs/recommended-settings/
+    //
+    // Automatically format code on save and during typing of certain characters
+    // (like `;` and `}`).
+    // "editor.formatOnSave": true,
+    // "editor.formatOnType": true,
+    // Draw a guide line at 80 characters, where Dart's formatting will wrap code.
+    // "editor.rulers": [80],
+    // Disables built-in highlighting of words that match your selection. Without
+    // this, all instances of the selected text will be highlighted, interfering
+    // with Dart's ability to highlight only exact references to the selected variable.
+    "editor.selectionHighlight": false,
+    // By default, VS Code prevents code completion from popping open when in
+    // "snippet mode" (editing placeholders in inserted code). Setting this option
+    // to `false` stops that and allows completion to open as normal, as if you
+    // weren't in a snippet placeholder.
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    // By default, VS Code will pre-select the most recently used item from code
+    // completion. This is usually not the most relevant item.
+    //
+    // "first" will always select top item
+    // "recentlyUsedByPrefix" will filter the recently used items based on the
+    //     text immediately preceding where completion was invoked.
+    "editor.suggestSelection": "first",
+    // Allows pressing <TAB> to complete snippets such as `for` even when the
+    // completion list is not visible.
+    "editor.tabCompletion": "onlySnippets",
+  },
+
+  // Allow trailing commas in ~/.code/*.json
+  //  - https://github.com/microsoft/vscode/issues/102061
+	"json.schemas": [
+    {
+      "fileMatch": [
+        ".code/keybindings.json",
+        ".code/settings.json",
+      ],
+      "schema": {
+        "allowTrailingCommas": true
+      }
+    },
+  ],
+
+  // vim
+  //  - https://github.com/VSCodeVim/Vim
+  //  - https://github.com/VSCodeVim/Vim#key-remapping
+  //
+  // TODO
+  //  - In insert mode, make shift-esc behave like esc (currently noop)
+  //
+  "editor.cursorSurroundingLines": 1, // HACK Workaround annoying bug: https://github.com/VSCodeVim/Vim/issues/1393
+  "vim.disableAnnoyingNeovimMessage": true,
+  "vim.hlsearch": true,
+  "vim.leader": ",",
+  "vim.mouseSelectionGoesIntoVisualMode": false,
+  "vim.searchHighlightColor": "#D9D905",
+  "vim.showmodename": false,
+  "vim.textwidth": 120,
+  "vim.visualstar": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+
+    // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
+    //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
+    //  - https://github.com/VSCodeVim/Vim/issues/2007
+    {"before": ["u"], "commands": ["undo"]},
+    {"before": ["<c-r>"], "commands": ["redo"]},
+
+    // Clear search on esc
+    {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", ":"]},
+    //  - Also on \\ (old habits die hard)
+    {"before": ["\\", "\\"], "commands": [
+      ":nohl",
+      "highlightwords.removeAllHighlights",
+    ]},
+
+    // Save
+    {"before": [",", ","], "commands": ["workbench.action.files.save"]},
+
+    // Indent/unindent
+    //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
+    {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
+    {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
+
+    // Comment
+    {"before": ["\\", "c"], "after": ["g", "c"]},
+
+    // ctrl-space to show hover (like gh)
+    {"before": ["<c-space>"], "commands": ["editor.action.showHover"]},
+
+    // Go to / Search
+    {"before": [",", "a"], "after": ["v", "i", "w"], "commands": ["search.action.openNewEditorToSide"]},
+    {"before": [",", "A"], "commands": ["editor.action.goToReferences"]},
+
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+
+    // Clipboard
+    {"before": ["Y"], "after": ["\"", "+", "y"]},
+
+    // Indent/unindent
+    //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
+    {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
+    {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
+
+  ],
+
+  // multi-commands
+  "multiCommand.commands": [
+
+    // Jupyter/notebook
+    {
+      "command": "multiCommand.notebook.cell.edit.InsertMode",
+      "sequence": ["notebook.cell.edit", "extension.vim_insert"],
+    },
+
+    // HACK Works! (but a little janky)
+    {
+      "command": "multiCommand.list.scrollPageDown",
+      "sequence": [
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
+      ],
+    },
+    {
+      "command": "multiCommand.list.scrollPageUp",
+      "sequence": [
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
+      ],
+    },
+
+    // HACK Workaround bug (see keybindings.json)
+    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
+    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
+
+  ],
+
   // Custom workbench colors
   //  - Keys:
   //    - https://code.visualstudio.com/api/references/theme-color
@@ -115,7 +381,8 @@
 		// "editorGroupHeader.noTabsBackground": "#000000",
     // "editorGroupHeader.tabsBorder": "#777",
 		// "editorGutter.addedBackground": "#33ab4e",
-    "editorGutter.background": "#111",
+    // "editorGutter.background": "#111",
+    "editorGutter.background": "#000",
 		// "editorGutter.commentRangeForeground": "#c5c5c5",
 		// "editorGutter.deletedBackground": "#fc5d6d",
 		// "editorGutter.foldingControlForeground": "#ffffff",
@@ -434,29 +701,11 @@
 
     // TODO Match atom style
     "textMateRules": [
-      {
-        "scope": [
-          "meta.embedded",
-          "source.groovy.embedded"
-        ],
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "emphasis",
-        "settings": {"fontStyle": "italic"}
-      },
-      {
-        "scope": "strong",
-        "settings": {"fontStyle": "bold"}
-      },
-      {
-        "scope": "meta.diff.header",
-        "settings": {"foreground": "#000080"}
-      },
-      {
-        "scope": "constant.language",
-        "settings": {"foreground": "#FF77FF"}
-      },
+      {"scope": ["meta.embedded", "source.groovy.embedded"], "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "emphasis", "settings": {"fontStyle": "italic"}},
+      {"scope": "strong", "settings": {"fontStyle": "bold"}},
+      {"scope": "meta.diff.header", "settings": {"foreground": "#000080"}},
+      {"scope": "constant.language", "settings": {"foreground": "#FF77FF"}},
       {
         "scope": [
           "constant.numeric",
@@ -466,26 +715,11 @@
         ],
         "settings": {"foreground": "#B5CEA8"}
       },
-      {
-        "scope": "constant.regexp",
-        "settings": {"foreground": "#B46695"}
-      },
-      {
-        "scope": "constant.character",
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {
-        "scope": "entity.name.tag",
-        "settings": {"foreground": "#569CD6"}
-      },
-      {
-        "scope": "entity.name.tag.css",
-        "settings": {"foreground": "#D7BA7D"}
-      },
-      {
-        "scope": "entity.other.attribute-name",
-        "settings": {"foreground": "#9CDCFE"}
-      },
+      {"scope": "constant.regexp", "settings": {"foreground": "#B46695"}},
+      {"scope": "constant.character", "settings": {"foreground": "#FF77FF"}},
+      {"scope": "entity.name.tag", "settings": {"foreground": "#569CD6"}},
+      {"scope": "entity.name.tag.css", "settings": {"foreground": "#D7BA7D"}},
+      {"scope": "entity.other.attribute-name", "settings": {"foreground": "#9CDCFE"}},
       {
         "scope": [
           "entity.other.attribute-name.class.css",
@@ -499,46 +733,16 @@
         ],
         "settings": {"foreground": "#D7BA7D"}
       },
-      {
-        "scope": "invalid",
-        "settings": {"foreground": "#F44747"}
-      },
-      {
-        "scope": "markup.underline",
-        "settings": {"fontStyle": "underline"}
-      },
-      {
-        "scope": "markup.bold",
-        "settings": {"fontStyle": "bold"}
-      },
-      {
-        "scope": "markup.heading",
-        "settings": {"foreground": "#5FFA68"}
-      },
-      {
-        "scope": "markup.italic",
-        "settings": {"fontStyle": "italic"}
-      },
-      {
-        "scope": "markup.inserted",
-        "settings": {"foreground": "#B5CEA8"}
-      },
-      {
-        "scope": "markup.deleted",
-        "settings": {"foreground": "#CE9178"}
-      },
-      {
-        "scope": "markup.changed",
-        "settings": {"foreground": "#569CD6"}
-      },
-      {
-        "scope": "markup.inline.raw.string.markdown",
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {
-        "scope": "punctuation.definition.list.begin.markdown",
-        "settings": {"foreground": "#FF77FF"}
-      },
+      {"scope": "invalid", "settings": {"foreground": "#F44747"}},
+      {"scope": "markup.underline", "settings": {"fontStyle": "underline"}},
+      {"scope": "markup.bold", "settings": {"fontStyle": "bold"}},
+      {"scope": "markup.heading", "settings": {"foreground": "#5FFA68"}},
+      {"scope": "markup.italic", "settings": {"fontStyle": "italic"}},
+      {"scope": "markup.inserted", "settings": {"foreground": "#B5CEA8"}},
+      {"scope": "markup.deleted", "settings": {"foreground": "#CE9178"}},
+      {"scope": "markup.changed", "settings": {"foreground": "#569CD6"}},
+      {"scope": "markup.inline.raw.string.markdown", "settings": {"foreground": "#FF77FF"}},
+      {"scope": "punctuation.definition.list.begin.markdown", "settings": {"foreground": "#FF77FF"}},
       {
         "scope": [
           // FIXME This highlights markdown `[x]` but not `[ ]` (and it incorrectly highlights `[foo]`)
@@ -547,54 +751,18 @@
         ],
         "settings": {"foreground": "#FF77FF"}
       },
-      {
-        "scope": ["punctuation.definition.tag"],
-        "settings": {"foreground": "#808080"}
-      },
-      {
-        "scope": "meta.preprocessor",
-        "settings": {"foreground": "#569CD6"}
-      },
-      {
-        "scope": "meta.preprocessor.string",
-        "settings": {"foreground": "#CE9178"}
-      },
-      {
-        "scope": "meta.preprocessor.numeric",
-        "settings": {"foreground": "#B5CEA8"}
-      },
-      {
-        "scope": "meta.structure.dictionary.key.python",
-        "settings": {"foreground": "#9CDCFE"}
-      },
-      {
-        "scope": "storage",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "storage.type",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "storage.modifier",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "string",
-        "settings": {"foreground": "#CE9178"}
-      },
-      {
-        "scope": "string.tag",
-        "settings": {"foreground": "#CE9178"}
-      },
-      {
-        "scope": "string.value",
-        "settings": {"foreground": "#CE9178"}
-      },
-      {
-        "scope": "string.regexp",
-        "settings": {"foreground": "#D16969"}
-      },
+      {"scope": ["punctuation.definition.tag"], "settings": {"foreground": "#808080"}},
+      {"scope": "meta.preprocessor", "settings": {"foreground": "#569CD6"}},
+      {"scope": "meta.preprocessor.string", "settings": {"foreground": "#CE9178"}},
+      {"scope": "meta.preprocessor.numeric", "settings": {"foreground": "#B5CEA8"}},
+      {"scope": "meta.structure.dictionary.key.python", "settings": {"foreground": "#9CDCFE"}},
+      {"scope": "storage", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "storage.type", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "storage.modifier", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "string", "settings": {"foreground": "#CE9178"}},
+      {"scope": "string.tag", "settings": {"foreground": "#CE9178"}},
+      {"scope": "string.value", "settings": {"foreground": "#CE9178"}},
+      {"scope": "string.regexp", "settings": {"foreground": "#D16969"}},
       {
         "scope": [
           "punctuation.definition.template-expression.begin",
@@ -603,10 +771,7 @@
         ],
         "settings": {"foreground": "#FF77FF"}
       },
-      {
-        "scope": ["meta.template.expression"],
-        "settings": {"foreground": "#FFFFFF"}
-      },
+      {"scope": ["meta.template.expression"], "settings": {"foreground": "#FFFFFF"}},
       {
         "scope": [
           "support.type.vendored.property-name",
@@ -618,18 +783,9 @@
         ],
         "settings": {"foreground": "#FFFFFF"}
       },
-      {
-        "scope": "keyword",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "keyword.control",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "keyword.operator",
-        "settings": {"foreground": "#FFFFFF"}
-      },
+      {"scope": "keyword", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "keyword.control", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "keyword.operator", "settings": {"foreground": "#FFFFFF"}},
       {
         "scope": [
           "keyword.operator.new",
@@ -637,22 +793,13 @@
           "keyword.operator.cast",
           "keyword.operator.sizeof",
           "keyword.operator.logical.python",
-          "keyword.operator.type",
+          "keyword.operator.type"
         ],
         "settings": {"foreground": "#FFFC67"}
       },
-      {
-        "scope": "keyword.other.unit",
-        "settings": {"foreground": "#B5CEA8"}
-      },
-      {
-        "scope": "support.function.git-rebase",
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "constant.sha.git-rebase",
-        "settings": {"foreground": "#B5CEA8"}
-      },
+      {"scope": "keyword.other.unit", "settings": {"foreground": "#B5CEA8"}},
+      {"scope": "support.function.git-rebase", "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "constant.sha.git-rebase", "settings": {"foreground": "#B5CEA8"}},
       {
         "scope": [
           "storage.modifier.import.java",
@@ -661,10 +808,7 @@
         ],
         "settings": {"foreground": "#FFFFFF"}
       },
-      {
-        "scope": "variable.language.this",
-        "settings": {"foreground": "#FFFC67"}
-      },
+      {"scope": "variable.language.this", "settings": {"foreground": "#FFFC67"}},
       {
         "scope": [
           "entity.name.function",
@@ -725,18 +869,8 @@
         ],
         "settings": {"foreground": "#C586C0"}
       },
-      {
-        "scope": [
-          "variable",
-          "meta.definition.variable.name",
-          "support.variable"
-        ],
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": ["meta.object-literal.key"],
-        "settings": {"foreground": "#FF77FF"}
-      },
+      {"scope": ["variable", "meta.definition.variable.name", "support.variable"], "settings": {"foreground": "#FFFFFF"}},
+      {"scope": ["meta.object-literal.key"], "settings": {"foreground": "#FF77FF"}},
       {
         "scope": [
           "support.constant.property-value",
@@ -749,101 +883,33 @@
         ],
         "settings": {"foreground": "#CE9178"}
       },
-      {
-        "scope": "meta.resultLinePrefix.contextLinePrefix.search",
-        "settings": {"foreground": "#CBEDCB"}
-      },
-      {
-        "scope": "comment",
-        "settings": {"foreground": "#777777"}
-      },
-      {
-        "scope": "punctuation.definition.comment",
-        "settings": {"foreground": "#777777"}
-      },
-      {
-        "scope": "string",
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {
-        "scope": "meta.embedded.assembly",
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {
-        "scope": "keyword - keyword.operator",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "keyword.control",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "storage",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "storage.type",
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {
-        "scope": "constant.numeric",
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {
-        "scope": [
-          "entity.name.type",
-        ],
-        "settings": {"foreground": "#60FDFF"}
-      },
-      {
-        "scope": "entity.name.class",
-        "settings": {"foreground": "#60FDFF"}
-      },
-      {
-        "scope": "support.type",
-        "settings": {"foreground": "#60FDFF"}
-      },
-      {
-        "scope": "support.class",
-        "settings": {"foreground": "#60FDFF"}
-      },
-      {
-        "scope": "entity.name.function",
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "support.function",
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "variable",
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "entity.name.variable",
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {
-        "scope": "token.info-token",
-        "settings": {"foreground": "#6796E6"}
-      },
-      {
-        "scope": "token.warn-token",
-        "settings": {"foreground": "#008000"}
-      },
-      {
-        "scope": "token.error-token",
-        "settings": {"foreground": "#FF0000"}
-      },
-      {
-        "scope": "token.debug-token",
-        "settings": {"foreground": "#B267E6"}
-      }
+      {"scope": "meta.resultLinePrefix.contextLinePrefix.search", "settings": {"foreground": "#CBEDCB"}},
+      {"scope": "comment", "settings": {"foreground": "#777777"}},
+      {"scope": "punctuation.definition.comment", "settings": {"foreground": "#777777"}},
+      {"scope": "string", "settings": {"foreground": "#FF77FF"}},
+      {"scope": "meta.embedded.assembly", "settings": {"foreground": "#FF77FF"}},
+      {"scope": "keyword - keyword.operator", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "keyword.control", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "storage", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "storage.type", "settings": {"foreground": "#FFFC67"}},
+      {"scope": "constant.numeric", "settings": {"foreground": "#FF77FF"}},
+      {"scope": ["entity.name.type"], "settings": {"foreground": "#60FDFF"}},
+      {"scope": "entity.name.class", "settings": {"foreground": "#60FDFF"}},
+      {"scope": "support.type", "settings": {"foreground": "#60FDFF"}},
+      {"scope": "support.class", "settings": {"foreground": "#60FDFF"}},
+      {"scope": "entity.name.function", "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "support.function", "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "variable", "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "entity.name.variable", "settings": {"foreground": "#FFFFFF"}},
+      {"scope": "token.info-token", "settings": {"foreground": "#6796E6"}},
+      {"scope": "token.warn-token", "settings": {"foreground": "#008000"}},
+      {"scope": "token.error-token", "settings": {"foreground": "#FF0000"}},
+      {"scope": "token.debug-token", "settings": {"foreground": "#B267E6"}}
     ]
 
   },
 
-  // [v2] Custom css/styling
+  // Custom css/styling
   //  - apc is the newer approach to customize-ui (2023-09-09)
   //  - https://github.com/drcika/apc-extension
   "apc.electron": {
@@ -883,14 +949,16 @@
     // "*": "-webkit-text-stroke-width: .15px",
     // "*": "-webkit-text-stroke-width: .1px",
 
-    // TODO Still needed? (2023-09-09)
-    // // Terminals
-    // //  - Hide scrollbars
-    // //    - https://github.com/microsoft/vscode/commit/4cbec65d
-    // //    - https://github.com/microsoft/vscode/blob/main/src/vs/workbench/contrib/terminal/browser/terminalInstance.ts
-    // ".monaco-workbench .editor-instance .xterm-viewport::-webkit-scrollbar, .monaco-workbench .pane-body.integrated-terminal .xterm-viewport::-webkit-scrollbar": "display: none !important",
-    // //  - Smaller left/right margin (10px -> 5px)
-    // ".monaco-workbench .editor-instance .terminal-wrapper, .monaco-workbench .pane-body.integrated-terminal .terminal-wrapper": "margin: 0px 5px",
+    // Hide ruler (editor right margin)
+    //  - https://github.com/microsoft/vscode/issues/85418
+    ".decorationsOverviewRuler": "display: none !important",
+
+    // Terminals
+    //  - Hide gutter
+    ".integrated-terminal.shell-integration .xterm, .monaco-workbench .pane-body.integrated-terminal .terminal-group .monaco-split-view2.horizontal .split-view-view:first-child .xterm, .monaco-workbench .terminal-editor .xterm": "padding-left: 3px !important",
+    ".monaco-workbench .xterm":                                                                                                                                                                                                      "padding-right: 3px",
+    //  - Hide ruler
+    ".xterm-decoration-overview-ruler": "display: none !important",
 
     // Disable underline for detected links
     ".monaco-editor .detected-link":        "text-decoration: inherit",
@@ -912,6 +980,9 @@
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                    "font-size: 12px !important",
     ".monaco-action-bar .action-label":                                                                                                                  "margin-right: 0px !important",
     ".tabs-and-actions-container":                                                                                                                       "height: 17px !important; background: #404040 !important",
+    ".tabs-and-actions-container .tab":                                                                                                                  "padding-right: 10px",
+    ".tabs-and-actions-container .tab .tab-label::before":                                                                                               "display: none",
+    ".tabs-and-actions-container .tab .tab-actions":                                                                                                     "display: none",
     ".tabs-and-actions-container .codicon":                                                                                                              "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
     ".tabs-and-actions-container .codicon:hover":                                                                                                        "color: #fff !important",
     ".tabs-and-actions-container .action-item":                                                                                                          "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
@@ -947,365 +1018,14 @@
 
   },
 
-  // XXX customize-ui was killed by a vscode update:
-  //  - https://github.com/iocave/customize-ui/issues/156
-  // // Custom css/styling
-  // "customizeUI.activityBar": "regular",
-  // "customizeUI.font.monospace": "Consolas",
-  // "customizeUI.titleBar": "frameless",
-  // "customizeUI.fontSizeMap": {
-  //   "13px":      "13px",     // Disable harmful default
-  //   "monospace": "monospace" // Disable harmful default
-  // },
-  // "customizeUI.stylesheet": {
-  //   // NOTE We need to jam all this css into settings.json else vscode Settings Sync wouldn't sync it
-  //   //  - I once tried using the iocave/monkey-patch extension to load my own custom.less, but I ran into a few issues
-  //   //    1. It wouldn't sync via vscode Settings Sync
-  //   //    2. The order it would load wrt. Customize UI was nondeterministic, and it would randomly get overridden and not work
-  //   //    2b. Trying to pin down the module load order was a big tar pit and I gave up
-  //
-  //   // Fix font smoothing
-  //   //  - Solution
-  //   //    - Use css `-webkit-text-stroke-width` [https://github.com/atom/atom/issues/20052#issuecomment-546669675]
-  //   //    - For more archeology, see ~/.atom/styles.less
-  //   //  - Troubleshooting
-  //   //    - Try "workbench.fontAliasing":"default"->"auto" (this was required for the CGFontRenderingFontSmoothingDisabled approach)
-  //   //  - Non-solution
-  //   //    - `defaults write com.microsoft.VSCode.helper CGFontRenderingFontSmoothingDisabled -bool NO`
-  //   //      - Only works when you enable the global setting "System Preferences -> General -> Use font smoothing when available"
-  //   //      - But we don't want that enabled globally
-  //   //      - (Note that's the same as `defaults -currentHost ... AppleFontSmoothing`)
-  //   //    - https://github.com/microsoft/vscode/issues/82109#issuecomment-542086670
-  //   //    - https://github.com/microsoft/vscode/issues/51132
-  //   //    - https://github.com/microsoft/vscode/issues/59887
-  //   "*": "-webkit-text-stroke-width: .35px", // Closest match to "Use font smoothing when available" (System Preferences -> General)
-  //   // "*": "-webkit-text-stroke-width: .3px",
-  //   // "*": "-webkit-text-stroke-width: .25px", // Tuned to taste
-  //   // "*": "-webkit-text-stroke-width: .2px",
-  //   // "*": "-webkit-text-stroke-width: .15px",
-  //   // "*": "-webkit-text-stroke-width: .1px",
-  //
-  //   // Terminals
-  //   //  - Hide scrollbars
-  //   //    - https://github.com/microsoft/vscode/commit/4cbec65d
-  //   //    - https://github.com/microsoft/vscode/blob/main/src/vs/workbench/contrib/terminal/browser/terminalInstance.ts
-  //   ".monaco-workbench .editor-instance .xterm-viewport::-webkit-scrollbar, .monaco-workbench .pane-body.integrated-terminal .xterm-viewport::-webkit-scrollbar": "display: none !important",
-  //   //  - Smaller left/right margin (10px -> 5px)
-  //   ".monaco-workbench .editor-instance .terminal-wrapper, .monaco-workbench .pane-body.integrated-terminal .terminal-wrapper": "margin: 0px 5px",
-  //
-  //   // Disable underline for detected links
-  //   ".monaco-editor .detected-link":        "text-decoration: inherit",
-  //   ".monaco-editor .detected-link-active": "text-decoration: inherit",
-  //
-  //   // Editor tabs + breadcrumbs (HACK)
-  //   //  - https://github.com/microsoft/vscode/issues/42253
-  //   //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
-  //   "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                  "height: 17px !important; line-height: 17px !important",
-  //   "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                           "height: 17px !important; line-height: 17px !important",
-  //   "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label:before": "height: 15px !important",
-  //   "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                  "height: 17px !important; line-height: 17px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                                        "height: 17px !important; line-height: 17px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                 "height: 17px !important; line-height: 17px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label:before":                       "height: 15px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                                        "height: 17px !important; line-height: 17px !important; outline: 0px !important; padding: 0px !important",
-  //   ".tab .tab-label":                                                                                                                                   "line-height: 17px !important; font-family: Consolas",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                      "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                    "font-size: 12px !important",
-  //   ".monaco-action-bar .action-label":                                                                                                                  "margin-right: 0px !important",
-  //   ".tabs-and-actions-container":                                                                                                                       "height: 17px !important; background: #404040 !important",
-  //   ".tabs-and-actions-container .codicon":                                                                                                              "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
-  //   ".tabs-and-actions-container .codicon:hover":                                                                                                        "color: #fff !important",
-  //   ".tabs-and-actions-container .action-item":                                                                                                          "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
-  //   ".tabs-and-actions-container .action-item:hover":                                                                                                    "background: #666 !important",
-  //   ".monaco-breadcrumbs":                                                                                                                               "height: 17px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                                 "height: 17px !important",
-  //   ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label":              "line-height: 15px !important; height: 17px !important",
-  //   ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                             "font-size: 11px !important; font-family: Consolas !important",
-  //   ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                                     "content: '/'",
-  //   ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                                   "content: '/'",
-  //   ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                                   "display: none; font-size: 11px !important",
-  //
-  //   // Disable git decorations on tab names
-  //   //  - But leave decorations enabled for Explorer view
-  //   //  - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
-  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title.tabs .monaco-icon-label:after": "display: none",
-  //
-  //   // Monospace font for quick input (e.g. cmd-p command palette)
-  //   //  - Tip from: https://github.com/iocave/customize-ui/issues/46#issuecomment-654335047
-  //   //  - css classes from: https://gist.github.com/RUSshy/b96061470dafe3d6a12bfcc8e3bf532c
-  //   ".quick-input-list-entry": "font-family: Consolas !important",
-  //   ".quick-input-box":        "font-family: Consolas !important",
-  //
-  //   // TODO TODO Finish breadcrumb styling
-  //   //  - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
-  //   //  - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
-  //   //    - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
-  //
-  //   // TODO Style fonts (Consolas 11px/13px) for:
-  //   //  - [yes] Palette/quickOpen
-  //   //  - [yes] Breadcrumb dropdowns
-  //   //  - [yes] Explorer
-  //   //  - [no]  Extensions
-  //   //  - [no]  Status bar
-  //   //  - [What other Activity Bar stuff is like Explorer but isn't like Extensions?]
-  //
-  // },
-
-  // Fonts
-  "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
-  "editor.fontSize": 11,
-  "editor.lineHeight": 13,
-  "editor.fontFamily": "Consolas",
-  // "editor.fontWeight": "bold",
-
-  // Terminal
-  "terminal.integrated.defaultLocation": "editor", // Woo!
-  // NOTE This all moved to init.ts
-  // "terminal.integrated.defaultProfile.osx": "tmux-new-or-attach-vscode-term-uid",
-  // "terminal.integrated.profiles.osx": {
-  //   "tmux-new-or-attach-vscode-term-uid": {
-  //     "path": "tmux-new-or-attach-vscode-term-uid", // NOTE Requires "terminal.integrated.inheritEnv":true (default)
-  //     "args": [],
-  //   },
-  // },
-  "terminal.integrated.fontSize": 11,
-  "terminal.integrated.fontWeight": "bold",
-  // "terminal.integrated.fontWeightBold": "bold",
-  "terminal.integrated.allowChords": false,
-  "terminal.integrated.rightClickBehavior": "default",
-  "terminal.external.osxExec": "iTerm.app",
-  "terminal.integrated.showExitAlert": false,
-  "terminal.integrated.tabs.title": "${cwdFolder}/",
-  // "terminal.integrated.tabs.title": "${cwd}",
-  // "terminal.integrated.tabs.title": "${process}",
-  // "terminal.integrated.tabs.title": "term",
-  // "terminal.integrated.tabs.title": "bash",
-  // "terminal.integrated.tabs.title": "#",
-  // "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
-  "terminal.integrated.tabs.description": "",
-
-  // Indent/tabs
-  //  - https://code.visualstudio.com/docs/editor/codebasics#_indentation
-  "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-
-  // vim
-  //  - https://github.com/VSCodeVim/Vim
-  //  - https://github.com/VSCodeVim/Vim#key-remapping
-  //
-  // TODO
-  //  - In insert mode, make shift-esc behave like esc (currently noop)
-  //
-  "editor.cursorSurroundingLines": 1, // HACK Workaround annoying bug: https://github.com/VSCodeVim/Vim/issues/1393
-  "vim.disableAnnoyingNeovimMessage": true,
-  "vim.hlsearch": true,
-  "vim.leader": ",",
-  "vim.mouseSelectionGoesIntoVisualMode": false,
-  "vim.searchHighlightColor": "#D9D905",
-  "vim.showmodename": false,
-  "vim.textwidth": 120,
-  "vim.visualstar": true,
-  "vim.normalModeKeyBindingsNonRecursive": [
-
-    // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
-    //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
-    //  - https://github.com/VSCodeVim/Vim/issues/2007
-    {"before": ["u"], "commands": ["undo"]},
-    {"before": ["<c-r>"], "commands": ["redo"]},
-
-    // Clear search on esc
-    {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", ":"]},
-    //  - Also on \\ (old habits die hard)
-    {"before": ["\\", "\\"], "commands": [
-      ":nohl",
-      "highlightwords.removeAllHighlights",
-    ]},
-
-    // Save
-    {"before": [",", ","], "commands": ["workbench.action.files.save"]},
-
-    // Indent/unindent
-    //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
-    {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
-    {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
-
-    // Comment
-    {"before": ["\\", "c"], "after": ["g", "c"]},
-
-    // ctrl-space to show hover (like gh)
-    {"before": ["<c-space>"], "commands": ["editor.action.showHover"]},
-
-    // Go to / Search
-    {"before": [",", "a"], "after": ["v", "i", "w"], "commands": ["search.action.openNewEditorToSide"]},
-    {"before": [",", "A"], "commands": ["editor.action.goToReferences"]},
-
-  ],
-  "vim.visualModeKeyBindingsNonRecursive": [
-
-    // Clipboard
-    {"before": ["Y"], "after": ["\"", "+", "y"]},
-
-    // Indent/unindent
-    //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
-    {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
-    {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
-
-  ],
-
-  // multi-commands
-  "multiCommand.commands": [
-
-    // Jupyter/notebook
-    {
-      "command": "multiCommand.notebook.cell.edit.InsertMode",
-      "sequence": ["notebook.cell.edit", "extension.vim_insert"],
-    },
-
-    // HACK Works! (but a little janky)
-    {
-      "command": "multiCommand.list.scrollPageDown",
-      "sequence": [
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-        "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown", "list.scrollDown",
-      ],
-    },
-    {
-      "command": "multiCommand.list.scrollPageUp",
-      "sequence": [
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-        "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
-      ],
-    },
-
-    // HACK Workaround bug (see keybindings.json)
-    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
-
-  ],
-
-  // Hide scrollbars + some bits of overview ruler
-  //  - https://github.com/microsoft/vscode/issues/35454 — Disable fading scrollbars
-  //  - https://github.com/microsoft/vscode/issues/66000 — Scroll bar visibility should be configurable
-  //  - https://github.com/microsoft/vscode/issues/98632 — Add option `editor.scrollbar.vertical/horizontal` as official
-  //  - https://github.com/microsoft/vscode/issues/28653 — Feature: Setting to hide Vertical Scroll-Bar when the Minimap is Visible
-  //  - https://github.com/microsoft/vscode/issues/85418 — Disable overview ruler entirely
-  // "editor.scrollbar.verticalScrollbarSize": 0, // Hides scrollbar, but also hides overview ruler
-  // "editor.scrollbar.horizontalScrollbarSize": 0,
-  "editor.scrollbar.vertical": "hidden", // Hides scrollbar and leaves overview ruler shown
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.hideCursorInOverviewRuler": true,
-  // "editor.overviewRulerBorder": false,
-  // "terminal.integrated.scrollbar.vertical": "hidden", // NOTE No such setting, handled in css
-
-  // Recommended by dart
-  //  - https://dartcode.org/docs/recommended-settings/
-  "debug.openDebug": "openOnDebugBreak",
-  "dart.closingLabels": false,
-  "dart.lineLength": 120,
-  "dart.showTodos": false,
-
-  // Disable decorating colors values (#rgb) with color swatches
-  //  - Because it's slow to open the editor, or even to add/remove text around them
-  "editor.colorDecorators": false,
-
-  // Completions
-  //  - https://github.com/microsoft/vscode/issues/76322
-  "editor.wordBasedSuggestions": true, // Complete on any word -- only if no other provider has a completion
-  "editor.quickSuggestions": {
-    "comments": true, // Complete in comments
-    "strings": true, // Complete in strings
-    "other": true, // ?
-  },
-
-  // Filetypes
-  "[markdown]": {
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    }
-  },
-  "[jupyter]": {
-    "editor.tabSize": 4,
-  },
-  "[python]": {
-    "editor.tabSize": 4,
-  },
-  "[dart]": {
-
-    //
-    // From ? (did I put these?)
-    //
-
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false,
-    "editor.suggest.insertMode": "replace",
-
-    //
-    // From dart: https://dartcode.org/docs/recommended-settings/
-    //
-
-    // Automatically format code on save and during typing of certain characters
-    // (like `;` and `}`).
-    // "editor.formatOnSave": true,
-    // "editor.formatOnType": true,
-
-    // Draw a guide line at 80 characters, where Dart's formatting will wrap code.
-    // "editor.rulers": [80],
-
-    // Disables built-in highlighting of words that match your selection. Without
-    // this, all instances of the selected text will be highlighted, interfering
-    // with Dart's ability to highlight only exact references to the selected variable.
-    "editor.selectionHighlight": false,
-
-    // By default, VS Code prevents code completion from popping open when in
-    // "snippet mode" (editing placeholders in inserted code). Setting this option
-    // to `false` stops that and allows completion to open as normal, as if you
-    // weren't in a snippet placeholder.
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-
-    // By default, VS Code will pre-select the most recently used item from code
-    // completion. This is usually not the most relevant item.
-    //
-    // "first" will always select top item
-    // "recentlyUsedByPrefix" will filter the recently used items based on the
-    //     text immediately preceding where completion was invoked.
-    "editor.suggestSelection": "first",
-
-    // Allows pressing <TAB> to complete snippets such as `for` even when the
-    // completion list is not visible.
-    "editor.tabCompletion": "onlySnippets",
-
-  },
-
   // TODO Organize
-  "workbench.startupEditor": "newUntitledFile",
+  "workbench.startupEditor": "none",
   "workbench.colorTheme": "Default High Contrast",
   "editor.renderWhitespace": "none",
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingOvertype": "never",
   "editor.autoClosingQuotes": "never",
   "editor.copyWithSyntaxHighlighting": false,
-  "editor.lineNumbers": "off",
   "editor.renderLineHighlight": "none",
   "editor.cursorBlinking": "solid",
   "editor.minimap.enabled": false,
@@ -1391,7 +1111,6 @@
   "notebook.insertToolbarLocation": "notebookToolbar",
   "notebook.showCellStatusBar": "hidden",
   "workbench.editor.untitled.hint": "hidden",
-  "editor.folding": false,
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
   "r.rpath.mac": "/opt/homebrew/bin/r",
   "editor.guides.indentation": false,
