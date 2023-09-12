@@ -1142,10 +1142,12 @@
   "security.workspace.trust.untrustedFiles": "open",
   "editor.comments.ignoreEmptyLines": false,
   "update.showReleaseNotes": false,
-  "update.mode": "manual",
   "git.openRepositoryInParentFolders": "never",
   "workbench.activityBar.visible": false,
   "jupyter.interactiveWindow.creationMode": "perFile",
   "python.terminal.activateEnvironment": false,
+
+  // Things that conflict with Stripe settings
+  "update.mode": "manual",
 
 }
