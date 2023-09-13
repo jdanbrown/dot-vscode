@@ -1,17 +1,21 @@
 # Can I be productive yet?
 - https://paper.dropbox.com/doc/atom-vscode--A_t~s6bd0hoZRqU1QhPOpRxBAg-h1pVZyCsdouFUaDxCTofw
 
-# FIXME Multiple things broke between 2022-08 and 2021-01 due to vscode upgrades — back to atom for now
-- [ ] customize-ui
+# 2022-08 Multiple things broke since 2021-01 due to vscode upgrades — back to atom for now
+- [x] customize-ui
   - No longer supportable: https://github.com/iocave/customize-ui/issues/156
   - They say this other one still works: https://github.com/be5invis/vscode-custom-css
     - I tried it in the past and liked it less, but maybe it's workable enough? Give it a shot
-- [ ] vim
+  - [2023-09-09] Replaced by https://github.com/drcika/apc-extension
+    - More notes in: https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
+- [x] vim
   - Doesn't activate...
   - No leads yet (haven't tried very hard)
-- [ ] advanced-open-file
+  - [2023-09-09] No longer failing, must have fixed itself
+- [x] advanced-open-file
   - Says command not found when I do cmd-o
   - Maybe it changed id? This one looks alive: https://marketplace.visualstudio.com/items?itemName=jit-y.vscode-advanced-open-file
+  - [2023-09-09] No longer failing, must have fixed itself
 
 # Workspace
 - [x] Disable font smoothing
@@ -38,42 +42,43 @@
     - Installed manually! (see ~/hack/vscode/Vscode-terminal-tab/README-vsce-package.md)
 - [x] Reattach each terminal to its tmux session on vscode restart
   - Use `>Launch a tmux baked terminal tab here`
-- [ ] Style: tmux copy-mode visual select is missing its background color
+- [x] ~~Style: tmux copy-mode visual select is missing its background color~~
+- [x] Fix: can't ctrl-h/l from a terminal tab (to switch to next/previous tab)
 - [ ] Fix: lost focus on new tab / switch to tab
-- [ ] Fix: can't ctrl-h/l from a terminal tab (to switch to next/previous tab)
 
 # Editor
-- [ ] How to copy to osx clipboard
+- [x] How to copy to osx clipboard
 
 # Style
 - Theme
-  - [ ] How far can we get with `workbench.colorCustomizations`? https://code.visualstudio.com/api/references/theme-color
+  - [x] How far can we get with `workbench.colorCustomizations`? https://code.visualstudio.com/api/references/theme-color
 - Custom CSS
   - [x] Install https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui
   - [x] Hide title bar
-  - [ ] Small-mono font in Explorer (shift-cmd-e)
-  - [ ] Small-mono font in tab bar
-  - [ ] Hide/shrink gutter (by default, with key to toggle back on because probably very useful)
+  - [x] Small-mono font in tab bar
+  - [x] Small-mono font in Explorer (shift-cmd-e)
+  - [x] Hide/shrink gutter
+    - [ ] Add key to toggle back on because probably sometimes very useful
 - Filetypes
   - *
     - [x] Don't underline links in editor
   - *.md
-    - [ ] Highlight `...` code expressions
+    - [x] Highlight `...` code expressions
 
 # Keybindings
 - General
-  - [ ] Use https://code.visualstudio.com/docs/getstarted/keybindings#_troubleshooting-keybindings
-  - [ ] Mimic keybindings from ~/.atom/keymap.cson
-  - [ ] See for examples: https://code.visualstudio.com/docs/getstarted/keybindings
-  - [ ] See for examples: https://github.com/Microsoft/vscode-atom-keybindings#what-keyboard-shortcuts-are-included
+  - Use https://code.visualstudio.com/docs/getstarted/keybindings#_troubleshooting-keybindings
+  - Mimic keybindings from ~/.atom/keymap.cson
+  - See for examples: https://code.visualstudio.com/docs/getstarted/keybindings
+  - See for examples: https://github.com/Microsoft/vscode-atom-keybindings#what-keyboard-shortcuts-are-included
 - Workspace
-  - [ ] Toggle Acitivty Bar Visibility
-  - [ ] How to switch tabs only within a tab group? (by default jumps across groups)
-  - [ ] Force opt-cmd-i to work for Help -> Toggle Developer Tools
+  - [x] Toggle Acitivty Bar Visibility
+  - [x] How to switch tabs only within a tab group? (by default jumps across groups)
+  - [x] Force opt-cmd-i to work for Help -> Toggle Developer Tools
 - Terminal
-  - [ ] cmd-t = `>Launch a tmux baked terminal tab here`
+  - [x] cmd-t = `>Launch a tmux baked terminal tab here`
 - Editor
-  - [ ] tab = >>, shift-tab = <<
+  - [x] tab = >>, shift-tab = <<
   - [ ] `[`/`]` for jump up/down
   - [ ] How to vim-surround
     - https://github.com/VSCodeVim/Vim
