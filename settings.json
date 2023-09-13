@@ -1,7 +1,15 @@
-// Docs:
+// Docs
 //  - https://code.visualstudio.com/docs/getstarted/settings
 //    - Big reference of all available commands
 {
+
+  // Workspace
+  "window.newWindowDimensions": "inherit",
+  "window.nativeFullScreen": false,
+  "window.titleBarStyle": "native",
+  "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
+  "workspace-path-status-bar.enable": false,
+  "security.workspace.trust.untrustedFiles": "open",
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
@@ -162,6 +170,16 @@
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.currentLine.enabled": false,
 
+  // NOTE Disabled because it adds spelling errors to the Problems list, which is too noisy
+  //  - Instead, manually use alfred 'spell' -- which actually has a really great interactive mode!
+  // // Spell Checker
+  // //  - https://streetsidesoftware.com/vscode-spell-checker/
+  // // "cSpell.enabled": false, // To disable without reload/restart
+  // "cSpell.showStatus": false,
+  // "cSpell.checkOnlyEnabledFileTypes": false,
+  // "cSpell.showAutocompleteSuggestions": true,
+  // "cSpell.hideAddToDictionaryCodeActions": true,
+
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://github.com/VSCodeVim/Vim#key-remapping
@@ -189,10 +207,7 @@
     // Clear search on esc
     {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", ":"]},
     //  - Also on \\ (old habits die hard)
-    {"before": ["\\", "\\"], "commands": [
-      ":nohl",
-      "highlightwords.removeAllHighlights",
-    ]},
+    {"before": ["\\", "\\"], "commands": [":nohl", "highlightwords.removeAllHighlights"]},
 
     // Save
     {"before": [",", ","], "commands": ["workbench.action.files.save"]},
@@ -206,7 +221,7 @@
     {"before": ["\\", "c"], "after": ["g", "c"]},
 
     // ctrl-space to show hover (like gh)
-    {"before": ["<c-space>"], "commands": ["editor.action.showHover"]},
+    // {"before": ["<c-space>"], "commands": ["editor.action.showHover"]},
 
     // Go to / Search
     {"before": [",", "a"], "after": ["v", "i", "w"], "commands": ["search.action.openNewEditorToSide"]},
@@ -1033,6 +1048,11 @@
 
   },
 
+  // Things that conflict with Stripe settings
+  "update.mode": "manual",
+  "workbench.editor.focusRecentEditorAfterClose": false,
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+
   // TODO Organize
   "workbench.startupEditor": "none",
   "workbench.colorTheme": "Default High Contrast",
@@ -1055,7 +1075,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "window.newWindowDimensions": "inherit",
   "workbench.statusBar.visible": true,
   "todohighlight.keywordsPattern": "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b",
   "todohighlight.defaultStyle": {
@@ -1073,7 +1092,6 @@
   "workbench.commandPalette.history": 0,
   "search.quickOpen.includeHistory": false,
   "task.quickOpen.history": 0,
-  "window.nativeFullScreen": false,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
@@ -1113,10 +1131,8 @@
   "explorer.compactFolders": false,
   "dart.debugExternalLibraries": false,
   "dart.debugSdkLibraries": false,
-  "window.titleBarStyle": "native",
   "problems.showCurrentInStatus": true,
   "git.enableStatusBarSync": false,
-  "workspace-path-status-bar.enable": false,
   "editor.acceptSuggestionOnEnter": "off",
   "dart.enableSnippets": false,
   "dart.hotReloadProgress": "statusBar",
@@ -1142,15 +1158,11 @@
   "search.exclude": {
     "build/**": true
   },
-  "security.workspace.trust.untrustedFiles": "open",
   "editor.comments.ignoreEmptyLines": false,
   "update.showReleaseNotes": false,
   "git.openRepositoryInParentFolders": "never",
   "workbench.activityBar.visible": false,
   "jupyter.interactiveWindow.creationMode": "perFile",
   "python.terminal.activateEnvironment": false,
-
-  // Things that conflict with Stripe settings
-  "update.mode": "manual",
 
 }
