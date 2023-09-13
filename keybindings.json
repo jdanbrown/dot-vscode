@@ -1,4 +1,9 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Docs
+//  - shift+cmd+p -> "Preferences: Open Default Keyboard Shortcuts (JSON)"
+//    - Reference for default keyboard shortcuts
+//    - Reference for all available commands
+//  - https://github.com/codebling/vs-code-default-keybindings/blob/master/macos.keybindings.json
+//    - (Only reference I can find on the web)
 [
 
   // Workspace
@@ -6,14 +11,13 @@
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
   {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
   {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"},
-  {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
-  {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
+  // {"key": "shift+ctrl+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
+  // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
+  {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
+  {"key": "ctrl+up", "command": "workbench.action.toggleKeybindingsLog"},
+  // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
   {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
-  {
-    "key": "cmd+r",
-    "command": "workbench.action.gotoSymbol",
-    "when": "!inSearchEditor"
-  },
+  {"key": "cmd+r", "command": "workbench.action.gotoSymbol", "when": "!inSearchEditor"},
   {"key": "shift+cmd+j", "command": "-workbench.action.search.toggleQueryDetails", "when": "inSearchEditor || searchViewletFocus"},
   {"key": "shift+cmd+j", "command": "workbench.action.togglePanel"},
 
@@ -81,6 +85,15 @@
   {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "listFocus"},
   {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "listFocus"},
 
+  // Editor
+  {"key": "ctrl+space", "command": "editor.action.showHover"}, // Alias for gh (vim)
+  // {"key": "cmd+.", "command": "editor.action.quickFix"}, // Default
+  {"key": "shift+cmd+.", "command": "editor.action.openLink"},
+  {"key": "shift+cmd+.", "command": "-breadcrumbs.focusAndSelect", "when": "breadcrumbsPossible && breadcrumbsVisible"},
+  {"key": "shift+cmd+.", "command": "-editor.action.inPlaceReplace.down", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "shift+cmd+.", "command": "-breadcrumbs.toggleToOn", "when": "!config.breadcrumbs.enabled"},
+  {"key": "shift+cmd+.", "command": "-editor.action.accessibleViewGoToSymbol", "when": "accessibilityHelpIsShown && accessibleViewGoToSymbolSupported || accessibleViewGoToSymbolSupported && accessibleViewIsShown"},
+
   // vim
   {"key": "ctrl+r", "command": "-workbench.action.openRecent"}, // Unshadow vim redo
 
@@ -111,25 +124,37 @@
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
 
   // Terminal
-  {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
-  //  - Whether or not to use our custom userInitTs.terminal.new cmd (in init.ts) that uses `tmux-new-or-attach`
-  //    - Currently thinking no, let's try vscode's default terminal and see if we can learn to like it
-  // {"key": "cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
-  // {"key": "alt+cmd+t", "command": "workbench.action.terminal.new", "when": "terminalProcessSupported"},
-  {"key": "alt+cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+  //  - Switch to vscode's default terminals instead of our custom userInitTs.terminal.new (in init.ts) that uses `tmux-new-or-attach`
   {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
-  //  - Disable cmd+w to close terminals, only editors
+  {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
+  {"key": "alt+cmd+t", "command": "userInitTs.terminal.new", "when": "terminalProcessSupported"},
+  //  - Disable cmd+w to close terminals (unsafe!), only editors
   //    - cmd+w on terminals is too dangerous because we can no longer do shift+cmd+t to reopen an accidentally closed terminal (^D the shell instead)
   {"key": "cmd+w", "command": "-workbench.action.terminal.killEditor", "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated && resourceScheme == 'vscode-terminal' || terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'"},
   {"key": "cmd+w", "command": "-workbench.action.closeActiveEditor"},
   {"key": "cmd+w", "command": "workbench.action.closeActiveEditor", "when": "!terminalFocus"},
-  //  - Replacement for tmux ^K with normal vscode terminals
+  //  - Scroll/select with keyboard
+  {"key": "cmd+r", "command": "workbench.action.terminal.runRecentCommand", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+g", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+u", "command": "workbench.action.terminal.scrollUpPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+d", "command": "workbench.action.terminal.scrollDownPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+y", "command": "workbench.action.terminal.scrollUp", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+e", "command": "workbench.action.terminal.scrollDown", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "shift+cmd+y", "command": "workbench.action.terminal.selectToPreviousLine", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "shift+cmd+e", "command": "workbench.action.terminal.selectToNextLine", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  // {"key": "shift+cmd+up", "command": "workbench.action.terminal.selectToPreviousCommand", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"}, // Default
+  // {"key": "shift+cmd+down", "command": "workbench.action.terminal.selectToNextCommand", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"}, // Default
+  //  - Hacky replacement for tmux ^K with normal vscode terminals
   //    - https://github.com/microsoft/vscode/issues/181390
   //    - https://code.visualstudio.com/docs/editor/accessibility#_terminal-accessibility -> focusAccessibleBuffer
   //    - This is pretty cool -- turns the whole terminal into a normal editor buffer, for easy copy/paste
   //    - Like tmux ^K but actually maybe better? (assuming it works on big scrollbacks!)
   //    - NOTE Had to remove accessibilityModeEnabled from the `when`, because enabling editor.accessibilitySupport would probably affect a lot of things
   {"key": "ctrl+k", "command": "workbench.action.terminal.focusAccessibleBuffer", "when": "terminalFocus && terminalHasBeenCreated && terminalTabFocusMode || terminalFocus && terminalHasBeenCreated && !terminalAccessibleBufferFocus || terminalFocus && terminalProcessSupported && terminalTabFocusMode || terminalFocus && terminalProcessSupported && !terminalAccessibleBufferFocus"},
+  // Open detected links
+  // {"key": "shift+cmd+o", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"}, // Default
+  {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"},
+
 
   // Jupyter/notebook
   {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
