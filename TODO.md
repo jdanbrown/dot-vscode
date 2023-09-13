@@ -79,11 +79,14 @@
   - [x] cmd-t = `>Launch a tmux baked terminal tab here`
 - Editor
   - [x] tab = >>, shift-tab = <<
-  - [ ] `[`/`]` for jump up/down
-  - [ ] How to vim-surround
+  - [x] How to vim-surround
     - https://github.com/VSCodeVim/Vim
     - https://github.com/tpope/vim-surround
-  - [ ] Toggle gutter (possible?)
+    - Here it is: https://github.com/VSCodeVim/Vim#vim-surround
+  - [ ] Toggle gutter
+    - How to do this? -- currently hidden via a handful of css rules
+- vim
+  - [ ] `[`/`]` for jump up/down
 
 # Jupyter notebooks
 - All issues
