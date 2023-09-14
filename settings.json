@@ -213,11 +213,13 @@
   "vim.cursorStylePerMode.visualline": "underline-thin",
   "vim.normalModeKeyBindingsNonRecursive": [
 
-    // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
-    //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
-    //  - https://github.com/VSCodeVim/Vim/issues/2007
-    {"before": ["u"], "commands": ["undo"]},
-    {"before": ["<c-r>"], "commands": ["redo"]},
+    // XXX No actually, this makes vim undo/redo behave really weird, with the wrong granularity of edits
+    //  - iiuc these issues are about weirdness when you _mix_ vim u/^R with vscode cmd+z/shift+cmd+z, so let's just not do that
+    // // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
+    // //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
+    // //  - https://github.com/VSCodeVim/Vim/issues/2007
+    // {"before": ["u"], "commands": ["undo"]},
+    // {"before": ["<c-r>"], "commands": ["redo"]},
 
     // Clear search on esc
     {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", ":"]},
