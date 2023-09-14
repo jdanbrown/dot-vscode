@@ -55,10 +55,10 @@
   {"key": "cmd+j", "command": "workbench.action.focusBelowGroup"},
   {"key": "cmd+l", "command": "-expandLineSelection", "when": "textInputFocus"},
   {"key": "cmd+l", "command": "workbench.action.focusRightGroup"},
-  {"key": "ctrl+alt+cmd+l", "command": "workbench.action.splitEditorRight"},
-  {"key": "ctrl+alt+cmd+h", "command": "workbench.action.splitEditorLeft"},
-  {"key": "ctrl+alt+cmd+j", "command": "workbench.action.splitEditorDown"},
-  {"key": "ctrl+alt+cmd+k", "command": "workbench.action.splitEditorUp"},
+  {"key": "ctrl+alt+cmd+l", "command": "workbench.action.splitEditorToRightGroup", "when": "!terminalFocus"},
+  {"key": "ctrl+alt+cmd+j", "command": "workbench.action.splitEditorToBelowGroup", "when": "!terminalFocus"},
+  {"key": "ctrl+alt+cmd+h", "command": "workbench.action.splitEditorToLeftGroup", "when": "!terminalFocus"},
+  {"key": "ctrl+alt+cmd+k", "command": "workbench.action.splitEditorToAboveGroup", "when": "!terminalFocus"},
   {"key": "cmd+1", "command": "workbench.action.openEditorAtIndex1"},
   {"key": "cmd+2", "command": "workbench.action.openEditorAtIndex2"},
   {"key": "cmd+3", "command": "workbench.action.openEditorAtIndex3"},
@@ -99,6 +99,13 @@
   {"key": "shift+cmd+.", "command": "-editor.action.inPlaceReplace.down", "when": "editorTextFocus && !editorReadonly"},
   {"key": "shift+cmd+.", "command": "-breadcrumbs.toggleToOn", "when": "!config.breadcrumbs.enabled"},
   {"key": "shift+cmd+.", "command": "-editor.action.accessibleViewGoToSymbol", "when": "accessibilityHelpIsShown && accessibleViewGoToSymbolSupported || accessibleViewGoToSymbolSupported && accessibleViewIsShown"},
+
+  // Move lines up/down
+  //  - TODO(practice)
+  {"key": "ctrl+cmd+j", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "ctrl+cmd+k", "command": "editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "alt+down", "command": "-editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly"},
+  {"key": "alt+up", "command": "-editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly"},
 
   // vim
   {"key": "ctrl+r", "command": "-workbench.action.openRecent"}, // Unshadow vim redo
@@ -411,26 +418,7 @@
     "command": "-editor.action.marker.prevInFiles",
     "when": "editorFocus"
   },
-  {
-    "key": "ctrl+cmd+j",
-    "command": "editor.action.moveLinesDownAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "alt+down",
-    "command": "-editor.action.moveLinesDownAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+cmd+k",
-    "command": "editor.action.moveLinesUpAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "alt+up",
-    "command": "-editor.action.moveLinesUpAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
+
   {
     "key": "j",
     "command": "search.action.focusNextSearchResult",
