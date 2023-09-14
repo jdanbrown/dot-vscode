@@ -38,7 +38,6 @@
   //  - https://github.com/microsoft/vscode/issues/12543
   "editor.lineNumbers": "off",
   "editor.glyphMargin": false,
-  "git.decorations.enabled": false,
   "editor.folding": false,
   "editor.lineNumbersMinChars": 0,  // Undocumented
   "editor.lineDecorationsWidth": 3, // Undocumented
@@ -180,6 +179,14 @@
   // "cSpell.showAutocompleteSuggestions": true,
   // "cSpell.hideAddToDictionaryCodeActions": true,
 
+  // Project Manager
+  //  - https://github.com/alefragnani/vscode-project-manager
+  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+  "projectManager.supportSymlinksOnBaseFolders": true,
+  "projectManager.git.baseFolders": [
+    "~/hack"
+  ],
+
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://github.com/VSCodeVim/Vim#key-remapping
@@ -196,6 +203,9 @@
   "vim.showmodename": false,
   "vim.textwidth": 120,
   "vim.visualstar": true,
+  "vim.cursorStylePerMode.visual": "underline-thin",
+  "vim.cursorStylePerMode.visualblock": "underline-thin",
+  "vim.cursorStylePerMode.visualline": "underline-thin",
   "vim.normalModeKeyBindingsNonRecursive": [
 
     // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
@@ -237,6 +247,12 @@
     //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
     {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
     {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
+
+    // Shrink/expand selection
+    //  - https://code.visualstudio.com/docs/editor/codebasics#_shrinkexpand-selection
+    //  - TODO(practice)
+    {"before": ["o"], "commands": ["editor.action.smartSelect.expand"]},
+    {"before": ["O"], "commands": ["editor.action.smartSelect.shrink"]},
 
   ],
 
@@ -289,357 +305,47 @@
 
   ],
 
-  // Custom workbench colors
-  //  - Keys:
-  //    - https://code.visualstudio.com/api/references/theme-color
-  //    - https://vscode.readthedocs.io/en/latest/getstarted/theme-color-reference/
-  //    - https://gist.github.com/lol-russo/1c7a0b958be4b9434c5a120f24d5e7c3
+  // Colors
+  //  - See all keys w/ default values: "Developer: Generate Color Theme From Current Settings"
+  //  - https://code.visualstudio.com/api/references/theme-color
   "workbench.colorCustomizations": {
-    // Generated from: "Developer: Generate Color Theme From Current Settings"
 
-		// "activityBar.background": "#000000",
-		// "activityBar.border": "#6fc3df",
-		// "activityBar.dropBorder": "#ffffff",
-		// "activityBar.foreground": "#ffffff",
-		// "activityBar.inactiveForeground": "#ffffff",
-		// "activityBarBadge.background": "#000000",
-		// "activityBarBadge.foreground": "#ffffff",
-		// "badge.background": "#000000",
-		// "badge.foreground": "#ffffff",
-		// "bookmarks.lineBackground": "#0000",
-		// "bookmarks.lineBorder": "#0000",
     "bookmarks.overviewRuler": "#0000", // Disable
-		// "breadcrumb.activeSelectionForeground": "#ffffff",
-		// "breadcrumb.background": "#000000",
-		// "breadcrumb.focusForeground": "#ffffff",
-		// "breadcrumb.foreground": "#ffffffcc",
-		// "breadcrumbPicker.background": "#0c141f",
-		// "button.foreground": "#ffffff",
-		// "button.secondaryForeground": "#ffffff",
-		// "charts.foreground": "#ffffff",
-		// "charts.green": "#89d185",
-		// "charts.lines": "#ffffff80",
-		// "charts.orange": "#ab5a00",
-		// "charts.purple": "#b180d7",
-		// "checkbox.background": "#000000",
-		// "checkbox.border": "#6fc3df",
-		// "checkbox.foreground": "#ffffff",
     "contrastActiveBorder": "#0000", // Disable
-    // "contrastBorder": "#777", // TODO
-    "contrastBorder": "#404040", // TODO
-    // "contrastBorder": "#0000",
-		// "dart.closingLabels": "#777777",
-		// "debugConsole.errorForeground": "#f48771",
-		// "debugConsole.infoForeground": "#ffffff",
-		// "debugConsole.sourceForeground": "#ffffff",
-		// "debugConsole.warningForeground": "#008000",
-		// "debugConsoleInputIcon.foreground": "#ffffff",
-		// "debugExceptionWidget.background": "#420b0d",
-		// "debugExceptionWidget.border": "#a31515",
-		// "debugIcon.breakpointCurrentStackframeForeground": "#ffcc00",
-		// "debugIcon.breakpointDisabledForeground": "#848484",
-		// "debugIcon.breakpointForeground": "#e51400",
-		// "debugIcon.breakpointStackframeForeground": "#89d185",
-		// "debugIcon.breakpointUnverifiedForeground": "#848484",
-		// "debugIcon.continueForeground": "#75beff",
-		// "debugIcon.disconnectForeground": "#f48771",
-		// "debugIcon.pauseForeground": "#75beff",
-		// "debugIcon.restartForeground": "#89d185",
-		// "debugIcon.startForeground": "#89d185",
-		// "debugIcon.stepBackForeground": "#75beff",
-		// "debugIcon.stepIntoForeground": "#75beff",
-		// "debugIcon.stepOutForeground": "#75beff",
-		// "debugIcon.stepOverForeground": "#75beff",
-		// "debugIcon.stopForeground": "#f48771",
-		// "debugTokenExpression.boolean": "#75bdfe",
-		// "debugTokenExpression.error": "#f48771",
-		// "debugTokenExpression.name": "#ffffff",
-		// "debugTokenExpression.number": "#89d185",
-		// "debugTokenExpression.string": "#f48771",
-		// "debugTokenExpression.value": "#ffffff",
-		// "debugToolBar.background": "#000000",
-		// "debugView.exceptionLabelBackground": "#6c2022",
-		// "debugView.exceptionLabelForeground": "#ffffff",
-		// "debugView.stateLabelBackground": "#88888844",
-		// "debugView.stateLabelForeground": "#ffffff",
-		// "debugView.valueChangedHighlight": "#569cd6",
-		// "descriptionForeground": "#ffffffb3",
-		// "diffEditor.border": "#6fc3df",
-		// "diffEditor.insertedTextBorder": "#33ff2e",
-		// "diffEditor.removedTextBorder": "#ff008f",
-		// "dropdown.background": "#000000",
-		// "dropdown.border": "#6fc3df",
-		// "dropdown.foreground": "#ffffff",
-		// "dropdown.listBackground": "#000000",
+    // "contrastBorder": "#777",
+    "contrastBorder": "#404040",
 
+    // Editor
 		"editor.background": "#000000",
-		// "editor.findMatchBorder": "#f38518",
-		// "editor.findMatchHighlightBorder": "#f38518",
-		// "editor.findRangeHighlightBorder": "#f3851866",
-		// "editor.focusedStackFrameHighlightBackground": "#7abd7a4d",
 		"editor.foreground": "#ffffff",
-		// "editor.hoverHighlightBackground": "#add6ff26",
-		// "editor.inactiveSelectionBackground": "#ffffff80",
-		// "editor.lineHighlightBorder": "#f38518",
-		// "editor.onTypeRenameBackground": "#ff00004d",
-		// "editor.rangeHighlightBorder": "#f38518",
 		"editor.selectionBackground": "#fff8",
-		// "editor.selectionForeground": "#000000",
     "editor.selectionHighlightBackground": "#fff6",
-		// "editor.selectionHighlightBorder": "#f38518",
-		// "editor.snippetFinalTabstopHighlightBorder": "#525252",
-		// "editor.snippetTabstopHighlightBackground": "#7c7c7c4d",
-		// "editor.stackFrameHighlightBackground": "#ffff0033",
-		// "editor.symbolHighlightBorder": "#f38518",
-		// "editor.wordHighlightBorder": "#f38518",
-		// "editor.wordHighlightStrongBorder": "#f38518",
-		// "editorBracketMatch.background": "#0064001a",
-		// "editorBracketMatch.border": "#6fc3df",
-		// "editorCodeLens.foreground": "#999999",
-		// "editorCursor.foreground": "#ffffff",
-		// "editorError.border": "#e47777cc",
-		// "editorGroup.border": "#6fc3df",
-		// "editorGroup.focusedEmptyBorder": "#f38518",
-		// "editorGroupHeader.border": "#6fc3df",
-		// "editorGroupHeader.noTabsBackground": "#000000",
-    // "editorGroupHeader.tabsBorder": "#777",
-		// "editorGutter.addedBackground": "#33ab4e",
-    // "editorGutter.background": "#111",
     "editorGutter.background": "#000",
-		// "editorGutter.commentRangeForeground": "#c5c5c5",
-		// "editorGutter.deletedBackground": "#fc5d6d",
-		// "editorGutter.foldingControlForeground": "#ffffff",
-		// "editorGutter.modifiedBackground": "#009bf9",
-		// "editorHint.border": "#eeeeeecc",
-		// "editorHoverWidget.background": "#0c141f",
-		// "editorHoverWidget.border": "#6fc3df",
-		// "editorHoverWidget.foreground": "#ffffff",
-		// "editorHoverWidget.statusBarBackground": "#0c141f",
-		// "editorIndentGuide.activeBackground": "#e3e4e229",
-		// "editorIndentGuide.background": "#e3e4e229",
-		// "editorInfo.border": "#75beffcc",
-		// "editorLightBulb.foreground": "#ffcc00",
-		// "editorLightBulbAutoFix.foreground": "#75beff",
-		// "editorLineNumber.activeForeground": "#f38518",
-		// "editorLineNumber.foreground": "#ffffff",
-		// "editorLink.activeForeground": "#00ffff",
-		// "editorMarkerNavigation.background": "#0c141f",
-		// "editorMarkerNavigationError.background": "#e47777cc",
-		// "editorMarkerNavigationInfo.background": "#75beffcc",
-		// "editorMarkerNavigationWarning.background": "#ffcc00cc",
-		// "editorOverviewRuler.addedForeground": "#33ab4e99",
-		// "editorOverviewRuler.border": "#7f7f7f4d",
-		// "editorOverviewRuler.bracketMatchForeground": "#a0a0a0",
-		// "editorOverviewRuler.commonContentForeground": "#c3df6f",
-		// "editorOverviewRuler.currentContentForeground": "#c3df6f",
-		// "editorOverviewRuler.deletedForeground": "#fc5d6d99",
-		// "editorOverviewRuler.errorForeground": "#ff3232",
-		// "editorOverviewRuler.findMatchForeground": "#ab5a00",
-		// "editorOverviewRuler.incomingContentForeground": "#c3df6f",
-		// "editorOverviewRuler.infoForeground": "#75beffcc",
-		// "editorOverviewRuler.modifiedForeground": "#009bf999",
-		// "editorOverviewRuler.rangeHighlightForeground": "#007acc99",
-		// "editorOverviewRuler.selectionHighlightForeground": "#a0a0a0cc",
-		// "editorOverviewRuler.warningForeground": "#ffcc00cc",
-		// "editorOverviewRuler.wordHighlightForeground": "#a0a0a0cc",
-		// "editorOverviewRuler.wordHighlightStrongForeground": "#c0a0c0cc",
-		// "editorPane.background": "#000000",
-		// "editorRuler.foreground": "#ffffff",
-		// "editorSuggestWidget.background": "#0c141f",
-		// "editorSuggestWidget.border": "#6fc3df",
-		// "editorSuggestWidget.foreground": "#ffffff",
-		// "editorSuggestWidget.highlightForeground": "#f38518",
-		// "editorUnnecessaryCode.border": "#ffffffcc",
-		// "editorWarning.border": "#ffcc00cc",
-		// "editorWhitespace.foreground": "#e3e4e229",
-		// "editorWidget.background": "#0c141f",
-		// "editorWidget.border": "#6fc3df",
-		// "editorWidget.foreground": "#ffffff",
 
-		// "errorForeground": "#f48771",
-		// "extensionBadge.remoteBackground": "#000000",
-		// "extensionBadge.remoteForeground": "#ffffff",
-		// "focusBorder": "#f38518",
-		// "foreground": "#ffffff",
-		"gitDecoration.addedResourceForeground": "#35A249", // Default too dark (#1b5225)
-		// "gitDecoration.conflictingResourceForeground": "#6c6cc4",
-		// "gitDecoration.deletedResourceForeground": "#c74e39",
-		// "gitDecoration.ignoredResourceForeground": "#a7a8a9",
-		// "gitDecoration.modifiedResourceForeground": "#e2c08d",
-		// "gitDecoration.stageDeletedResourceForeground": "#c74e39",
-		// "gitDecoration.stageModifiedResourceForeground": "#e2c08d",
-		// "gitDecoration.submoduleResourceForeground": "#8db9e2",
-		// "gitDecoration.untrackedResourceForeground": "#73c991",
-		// "icon.foreground": "#ffffff",
-		// "imagePreview.border": "#6fc3df",
-		// "inlineTitleBar.background": "#000000",
-		// "input.background": "#000000",
-		// "input.border": "#6fc3df",
-		// "input.foreground": "#ffffff",
-		// "input.placeholderForeground": "#ffffffb3",
-		// "inputOption.activeBackground": "#0000",
-		// "inputOption.activeBorder": "#6fc3df",
-		// "inputValidation.errorBackground": "#000000",
-		// "inputValidation.errorBorder": "#6fc3df",
-		// "inputValidation.infoBackground": "#000000",
-		// "inputValidation.infoBorder": "#6fc3df",
-		// "inputValidation.warningBackground": "#000000",
-		// "inputValidation.warningBorder": "#6fc3df",
+    // Git
+		"gitDecoration.addedResourceForeground": "#5ffa68", // New staged
+		"gitDecoration.conflictingResourceForeground": "#ff6e67",
+		"gitDecoration.deletedResourceForeground": "#ff77ff",
+		"gitDecoration.ignoredResourceForeground": "#686868",
+		"gitDecoration.modifiedResourceForeground": "#de935f",
+		"gitDecoration.stageDeletedResourceForeground": "#ff77ff",
+		"gitDecoration.stageModifiedResourceForeground": "#de935f",
+		"gitDecoration.submoduleResourceForeground": "#8db9e2", // (Leave as default)
+		"gitDecoration.untrackedResourceForeground": "#5ffa68", // New unstaged
 
     "list.activeSelectionBackground": "#666",
-		// "list.deemphasizedForeground": "#a7a8a9",
-    // "list.filterMatchBorder": "#6fc3df",
-    // "list.focusBackground": "#404040",
     "list.focusBackground": "#404040",
-		// "list.highlightForeground": "#f38518",
-    // "list.hoverBackground": "#202020",
     "list.hoverBackground": "#404040",
-		// "list.invalidItemForeground": "#b89500",
-		// "listFilterWidget.background": "#000000",
-		// "listFilterWidget.noMatchesOutline": "#6fc3df",
-		// "listFilterWidget.outline": "#f38518",
-
-		// "menu.background": "#000000",
-		// "menu.border": "#6fc3df",
-		// "menu.foreground": "#ffffff",
-		// "menu.selectionBorder": "#f38518",
-		// "menu.separatorBackground": "#6fc3df",
-		// "menubar.selectionBorder": "#f38518",
-		// "menubar.selectionForeground": "#ffffff",
-		// "merge.border": "#c3df6f",
-		// "minimap.errorHighlight": "#ff3232",
-		// "minimap.findMatchHighlight": "#ab5a00",
-		// "minimap.selectionHighlight": "#ffffff",
-		// "minimap.warningHighlight": "#ffcc00cc",
-		// "minimapGutter.addedBackground": "#33ab4e",
-		// "minimapGutter.deletedBackground": "#fc5d6d",
-		// "minimapGutter.modifiedBackground": "#009bf9",
-		// "minimapSlider.activeBackground": "#6fc3df80",
-		// "minimapSlider.background": "#6fc3df4d",
-		// "minimapSlider.hoverBackground": "#6fc3df66",
-		// "notebook.cellBorderColor": "#6fc3df",
-		// "notebook.cellInsertionIndicator": "#f38518",
-		// "notebook.cellStatusBarItemHoverBackground": "#ffffff26",
-		// "notebook.cellToolbarSeparator": "#6fc3df",
-		// "notebook.focusedCellBorder": "#f38518",
-		// "notebook.focusedEditorBorder": "#f38518",
-		// "notebook.focusedRowBorder": "#f38518",
-		// "notebook.selectedCellBorder": "#6fc3df",
-		// "notebookScrollbarSlider.activeBackground": "#6fc3df",
-		// "notebookScrollbarSlider.background": "#6fc3df99",
-		// "notebookScrollbarSlider.hoverBackground": "#6fc3dfcc",
-		// "notebookStatusErrorIcon.foreground": "#f48771",
-		// "notebookStatusRunningIcon.foreground": "#ffffff",
-		// "notebookStatusSuccessIcon.foreground": "#89d185",
-		// "notificationCenter.border": "#6fc3df",
-		// "notificationCenterHeader.background": "#0c141f",
-		// "notificationLink.foreground": "#3794ff",
-		// "notifications.background": "#0c141f",
-		// "notifications.border": "#0c141f",
-		// "notifications.foreground": "#ffffff",
-		// "notificationToast.border": "#6fc3df",
-		// "panel.background": "#000000",
-		// "panel.border": "#6fc3df",
-		// "panel.dropBorder": "#ffffff",
-		// "panelSection.border": "#6fc3df",
-		// "panelSectionHeader.border": "#6fc3df",
-		// "panelTitle.activeBorder": "#6fc3df",
-		// "panelTitle.activeForeground": "#ffffff",
-		// "panelTitle.inactiveForeground": "#ffffff",
-		// "peekView.border": "#6fc3df",
-		// "peekViewEditor.background": "#000000",
-		// "peekViewEditor.matchHighlightBorder": "#f38518",
-		// "peekViewEditorGutter.background": "#000000",
-		// "peekViewResult.background": "#000000",
-		// "peekViewResult.fileForeground": "#ffffff",
-		// "peekViewResult.lineForeground": "#ffffff",
-		// "peekViewResult.selectionForeground": "#ffffff",
-		// "peekViewTitle.background": "#0c141f",
-		// "peekViewTitleDescription.foreground": "#ffffff99",
-		// "peekViewTitleLabel.foreground": "#ffffff",
-		// "pickerGroup.border": "#ffffff",
-		// "pickerGroup.foreground": "#ffffff",
-		// "progressBar.background": "#6fc3df",
-		// "quickInput.background": "#0c141f",
-		// "quickInput.foreground": "#ffffff",
     "quickInputList.focusBackground": "#404040",
-		// "quickInputTitle.background": "#000000",
-		// "scm.providerBorder": "#6fc3df",
-		// "scrollbarSlider.activeBackground": "#6fc3df",
-		// "scrollbarSlider.background": "#6fc3df99",
-		// "scrollbarSlider.hoverBackground": "#6fc3dfcc",
-		// "searchEditor.findMatchBorder": "#f38518",
-		// "searchEditor.textInputBorder": "#6fc3df",
 		"selection.background": "#008000",
-		// "settings.checkboxBackground": "#000000",
-		// "settings.checkboxBorder": "#6fc3df",
-		// "settings.checkboxForeground": "#ffffff",
-		// "settings.dropdownBackground": "#000000",
-		// "settings.dropdownBorder": "#6fc3df",
-		// "settings.dropdownForeground": "#ffffff",
-		// "settings.dropdownListBorder": "#6fc3df",
-		// "settings.headerForeground": "#ffffff",
-		// "settings.modifiedItemIndicator": "#00497a",
-		// "settings.numberInputBackground": "#000000",
-		// "settings.numberInputBorder": "#6fc3df",
-		// "settings.numberInputForeground": "#ffffff",
-		// "settings.textInputBackground": "#000000",
-		// "settings.textInputBorder": "#6fc3df",
-		// "settings.textInputForeground": "#ffffff",
-		// "sideBar.background": "#000000",
-		// "sideBar.border": "#6fc3df",
-		// "sideBarSectionHeader.border": "#6fc3df",
+		"settings.focusedRowBorder": "#a6a6a6",
 		"statusBar.background": "#404040",
-		// "statusBar.border": "#6fc3df",
-		// "statusBar.debuggingBackground": "#cc6633",
-		// "statusBar.debuggingBorder": "#6fc3df",
-		// "statusBar.debuggingForeground": "#ffffff",
 		"statusBar.foreground": "#a6a6a6",
-		// "statusBar.noFolderBorder": "#6fc3df",
-		// "statusBar.noFolderForeground": "#ffffff",
-		// "statusBarItem.activeBackground": "#ffffff2e",
-		// "statusBarItem.hoverBackground": "#ffffff1f",
-		// "statusBarItem.prominentBackground": "#00000080",
-		// "statusBarItem.prominentForeground": "#ffffff",
-		// "statusBarItem.prominentHoverBackground": "#0000004d",
 		"statusBarItem.remoteBackground": "#0000",
-		// "statusBarItem.remoteForeground": "#ffffff",
-		// "symbolIcon.arrayForeground": "#ffffff",
-		// "symbolIcon.booleanForeground": "#ffffff",
-		// "symbolIcon.classForeground": "#ee9d28",
-		// "symbolIcon.colorForeground": "#ffffff",
-		// "symbolIcon.constantForeground": "#ffffff",
-		// "symbolIcon.constructorForeground": "#b180d7",
-		// "symbolIcon.enumeratorForeground": "#ee9d28",
-		// "symbolIcon.enumeratorMemberForeground": "#75beff",
-		// "symbolIcon.eventForeground": "#ee9d28",
-		// "symbolIcon.fieldForeground": "#75beff",
-		// "symbolIcon.fileForeground": "#ffffff",
-		// "symbolIcon.folderForeground": "#ffffff",
-		// "symbolIcon.functionForeground": "#b180d7",
-		// "symbolIcon.interfaceForeground": "#75beff",
-		// "symbolIcon.keyForeground": "#ffffff",
-		// "symbolIcon.keywordForeground": "#ffffff",
-		// "symbolIcon.methodForeground": "#b180d7",
-		// "symbolIcon.moduleForeground": "#ffffff",
-		// "symbolIcon.namespaceForeground": "#ffffff",
-		// "symbolIcon.nullForeground": "#ffffff",
-		// "symbolIcon.numberForeground": "#ffffff",
-		// "symbolIcon.objectForeground": "#ffffff",
-		// "symbolIcon.operatorForeground": "#ffffff",
-		// "symbolIcon.packageForeground": "#ffffff",
-		// "symbolIcon.propertyForeground": "#ffffff",
-		// "symbolIcon.referenceForeground": "#ffffff",
-		// "symbolIcon.snippetForeground": "#ffffff",
-		// "symbolIcon.stringForeground": "#ffffff",
-		// "symbolIcon.structForeground": "#ffffff",
-		// "symbolIcon.textForeground": "#ffffff",
-		// "symbolIcon.typeParameterForeground": "#ffffff",
-		// "symbolIcon.unitForeground": "#ffffff",
-		// "symbolIcon.variableForeground": "#75beff",
 
-		// "tab.activeBackground": "#404040",
-		"tab.activeBackground": "#666",
+    // Tabs
+		// "tab.activeBackground": "#404040", // Don't highlight background of active tab, only foreground (like atom)
+		"tab.activeBackground": "#666", // Do highlight background of active tab (I think this is better than atom)
     "tab.activeForeground": "#fff",
 		"tab.border": "#0000",
     // "tab.hoverBackground": "#404040",
@@ -651,7 +357,6 @@
     // "tab.inactiveForeground": "#777",
     "tab.inactiveForeground": "#a6a6a6",
 		"tab.inactiveModifiedBorder": "#0000",
-		// "tab.lastPinnedBorder": "#6fc3df",
     // "tab.unfocusedActiveBackground": "#404040",
     "tab.unfocusedActiveBackground": "#404040",
     "tab.unfocusedActiveForeground": "#fff",
@@ -667,20 +372,9 @@
     "tab.unfocusedInactiveForeground": "#a6a6a6",
 		"tab.unfocusedInactiveModifiedBorder": "#0000",
 
-		// "textBlockQuote.border": "#ffffff",
-		// "textCodeBlock.background": "#000000",
-		// "textLink.activeForeground": "#3794ff",
-		// "textLink.foreground": "#3794ff",
-		// "textPreformat.foreground": "#d7ba7d",
-		// "textSeparator.foreground": "#000000",
-		// "titleBar.activeBackground": "#000000",
-		// "titleBar.activeForeground": "#ffffff",
-		// "titleBar.border": "#6fc3df",
-		// "tree.indentGuidesStroke": "#a9a9a9",
-		// "window.activeBorder": "#6fc3df",
-		// "window.inactiveBorder": "#6fc3df"
-
-    // https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
+    // Terminal
+    //  - Copied my classic colors from iTerm2
+    //  - https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
     //  - https://glitchbone.github.io/vscode-base16-term
     "terminal.background": "#000000",
     "terminal.foreground": "#ffffff",
@@ -700,12 +394,6 @@
     "terminal.ansiRed": "#ff6e67",
     "terminal.ansiWhite": "#ffffff",
     "terminal.ansiYellow": "#fffc67",
-    // "terminalCursor.background": "#ffffff",
-    // "terminalCursor.foreground": "#ffffff",
-    // "terminal.border": "#6fc3df",
-    // "terminal.selectionBackground": "#ffffff80",
-    // "terminal.dropBackground": "#ffffff",
-    // "terminal.tab.activeBorder": "#ffffff",
 
   },
 
@@ -933,21 +621,30 @@
   },
 
   // Custom css/styling
-  //  - apc is the newer approach to customize-ui (2023-09-09)
   //  - https://github.com/drcika/apc-extension
+  //  - apc is the newer approach to customize-ui -- yay! (2023-09-09)
   "apc.electron": {
     "frame": false,
   },
   "apc.font.family": "Consolas",
   "apc.monospace.font.family": "Consolas",
   // XXX Done better in "Editor tabs + breadcrumbs", below
-  // "apc.header": {
-  //   "fontSize": 11,
-  //   "height": 20,
-  // },
+  "apc.header": {
+    // "fontSize": 11,
+    // "height": 20,
+  },
   "apc.listRow": {
     "fontSize": 11,
     "height": 13,
+  },
+  "apc.statusBar": {
+    "fontSize": 11,
+    "height": 17,
+  },
+  "apc.activityBar": {
+    "position": "bottom",
+    "size": 26,
+    "itemMargin": 0,
   },
   "apc.stylesheet": {
 
@@ -972,9 +669,67 @@
     // "*": "-webkit-text-stroke-width: .15px",
     // "*": "-webkit-text-stroke-width: .1px",
 
+    // Quick input (cmd-p)
+    //  - Challenge: You can't use element inspector on these! (the quick-input popup disappears)
+    //  - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
+    ".monaco-workbench": "font-size: 11px",
+    // XXX Nope, these two don't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px :/
+    // ".quick-input-list": "line-height: 13px",
+    // ".quick-input-list .monaco-list-row": "height: 13px !important",
+
+    // Explorer (tree view)
+    ".monaco-workbench .codicon[class*=codicon-]": "font-size: 11px",
+
     // Hide ruler (editor right margin)
     //  - https://github.com/microsoft/vscode/issues/85418
     ".decorationsOverviewRuler": "display: none !important",
+
+    // Editor tabs + breadcrumbs
+    //  - https://github.com/microsoft/vscode/issues/42253
+    //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
+    //  - Codicon references
+    //    - https://microsoft.github.io/vscode-codicons/dist/codicon.html
+    //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv
+    //  - TODO Finish breadcrumb styling
+    //    - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
+    //    - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
+    //      - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
+    ".tabs-and-actions-container":                                                                                                                        "height: 17px !important; background: #404040 !important",
+    ".tabs-and-actions-container .tab":                                                                                                                   "padding-right: 10px",
+    ".tabs-and-actions-container .tab.dirty .tab-label::after":                                                                                           "content: \"\\ea71\"; font-family: codicon; padding-right: 0px; display: block !important",
+    ".tabs-and-actions-container .tab .tab-label::before":                                                                                                "display: none",
+    ".tabs-and-actions-container .tab .tab-actions":                                                                                                      "display: none",
+    ".tabs-and-actions-container .codicon":                                                                                                               "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
+    ".tabs-and-actions-container .codicon:hover":                                                                                                         "color: #fff !important",
+    ".tabs-and-actions-container .action-item":                                                                                                           "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
+    ".tabs-and-actions-container .action-item:hover":                                                                                                     "background: #666 !important",
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                   "height: 17px !important; line-height: 17px !important",
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                            "height: 17px !important; line-height: 17px !important",
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": "height: 15px !important",
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                   "height: 17px !important; line-height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                                         "height: 17px !important; line-height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                  "height: 17px !important; line-height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before":                       "height: 15px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                                         "height: 17px !important; line-height: 17px !important; outline: 0px !important; padding: 0px !important",
+    ".tab .tab-label":                                                                                                                                    "line-height: 17px !important; font-family: Consolas",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                       "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important",
+    ".monaco-action-bar .action-label":                                                                                                                   "margin-right: 0px !important",
+    ".monaco-breadcrumbs":                                                                                                                                "height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                                  "height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label":               "line-height: 15px !important; height: 17px !important",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                              "font-size: 11px !important; font-family: Consolas !important",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                                      "content: '/'",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                                    "content: '/'",
+    ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                                    "display: none; font-size: 11px !important",
+    //  - Disable git decorations on tab names
+    //    - But leave decorations enabled for Explorer view (tree view)
+    //    - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title.tabs .monaco-icon-label::after": "display: none",
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemColor-]":        "color: inherit",
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-iconBadge-]":        "color: inherit",
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]":        "color: inherit",
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]::after": "color: inherit",
 
     // Terminals
     //  - Hide gutter
@@ -994,62 +749,26 @@
     ".monaco-editor .detected-link":        "text-decoration: inherit",
     ".monaco-editor .detected-link-active": "text-decoration: inherit",
 
-    // Editor tabs + breadcrumbs (HACK)
-    //  - https://github.com/microsoft/vscode/issues/42253
-    //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                  "height: 17px !important; line-height: 17px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                           "height: 17px !important; line-height: 17px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label:before": "height: 15px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                  "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                                        "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                 "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label:before":                       "height: 15px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                                        "height: 17px !important; line-height: 17px !important; outline: 0px !important; padding: 0px !important",
-    ".tab .tab-label":                                                                                                                                   "line-height: 17px !important; font-family: Consolas",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                      "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                    "font-size: 12px !important",
-    ".monaco-action-bar .action-label":                                                                                                                  "margin-right: 0px !important",
-    ".tabs-and-actions-container":                                                                                                                       "height: 17px !important; background: #404040 !important",
-    ".tabs-and-actions-container .tab":                                                                                                                  "padding-right: 10px",
-    ".tabs-and-actions-container .tab .tab-label::before":                                                                                               "display: none",
-    ".tabs-and-actions-container .tab .tab-actions":                                                                                                     "display: none",
-    ".tabs-and-actions-container .codicon":                                                                                                              "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
-    ".tabs-and-actions-container .codicon:hover":                                                                                                        "color: #fff !important",
-    ".tabs-and-actions-container .action-item":                                                                                                          "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
-    ".tabs-and-actions-container .action-item:hover":                                                                                                    "background: #666 !important",
-    ".monaco-breadcrumbs":                                                                                                                               "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                                 "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label":              "line-height: 15px !important; height: 17px !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                             "font-size: 11px !important; font-family: Consolas !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                                     "content: '/'",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                                   "content: '/'",
-    ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                                   "display: none; font-size: 11px !important",
+    // Add border on active editor/terminal pane
+    //  - TODO TODO This is really tricky, might need to break out top/bottom/left/right on separate elements
+    // ".editor-group-container.active": "border: 2px solid white",
+    // ".monaco-editor.focused": "border: 2px solid white",
+    // ".monaco-editor.focused::before": "content: \"\"; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: 5px solid yellow; box-sizing: border-box; z-index: 1",
+    // ".monaco-editor.focused .monaco-editor-background": "background-color: blue", // XXX Test that I've got the right selector
+    // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#f00,#f00) left 0px top    5px / 100% 5px, linear-gradient(#f00,#f00) top  0px left   5px / 5px 100%, linear-gradient(#f00,#f00) left 0px bottom 5px / 100% 5px, linear-gradient(#f00,#f00) top  0px right  5px / 5px 100%, linear-gradient(#000,#000) 20px 20px",
+    // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#00f,#00f) left 0px top    5px / 100% 5px, linear-gradient(#00f,#00f) top  0px left   5px / 5px 100%, linear-gradient(#00f,#00f) left 0px bottom 5px / 100% 5px, linear-gradient(#00f,#00f) top  0px right  5px / 5px 100%, linear-gradient(#f00,#f00) 20px 20px",
 
-    // Disable git decorations on tab names
-    //  - But leave decorations enabled for Explorer view (tree view)
-    //  - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title.tabs .monaco-icon-label:after": "display: none",
+    /*
 
-    // Explorer view (tree view)
-    ".monaco-workbench .codicon[class*=codicon-]": "font-size: 11px",
+    linear-gradient(#00f,#00f) left 0px top    5px / 100% 5px,
+    linear-gradient(#00f,#00f) top  0px left   5px / 5px 100%,
+    linear-gradient(#00f,#00f) left 0px bottom 5px / 100% 5px,
+    linear-gradient(#00f,#00f) top  0px right  5px / 5px 100%,
+    linear-gradient(#f00,#f00) 20px 20px
 
-    // Quick input (cmd-p)
-    //  - Can't use element inspector on these! (the quick-input popup disappears)
-    //  - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
-    ".monaco-workbench": "font-size: 11px",
-    // XXX Nope, these two don't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px :/
-    // ".quick-input-list": "line-height: 13px",
-    // ".quick-input-list .monaco-list-row": "height: 13px !important",
-
-    // TODO TODO Finish breadcrumb styling
-    //  - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
-    //  - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
-    //    - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
+    */
 
   },
-
-  // Things that conflict with Stripe settings
-  "update.mode": "manual",
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
 
@@ -1083,7 +802,6 @@
   },
   "search.smartCase": true,
   "debug.console.fontSize": 10,
-  "extensions.autoUpdate": "onlyEnabledExtensions",
   "python.showStartPage": false,
   "jupyter.collapseCellInputCodeByDefault": false,
   "jupyter.disableJupyterAutoStart": true,
@@ -1115,7 +833,6 @@
   "editor.snippetSuggestions": "bottom",
   "editor.suggestOnTriggerCharacters": false,
   "editor.suggestSelection": "first",
-  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
   "markdown-checkbox.checkmark": "x",
   "markdown-checkbox.dateWhenChecked": false,
   "markdown-checkbox.italicWhenChecked": false,
@@ -1127,7 +844,6 @@
   "explorer.openEditors.visible": 0,
   "breadcrumbs.symbolPath": "off",
   "dart.previewLsp": true,
-  "git.countBadge": "tracked",
   "explorer.compactFolders": false,
   "dart.debugExternalLibraries": false,
   "dart.debugSdkLibraries": false,
@@ -1152,17 +868,25 @@
   "editor.occurrencesHighlight": false,
   "ActiveFileInStatusBar.revealFile": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-  "vim.cursorStylePerMode.visual": "underline-thin",
-  "vim.cursorStylePerMode.visualblock": "underline-thin",
-  "vim.cursorStylePerMode.visualline": "underline-thin",
   "search.exclude": {
     "build/**": true
   },
   "editor.comments.ignoreEmptyLines": false,
   "update.showReleaseNotes": false,
   "git.openRepositoryInParentFolders": "never",
-  "workbench.activityBar.visible": false,
   "jupyter.interactiveWindow.creationMode": "perFile",
   "python.terminal.activateEnvironment": false,
+  "scm.alwaysShowRepositories": true,
+  "scm.countBadge": "off",
+  "scm.defaultViewMode": "tree",
+  "scm.inputFontSize": 11,
+  "scm.inputFontFamily": "editor",
+  "editor.linkedEditing": true,
+  "bookmarks.sideBar.countBadge": "off",
+  "testing.countBadge": "off",
+  "explorer.excludeGitIgnore": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleKeybindingsLog"
+  ],
 
 }
