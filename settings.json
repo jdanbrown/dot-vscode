@@ -90,12 +90,36 @@
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.persistentSessionScrollback": 10000,
 
-  // Recommended by dart
-  //  - https://dartcode.org/docs/recommended-settings/
-  "debug.openDebug": "openOnDebugBreak",
-  "dart.closingLabels": false,
-  "dart.lineLength": 120,
-  "dart.showTodos": false,
+  // GitLens
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.currentLine.enabled": false,
+
+  // NOTE Disabled because it adds spelling errors to the Problems list, which is too noisy
+  //  - Instead, manually use alfred 'spell' -- which actually has a really great interactive mode!
+  // // Spell Checker
+  // //  - https://streetsidesoftware.com/vscode-spell-checker/
+  // // "cSpell.enabled": false, // To disable without reload/restart
+  // "cSpell.showStatus": false,
+  // "cSpell.checkOnlyEnabledFileTypes": false,
+  // "cSpell.showAutocompleteSuggestions": true,
+  // "cSpell.hideAddToDictionaryCodeActions": true,
+
+  // Project Manager
+  //  - https://github.com/alefragnani/vscode-project-manager
+  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+  "projectManager.supportSymlinksOnBaseFolders": true,
+  "projectManager.git.baseFolders": [
+    "~/hack"
+  ],
+
+  // Emoji/unicode
+  //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
+  //  - https://github.com/mattbierner/vscode-emojisense -- cmd+i
+  //    - TODO Remove emojisense if insert-unicode adds a command to insert emoji only
+  //      - https://github.com/brunnerh/insert-unicode/issues/43
+  //      - insert-unicode has better usability (recents, favorites, etc.)
+  "emojisense.languages": {"*": true},
 
   // Filetypes
   "[markdown]": {
@@ -150,6 +174,13 @@
     "editor.tabCompletion": "onlySnippets",
   },
 
+  // Recommended by dart
+  //  - https://dartcode.org/docs/recommended-settings/
+  "debug.openDebug": "openOnDebugBreak",
+  "dart.closingLabels": false,
+  "dart.lineLength": 120,
+  "dart.showTodos": false,
+
   // Allow trailing commas in ~/.code/*.json
   //  - https://github.com/microsoft/vscode/issues/102061
 	"json.schemas": [
@@ -162,29 +193,6 @@
         "allowTrailingCommas": true
       }
     },
-  ],
-
-  // GitLens
-  "gitlens.showWelcomeOnInstall": false,
-  "gitlens.showWhatsNewAfterUpgrades": false,
-  "gitlens.currentLine.enabled": false,
-
-  // NOTE Disabled because it adds spelling errors to the Problems list, which is too noisy
-  //  - Instead, manually use alfred 'spell' -- which actually has a really great interactive mode!
-  // // Spell Checker
-  // //  - https://streetsidesoftware.com/vscode-spell-checker/
-  // // "cSpell.enabled": false, // To disable without reload/restart
-  // "cSpell.showStatus": false,
-  // "cSpell.checkOnlyEnabledFileTypes": false,
-  // "cSpell.showAutocompleteSuggestions": true,
-  // "cSpell.hideAddToDictionaryCodeActions": true,
-
-  // Project Manager
-  //  - https://github.com/alefragnani/vscode-project-manager
-  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
-  "projectManager.supportSymlinksOnBaseFolders": true,
-  "projectManager.git.baseFolders": [
-    "~/hack"
   ],
 
   // vim
@@ -315,6 +323,12 @@
   // Colors
   //  - See all keys w/ default values: "Developer: Generate Color Theme From Current Settings"
   //  - https://code.visualstudio.com/api/references/theme-color
+  //  - Inspiration for colors (high-contrast dark)
+  //    - https://glitchbone.github.io/vscode-base16-term/#/3024
+  //    - https://glitchbone.github.io/vscode-base16-term/#/isotope
+  //    - https://glitchbone.github.io/vscode-base16-term/#/summerfruit-dark
+  //    - https://glitchbone.github.io/vscode-base16-term/#/google-dark
+  //    - https://glitchbone.github.io/vscode-base16-term/#/spacemacs
   "workbench.colorCustomizations": {
 
     "bookmarks.overviewRuler": "#0000", // Disable
@@ -351,6 +365,33 @@
     "quickInputList.focusBackground": "#404040",
 
 		"selection.background": "#008000",
+
+    // Highlight color in a lot of places
+    //  - e.g. fuzzy-matche text highlighting (e.g. autocomplete, cmd-p)
+    //  - e.g. borders in active/focused UI widgets (e.g. settings)
+    // "focusBorder": "#f38518", // Orange from hcDark theme
+    // "focusBorder": "#5ffa68", // Green from my terminal colors
+    "focusBorder": "#01A252", // Green from 3024 👍👍
+    // "focusBorder": "#FDED02", // Yellow from 3024 👍
+    // "focusBorder": "#01A0E4", // Blue from 3024 👍
+    // "focusBorder": "#33FF00", // Green from isotope ❌ too neon
+    // "focusBorder": "#01A0E4", // Blue from isotope 👍
+
+    // XXX Isotope
+    // "terminal.ansiBlue":"#0066FF",
+    // "terminal.ansiCyan":"#00FFFF",
+    // "terminal.ansiGreen":"#33FF00",
+    // "terminal.ansiMagenta":"#CC00FF",
+    // "terminal.ansiRed":"#FF0000",
+    // "terminal.ansiYellow":"#FF0099"
+
+    // XXX 3024
+    // "terminal.ansiBlue":"#01A0E4",
+    // "terminal.ansiCyan":"#B5E4F4",
+    // "terminal.ansiGreen":"#01A252",
+    // "terminal.ansiMagenta":"#A16A94",
+    // "terminal.ansiRed":"#DB2D20",
+    // "terminal.ansiYellow":"#FDED02"
 
 		"settings.focusedRowBorder": "#a6a6a6",
 
@@ -710,19 +751,16 @@
     //    - https://microsoft.github.io/vscode-codicons/dist/codicon.html
     //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv -- shows hex values, but incomplete
     //    - https://github.com/microsoft/vscode-codicons/blob/main/src/template/mapping.json -- complete, but shows decimal values (use python hex())
-    //  - TODO Finish breadcrumb styling
-    //    - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
-    //    - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
-    //      - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
-    ".tabs-and-actions-container":                                                                                                                        "height: 17px !important; background: #404040 !important",
-    ".tabs-and-actions-container .tab":                                                                                                                   "padding-right: 10px",
-    ".tabs-and-actions-container .tab.dirty .tab-label::after":                                                                                           "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important",
-    ".tabs-and-actions-container .tab .tab-label::before":                                                                                                "display: none",
-    ".tabs-and-actions-container .tab .tab-actions":                                                                                                      "display: none",
-    ".tabs-and-actions-container .codicon":                                                                                                               "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
-    ".tabs-and-actions-container .codicon:hover":                                                                                                         "color: #fff !important",
-    ".tabs-and-actions-container .action-item":                                                                                                           "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
-    ".tabs-and-actions-container .action-item:hover":                                                                                                     "background: #666 !important",
+    //  - Tabs
+    ".tabs-and-actions-container":                              "height: 17px !important; background: #404040 !important",
+    ".tabs-and-actions-container .tab":                         "padding-right: 10px",
+    //  - Tab icons
+    ".tabs-and-actions-container .tab.dirty .tab-label::after": "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important", // Add circle on dirty (unsaved) editors
+    ".tabs-and-actions-container .codicon":                     "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
+    ".tabs-and-actions-container .codicon:hover":               "color: #fff !important",
+    ".tabs-and-actions-container .action-item":                 "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
+    ".tabs-and-actions-container .action-item:hover":           "background: #666 !important",
+    //  - Tab font/height sizing
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                   "height: 17px !important; line-height: 17px !important",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                            "height: 17px !important; line-height: 17px !important",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": "height: 15px !important",
@@ -735,21 +773,31 @@
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                       "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important",
     ".monaco-action-bar .action-label":                                                                                                                   "margin-right: 0px !important",
-    ".monaco-breadcrumbs":                                                                                                                                "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                                  "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label":               "line-height: 15px !important; height: 17px !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                              "font-size: 11px !important; font-family: Consolas !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                                      "content: '/'",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                                    "content: '/'",
-    ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                                    "display: none; font-size: 11px !important",
-    //  - Disable git decorations on tab names
-    //    - But leave decorations enabled for Explorer view (tree view)
+    //  - Tab: Hide decorations before/after
+    //    - Before: Tab icons (e.g. terminal tabs have one)
+    //    - After: Tab actions (e.g. X to close, git M/A/U decorations)
+    ".tabs-and-actions-container .tab .tab-label::before":      "display: none",
+    ".tabs-and-actions-container .tab .tab-actions":            "display: none",
+    //  - Tab: Disable git font color
+    //    - But leave git font color enabled for Explorer view
     //    - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
     ".monaco-workbench .part.editor > .content .editor-group-container > .title.tabs .monaco-icon-label::after": "display: none",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemColor-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-iconBadge-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]::after": "color: inherit",
+    //  - Breadcrumbs
+    //    - TODO Finish
+    //      - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
+    //      - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
+    //        - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
+    ".monaco-breadcrumbs":                                                                                                                  "height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                    "height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label": "line-height: 15px !important; height: 17px !important",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                "font-size: 11px !important; font-family: Consolas !important",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                        "content: '/'",
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                      "content: '/'",
+    ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                      "display: none; font-size: 11px !important",
 
     // Terminals
     //  - Hide gutter
@@ -913,5 +961,6 @@
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog"
   ],
+  "breadcrumbs.icons": false,
 
 }

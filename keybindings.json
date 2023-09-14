@@ -142,6 +142,15 @@
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
 
+  // Emoji/unicode
+  //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
+  //  - https://github.com/mattbierner/vscode-emojisense -- cmd+i
+  //    - TODO Remove emojisense if insert-unicode adds a command to insert emoji only
+  //      - https://github.com/brunnerh/insert-unicode/issues/43
+  //      - insert-unicode has better usability (recents, favorites, etc.)
+  {"key": "shift+cmd+i", "command": "insert-unicode.insertText", "when": "editorTextFocus"},
+  {"key": "cmd+i", "command": "emojisense.quickEmoji", "when": "editorTextFocus"}, // Default
+
   // Terminal
   //  - Switch to vscode's default terminals instead of our custom userInitTs.terminal.new (in init.ts) that uses `tmux-new-or-attach`
   {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
@@ -213,6 +222,8 @@
     "command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp",
     "when": "notebookEditorFocused && listFocus && inputFocus"
   },
+
+  // TODO Organize
   {
     "key": "cmd+enter",
     "command": "markdown-checkbox.markCheckbox",
