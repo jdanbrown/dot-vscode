@@ -108,7 +108,10 @@
   {"key": "alt+up", "command": "-editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly"},
 
   // vim
-  {"key": "ctrl+r", "command": "-workbench.action.openRecent"}, // Unshadow vim redo
+  //  - Unshadow vim redo
+  {"key": "ctrl+r", "command": "-workbench.action.openRecent"},
+  //  - shift+esc is a common typo when typing fast with shift
+  {"key": "shift+escape", "command": "extension.vim_escape", "when": "vim.active && !inDebugRepl && vim.mode != 'Normal'"},
 
   // Symbols
   {"key": "shift+cmd+r", "command": "workbench.action.showAllSymbols"},
