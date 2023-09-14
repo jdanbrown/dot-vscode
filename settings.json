@@ -657,6 +657,12 @@
 
   },
 
+  // Tabs + breadcrumbs
+  "breadcrumbs.icons": false,
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.editor.showIcons": false,
+  "workbench.editor.decorations.badges": false,
+
   // Custom css/styling
   //  - https://github.com/drcika/apc-extension
   //  - apc is the newer approach to customize-ui -- yay! (2023-09-09)
@@ -665,19 +671,22 @@
   },
   "apc.font.family": "Consolas",
   "apc.monospace.font.family": "Consolas",
-  // XXX Done better in "Editor tabs + breadcrumbs", below
-  "apc.header": {
-    // "fontSize": 11,
-    // "height": 20,
+  // Tabs
+  //  - Disabled because we do this better in css below (and this one conflicts)
+  // "apc.header": {
+  //   "fontSize": 11,
+  //   "height": 20,
+  // },
+  "apc.statusBar": {
+    "fontSize": 11,
+    "height": 17,
   },
   "apc.listRow": {
     "fontSize": 11,
     "height": 13,
   },
-  "apc.statusBar": {
-    "fontSize": 11,
-    "height": 17,
-  },
+  // Activity bar
+  //  - Change large icons always visibile on the left -> small icons at the bottom of Explorer view
   "apc.activityBar": {
     "position": "bottom",
     "size": 26,
@@ -713,7 +722,8 @@
 
     // Quick input (cmd-p)
     //  - Challenge: You can't use element inspector on these! (the quick-input popup disappears)
-    //  - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
+    //    - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
+    //    - Better solution! Temporarily set "workbench.quickOpen.closeOnFocusLost":false
     ".monaco-workbench": "font-size: 11px",
     // XXX Nope, these two don't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px :/
     // ".quick-input-list": "line-height: 13px",
@@ -726,23 +736,17 @@
     //  - https://github.com/microsoft/vscode/issues/85418
     ".decorationsOverviewRuler": "display: none !important",
 
-    // Editor tabs + breadcrumbs
+    // Tabs + breadcrumbs
     //  - https://github.com/microsoft/vscode/issues/42253
     //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
     //  - Codicon references
     //    - https://microsoft.github.io/vscode-codicons/dist/codicon.html
     //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv -- shows hex values, but incomplete
     //    - https://github.com/microsoft/vscode-codicons/blob/main/src/template/mapping.json -- complete, but shows decimal values (use python hex())
-    //  - Tabs
-    ".tabs-and-actions-container":                              "height: 17px !important; background: #404040 !important",
-    ".tabs-and-actions-container .tab":                         "padding-right: 10px",
-    //  - Tab icons
-    ".tabs-and-actions-container .tab.dirty .tab-label::after": "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important", // Add circle on dirty (unsaved) editors
-    ".tabs-and-actions-container .codicon":                     "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
-    ".tabs-and-actions-container .codicon:hover":               "color: #fff !important",
-    ".tabs-and-actions-container .action-item":                 "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
-    ".tabs-and-actions-container .action-item:hover":           "background: #666 !important",
-    //  - Tab font/height sizing
+
+    // Tabs: Font/height sizing
+    ".tabs-and-actions-container":                                                                                                                        "height: 17px !important; background: #404040 !important",
+    ".tabs-and-actions-container .tab":                                                                                                                   "padding-right: 10px",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                   "height: 17px !important; line-height: 17px !important",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                            "height: 17px !important; line-height: 17px !important",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": "height: 15px !important",
@@ -755,24 +759,30 @@
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                       "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important",
     ".monaco-action-bar .action-label":                                                                                                                   "margin-right: 0px !important",
-    //  - Tab: Hide decorations before/after
-    //    - Before: Tab icons (e.g. terminal tabs have one)
-    //    - After: Tab actions (e.g. X to close, git M/A/U decorations)
+
+    // Tabs: Icons
+    ".tabs-and-actions-container .tab.dirty .tab-label::after": "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important", // Add circle on dirty/unsaved editors
+    ".tabs-and-actions-container .codicon":                     "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
+    ".tabs-and-actions-container .codicon:hover":               "color: #fff !important",
+    ".tabs-and-actions-container .action-item":                 "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
+    ".tabs-and-actions-container .action-item:hover":           "background: #666 !important",
+
+    // Tabs: Hide decorations before/after
+    //  - Before: Tab icons (e.g. terminal tabs have one)
+    //  - After: Tab actions (e.g. X to close, git M/A/U decorations)
     ".tabs-and-actions-container .tab .tab-label::before":      "display: none",
     ".tabs-and-actions-container .tab .tab-actions":            "display: none",
-    //  - Tab: Disable git font color
-    //    - But leave git font color enabled for Explorer view
-    //    - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
+
+    // Tabs: Disable git font color
+    //  - But leave git font color enabled for Explorer view
+    //  - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
     ".monaco-workbench .part.editor > .content .editor-group-container > .title.tabs .monaco-icon-label::after": "display: none",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemColor-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-iconBadge-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]":        "color: inherit",
     ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]::after": "color: inherit",
-    //  - Breadcrumbs
-    //    - TODO Finish
-    //      - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
-    //      - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
-    //        - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
+
+    // Breadcrumbs
     ".monaco-breadcrumbs":                                                                                                                  "height: 17px !important",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                    "height: 17px !important",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label": "line-height: 15px !important; height: 17px !important",
@@ -795,13 +805,13 @@
     // ".monaco-workbench .terminal-accessible-widget": "padding-left: 0px",
     // ".monaco-workbench .terminal-accessible-widget .margin": "display: none",
 
-    // Change icons that indicate terminals
+    // Terminals: Change icons from 'terminal-bash' -> 'terminal'
     //  - This affects terminal tabs (display:none above) + quick input list (cmd+p, Go To File)
     ".monaco-workbench .tab .terminal-tab.codicon-terminal-bash::before":              "content: '\\ea85' !important; font-family: 'codicon' !important",
     ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "content: '\\ea85' !important; font-family: 'codicon' !important",
     // ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "display: none",
 
-    // Disable underline for detected links
+    // Disable underlines for detected links
     ".monaco-editor .detected-link":        "text-decoration: inherit",
     ".monaco-editor .detected-link-active": "text-decoration: inherit",
 
@@ -824,10 +834,10 @@
     */
 
   },
-  "workbench.editor.focusRecentEditorAfterClose": false,
-  "workbench.welcomePage.walkthroughs.openOnInstall": false,
 
   // TODO Organize
+  "workbench.editor.focusRecentEditorAfterClose": false,
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.startupEditor": "none",
   "workbench.colorTheme": "Default High Contrast",
   "editor.renderWhitespace": "none",
@@ -849,7 +859,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "workbench.statusBar.visible": true,
   "todohighlight.keywordsPattern": "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b",
   "todohighlight.defaultStyle": {
     "color": "#FB6D65",
@@ -866,7 +875,8 @@
   "search.quickOpen.includeHistory": false,
   "task.quickOpen.history": 0,
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
+    // TODO(notebook): Do we still need this? Probably from before they launched stable notebook support
+    // "*.ipynb": "jupyter-notebook"
   },
   "jupyter.insidersChannel": "off",
   "jupyter.alwaysTrustNotebooks": true,
@@ -943,6 +953,11 @@
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog"
   ],
-  "breadcrumbs.icons": false,
+  "workbench.hover.delay": 500,
+  "workbench.tips.enabled": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.editor.autoLockGroups": {
+    "terminalEditor": false
+  },
 
 }
