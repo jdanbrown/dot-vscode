@@ -14,7 +14,7 @@
   // {"key": "shift+ctrl+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
   {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
-  {"key": "ctrl+up", "command": "workbench.action.toggleKeybindingsLog"},
+  {"key": "ctrl+up", "command": "workbench.action.toggleKeybindingsLog"}, // ctrl+up = ctrl+shift+cmd+k (because karabiner?)
   // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
   {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
   {"key": "cmd+r", "command": "workbench.action.gotoSymbol", "when": "!inSearchEditor"},
@@ -24,6 +24,12 @@
   // Require shift+cmd+w to close a window
   //  - Default: Allow just cmd+w when no editors remaining
   {"key": "cmd+w", "command": "-workbench.action.closeWindow", "when": "!editorIsOpen && !multipleEditorGroups"},
+
+  // Sidebar
+  {"key": "cmd+\\", "command": "workbench.action.toggleSidebarVisibility"},
+  {"key": "shift+cmd+\\", "command": "workbench.view.explorer"},
+  {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable because it conflicts in terminal, so learn shift+cmd+\ instead
+  // {"key": "shift+cmd+x", "command": "workbench.view.extensions", "when": "viewContainer.workbench.view.extensions.enabled"} // Default
 
   // Files
   {"key": "cmd+o", "command": "-workbench.action.files.openFileFolder"},
@@ -109,7 +115,10 @@
     "when": "textInputFocus"
   },
 
-  // Search Editor
+  // Search
+  {"key": "shift+cmd+f", "command": "search.action.openNewEditorToSide"},
+  {"key": "shift+cmd+f", "command": "-workbench.view.search", "when": "!searchViewletVisible"},
+  {"key": "shift+cmd+f", "command": "-workbench.action.findInFiles"},
   {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
   {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
   {
@@ -120,7 +129,7 @@
   {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && inSearchEditor"},
 
   // Project Manager
-  {"key": "ctrl+shift+p", "command": "projectManager.listProjectsNewWindow"},
+  {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
 
   // Terminal
@@ -134,6 +143,7 @@
   {"key": "cmd+w", "command": "-workbench.action.closeActiveEditor"},
   {"key": "cmd+w", "command": "workbench.action.closeActiveEditor", "when": "!terminalFocus"},
   //  - Scroll/select with keyboard
+  //    - TODO(practice)
   {"key": "cmd+r", "command": "workbench.action.terminal.runRecentCommand", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+g", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+u", "command": "workbench.action.terminal.scrollUpPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
@@ -152,9 +162,9 @@
   //    - NOTE Had to remove accessibilityModeEnabled from the `when`, because enabling editor.accessibilitySupport would probably affect a lot of things
   {"key": "ctrl+k", "command": "workbench.action.terminal.focusAccessibleBuffer", "when": "terminalFocus && terminalHasBeenCreated && terminalTabFocusMode || terminalFocus && terminalHasBeenCreated && !terminalAccessibleBufferFocus || terminalFocus && terminalProcessSupported && terminalTabFocusMode || terminalFocus && terminalProcessSupported && !terminalAccessibleBufferFocus"},
   // Open detected links
+  //  - TODO(practice)
   // {"key": "shift+cmd+o", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"}, // Default
   {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"},
-
 
   // Jupyter/notebook
   {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
@@ -172,7 +182,7 @@
   {"key": "cmd+[", "command": "list.focusUp", "when": "notebookEditorFocused && !inputFocus"},
   {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus"},
   //  - Kernel management
-  //    - TODO TODO YOU ARE HERE (these maybe all work now? try and see)
+  //    - TODO YOU ARE HERE (these maybe all work now? try and see)
   {"key": "ctrl+cmd+k", "command": "jupyter.switchKernel", "when": "notebookEditorFocused"},
   {"key": "ctrl+c", "command": "jupyter.notebookeditor.interruptkernel", "when": "notebookEditorFocused"},
   {"key": "0 0", "command": "jupyter.notebookeditor.restartkernel", "when": "notebookEditorFocused && !inputFocus"},
@@ -212,22 +222,8 @@
     "command": "-editor.action.toggleWordWrap"
   },
   {
-    "key": "shift+cmd+\\",
-    "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarFocus"
-  },
-  {
     "key": "cmd+b",
     "command": "-workbench.action.toggleSidebarVisibility"
-  },
-  {
-    "key": "shift+cmd+\\",
-    "command": "workbench.view.explorer",
-    "when": "!sideBarFocus"
-  },
-  {
-    "key": "shift+cmd+e",
-    "command": "-workbench.view.explorer"
   },
   {
     "key": "ctrl+tab",
@@ -266,10 +262,6 @@
     "key": "cmd+down",
     "command": "-explorer.openAndPassFocus",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"
-  },
-  {
-    "key": "shift+cmd+e",
-    "command": "workbench.view.explorer"
   },
   {
     "key": "cmd+]",
@@ -334,10 +326,6 @@
   {
     "key": "cmd+enter",
     "command": "jupyter.notebookeditor.runselectedcell"
-  },
-  {
-    "key": "cmd+\\",
-    "command": "workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "l",
@@ -442,19 +430,6 @@
     "key": "alt+up",
     "command": "-editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "shift+cmd+f",
-    "command": "-workbench.action.findInFiles"
-  },
-  {
-    "key": "shift+cmd+f",
-    "command": "search.action.openNewEditorToSide"
-  },
-  {
-    "key": "shift+cmd+f",
-    "command": "-workbench.view.search",
-    "when": "!searchViewletVisible"
   },
   {
     "key": "j",
