@@ -183,7 +183,7 @@
 
   // Allow trailing commas in ~/.code/*.json
   //  - https://github.com/microsoft/vscode/issues/102061
-	"json.schemas": [
+  "json.schemas": [
     {
       "fileMatch": [
         ".code/keybindings.json",
@@ -337,9 +337,9 @@
     // "contrastBorder": "#777",
     "contrastBorder": "#404040",
 
-		"editor.background": "#000000",
-		"editor.foreground": "#ffffff",
-		"editor.selectionBackground": "#fff8",
+    "editor.background": "#000000",
+    "editor.foreground": "#ffffff",
+    "editor.selectionBackground": "#fff8",
     "editor.selectionHighlightBackground": "#fff6",
     "editorGutter.background": "#000",
 
@@ -352,39 +352,39 @@
     // "focusBorder": "#01A0E4", // Blue from 3024 -- nicely bright, but a little too eye-burning for autocomplete as I type
     // "focusBorder": "#01A252", // Green from 3024 -- good alternate choice if I ever get tired of blue
 
-		"gitDecoration.addedResourceForeground": "#5ffa68", // New staged
-		"gitDecoration.conflictingResourceForeground": "#ff6e67",
-		"gitDecoration.deletedResourceForeground": "#ff77ff",
-		"gitDecoration.ignoredResourceForeground": "#686868",
-		"gitDecoration.modifiedResourceForeground": "#de935f",
-		"gitDecoration.stageDeletedResourceForeground": "#ff77ff",
-		"gitDecoration.stageModifiedResourceForeground": "#de935f",
-		"gitDecoration.submoduleResourceForeground": "#8db9e2", // (Leave as default)
-		"gitDecoration.untrackedResourceForeground": "#5ffa68", // New unstaged
+    "gitDecoration.addedResourceForeground": "#5ffa68", // New staged
+    "gitDecoration.conflictingResourceForeground": "#ff6e67",
+    "gitDecoration.deletedResourceForeground": "#ff77ff",
+    "gitDecoration.ignoredResourceForeground": "#686868",
+    "gitDecoration.modifiedResourceForeground": "#de935f",
+    "gitDecoration.stageDeletedResourceForeground": "#ff77ff",
+    "gitDecoration.stageModifiedResourceForeground": "#de935f",
+    "gitDecoration.submoduleResourceForeground": "#8db9e2", // (Leave as default)
+    "gitDecoration.untrackedResourceForeground": "#5ffa68", // New unstaged
 
     // Explorer
     //  - TODO "list.activeSelectionForeground": How to keep git decoration color instead of changing to white?
     //  - TODO "list.activeSelectionBackground": How to change to "list.focusBackground" when they overlap?
     "list.activeSelectionBackground": "#404040",
-		"list.inactiveFocusBackground": null,
-		"list.inactiveSelectionBackground": "#404040",
+    "list.inactiveFocusBackground": null,
+    "list.inactiveSelectionBackground": "#404040",
     "list.focusBackground": "#666",
     "list.hoverBackground": "#666",
 
     "quickInputList.focusBackground": "#404040",
 
-		"selection.background": "#008000",
+    "selection.background": "#008000",
 
-		"settings.focusedRowBorder": "#a6a6a6", // Override focusBorder (blue -> gray)
+    "settings.focusedRowBorder": "#a6a6a6", // Override focusBorder (blue -> gray)
 
-		"statusBar.background": "#404040",
-		"statusBar.foreground": "#a6a6a6",
-		"statusBarItem.remoteBackground": "#0000",
+    "statusBar.background": "#404040",
+    "statusBar.foreground": "#a6a6a6",
+    "statusBarItem.remoteBackground": "#0000",
 
-		// "tab.activeBackground": "#404040", // Don't highlight background of active tab, only foreground (like atom)
-		"tab.activeBackground": "#666", // Do highlight background of active tab (I think this is better than atom)
+    // "tab.activeBackground": "#404040", // Don't highlight background of active tab, only foreground (like atom)
+    "tab.activeBackground": "#666", // Do highlight background of active tab (I think this is better than atom)
     "tab.activeForeground": "#fff",
-		"tab.border": "#0000",
+    "tab.border": "#0000",
     // "tab.hoverBackground": "#404040",
     "tab.hoverBackground": "#666",
     "tab.hoverForeground": "#fff",
@@ -393,12 +393,12 @@
     // "tab.inactiveForeground": "#fff",
     // "tab.inactiveForeground": "#777",
     "tab.inactiveForeground": "#a6a6a6",
-		"tab.inactiveModifiedBorder": "#0000",
+    "tab.inactiveModifiedBorder": "#0000",
     // "tab.unfocusedActiveBackground": "#404040",
     "tab.unfocusedActiveBackground": "#404040",
     "tab.unfocusedActiveForeground": "#fff",
     // "tab.unfocusedActiveForeground": "#a6a6a6",
-		"tab.unfocusedActiveModifiedBorder": "#0000",
+    "tab.unfocusedActiveModifiedBorder": "#0000",
     // "tab.unfocusedHoverBackground": "#404040",
     "tab.unfocusedHoverBackground": "#666",
     "tab.unfocusedHoverForeground": "#fff",
@@ -407,7 +407,7 @@
     // "tab.unfocusedInactiveForeground": "#777",
     // "tab.unfocusedInactiveForeground": "#fff",
     "tab.unfocusedInactiveForeground": "#a6a6a6",
-		"tab.unfocusedInactiveModifiedBorder": "#0000",
+    "tab.unfocusedInactiveModifiedBorder": "#0000",
 
     // Terminal
     //  - Copied my classic colors from iTerm2
