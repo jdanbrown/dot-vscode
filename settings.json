@@ -190,6 +190,11 @@
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://github.com/VSCodeVim/Vim#key-remapping
+  //  - Issues
+  //    - https://galenwong.github.io/blog/2021-03-22-vscode-neovim-vs-vscodevim/
+  //    - Undo
+  //      - https://github.com/VSCodeVim/Vim/issues/1490
+  //      - https://github.com/VSCodeVim/Vim/issues/2007
   //
   // TODO
   //  - In insert mode, make shift-esc behave like esc (currently noop)
@@ -689,14 +694,15 @@
     //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
     //  - Codicon references
     //    - https://microsoft.github.io/vscode-codicons/dist/codicon.html
-    //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv
+    //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv -- shows hex values, but incomplete
+    //    - https://github.com/microsoft/vscode-codicons/blob/main/src/template/mapping.json -- complete, but shows decimal values (use python hex())
     //  - TODO Finish breadcrumb styling
     //    - [x] Left-most item shouldn't have a ::before '/', since the dir is relative to workspace, not root of fs
     //    - [x] How does the cool type-to-find thing work once breadcrumbs are selected?
     //      - See https://code.visualstudio.com/updates/v1_26#_breadcrumbs
     ".tabs-and-actions-container":                                                                                                                        "height: 17px !important; background: #404040 !important",
     ".tabs-and-actions-container .tab":                                                                                                                   "padding-right: 10px",
-    ".tabs-and-actions-container .tab.dirty .tab-label::after":                                                                                           "content: \"\\ea71\"; font-family: codicon; padding-right: 0px; display: block !important",
+    ".tabs-and-actions-container .tab.dirty .tab-label::after":                                                                                           "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important",
     ".tabs-and-actions-container .tab .tab-label::before":                                                                                                "display: none",
     ".tabs-and-actions-container .tab .tab-actions":                                                                                                      "display: none",
     ".tabs-and-actions-container .codicon":                                                                                                               "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
@@ -744,6 +750,12 @@
     //    - [Started at 2am, quit before figuring it out -- probalby not hard!]
     // ".monaco-workbench .terminal-accessible-widget": "padding-left: 0px",
     // ".monaco-workbench .terminal-accessible-widget .margin": "display: none",
+
+    // Change icons that indicate terminals
+    //  - This affects terminal tabs (display:none above) + quick input list (cmd+p, Go To File)
+    ".monaco-workbench .tab .terminal-tab.codicon-terminal-bash::before":              "content: '\\ea85' !important; font-family: 'codicon' !important",
+    ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "content: '\\ea85' !important; font-family: 'codicon' !important",
+    // ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "display: none",
 
     // Disable underline for detected links
     ".monaco-editor .detected-link":        "text-decoration: inherit",
