@@ -343,6 +343,15 @@
     "editor.selectionHighlightBackground": "#fff6",
     "editorGutter.background": "#000",
 
+    // Accent/highlight color in a _lot_ of places
+    //  - e.g. autocomplete fuzzy text matching -- need a color muted enough so it doesn't burn your eyes here (99% case, always typing)
+    //  - e.g. cmd-p fuzzy text matching -- need a color bright enough that it catches your eyes here (e.g. sparse char matches)
+    //  - e.g. borders in focused UI widgets (e.g. settings) -- secondary concern to the above
+    // "focusBorder": "#f38518", // Orange from hcDark theme -- I don't want orange for so many accents (e.g. autocomplete)
+    "focusBorder": "#4F97D7", // Blue from spacemacs -- muted enough to not burn my eyes in autocomplete as I type (99% case)
+    // "focusBorder": "#01A0E4", // Blue from 3024 -- nicely bright, but a little too eye-burning for autocomplete as I type
+    // "focusBorder": "#01A252", // Green from 3024 -- good alternate choice if I ever get tired of blue
+
 		"gitDecoration.addedResourceForeground": "#5ffa68", // New staged
 		"gitDecoration.conflictingResourceForeground": "#ff6e67",
 		"gitDecoration.deletedResourceForeground": "#ff77ff",
@@ -366,34 +375,7 @@
 
 		"selection.background": "#008000",
 
-    // Highlight color in a lot of places
-    //  - e.g. fuzzy-matche text highlighting (e.g. autocomplete, cmd-p)
-    //  - e.g. borders in active/focused UI widgets (e.g. settings)
-    // "focusBorder": "#f38518", // Orange from hcDark theme
-    // "focusBorder": "#5ffa68", // Green from my terminal colors
-    "focusBorder": "#01A252", // Green from 3024 👍👍
-    // "focusBorder": "#FDED02", // Yellow from 3024 👍
-    // "focusBorder": "#01A0E4", // Blue from 3024 👍
-    // "focusBorder": "#33FF00", // Green from isotope ❌ too neon
-    // "focusBorder": "#01A0E4", // Blue from isotope 👍
-
-    // XXX Isotope
-    // "terminal.ansiBlue":"#0066FF",
-    // "terminal.ansiCyan":"#00FFFF",
-    // "terminal.ansiGreen":"#33FF00",
-    // "terminal.ansiMagenta":"#CC00FF",
-    // "terminal.ansiRed":"#FF0000",
-    // "terminal.ansiYellow":"#FF0099"
-
-    // XXX 3024
-    // "terminal.ansiBlue":"#01A0E4",
-    // "terminal.ansiCyan":"#B5E4F4",
-    // "terminal.ansiGreen":"#01A252",
-    // "terminal.ansiMagenta":"#A16A94",
-    // "terminal.ansiRed":"#DB2D20",
-    // "terminal.ansiYellow":"#FDED02"
-
-		"settings.focusedRowBorder": "#a6a6a6",
+		"settings.focusedRowBorder": "#a6a6a6", // Override focusBorder (blue -> gray)
 
 		"statusBar.background": "#404040",
 		"statusBar.foreground": "#a6a6a6",
