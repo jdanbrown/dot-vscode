@@ -318,18 +318,17 @@
   "workbench.colorCustomizations": {
 
     "bookmarks.overviewRuler": "#0000", // Disable
+
     "contrastActiveBorder": "#0000", // Disable
     // "contrastBorder": "#777",
     "contrastBorder": "#404040",
 
-    // Editor
 		"editor.background": "#000000",
 		"editor.foreground": "#ffffff",
 		"editor.selectionBackground": "#fff8",
     "editor.selectionHighlightBackground": "#fff6",
     "editorGutter.background": "#000",
 
-    // Git
 		"gitDecoration.addedResourceForeground": "#5ffa68", // New staged
 		"gitDecoration.conflictingResourceForeground": "#ff6e67",
 		"gitDecoration.deletedResourceForeground": "#ff77ff",
@@ -340,17 +339,25 @@
 		"gitDecoration.submoduleResourceForeground": "#8db9e2", // (Leave as default)
 		"gitDecoration.untrackedResourceForeground": "#5ffa68", // New unstaged
 
-    "list.activeSelectionBackground": "#666",
-    "list.focusBackground": "#404040",
-    "list.hoverBackground": "#404040",
+    // Explorer
+    //  - TODO "list.activeSelectionForeground": How to keep git decoration color instead of changing to white?
+    //  - TODO "list.activeSelectionBackground": How to change to "list.focusBackground" when they overlap?
+    "list.activeSelectionBackground": "#404040",
+		"list.inactiveFocusBackground": null,
+		"list.inactiveSelectionBackground": "#404040",
+    "list.focusBackground": "#666",
+    "list.hoverBackground": "#666",
+
     "quickInputList.focusBackground": "#404040",
+
 		"selection.background": "#008000",
+
 		"settings.focusedRowBorder": "#a6a6a6",
+
 		"statusBar.background": "#404040",
 		"statusBar.foreground": "#a6a6a6",
 		"statusBarItem.remoteBackground": "#0000",
 
-    // Tabs
 		// "tab.activeBackground": "#404040", // Don't highlight background of active tab, only foreground (like atom)
 		"tab.activeBackground": "#666", // Do highlight background of active tab (I think this is better than atom)
     "tab.activeForeground": "#fff",
