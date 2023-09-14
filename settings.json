@@ -660,6 +660,11 @@
     "size": 26,
     "itemMargin": 0,
   },
+  // XXX Don't use apc.imports
+  //  - https://github.com/drcika/apc-extension#apcimports
+  //  - Storing in a .css that we import here introduces weird jank on save->refresh that storing css lines here in settings.json doesn't
+  //  - Also, line comments in .css are a big pita (/*..*/)
+  // "apc.imports": ["/Users/danb/.code/style-apc.css"],
   "apc.stylesheet": {
 
     // Fix font smoothing
@@ -778,7 +783,6 @@
     // ".monaco-editor.focused .monaco-editor-background": "background-color: blue", // XXX Test that I've got the right selector
     // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#f00,#f00) left 0px top    5px / 100% 5px, linear-gradient(#f00,#f00) top  0px left   5px / 5px 100%, linear-gradient(#f00,#f00) left 0px bottom 5px / 100% 5px, linear-gradient(#f00,#f00) top  0px right  5px / 5px 100%, linear-gradient(#000,#000) 20px 20px",
     // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#00f,#00f) left 0px top    5px / 100% 5px, linear-gradient(#00f,#00f) top  0px left   5px / 5px 100%, linear-gradient(#00f,#00f) left 0px bottom 5px / 100% 5px, linear-gradient(#00f,#00f) top  0px right  5px / 5px 100%, linear-gradient(#f00,#f00) 20px 20px",
-
     /*
 
     linear-gradient(#00f,#00f) left 0px top    5px / 100% 5px,
