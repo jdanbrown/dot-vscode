@@ -817,16 +817,16 @@
 
     // Add border on focused editor/terminal
     //  - Top
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container::after": "background-color:#fff !important",
+    ".editor-group-container:not(.empty).active .tabs-and-actions-container::after": "background-color:#fff !important",
     //  - Bottom
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus)::after": "background-color:#fff; width:100%; height:1px; bottom:0; right:0; position:absolute; content:' '; pointer-events:none",
+    ".editor-group-container:not(.empty).active::after": "background-color:#fff; width:100%; height:1px; bottom:0; right:0; position:absolute; content:' '; pointer-events:none",
     //  - Left
-    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::before": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; left:0; position:absolute; content:' '; pointer-events:none",
+    ".split-view-view:has(> .editor-group-container:not(.empty).active)::before": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; left:0; position:absolute; content:' '; pointer-events:none",
     //  - Right
-    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::after": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; right:0; position:absolute; content:' '; pointer-events:none",
+    ".split-view-view:has(> .editor-group-container:not(.empty).active)::after": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; right:0; position:absolute; content:' '; pointer-events:none",
     //  - Fix up overlaps with left/right
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container": "z-index:2",
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": "z-index:0 !important",
+    ".editor-group-container:not(.empty).active .tabs-and-actions-container": "z-index:2",
+    ".editor-group-container:not(.empty).active .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": "z-index:0 !important",
 
   },
 
