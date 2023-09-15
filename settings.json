@@ -348,9 +348,9 @@
     //  - e.g. cmd-p fuzzy text matching -- need a color bright enough that it catches your eyes here (e.g. sparse char matches)
     //  - e.g. borders in focused UI widgets (e.g. settings) -- secondary concern to the above
     // "focusBorder": "#f38518", // Orange from hcDark theme -- I don't want orange for so many accents (e.g. autocomplete)
-    "focusBorder": "#4F97D7", // Blue from spacemacs -- muted enough to not burn my eyes in autocomplete as I type (99% case)
-    // "focusBorder": "#01A0E4", // Blue from 3024 -- nicely bright, but a little too eye-burning for autocomplete as I type
-    // "focusBorder": "#01A252", // Green from 3024 -- good alternate choice if I ever get tired of blue
+    "focusBorder": "#4f97d7", // Blue from spacemacs -- muted enough to not burn my eyes in autocomplete as I type (99% case)
+    // "focusBorder": "#01a0e4", // Blue from 3024 -- nicely bright, but a little too eye-burning for autocomplete as I type
+    // "focusBorder": "#01a252", // Green from 3024 -- good alternate choice if I ever get tired of blue
 
     "gitDecoration.addedResourceForeground": "#5ffa68", // New staged
     "gitDecoration.conflictingResourceForeground": "#ff6e67",
@@ -824,23 +824,25 @@
     //  - NOTE .notebook-editor (and other iframe views) doesn't make a :focus (because iframe), and doesn't expose its
     //    own .focused/.focus state on .notebook-editor, so we rely on .active alone and let it incorrectly stay
     //    outlined when focus switches to Explorer/etc.
+    //  - NOTE z-index arms race because various things keep appearing with higher z-indexes 🤷
     //  - Top
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after":
       "background-color:#fff !important",
     //  - Bottom
-    //    - z-index:21 to override notebook cells [HACK arms race]
+    //    - z-index:21 to override notebook cells
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after":
       "background-color:#fff; width:100%; height:1px; z-index:21; bottom:0; right:0; position:absolute; content:' '; pointer-events:none",
     //  - Left
-    //    - z-index to override .tabs borders
+    //    - z-index:1 to override .tabs borders
+    //    - z-index:10 to override some weird thing with nested alternating .split-view-view's 🤷
     ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before":
-      "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; left:0; position:absolute; content:' '; pointer-events:none",
+      "background-color:#fff !important; height:100% !important; width:1px !important; z-index:10 !important; top:0 !important; left:0 !important; position:absolute; content:' '; pointer-events:none",
     //  - Right
     ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after":
-      "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; right:0; position:absolute; content:' '; pointer-events:none",
+      "background-color:#fff !important; height:100% !important; width:1px !important; z-index:10 !important; top:0 !important; right:0 !important; position:absolute; content:' '; pointer-events:none",
     //  - Fix up z-index overlaps with left/right
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container":
-      "z-index:2",
+      "z-index:11",
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after":
       "z-index:0 !important",
 
