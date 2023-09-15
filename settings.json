@@ -313,10 +313,10 @@
     },
 
     // HACK Workaround bug (see keybindings.json)
-    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;list.scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
 
   ],
 

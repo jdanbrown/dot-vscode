@@ -185,43 +185,45 @@
   // {"key": "shift+cmd+o", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"}, // Default
   {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"},
 
-  // Jupyter/notebook
+  // Notebooks
   {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
   {"key": "cmd+]", "command": "-editor.action.indentLines", "when": "editorTextFocus && !editorReadonly"},
   {"key": "shift+cmd+]", "command": "-workbench.action.nextEditor"},
   {"key": "shift+cmd+[", "command": "-workbench.action.previousEditor"},
-  {"key": ", ,", "command": "workbench.action.files.save", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": ", ,", "command": "workbench.action.files.save", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   {"key": "escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
   {"key": "shift+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl"},
-  {"key": "i", "command": "notebook.cell.edit", "when": "notebookEditorFocused && !inputFocus"},
-  {"key": "shift+i", "command": "multiCommand.notebook.cell.edit.InsertMode", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "i", "command": "notebook.cell.edit", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "shift+i", "command": "multiCommand.notebook.cell.edit.InsertMode", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   {"key": "cmd+]", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus"},
   {"key": "cmd+[", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "cmd+]", "command": "list.focusDown", "when": "notebookEditorFocused && !inputFocus"},
-  {"key": "cmd+[", "command": "list.focusUp", "when": "notebookEditorFocused && !inputFocus"},
-  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "cmd+]", "command": "list.focusDown", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "cmd+[", "command": "list.focusUp", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "u", "command": "undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "z", "command": "-undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
+  //  - Disable j/k movements at cell boundaries, more often confusing than helpful
+  //    - Ref: notebookEditorCursorAtBoundary = 'none' | 'top' | 'bottom' | 'both'
+  //    - https://github.com/microsoft/vscode/blob/f25f1abf/src/vs/workbench/contrib/notebook/common/notebookCommon.ts#L687-L688
+  {"key": "j", "command": "-notebook.focusNextEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"},
+  {"key": "k", "command": "-notebook.focusPreviousEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"},
+  //  - Move cells up/down
+  {"key": "ctrl+cmd+j", "command": "notebook.cell.moveDown", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "ctrl+cmd+k", "command": "notebook.cell.moveUp", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  //  - Folding
+  {"key": "h", "command": "notebook.fold", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "l", "command": "notebook.unfold", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  //  - Scrolling
+  {"key": "ctrl+e", "command": "list.scrollDown", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "ctrl+y", "command": "list.scrollUp", "when": "notebookEditorFocused && inputFocus"},
+  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "notebookEditorFocused && listFocus && inputFocus"},
+  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "notebookEditorFocused && listFocus && inputFocus"},
   //  - Kernel management
   //    - TODO YOU ARE HERE (these maybe all work now? try and see)
   {"key": "ctrl+cmd+k", "command": "jupyter.switchKernel", "when": "notebookEditorFocused"},
   {"key": "ctrl+c", "command": "jupyter.notebookeditor.interruptkernel", "when": "notebookEditorFocused"},
-  {"key": "0 0", "command": "jupyter.notebookeditor.restartkernel", "when": "notebookEditorFocused && !inputFocus"},
-  //  - Code reference for notebookEditorCursorAtBoundary
-  //    - https://github.com/microsoft/vscode/blob/f25f1abf/src/vs/workbench/contrib/notebook/common/notebookCommon.ts#L687-L688
-  {"key": "j", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'bottom'"},
-  {"key": "j", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'both'"},
-  {"key": "k", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'top'"},
-  {"key": "k", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus && notebookEditorCursorAtBoundary == 'both'"},
-  //  - FIXME These stop working if you scrollDown/scrollUp while editing a cell and cause the cell to become off screen by ~half a page
-  //    - Looks like the problem is that all keyboard input stops working in this case (until you click/scroll to bring it back)
-  //    - This isn't a problem when you aren't editing a cell (i.e. list view works fine)
-  {"key": "ctrl+e", "command": "multiCommand:notebook.cell.quitEdit;list.scrollDown", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "ctrl+y", "command": "multiCommand:notebook.cell.quitEdit;list.scrollUp", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "ctrl+d", "command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageDown", "when": "notebookEditorFocused && listFocus && inputFocus"},
-  {
-    "key": "ctrl+u",
-    "command": "multiCommand:notebook.cell.quitEdit;multiCommand.list.scrollPageUp",
-    "when": "notebookEditorFocused && listFocus && inputFocus"
-  },
+  {"key": "0 0", "command": "jupyter.notebookeditor.restartkernel", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
 
   // TODO Organize
   {
