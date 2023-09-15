@@ -720,6 +720,9 @@
     // "*": "-webkit-text-stroke-width: .15px",
     // "*": "-webkit-text-stroke-width: .1px",
 
+    // Hide all scrollbars
+    ".scrollbar": "display: none",
+
     // Quick input (cmd-p)
     //  - Challenge: You can't use element inspector on these! (the quick-input popup disappears)
     //    - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
