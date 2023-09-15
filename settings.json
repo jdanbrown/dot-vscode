@@ -274,13 +274,18 @@
   // multi-commands
   "multiCommand.commands": [
 
-    // Jupyter/notebook
+    // Notebook
     {
       "command": "multiCommand.notebook.cell.edit.InsertMode",
       "sequence": ["notebook.cell.edit", "extension.vim_insert"],
     },
 
-    // HACK Works! (but a little janky)
+    // Scrolling
+    //  - HACK Works! (a little janky)
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
+    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
     {
       "command": "multiCommand.list.scrollPageDown",
       "sequence": [
@@ -311,12 +316,6 @@
         "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp", "list.scrollUp",
       ],
     },
-
-    // HACK Workaround bug (see keybindings.json)
-    {"command": "multiCommand:notebook.cell.quitEdit_scrollDown", "sequence": ["notebook.cell.quitEdit", "list.scrollDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit_scrollUp", "sequence": ["notebook.cell.quitEdit", "list.scrollUp"]},
-    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageDown", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageDown"]},
-    {"command": "multiCommand:notebook.cell.quitEdit_scrollPageUp", "sequence": ["notebook.cell.quitEdit", "multiCommand.list.scrollPageUp"]},
 
   ],
 
