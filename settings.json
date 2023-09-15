@@ -815,116 +815,18 @@
     ".monaco-editor .detected-link":        "text-decoration: inherit",
     ".monaco-editor .detected-link-active": "text-decoration: inherit",
 
-    //
-    // TODO TODO Add border on active editor/terminal pane
-    //
-
-    // TODO This is really tricky, might need to break out top/bottom/left/right on separate elements
-    // ".editor-group-container.active": "border: 2px solid white",
-    // ".monaco-editor.focused": "border: 2px solid white",
-    // ".monaco-editor.focused::before": "content: \"\"; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: 5px solid yellow; box-sizing: border-box; z-index: 1",
-    // ".monaco-editor.focused .monaco-editor-background": "background-color: blue", // XXX Test that I've got the right selector
-    // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#f00,#f00) left 0px top    5px / 100% 5px, linear-gradient(#f00,#f00) top  0px left   5px / 5px 100%, linear-gradient(#f00,#f00) left 0px bottom 5px / 100% 5px, linear-gradient(#f00,#f00) top  0px right  5px / 5px 100%, linear-gradient(#000,#000) 20px 20px",
-    // ".monaco-editor.focused .monaco-editor-background": "background-repeat: no-repeat; background: linear-gradient(#00f,#00f) left 0px top    5px / 100% 5px, linear-gradient(#00f,#00f) top  0px left   5px / 5px 100%, linear-gradient(#00f,#00f) left 0px bottom 5px / 100% 5px, linear-gradient(#00f,#00f) top  0px right  5px / 5px 100%, linear-gradient(#f00,#f00) 20px 20px",
-    // ".monaco-editor.focused .monaco-editor-background": "background: gray",
-
-    // Try border, might actually be simpler than background/gradient
-    //  - XXX Nope, adding ~2px to the divs messes up overall sizing (right/bottom overflow)
-    //  - 1px white border when focused
-    //  - 1px black border when unfocused
-
-    // ".monaco-editor.focused": "border: 2px solid white", // No: Only top/left/bottom borders, and left border has 1px hidden
-    // ".monaco-editor.focused .editor-scrollable": "border: 5px solid white", // No: Only top/left borders
-    // ".monaco-editor.focused .monaco-editor-background": "border: 5px solid white", // No: Only left border
-
-    // Try background/gradient
-    //  - TODO These seem on the right track
-
-    // No: Only left/right edges
-    // ".monaco-editor.focused .monaco-editor-background": "background: linear-gradient(#fff,#fff) left 0px top 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px left 0px / 1px 100%, linear-gradient(#fff,#fff) left 0px bottom 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px right 0px / 1px 100%, linear-gradient(#000,#000) 0px 0px; background-repeat: no-repeat",
-
-    // No: Only top/bottom edges
-    // ".monaco-editor.focused": "background: linear-gradient(#fff,#fff) left 0px top 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px left 0px / 1px 100%, linear-gradient(#fff,#fff) left 0px bottom 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px right 0px / 1px 100%, linear-gradient(#000,#000) 0px 0px; background-repeat: no-repeat",
-    // ".monaco-editor.focused .monaco-editor-background": "background-color: #0000",
-
-    // No: Only top/bottom edges
-    // ".editor-container:has(.monaco-editor.focused)": "background-color: inherit !important; background: linear-gradient(#fff,#fff) left 0px top 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px left 0px / 1px 100%, linear-gradient(#fff,#fff) left 0px bottom 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px right 0px / 1px 100%, linear-gradient(#000,#000) 0px 0px; background-repeat: no-repeat",
-    // ".monaco-editor.focused": "background-color: #0000",
-    // ".monaco-editor.focused .monaco-editor-background": "background-color: #0000",
-
-    // Close! All four edges, but with weird gaps + text overlay
-    // ".monaco-editor.focused .monaco-editor-background": "background-color: #0000",
-    // ".monaco-editor.focused .editor-scrollable": "background: linear-gradient(#fff,#fff) left 0px top 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px left 0px / 1px 100%, linear-gradient(#fff,#fff) left 0px bottom 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px right 0px / 1px 100%, linear-gradient(#000,#000) 0px 0px; background-repeat: no-repeat",
-
-    // Close! All four edges, but with weird gaps + text overlay
-    //  - TODO Restore .focused (removed it to debug weird gaps + text overlay)
-    //  - TODO Hmm, I see no way to avoid text overlay at the top/bottom edges, since the text is an inner element with overflow height/width that isn't contained by our edges
-    // ".monaco-editor .monaco-editor-background": "background-color: #0000",
-    // ".monaco-editor .editor-scrollable": "padding: 0px; background: linear-gradient(#fff,#fff) left 0px top 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px left 0px / 1px 100%, linear-gradient(#fff,#fff) left 0px bottom 0px / 100% 1px, linear-gradient(#fff,#fff) top 0px right 0px / 1px 100%, linear-gradient(#000,#000) 0px 0px; background-repeat: no-repeat",
-
-    /*
-    [dom outline]
-      .split-view-container // all tab groups
-        .split-view-view [background-color: #444] // tab group w/ tabs + separator0
-          ::before // separator (on tab groups i>0)
-          .editor-group-container.active [background-color: #000] // tab group (w/ tabs)
-            // First element with editor height/width (no tabs, no bottom gap)
-            .editor-container [background-color: #000] // editor
-              .editor-instance // editor
-                .monaco-editor.focused [background-color: #000] // editor
-                  .overflow-guard // editor
-                    .margin [width: 3px]
-                    // First element with editor-3px width (because margin)
-                    .editor-scrollable
-                      // Fist element with content height (because overflow)
-                      .lines-content.monaco-editor-background [background-color: $editorPane.background]
-                        .view-overlays.focused
-                        .view-lines.monaco-mouse-cursor-text
-                          // The actual lines of text in view (w/ dynamic loading)
-                          .view-line
-                          .view-line
-                          ...
-    */
-
-    // .split-view-view::before
-    //  - No, highlights up the left side of the tab bar
-    //  - (Does work for terminals + editors, though)
-    // ".monaco-split-view2.separator-border > .monaco-scrollable-element > .split-view-container > .split-view-view:has(> .editor-group-container.active):before": "background-color: #fff !important",
-    // ".monaco-split-view2.separator-border > .monaco-scrollable-element > .split-view-container > .split-view-view:has(> .editor-group-container):before": "background-color: #fff !important",
-
-    // Oops, this outlines the editor, but I want to outline the whole tab group (because the tab indicates the editor)
-    // ".editor-container .monaco-editor.focused::before": "background-color: #fff; height: 100%; width: 1px; position:absolute; top:0; left:0; z-index:5; content:' '; pointer-events:none",
-    // ".editor-container .monaco-editor.focused::after": "background-color: #fff; width: 100%; height: 1px; position:absolute; top:0; left:0; z-index:5; content:' '; pointer-events:none",
-    // ".editor-container .monaco-editor.focused .overflow-guard::before": "background-color: #fff; height: 100%; width: 1px; position:absolute; bottom:0; right:0; z-index:5; content:' '; pointer-events:none",
-    // ".editor-container .monaco-editor.focused .overflow-guard::after": "background-color: #fff; width: 100%; height: 1px; position:absolute; bottom:0; right:0; z-index:5; content:' '; pointer-events:none",
-
-    // Oops oops, this outlines the tab group, but that's weird with rounded macos corners, so now I want to line the bottom of the tab bar (top of editor), the left/right of the editor, and the bottom of the editor group
-    // ".split-view-view:has(> .editor-group-container .editor-container .monaco-editor)::before": "background-color: #fff !important; height: 100%; width: 1px; position:absolute; top:0; left:0; z-index:10 !important; content:' '; pointer-events:none",
-    // ".split-view-view:has(> .editor-group-container .editor-container .monaco-editor)::after": "background-color: #fff; width: 100%; height: 1px; position:absolute; top:0; left:0; z-index:10; content:' '; pointer-events:none",
-    // ".editor-group-container:has(.editor-container .monaco-editor)::before": "background-color: #fff; height: 100%; width: 1px; position:absolute; bottom:0; right:0; z-index:10; content:' '; pointer-events:none",
-    // ".editor-group-container:has(.editor-container .monaco-editor)::after": "background-color: #fff; width: 100%; height: 1px; position:absolute; bottom:0; right:0; z-index:10; content:' '; pointer-events:none",
-
-    // Top
-    // Bottom
-    // Left
-    // XXX ".editor-container .monaco-editor::before": "background-color: #fff; height: 100%; width: 1px; position:absolute; top:0; left:0; z-index:5; content:' '; pointer-events:none",
-    // Right
-    // XXX ".split-view-view:has(> .editor-group-container .editor-container .monaco-editor)::after": "background-color: #fff !important; height: 100%; width: 1px; position:absolute; top:0; right:0; z-index:10 !important; content:' '; pointer-events:none",
-    // XXX ".tabs-breadcrumbs .monaco-breadcrumbs": "background-color: #0000 !important",
-    // XXX ".tabs-breadcrumbs": "",
-    // XXX ".editor-container .monaco-editor::after": "background-color: #fff; height: 100%; width: 1px; position:absolute; top:0; right:0; z-index:5; content:' '; pointer-events:none",
-    // Left/right
-    // XXX ".monaco-workbench .part.editor > .content .editor-group-container > .title.title-border-bottom::after": "z-index: 0",
-
-    // Top
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container::after": "background-color: #fff !important",
-    // Bottom
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus)::after": "background-color: #fff; width: 100%; height: 1px; position:absolute; bottom:0; right:0; content:' '; pointer-events:none",
-    // Left/right
-    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::before": "background-color: #fff !important; height: 100%; width: 1px; position:absolute; top:0; left:0; z-index:1 !important; content:' '; pointer-events:none",
-    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::after": "background-color: #fff !important; height: 100%; width: 1px; position:absolute; top:0; right:0; z-index:1 !important; content:' '; pointer-events:none",
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container": "z-index: 2",
-    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": "z-index: 0 !important",
+    // Add border on focused editor/terminal
+    //  - Top
+    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container::after": "background-color:#fff !important",
+    //  - Bottom
+    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus)::after": "background-color:#fff; width:100%; height:1px; bottom:0; right:0; position:absolute; content:' '; pointer-events:none",
+    //  - Left
+    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::before": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; left:0; position:absolute; content:' '; pointer-events:none",
+    //  - Right
+    ".split-view-view:has(> .editor-group-container .monaco-editor.focused, > .editor-group-container .terminal.focus)::after": "background-color:#fff !important; height:100%; width:1px; z-index:1 !important; top:0; right:0; position:absolute; content:' '; pointer-events:none",
+    //  - Fix up overlaps with left/right
+    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs-and-actions-container": "z-index:2",
+    ".editor-group-container:has(.monaco-editor.focused, .terminal.focus) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": "z-index:0 !important",
 
   },
 
