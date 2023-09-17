@@ -175,7 +175,14 @@
     "editor.tabCompletion": "onlySnippets",
   },
 
-  // Recommended by dart
+  // Python
+  "python.showStartPage": false,
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.terminal.activateEnvironment": false,
+  "jupyter.interactiveWindow.viewColumn": "beside",
+
+  // Dart
   //  - https://dartcode.org/docs/recommended-settings/
   "debug.openDebug": "openOnDebugBreak",
   "dart.closingLabels": false,
@@ -889,7 +896,6 @@
   },
   "search.smartCase": true,
   "debug.console.fontSize": 10,
-  "python.showStartPage": false,
   "jupyter.collapseCellInputCodeByDefault": false,
   "jupyter.disableJupyterAutoStart": true,
   "jupyter.enableScrollingForCellOutputs": false,
@@ -911,7 +917,6 @@
   "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
   "bookmarks.navigateThroughAllFiles": true,
   "bookmarks.sideBar.expanded": true,
-  "python.languageServer": "Pylance",
   "search.searchEditor.reusePriorSearchConfiguration": true,
   "search.searchEditor.defaultNumberOfContextLines": 0,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
@@ -962,7 +967,6 @@
   "update.showReleaseNotes": false,
   "git.openRepositoryInParentFolders": "never",
   "jupyter.interactiveWindow.creationMode": "perFile",
-  "python.terminal.activateEnvironment": false,
   "scm.alwaysShowRepositories": true,
   "scm.countBadge": "off",
   "scm.defaultViewMode": "tree",
