@@ -981,5 +981,6 @@
     "terminalEditor": false
   },
   "workbench.editor.untitled.hint": "hidden",
+  "editor.accessibilitySupport": "off",
 
 }
