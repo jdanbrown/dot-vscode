@@ -10,6 +10,7 @@
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
   "workspace-path-status-bar.enable": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "workbench.reduceMotion": "on", // Disable animations
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
