@@ -31,6 +31,10 @@
   {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable because it conflicts in terminal, so learn shift+cmd+\ instead
   // {"key": "shift+cmd+x", "command": "workbench.view.extensions", "when": "viewContainer.workbench.view.extensions.enabled"} // Default
 
+  // Navigate editors/terminals
+  //  - TODO(practice)
+  {"key": "cmd+;", "command": "workbench.action.showAllEditors"},
+
   // Files
   {"key": "cmd+o", "command": "-workbench.action.files.openFileFolder"},
   {"key": "cmd+o", "command": "-workbench.action.files.openLocalFileFolder", "when": "remoteFileDialogVisible"},
