@@ -668,21 +668,25 @@
   "apc.electron": {
     "frame": false,
   },
+  // Monospace everywhere
   "apc.font.family": "Consolas",
   "apc.monospace.font.family": "Consolas",
   // Tabs
-  //  - Disabled because we do this better in css below (and this one conflicts)
-  // "apc.header": {
-  //   "fontSize": 11,
-  //   "height": 20,
-  // },
-  "apc.statusBar": {
-    "fontSize": 11,
-    "height": 17,
-  },
-  "apc.listRow": {
-    "fontSize": 11,
+  "apc.header": {
+    // HACK Tune height to 13px to avoid a gap at the bottom of editors/terminals/notebooks
+    //  - This is caused by (and coupled with) our tabs css sizing below
     "height": 13,
+    "fontSize": 12,
+  },
+  // Status bar
+  "apc.statusBar": {
+    "height": 17,
+    "fontSize": 11,
+  },
+  // Explorer (&al)
+  "apc.listRow": {
+    "height": 13,
+    "fontSize": 11,
   },
   // Activity bar
   //  - Change large icons always visibile on the left -> small icons at the bottom of Explorer view
@@ -691,7 +695,7 @@
     "size": 26,
     "itemMargin": 0,
   },
-  // XXX Don't use apc.imports
+  // XXX Nope, don't use apc.imports
   //  - https://github.com/drcika/apc-extension#apcimports
   //  - Storing in a .css that we import here introduces weird jank on save->refresh that storing css lines here in settings.json doesn't
   //  - Also, line comments in .css are a big pita (/*..*/)
@@ -754,12 +758,12 @@
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": "height: 15px !important",
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                   "height: 17px !important; line-height: 17px !important",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                                         "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                  "height: 17px !important; line-height: 17px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                  "height: 17px !important; line-height: 17px !important; padding: 0 7px !important",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before":                       "height: 15px !important",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                                         "height: 17px !important; line-height: 17px !important; outline: 0px !important; padding: 0px !important",
     ".tab .tab-label":                                                                                                                                    "line-height: 17px !important; font-family: Consolas",
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                       "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important", // [Redundant with apc.header.fontSize -- safe to delete?]
     ".monaco-action-bar .action-label":                                                                                                                   "margin-right: 0px !important",
 
     // Tabs: Icons
@@ -794,9 +798,15 @@
     ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                      "display: none; font-size: 11px !important",
 
     // Terminals
+    //  - HACK Tune bottom offset to 6px to compensate for fixing the gap above (apc.header.height)
+    //    - 5px = run `cat` to put the block cursor in the bottom-left, then zoom in and to visually match pixels to the left/down
+    //    - 1px = adjust to taste
+    //    - Total: 6px
+    ".monaco-workbench .terminal-editor .xterm": "bottom: 6px",
     //  - Hide gutter
-    ".integrated-terminal.shell-integration .xterm, .monaco-workbench .pane-body.integrated-terminal .terminal-group .monaco-split-view2.horizontal .split-view-view:first-child .xterm, .monaco-workbench .terminal-editor .xterm": "padding-left: 3px !important",
-    ".monaco-workbench .xterm":                                                                                                                                                                                                      "padding-right: 3px",
+    ".integrated-terminal.shell-integration .xterm, .monaco-workbench .pane-body.integrated-terminal .terminal-group .monaco-split-view2.horizontal .split-view-view:first-child .xterm, .monaco-workbench .terminal-editor .xterm":
+      "padding-left: 3px !important",
+    ".monaco-workbench .xterm": "padding-right: 3px",
     //  - Hide ruler
     ".xterm-decoration-overview-ruler": "display: none !important",
     //  - Hide scrollbar

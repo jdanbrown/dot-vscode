@@ -31,7 +31,7 @@
   {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable because it conflicts in terminal, so learn shift+cmd+\ instead
   // {"key": "shift+cmd+x", "command": "workbench.view.extensions", "when": "viewContainer.workbench.view.extensions.enabled"} // Default
 
-  // Navigate editors/terminals
+  // Navigate editors (and terminals, notebooks, etc.)
   //  - TODO(practice)
   {"key": "cmd+;", "command": "workbench.action.showAllEditors"},
 
