@@ -19,6 +19,9 @@
   "editor.fontFamily": "Consolas",
   // "editor.fontWeight": "bold",
 
+  // Explorer
+  "workbench.list.defaultFindMatchType": "contiguous",
+
   // Indent/tabs
   //  - https://code.visualstudio.com/docs/editor/codebasics#_indentation
   "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below

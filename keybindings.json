@@ -94,6 +94,16 @@
   {"key": "ctrl+y", "command": "list.scrollUp", "when": "listFocus && !inputFocus"},
   {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "listFocus"},
   {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "listFocus"},
+  //  - Find
+  //    - TODO(practice)
+  // {"key": "cmd+f", "command": "list.find", "when": "listFocus && listSupportsFind"}, // Default
+  {"key": "/", "command": "list.find", "when": "listFocus && listSupportsFind"},
+  // {"key": "j", "command": "list.focusDown", "when": "listFocus && !inputFocus"}, // Default
+  // {"key": "k", "command": "list.focusUp", "when": "listFocus && !inputFocus"}, // Default
+  // {"key": "down", "command": "list.focusDown", "when": "listFocus && !inputFocus"}, // Default
+  // {"key": "up", "command": "list.focusUp", "when": "listFocus && !inputFocus"}, // Default
+  {"key": "cmd+g", "command": "list.focusDown", "when": "listFocus"},
+  {"key": "shift+cmd+g", "command": "list.focusUp", "when": "listFocus"},
 
   // Editor
   {"key": "ctrl+space", "command": "editor.action.showHover"}, // Alias for gh (vim)
