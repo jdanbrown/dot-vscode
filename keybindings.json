@@ -212,8 +212,8 @@
   {"key": "cmd+g", "command": "-workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
   //  - Scroll/select with keyboard
   //    - TODO(practice)
-  {"key": "cmd+u", "command": "jdanbrown-init.terminal.scrollUpHalfPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
-  {"key": "cmd+d", "command": "jdanbrown-init.terminal.scrollDownHalfPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+u", "command": "jdanbrown.terminal.scrollUpHalfPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  {"key": "cmd+d", "command": "jdanbrown.terminal.scrollDownHalfPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+y", "command": "workbench.action.terminal.scrollUp", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+e", "command": "workbench.action.terminal.scrollDown", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "shift+cmd+y", "command": "workbench.action.terminal.selectToPreviousLine", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},

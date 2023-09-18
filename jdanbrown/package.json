@@ -1,12 +1,12 @@
 {
-  "name": "jdanbrown-init",
-  "displayName": "jdanbrown-init",
+  "name": "jdanbrown",
+  "displayName": "jdanbrown",
   "description": "",
   "version": "0.0.1",
   "publisher": "jdanbrown",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jdanbrown/vscode-jdanbrown-init"
+    "url": "https://github.com/jdanbrown/dot-vscode"
   },
   "engines": {
     "vscode": "^1.82.0"
@@ -18,8 +18,8 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      {"command": "jdanbrown-init.terminal.scrollDownHalfPage", "title": "[jdanbrown-init] Terminal: Scroll Down (Half Page)"},
-      {"command": "jdanbrown-init.terminal.scrollUpHalfPage", "title": "[jdanbrown-init] Terminal: Scroll Up (Half Page)"}
+      {"command": "jdanbrown.terminal.scrollDownHalfPage", "title": "[jdanbrown] Terminal: Scroll Down (Half Page)"},
+      {"command": "jdanbrown.terminal.scrollUpHalfPage", "title": "[jdanbrown] Terminal: Scroll Up (Half Page)"}
     ]
   },
   "scripts": {

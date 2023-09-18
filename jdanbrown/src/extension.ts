@@ -1,11 +1,11 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+export function deactivate() {
+  console.info('[jdanbrown] deactivate');
+}
+
 export function activate(context: vscode.ExtensionContext) {
-  console.info('[jdanbrown-init] activate');
+  console.info('[jdanbrown] activate');
 
   function scrollHalfPage(direction: 'up' | 'down') {
 
@@ -49,14 +49,15 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('jdanbrown-init.terminal.scrollUpHalfPage', () => scrollHalfPage('up')),
-    vscode.commands.registerCommand('jdanbrown-init.terminal.scrollDownHalfPage', () => scrollHalfPage('down')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', () => scrollHalfPage('up')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', () => scrollHalfPage('down')),
   );
 
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+//
+// Utils
+//
 
 function range(n: number): Array<number> {
   if (!Number.isInteger(n)) {
