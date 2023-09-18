@@ -1,13 +1,85 @@
+// Tracking
+//  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
+
 import * as vscode from 'vscode';
 
-export function deactivate() {
-  console.info('[jdanbrown] deactivate');
-}
+// Used to have these, add them back to package.json if we need them again
+// import * as CryptoJS from 'crypto-js';
+// import * as _ from "lodash";
 
 export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
+  fixLostFocusBug(context);
+  registerCommandsTerminalScrollHalfPage(context);
+  attic(context);
+}
 
-  function scrollHalfPage(direction: 'up' | 'down') {
+export function attic(context: vscode.ExtensionContext) {
+  const config = vscode.workspace.getConfiguration();
+  const output = vscode.window.createOutputChannel('init.ts');
+
+  // output.appendLine(`terminals: ${jsonPretty(vscode.window.terminals.map(x => ({name: x.name, processId: x.processId})))}`);
+  // output.appendLine(`workspace: ${jsonPretty({
+  //   name: vscode.workspace.name,
+  //   workspaceFile: vscode.workspace.workspaceFile,
+  //   rootPath: vscode.workspace.rootPath,
+  // })}`);
+  // output.appendLine(`context: ${jsonPretty({
+  //   workspaceState: {
+  //     keys: context.workspaceState.keys(),
+  //   },
+  // })}`);
+
+  // NOTE Howto persist state (across restart/reload) at workspace scope (global scope also available, which we don't want)
+  //  - https://code.visualstudio.com/api/references/vscode-api#ExtensionContext
+  //  - https://code.visualstudio.com/api/references/vscode-api#Memento
+  // await context.workspaceState.update('junk-0', 'a');       // Update key
+  // await context.workspaceState.update('junk-0', undefined); // Delete key
+
+  // // TODO
+  // //  - Rename command
+  // //  - Good otherwise?
+  // vscode.commands.registerCommand('userInitTs.terminal.new', () => {
+  //   const workspacePath = vscode.workspace.workspaceFile.path // TODO Don't persist terminals if no path (i.e. workspace isn't saved)
+  //   const workspacePathBasename = workspacePath.split('/').pop().split('.')[0];
+  //   const nowStr = new Date().toISOString().replace(/[-:.]/g, '');
+  //   const termUid = `${workspacePathBasename}-${sha1HexShort(workspacePath)}-${nowStr}`;
+  //   // output.appendLine(`termUid: ${termUid}`);
+  //   // vscode.window.showInformationMessage(`termUid: ${termUid}`);
+  //   vscode.window.createTerminal({
+  //     // shellPath: 'bash', shellArgs: ['-l'], // XXX Debug
+  //     shellPath: 'tmux-new-or-attach-vscode-term-uid', // NOTE Requires "terminal.integrated.inheritEnv":true (default)
+  //     env: {VSCODE_TERM_UID: termUid}, // For tmux-new-or-attach-vscode-term-uid
+  //   });
+  // });
+
+  // TODO Terminal persistence
+  //  - [updated] Review vscode's WIP first
+  //    - https://github.com/microsoft/vscode/labels/terminal-persistence
+  //  - How to reopen `foo-*` terms after restart? (reload already works, via its own magic)
+  //    - Add a command that lists them and then manually opens them all
+  //    - Pane positions/layout won't be restored, but that's fine (and status quo)
+  //  - https://code.visualstudio.com/api/references/vscode-api
+  //    - https://code.visualstudio.com/api/references/vscode-api#Terminal
+  //    - https://code.visualstudio.com/api/references/vscode-api#TerminalOptions
+
+}
+
+// HACK Fix lost-focus bug when a terminal editor closes because the process exits (e.g. ^D in a shell)
+//  - [2023-09-18] I can't even find a github issue about it :/ (and I haven't slowed down to file one, but I should)
+export function fixLostFocusBug(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] fixLostFocusBug');
+  vscode.window.onDidCloseTerminal((editor: vscode.Terminal) => {
+    if (!editor) { return; }
+    // console.log(editor) // XXX Debug
+    vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+  });
+}
+
+export function registerCommandsTerminalScrollHalfPage(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsTerminalScrollHalfPage');
+
+  function terminalScrollHalfPage(direction: 'up' | 'down') {
 
     // Get terminal
     const terminal = vscode.window.activeTerminal;
@@ -49,8 +121,8 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', () => scrollHalfPage('up')),
-    vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', () => scrollHalfPage('down')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', () => terminalScrollHalfPage('up')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', () => terminalScrollHalfPage('down')),
   );
 
 }
@@ -59,9 +131,21 @@ export function activate(context: vscode.ExtensionContext) {
 // Utils
 //
 
+function jsonPretty(x: any): string {
+  return JSON.stringify(x, null, 2);
+}
+
 function range(n: number): Array<number> {
   if (!Number.isInteger(n)) {
     throw new Error(`Must be integer: n[${n}]`);
   }
   return [...Array(n).keys()];
 }
+
+// function sha1HexShort(x: string, n: number = 8): string {
+//   return sha1Hex(x).substr(0, n);
+// }
+//
+// function sha1Hex(x: string): string {
+//   return CryptoJS.SHA256(x).toString(CryptoJS.enc.Hex);
+// }
