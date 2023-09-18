@@ -948,7 +948,7 @@
   "markdown-checkbox.typeOfBulletPoint": "-",
   "scm.diffDecorationsGutterVisibility": "hover",
   "editor.wordBasedSuggestionsMode": "allDocuments",
-  "explorer.openEditors.visible": 0,
+  "explorer.openEditors.visible": 50,
   "breadcrumbs.symbolPath": "off",
   "dart.previewLsp": true,
   "explorer.compactFolders": false,
