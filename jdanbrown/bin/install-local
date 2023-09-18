@@ -1,7 +1,15 @@
 #!/bin/bash -eux
 
+bin="$(dirname "$0")"
+dir="$bin/.."
+
+extension_path="$(mktemp /tmp/extension-XXXXXXXX.vsix)"
+
+# Must run from extension dir
+cd "$dir"
+
 # https://code.visualstudio.com/api/working-with-extensions/publishing-extension
-vsce package --out extension.vsix
+vsce package --out "$extension_path"
 
 # https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix
-code --install-extension extension.vsix
+code --install-extension "$extension_path"
