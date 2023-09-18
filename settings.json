@@ -90,6 +90,9 @@
   "terminal.integrated.confirmOnExit": "always",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.persistentSessionScrollback": 10000,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleKeybindingsLog"
+  ],
 
   // GitLens
   "gitlens.showWelcomeOnInstall": false,
@@ -978,9 +981,6 @@
   "bookmarks.sideBar.countBadge": "off",
   "testing.countBadge": "off",
   "explorer.excludeGitIgnore": true,
-  "terminal.integrated.commandsToSkipShell": [
-    "workbench.action.toggleKeybindingsLog"
-  ],
   "workbench.hover.delay": 500,
   "workbench.tips.enabled": false,
   "workbench.tree.renderIndentGuides": "none",
