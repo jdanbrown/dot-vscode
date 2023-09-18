@@ -1,0 +1,7 @@
+#!/bin/bash -eux
+
+# https://code.visualstudio.com/api/working-with-extensions/publishing-extension
+vsce package --out extension.vsix
+
+# https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix
+code --install-extension extension.vsix
