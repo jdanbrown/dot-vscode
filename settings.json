@@ -689,7 +689,7 @@
   // Status bar
   "apc.statusBar": {
     "height": 17,
-    "fontSize": 11,
+    "fontSize": 11, // 1 smaller than tab bar (status bar is more dense and less important)
   },
   // Explorer (&al)
   "apc.listRow": {
@@ -805,6 +805,9 @@
     ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                      "content: '/'",
     ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                      "display: none; font-size: 11px !important",
 
+    // Status bar
+    ".statusbar .statusbar-item .codicon": "font-size: 13px !important",
+
     // Terminals
     //  - HACK Tune bottom offset to 6px to compensate for fixing the gap above (apc.header.height)
     //    - 5px = run `cat` to put the block cursor in the bottom-left, then zoom in and to visually match pixels to the left/down
@@ -830,10 +833,6 @@
     ".monaco-workbench .tab .terminal-tab.codicon-terminal-bash::before":              "content: '\\ea85' !important; font-family: 'codicon' !important",
     ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "content: '\\ea85' !important; font-family: 'codicon' !important",
     // ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "display: none", // To disable
-
-    // Disable underlines for detected links
-    ".monaco-editor .detected-link":        "text-decoration: inherit",
-    ".monaco-editor .detected-link-active": "text-decoration: inherit",
 
     // Add border on focused editor/terminal
     //  - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
@@ -862,6 +861,10 @@
       "z-index:11",
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after":
       "z-index:0 !important",
+
+    // Disable underlines for detected links
+    ".monaco-editor .detected-link":        "text-decoration: inherit",
+    ".monaco-editor .detected-link-active": "text-decoration: inherit",
 
   },
 
