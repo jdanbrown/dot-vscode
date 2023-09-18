@@ -954,7 +954,6 @@
   "notebook.insertToolbarLocation": "notebookToolbar",
   "notebook.showCellStatusBar": "hidden",
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
-  "r.rpath.mac": "/opt/homebrew/bin/r",
   "editor.guides.indentation": false,
   "editor.bracketPairColorization.enabled": false,
   "extensions.experimental.affinity": {
