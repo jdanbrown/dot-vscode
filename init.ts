@@ -43,7 +43,7 @@ export async function init(context: vscode.ExtensionContext) {
   // await context.workspaceState.update('junk-0', 'a');       // Update key
   // await context.workspaceState.update('junk-0', undefined); // Delete key
 
-  // // TODO TODO
+  // // TODO
   // //  - Rename command
   // //  - Good otherwise?
   // vscode.commands.registerCommand('userInitTs.terminal.new', () => {
@@ -60,7 +60,7 @@ export async function init(context: vscode.ExtensionContext) {
   //   });
   // });
 
-  // TODO TODO Terminal persistence
+  // TODO Terminal persistence
   //  - [updated] Review vscode's WIP first
   //    - https://github.com/microsoft/vscode/labels/terminal-persistence
   //  - How to reopen `foo-*` terms after restart? (reload already works, via its own magic)
