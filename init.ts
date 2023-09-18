@@ -41,22 +41,22 @@ export async function init(context: vscode.ExtensionContext) {
   // await context.workspaceState.update('junk-0', 'a');       // Update key
   // await context.workspaceState.update('junk-0', undefined); // Delete key
 
-  // TODO TODO
-  //  - Rename command
-  //  - Good otherwise?
-  vscode.commands.registerCommand('userInitTs.terminal.new', () => {
-    const workspacePath = vscode.workspace.workspaceFile.path // TODO Don't persist terminals if no path (i.e. workspace isn't saved)
-    const workspacePathBasename = workspacePath.split('/').pop().split('.')[0];
-    const nowStr = new Date().toISOString().replace(/[-:.]/g, '');
-    const termUid = `${workspacePathBasename}-${sha1HexShort(workspacePath)}-${nowStr}`;
-    // output.appendLine(`termUid: ${termUid}`);
-    // vscode.window.showInformationMessage(`termUid: ${termUid}`);
-    vscode.window.createTerminal({
-      // shellPath: 'bash', shellArgs: ['-l'], // XXX Debug
-      shellPath: 'tmux-new-or-attach-vscode-term-uid', // NOTE Requires "terminal.integrated.inheritEnv":true (default)
-      env: {VSCODE_TERM_UID: termUid}, // For tmux-new-or-attach-vscode-term-uid
-    });
-  });
+  // // TODO TODO
+  // //  - Rename command
+  // //  - Good otherwise?
+  // vscode.commands.registerCommand('userInitTs.terminal.new', () => {
+  //   const workspacePath = vscode.workspace.workspaceFile.path // TODO Don't persist terminals if no path (i.e. workspace isn't saved)
+  //   const workspacePathBasename = workspacePath.split('/').pop().split('.')[0];
+  //   const nowStr = new Date().toISOString().replace(/[-:.]/g, '');
+  //   const termUid = `${workspacePathBasename}-${sha1HexShort(workspacePath)}-${nowStr}`;
+  //   // output.appendLine(`termUid: ${termUid}`);
+  //   // vscode.window.showInformationMessage(`termUid: ${termUid}`);
+  //   vscode.window.createTerminal({
+  //     // shellPath: 'bash', shellArgs: ['-l'], // XXX Debug
+  //     shellPath: 'tmux-new-or-attach-vscode-term-uid', // NOTE Requires "terminal.integrated.inheritEnv":true (default)
+  //     env: {VSCODE_TERM_UID: termUid}, // For tmux-new-or-attach-vscode-term-uid
+  //   });
+  // });
 
   // TODO TODO Terminal persistence
   //  - [updated] Review vscode's WIP first
