@@ -1,6 +1,10 @@
+// Tracking
+//  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
+//
 // Docs
 //  - https://code.visualstudio.com/docs/getstarted/settings
 //    - Big reference of all available commands
+//
 {
 
   // Workspace
@@ -27,6 +31,11 @@
   "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
+
+  // Editor
+  //  - FIXME vim L/H keeps scrolling down/up if you repeat it: https://github.com/VSCodeVim/Vim/issues/1393
+  //    - 0 fixes H, but L still scrolls down by 1
+  "editor.cursorSurroundingLines": 0,
 
   // Completions
   //  - https://github.com/microsoft/vscode/issues/76322
@@ -211,28 +220,30 @@
 
   // vim
   //  - https://github.com/VSCodeVim/Vim
-  //  - https://github.com/VSCodeVim/Vim#key-remapping
-  //  - Issues
-  //    - https://galenwong.github.io/blog/2021-03-22-vscode-neovim-vs-vscodevim/
-  //    - Undo
-  //      - https://github.com/VSCodeVim/Vim/issues/1490
-  //      - https://github.com/VSCodeVim/Vim/issues/2007
+  //  - https://galenwong.github.io/blog/2021-03-22-vscode-neovim-vs-vscodevim/
   //
-  // TODO
-  //  - In insert mode, make shift-esc behave like esc (currently noop)
-  //
-  "editor.cursorSurroundingLines": 1, // HACK Workaround annoying bug: https://github.com/VSCodeVim/Vim/issues/1393
+  //  - Basics
   "vim.disableAnnoyingNeovimMessage": true,
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.mouseSelectionGoesIntoVisualMode": false,
-  "vim.searchHighlightColor": "#D9D905",
   "vim.showmodename": false,
   "vim.textwidth": 120,
   "vim.visualstar": true,
+  // ReplaceWithRegister
+  //  - https://github.com/VSCodeVim/Vim#replacewithregister
+  //  - yank -> gr<motion> to paste
+  //  - TODO(practice)
+  "vim.replaceWithRegister": true,
+  //  - Cursor style
   "vim.cursorStylePerMode.visual": "underline-thin",
   "vim.cursorStylePerMode.visualblock": "underline-thin",
   "vim.cursorStylePerMode.visualline": "underline-thin",
+  //  - Find/search highlight
+  "vim.searchHighlightColor": "#ff0d", // Need a little transparency else I can't see the cursor as I next/prev
+  "vim.searchHighlightTextColor": "#000",
+  "vim.searchMatchColor": "#fff", // Color for the first match while typing before hitting enter (short lived)
+  "vim.searchMatchTextColor": "#000",
   "vim.normalModeKeyBindingsNonRecursive": [
 
     // XXX No actually, this makes vim undo/redo behave really weird, with the wrong granularity of edits
@@ -352,18 +363,28 @@
 
     "editor.background": "#000000",
     "editor.foreground": "#ffffff",
-    "editor.selectionBackground": "#fff8",
-    "editor.selectionHighlightBackground": "#fff6",
+
+    // Editor find/search highlight
+    //  - NOTE This is for cmd+f, vim '/' is set by "vim.searchHighlightColor"
+    "editor.findMatchBackground": "#ff0", // Focused match
+    "editor.findMatchBorder": "#0000", // Focused match
+    "editor.findMatchHighlightBackground": "#ff0d", // All other matches (like "vim.searchHighlightColor")
+    "editor.findMatchHighlightBorder": "#0000", // All other matches
+
     "editorGutter.background": "#000",
 
     // Accent/highlight color in a _lot_ of places
     //  - e.g. autocomplete fuzzy text matching -- need a color muted enough so it doesn't burn your eyes here (99% case, always typing)
     //  - e.g. cmd-p fuzzy text matching -- need a color bright enough that it catches your eyes here (e.g. sparse char matches)
     //  - e.g. borders in focused UI widgets (e.g. settings) -- secondary concern to the above
-    // "focusBorder": "#f38518", // Orange from hcDark theme -- I don't want orange for so many accents (e.g. autocomplete)
+    // "focusBorder": "#f38518", // Default orange from hcDark theme -- I don't like this orange everywhere (e.g. autocomplete)
     "focusBorder": "#4f97d7", // Blue from spacemacs -- muted enough to not burn my eyes in autocomplete as I type (99% case)
     // "focusBorder": "#01a0e4", // Blue from 3024 -- nicely bright, but a little too eye-burning for autocomplete as I type
     // "focusBorder": "#01a252", // Green from 3024 -- good alternate choice if I ever get tired of blue
+    //  - Manually fix all residual orange (#f38518), from: "Developer: Generate Color Theme From Current Settings"
+    "editor.lineHighlightBorder": "#4f97d7",
+    "listFilterWidget.outline": "#4f97d7",
+    "terminalOverviewRuler.findMatchForeground": "#4f97d7",
 
     "gitDecoration.addedResourceForeground": "#5ffa68", // New staged
     "gitDecoration.conflictingResourceForeground": "#ff6e67",
@@ -384,7 +405,15 @@
     "list.focusBackground": "#666",
     "list.hoverBackground": "#666",
 
+    // List find/search highlight (Explorer)
+    "list.filterMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
+    "list.filterMatchBorder": "#0000",
+
     "quickInputList.focusBackground": "#404040",
+
+    // Search Editor find/search highlight
+		"searchEditor.findMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
+		"searchEditor.findMatchBorder": "#0000",
 
     "selection.background": "#008000",
 
@@ -444,6 +473,13 @@
     "terminal.ansiRed": "#ff6e67",
     "terminal.ansiWhite": "#ffffff",
     "terminal.ansiYellow": "#fffc67",
+
+    // Terminal find/search highlight
+    //  - NOTE Must Reload Window (ctrl+cmd+r) for these colors to update in active terminals (probably a bug)
+    "terminal.findMatchBackground": "#ff0", // Focused match
+    "terminal.findMatchBorder": "#ff0", // Focused match
+    "terminal.findMatchHighlightBackground": "#ff0d", // All other matches (like "vim.searchHighlightColor")
+    "terminal.findMatchHighlightBorder": "#0000", // All other matches
 
   },
 
@@ -905,7 +941,7 @@
   "zenMode.hideLineNumbers": false,
   "todohighlight.keywordsPattern": "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b",
   "todohighlight.defaultStyle": {
-    "color": "#FB6D65",
+    "color": "#ff6e67", // Same as "terminal.ansiBrightRed" (above)
     "backgroundColor": "inherit"
   },
   "search.smartCase": true,

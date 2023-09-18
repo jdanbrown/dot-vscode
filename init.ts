@@ -1,3 +1,6 @@
+// Tracking
+//  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
+
 // This file is run by this extension: https://github.com/bodil/vscode-init-script
 //  - NOTE Must `cd ~/Library/Application Support/Code/User/ && npm install`
 //    - https://github.com/bodil/vscode-init-script/pull/3/files

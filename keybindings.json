@@ -1,9 +1,13 @@
+// Tracking
+//  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
+//
 // Docs
 //  - shift+cmd+p -> "Preferences: Open Default Keyboard Shortcuts (JSON)"
 //    - Reference for default keyboard shortcuts
 //    - Reference for all available commands
 //  - https://github.com/codebling/vs-code-default-keybindings/blob/master/macos.keybindings.json
 //    - (Only reference I can find on the web)
+//
 [
 
   // Workspace
@@ -139,18 +143,44 @@
     "when": "textInputFocus"
   },
 
-  // Search
+  // Search Editor
   {"key": "shift+cmd+f", "command": "search.action.openNewEditorToSide"},
   {"key": "shift+cmd+f", "command": "-workbench.view.search", "when": "!searchViewletVisible"},
   {"key": "shift+cmd+f", "command": "-workbench.action.findInFiles"},
   {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
   {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
-  {
-    "key": "backspace",
-    "command": "search.searchEditor.action.deleteFileResults",
-    "when": "inSearchEditor && !searchInputBoxFocus"
-  },
+  {"key": "backspace", "command": "search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && !searchInputBoxFocus"},
   {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && inSearchEditor"},
+  {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "f4", "command": "-search.action.focusNextSearchResult", "when": "hasSearchResult || inSearchEditor"},
+  {"key": "shift+f4", "command": "-search.action.focusPreviousSearchResult", "when": "hasSearchResult || inSearchEditor"},
+  {"key": "escape", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+n", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
+  {"key": "ctrl+p", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
+  {"key": "cmd+g", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
+  {"key": "shift+cmd+g", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
+  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "escape", "command": "-search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
+  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "alt+cmd+r", "command": "-toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "alt+cmd+c", "command": "-toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "alt+cmd+w", "command": "-toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "o", "command": "search.action.openResult", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "ctrl+o", "command": "search.action.openResultToSide", "when": "inSearchEditor"},
+  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
+  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor"},
+  {"key": "r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "shift+cmd+r", "command": "-rerunSearchEditorSearch", "when": "inSearchEditor"},
+  {"key": "-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "cmd+r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor"},
 
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
@@ -178,7 +208,9 @@
   //  - Scroll/select with keyboard
   //    - TODO(practice)
   {"key": "cmd+r", "command": "workbench.action.terminal.runRecentCommand", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
-  {"key": "cmd+g", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
+  //    - Disable cmd+g for Go To Dir (conflicts with Find Next)
+  {"key": "cmd+g", "command": "-workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
+  {"key": "shift+cmd+c", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
   {"key": "cmd+u", "command": "workbench.action.terminal.scrollUpPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+d", "command": "workbench.action.terminal.scrollDownPage", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   {"key": "cmd+y", "command": "workbench.action.terminal.scrollUp", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
@@ -284,34 +316,6 @@
   {"key": "shift+alt+f8", "command": "-editor.action.marker.prev", "when": "editorFocus"},
   {"key": "ctrl+alt+cmd+m", "command": "editor.action.marker.prevInFiles", "when": "editorFocus"},
   {"key": "shift+f8", "command": "-editor.action.marker.prevInFiles", "when": "editorFocus"},
-  {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "shift+f4", "command": "-search.action.focusPreviousSearchResult", "when": "hasSearchResult || inSearchEditor"},
-  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "escape", "command": "-search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
-  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+r", "command": "-toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+c", "command": "-toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+w", "command": "-toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "o", "command": "search.action.openResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "ctrl+o", "command": "search.action.openResultToSide", "when": "inSearchEditor"},
-  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
-  {"key": "f4", "command": "-search.action.focusNextSearchResult", "when": "hasSearchResult || inSearchEditor"},
-  {"key": "escape", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+p", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
-  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor"},
-  {"key": "r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "shift+cmd+r", "command": "-rerunSearchEditorSearch", "when": "inSearchEditor"},
-  {"key": "-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "ctrl+n", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
-  {"key": "cmd+r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor"},
   {"key": "ctrl+cmd+m", "command": "fileutils.moveFile"},
   {"key": "n", "command": "explorer.newFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
   {"key": "shift+cmd+c", "command": "-markdown-checkbox.createCheckbox", "when": "editorTextFocus"},
