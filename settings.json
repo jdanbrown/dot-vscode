@@ -711,6 +711,11 @@
   //  - Storing in a .css that we import here introduces weird jank on save->refresh that storing css lines here in settings.json doesn't
   //  - Also, line comments in .css are a big pita (/*..*/)
   // "apc.imports": ["/Users/danb/.code/style-apc.css"],
+  // XXX In case we want to switch away from vscode-init-script, here's a start
+  // "apc.imports": [
+  //   // "/Users/danb/.code/init-apc.js",
+  //   {"type": "module", "src": "/Users/danb/.code/init-apc.js"},
+  // ],
   "apc.stylesheet": {
 
     // Fix font smoothing

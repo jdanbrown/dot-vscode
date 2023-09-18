@@ -44,7 +44,7 @@
   - Use `>Launch a tmux baked terminal tab here`
 - [x] ~~Style: tmux copy-mode visual select is missing its background color~~
 - [x] Fix: can't ctrl-h/l from a terminal tab (to switch to next/previous tab)
-- [ ] Fix: lost focus on new tab / switch to tab
+- [x] Fix: lost focus on new tab / switch to tab
 
 # Editor
 - [x] How to copy to osx clipboard

@@ -2,10 +2,9 @@
 //  - NOTE Must `cd ~/Library/Application Support/Code/User/ && npm install`
 //    - https://github.com/bodil/vscode-init-script/pull/3/files
 //    - https://www.npmjs.com/package/vscode (1.1.37) -> https://www.npmjs.com/package/@types/vscode (^1.62.0)
-
-// TODO Make a git repo for User/ files
-//  - Only {settings,keybindings}.json are synced by vscode
-//  - We're on our own to version control the rest (init.ts, package.json, ...)
+//  - NOTE If you upgrade "@types/vscode":"1.62.0" in package.json, I _think_ you have to upgrade package.json in the extension as well
+//    - When I tried upgrading our ~/.code/package.json from 1.62.0 -> 1.82.0 I got a lot of weird errors (from the extension?)
+//    - To update the extension's package.json, clone it into ~/hack/vscode/ and install it locally as a vsix (like advanced-open-file)
 
 // XXX Got stuck on node imports, gave up and switched to lodash + crypto-js
 // import "node";
@@ -16,8 +15,8 @@
 
 import * as vscode from "vscode";
 
-import * as CryptoJS from 'crypto-js';
-import * as _ from "lodash";
+// import * as CryptoJS from 'crypto-js';
+// import * as _ from "lodash";
 
 export async function init(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration();
@@ -68,6 +67,19 @@ export async function init(context: vscode.ExtensionContext) {
   //    - https://code.visualstudio.com/api/references/vscode-api#Terminal
   //    - https://code.visualstudio.com/api/references/vscode-api#TerminalOptions
 
+  // HACK Fix lost-focus bug when a terminal editor closes because the process exits (e.g. ^D in a shell)
+  //  - [2023-09-18] I can't even find a github issue about it :/ (and I haven't slowed down to file one, but I should)
+  function fixFocus(editor: any) {
+    if (!editor) return;
+    // output.appendLine(`editor: ${editor}`); // Where does this logging go?
+    // throw `STOP_01: ${editor}`; // Logging hack
+    vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+  }
+  vscode.window.onDidCloseTerminal(fixFocus);
+  // vscode.window.onDidChangeActiveTextEditor(fixFocus);
+  // vscode.window.onDidChangeActiveTerminal(fixFocus);
+  // vscode.window.onDidChangeActiveNotebookEditor(fixFocus); // TODO Requires upgrading @types/vscode in package.json (see note at top)
+
 }
 
 //
@@ -78,10 +90,10 @@ function jsonPretty(x: any): string {
   return JSON.stringify(x, null, 2);
 }
 
-function sha1HexShort(x: string, n: number = 8): string {
-  return sha1Hex(x).substr(0, n);
-}
-
-function sha1Hex(x: string): string {
-  return CryptoJS.SHA256(x).toString(CryptoJS.enc.Hex);
-}
+// function sha1HexShort(x: string, n: number = 8): string {
+//   return sha1Hex(x).substr(0, n);
+// }
+//
+// function sha1Hex(x: string): string {
+//   return CryptoJS.SHA256(x).toString(CryptoJS.enc.Hex);
+// }
