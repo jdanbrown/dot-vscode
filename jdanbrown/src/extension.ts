@@ -11,10 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
   fixLostFocusBug(context);
   registerCommandsTerminalScrollHalfPage(context);
-  attic(context);
+  _attic(context);
 }
 
-export function attic(context: vscode.ExtensionContext) {
+export function _attic(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration();
   const output = vscode.window.createOutputChannel('init.ts');
 
