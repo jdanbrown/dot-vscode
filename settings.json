@@ -414,8 +414,8 @@
     "quickInputList.focusBackground": "#404040",
 
     // Search Editor find/search highlight
-		"searchEditor.findMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
-		"searchEditor.findMatchBorder": "#0000",
+    "searchEditor.findMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
+    "searchEditor.findMatchBorder": "#0000",
 
     "selection.background": "#008000",
 
