@@ -785,50 +785,79 @@
     //    - https://github.com/microsoft/vscode/issues/82109#issuecomment-542086670
     //    - https://github.com/microsoft/vscode/issues/51132
     //    - https://github.com/microsoft/vscode/issues/59887
-    "*": "-webkit-text-stroke-width: .35px", // Closest match to "Use font smoothing when available" (System Preferences -> General)
-    // "*": "-webkit-text-stroke-width: .3px",
-    // "*": "-webkit-text-stroke-width: .25px", // Tuned to taste
-    // "*": "-webkit-text-stroke-width: .2px",
-    // "*": "-webkit-text-stroke-width: .15px",
-    // "*": "-webkit-text-stroke-width: .1px",
+    "*": {
+      "-webkit-text-stroke-width": ".35px", // Closest match to "Use font smoothing when available" (System Preferences -> General)
+      // "-webkit-text-stroke-width": ".3px",
+      // "-webkit-text-stroke-width": ".25px", // Tuned to taste
+      // "-webkit-text-stroke-width": ".2px",
+      // "-webkit-text-stroke-width": ".15px",
+      // "-webkit-text-stroke-width": ".1px",
+    },
 
     // Hide all scrollbars
-    ".scrollbar": "display: none",
+    ".scrollbar": {
+      "display": "none",
+    },
 
     // Quick input (cmd+p)
     //  - Protip: To use element inspector on these, set "workbench.quickOpen.closeOnFocusLost":false
     //  - Wider command palette (default 600px is too narrow for long paths)
-    ".monaco-workbench": "font-size: 11px",
+    ".monaco-workbench": {
+      "font-size": "11px",
+    },
     //  - Files
     //    - Reorder "file dir" -> "dir/file"
     //    - Make really wide
-    ".quick-input-widget:has(.monaco-list[aria-label*='Search files'])": "width: 1000px !important; left: calc((100% - 1000px) / 2) !important; margin-left: 0px !important",
-    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container": "display: flex",
-    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container": "order: 1; overflow-y: hidden; text-overflow: ellipsis",
-    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": "font-size: inherit !important; opacity: 1 !important",
-    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-name-container": "order: 2",
-    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": "content: '/'",
+    ".quick-input-widget:has(.monaco-list[aria-label*='Search files'])": {
+      "width": "1000px !important",
+      "left": "calc((100% - 1000px) / 2) !important",
+      "margin-left": "0px !important",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container": {
+      "display": "flex",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container": {
+      "order": "1",
+      "overflow-y": "hidden",
+      "text-overflow": "ellipsis",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": {
+      "font-size": "inherit !important",
+      "opacity": "1 !important",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-name-container": {
+      "order": "2",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": {
+      "content": "'/'",
+    },
     //  - Symbols
     //    - Move parent to the right edge for vertical alignment ("symbol parent [space]" -> "symbol [space] parent")
-    ".quick-input-widget .monaco-list[aria-label*='name of a symbol'] .monaco-icon-description-container": "float: right",
+    ".quick-input-widget .monaco-list[aria-label*='name of a symbol'] .monaco-icon-description-container": {
+      "float": "right",
+    },
 
     // [nope] Quick input: Smaller row height
     //  - XXX This doesn't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px
-    // ".quick-input-list": "line-height: 13px",
-    // ".quick-input-list .monaco-list-row": "height: 13px !important",
+    // ".quick-input-list": { "line-height": "13px" },
+    // ".quick-input-list .monaco-list-row": { "height": "13px !important" },
     //  - XXX This doesn't work because row elements are dynamically removed/added from the top/bottom as you scroll
-    // ".quick-input-widget .monaco-list-row": "position: relative; top: unset !important",
+    // ".quick-input-widget .monaco-list-row": { "position": "relative", "top": "unset !important" },
     //  - XXX This doesn't work because I can't find a way to include _more_ results in the dynamic list of rows
-    // ".quick-input-widget .monaco-list-row[data-index='0']": "top: calc(13px * 0) !important",
-    // ".quick-input-widget .monaco-list-row[data-index='1']": "top: calc(13px * 1) !important",
-    // ".quick-input-widget .monaco-list-row[data-index='2']": "top: calc(13px * 2) !important",
+    // ".quick-input-widget .monaco-list-row[data-index='0']": { "top": "calc(13px * 0) !important" },
+    // ".quick-input-widget .monaco-list-row[data-index='1']": { "top": "calc(13px * 1) !important" },
+    // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
 
     // Explorer (tree view)
-    ".monaco-workbench .codicon[class*=codicon-]": "font-size: 11px",
+    ".monaco-workbench .codicon[class*=codicon-]": {
+      "font-size": "11px",
+    },
 
     // Hide ruler (editor right margin)
     //  - https://github.com/microsoft/vscode/issues/85418
-    ".decorationsOverviewRuler": "display: none !important",
+    ".decorationsOverviewRuler": {
+      "display": "none !important",
+    },
 
     // Tabs + breadcrumbs
     //  - https://github.com/microsoft/vscode/issues/42253
@@ -839,84 +868,196 @@
     //    - https://github.com/microsoft/vscode-codicons/blob/main/src/template/mapping.json -- complete, but shows decimal values (use python hex())
 
     // Tabs: Font/height sizing
-    ".tabs-and-actions-container":                                                                                                                        "height: 17px !important; background: #404040 !important",
-    ".tabs-and-actions-container .tab":                                                                                                                   "padding-right: 10px",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                   "height: 17px !important; line-height: 17px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                            "height: 17px !important; line-height: 17px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": "height: 15px !important",
-    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                   "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container":                                                         "height: 17px !important; line-height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab":                                                  "height: 17px !important; line-height: 17px !important; padding: 0 7px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before":                       "height: 15px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions":                                                         "height: 17px !important; line-height: 17px !important; outline: 0px !important; padding: 0px !important",
-    ".tab .tab-label":                                                                                                                                    "line-height: 17px !important; font-family: Consolas",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit":                                       "width: inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a":                                     "font-size: 12px !important", // [Redundant with apc.header.fontSize -- safe to delete?]
-    ".monaco-action-bar .action-label":                                                                                                                   "margin-right: 0px !important",
+    ".tabs-and-actions-container": {
+      "height": "17px !important",
+      "background": "#404040 !important",
+    },
+    ".tabs-and-actions-container .tab": {
+      "padding-right": "10px",
+    },
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+    },
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+    },
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": {
+      "height": "15px !important",
+    },
+    "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+      "padding": "0 7px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .monaco-icon-label::before": {
+      "height": "15px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .editor-actions": {
+      "height": "17px !important",
+      "line-height": "17px !important",
+      "outline": "0px !important",
+      "padding": "0px !important",
+    },
+    ".tab .tab-label": {
+      "line-height": "17px !important",
+      "font-family": "Consolas",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit": {
+      "width": "inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a": {
+      "font-size": "12px !important", // [Redundant with apc.header.fontSize -- safe to delete?]
+    },
+    ".monaco-action-bar .action-label": {
+      "margin-right": "0px !important",
+    },
 
     // Tabs: Icons
-    ".tabs-and-actions-container .tab.dirty .tab-label::after": "content: '\\ea71'; font-family: codicon; padding-right: 0px; display: block !important", // Add circle on dirty/unsaved editors
-    ".tabs-and-actions-container .codicon":                     "font-size: 13px !important; width: inherit !important; padding: 0px !important; color: #a6a6a6 !important",
-    ".tabs-and-actions-container .codicon:hover":               "color: #fff !important",
-    ".tabs-and-actions-container .action-item":                 "height: 17px !important; margin: 0px !important; padding: 0px 4px !important; text-align: center !important",
-    ".tabs-and-actions-container .action-item:hover":           "background: #666 !important",
+    ".tabs-and-actions-container .tab.dirty .tab-label::after": {
+      "content": "'\\ea71'",
+      "font-family": "codicon",
+      "padding-right": "0px",
+      "display": "block !important", // Add circle on dirty/unsaved editors
+    },
+    ".tabs-and-actions-container .codicon": {
+      "font-size": "13px !important",
+      "width": "inherit !important",
+      "padding": "0px !important",
+      "color": "#a6a6a6 !important",
+    },
+    ".tabs-and-actions-container .codicon:hover": {
+      "color": "#fff !important",
+    },
+    ".tabs-and-actions-container .action-item": {
+      "height": "17px !important",
+      "margin": "0px !important",
+      "padding": "0px 4px !important",
+      "text-align": "center !important",
+    },
+    ".tabs-and-actions-container .action-item:hover": {
+      "background": "#666 !important",
+    },
 
     // Tabs: Hide decorations before/after
     //  - Before: Tab icons (e.g. terminal tabs have one)
     //  - After: Tab actions (e.g. X to close, git M/A/U decorations)
-    ".tabs-and-actions-container .tab .tab-label::before":      "display: none",
-    ".tabs-and-actions-container .tab .tab-actions":            "display: none",
+    ".tabs-and-actions-container .tab .tab-label::before": {
+      "display": "none",
+    },
+    ".tabs-and-actions-container .tab .tab-actions": {
+      "display": "none",
+    },
 
     // Tabs: Disable git font color
     //  - But leave git font color enabled for Explorer view
     //  - See also: `workbench.colorCustomizations` in https://code.visualstudio.com/api/references/theme-color#git-colors
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title.tabs .monaco-icon-label::after": "display: none",
-    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemColor-]":        "color: inherit",
-    ".tabs-and-actions-container .tab *[class*=monaco-decoration-iconBadge-]":        "color: inherit",
-    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]":        "color: inherit",
-    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]::after": "color: inherit",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title.tabs .monaco-icon-label::after": {
+      "display": "none",
+    },
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemColor-]": {
+      "color": "inherit",
+    },
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-iconBadge-]": {
+      "color": "inherit",
+    },
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]": {
+      "color": "inherit",
+    },
+    ".tabs-and-actions-container .tab *[class*=monaco-decoration-itemBadge-]::after": {
+      "color": "inherit",
+    },
 
     // Breadcrumbs
-    ".monaco-breadcrumbs":                                                                                                                  "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control":                    "height: 17px !important",
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label": "line-height: 15px !important; height: 17px !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name":                                                                                "font-size: 11px !important; font-family: Consolas !important",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before":                                        "content: '/'",
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after":                                                      "content: '/'",
-    ".tabs-breadcrumbs .codicon-breadcrumb-separator":                                                                                      "display: none; font-size: 11px !important",
+    ".monaco-breadcrumbs": {
+      "height": "17px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control": {
+      "height": "17px !important",
+    },
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label": {
+      "line-height": "15px !important",
+      "height": "17px !important",
+    },
+    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name": {
+      "font-size": "11px !important",
+      "font-family": "Consolas !important",
+    },
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before": {
+      "content": "'/'",
+    },
+    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after": {
+      "content": "'/'",
+    },
+    ".tabs-breadcrumbs .codicon-breadcrumb-separator": {
+      "display": "none",
+      "font-size": "11px !important",
+    },
 
     // Status bar
-    ".statusbar .statusbar-item .codicon": "font-size: 13px !important",
+    ".statusbar .statusbar-item .codicon": {
+      "font-size": "13px !important",
+    },
 
     // Editor
     //  - Hack for missing color variable "editor.inactiveSelectionHighlightBackground" (see above: "Editor selection highlight")
-    ".monaco-editor .selectionHighlight": "background-color: var(--vscode-editor-selectionHighlightBackground)",
+    ".monaco-editor .selectionHighlight": {
+      "background-color": "var(--vscode-editor-selectionHighlightBackground)",
+    },
 
     // Terminals
     //  - HACK Tune bottom offset to 6px to compensate for fixing the gap above (apc.header.height)
     //    - 5px = run `cat` to put the block cursor in the bottom-left, then zoom in and to visually match pixels to the left/down
     //    - 1px = adjust to taste
     //    - Total: 6px
-    ".monaco-workbench .terminal-editor .xterm": "bottom: 6px",
+    ".monaco-workbench .terminal-editor .xterm": {
+      "bottom": "6px",
+    },
     //  - Hide gutter
-    ".integrated-terminal.shell-integration .xterm, .monaco-workbench .pane-body.integrated-terminal .terminal-group .monaco-split-view2.horizontal .split-view-view:first-child .xterm, .monaco-workbench .terminal-editor .xterm":
-      "padding-left: 3px !important",
-    ".monaco-workbench .xterm": "padding-right: 3px",
+    ".integrated-terminal.shell-integration .xterm, .monaco-workbench .pane-body.integrated-terminal .terminal-group .monaco-split-view2.horizontal .split-view-view:first-child .xterm, .monaco-workbench .terminal-editor .xterm": {
+      "padding-left": "3px !important",
+    },
+    ".monaco-workbench .xterm": {
+      "padding-right": "3px",
+    },
     //  - Hide ruler
-    ".xterm-decoration-overview-ruler": "display: none !important",
+    ".xterm-decoration-overview-ruler": {
+      "display": "none !important",
+    },
     //  - Hide scrollbar
     //    - https://stackoverflow.com/a/38994837/397334
-    ".xterm-viewport::-webkit-scrollbar": "display: none",
+    ".xterm-viewport::-webkit-scrollbar": {
+      "display": "none",
+    },
     //  - TODO Remove the focusAccessibleBuffer padding-left:10px to align with terminal padding
-    //    - [Started at 2am, quit before figuring it out -- probalby not hard!]
-    // ".monaco-workbench .terminal-accessible-widget": "padding-left: 0px",
-    // ".monaco-workbench .terminal-accessible-widget .margin": "display: none",
+    //    - [Started at 2am, quit before figuring it out -- probably not hard!]
+    // ".monaco-workbench .terminal-accessible-widget": {
+    //   "padding-left": "0px",
+    // },
+    // ".monaco-workbench .terminal-accessible-widget .margin": {
+    //   "display": "none",
+    // },
 
     // Terminals: Change icons from 'terminal-bash' -> 'terminal'
     //  - This affects terminal tabs (display:none above) + quick input list (cmd+p, Go To File)
-    ".monaco-workbench .tab .terminal-tab.codicon-terminal-bash::before":              "content: '\\ea85' !important; font-family: 'codicon' !important",
-    ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "content: '\\ea85' !important; font-family: 'codicon' !important",
-    // ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": "display: none", // To disable
+    ".monaco-workbench .tab .terminal-tab.codicon-terminal-bash::before": {
+      "content": "'\\ea85' !important",
+      "font-family": "'codicon' !important",
+    },
+    ".monaco-workbench .quick-input-list .terminal-tab.codicon-terminal-bash::before": {
+      "content": "'\\ea85' !important",
+      "font-family": "'codicon' !important",
+      // "display": "none", // Or hide them, which is confusing in cmd+p (with no input) when terminals and paths are all displayed together
+    },
 
     // Add border on focused editor/terminal
     //  - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
@@ -926,29 +1067,39 @@
     //    outlined when focus switches to Explorer/etc.
     //  - NOTE z-index arms race because various things keep appearing with higher z-indexes 🤷
     //  - Top
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after":
-      "background-color:#fff !important",
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after": {
+      "background-color": "#fff !important",
+    },
     //  - Bottom
     //    - z-index:21 to override notebook cells
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after":
-      "background-color:#fff; width:100%; height:1px; z-index:21; bottom:0; right:0; position:absolute; content:' '; pointer-events:none",
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after": {
+      "background-color":"#fff", "width":"100%", "height":"1px", "z-index":"21", "bottom":"0", "right":"0", "position":"absolute", "content":"' '", "pointer-events":"none",
+    },
     //  - Left
     //    - z-index:1 to override .tabs borders
     //    - z-index:10 to override some weird thing with nested alternating .split-view-view's 🤷
-    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before":
-      "background-color:#fff !important; height:100% !important; width:1px !important; z-index:10 !important; top:0 !important; left:0 !important; position:absolute; content:' '; pointer-events:none",
+    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before": {
+      "background-color":"#fff !important", "height":"100% !important", "width":"1px !important", "z-index":"10 !important", "top":"0 !important", "left":"0 !important", "position":"absolute", "content":"' '", "pointer-events":"none",
+    },
     //  - Right
-    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after":
-      "background-color:#fff !important; height:100% !important; width:1px !important; z-index:10 !important; top:0 !important; right:0 !important; position:absolute; content:' '; pointer-events:none",
+    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after": {
+      "background-color":"#fff !important", "height":"100% !important", "width":"1px !important", "z-index":"10 !important", "top":"0 !important", "right":"0 !important", "position":"absolute", "content":"' '", "pointer-events":"none",
+    },
     //  - Fix up z-index overlaps with left/right
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container":
-      "z-index:11",
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after":
-      "z-index:0 !important",
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container": {
+      "z-index": "11",
+    },
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": {
+      "z-index": "0 !important",
+    },
 
     // Disable underlines for detected links
-    ".monaco-editor .detected-link":        "text-decoration: inherit",
-    ".monaco-editor .detected-link-active": "text-decoration: inherit",
+    ".monaco-editor .detected-link": {
+      "text-decoration": "inherit",
+    },
+    ".monaco-editor .detected-link-active": {
+      "text-decoration": "inherit",
+    },
 
   },
 
