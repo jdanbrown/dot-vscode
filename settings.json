@@ -16,6 +16,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.reduceMotion": "on", // Disable animations
   "workbench.editor.focusRecentEditorAfterClose": false, // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
+  "files.refactoring.autoSave": false,
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
