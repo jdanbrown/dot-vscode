@@ -171,10 +171,11 @@
     // "editor.formatOnType": true,
     // Draw a guide line at 80 characters, where Dart's formatting will wrap code.
     // "editor.rulers": [80],
-    // Disables built-in highlighting of words that match your selection. Without
-    // this, all instances of the selected text will be highlighted, interfering
-    // with Dart's ability to highlight only exact references to the selected variable.
-    "editor.selectionHighlight": false,
+    // XXX Nope, I want "editor.selectionHighlight"!
+    // // Disables built-in highlighting of words that match your selection. Without
+    // // this, all instances of the selected text will be highlighted, interfering
+    // // with Dart's ability to highlight only exact references to the selected variable.
+    // "editor.selectionHighlight": false,
     // By default, VS Code prevents code completion from popping open when in
     // "snippet mode" (editing placeholders in inserted code). Setting this option
     // to `false` stops that and allows completion to open as normal, as if you
@@ -374,6 +375,14 @@
     "editor.findMatchHighlightBorder": "#0000", // All other matches
 
     "editorGutter.background": "#000",
+
+    // Editor selection + selection highlight (other text that matches selection)
+    "editor.selectionBackground": "#fff", // Selected text
+    "editor.inactiveSelectionBackground": "#fff", // (Default: Adds transparency on lost focus -- don't want)
+    "editor.selectionHighlightBackground": "#fff8", // All other text that matches selected text
+    "editor.selectionHighlightBorder": "#0000",
+    //  - No variable for this one, set below in css (".monaco-editor .selectionHighlight")
+    // "editor.inactiveSelectionHighlightBackground": "#fff8", // (Default: Adds transparency on lost focus -- don't want)
 
     // Accent/highlight color in a _lot_ of places
     //  - e.g. autocomplete fuzzy text matching -- need a color muted enough so it doesn't burn your eyes here (99% case, always typing)
@@ -875,6 +884,10 @@
 
     // Status bar
     ".statusbar .statusbar-item .codicon": "font-size: 13px !important",
+
+    // Editor
+    //  - Hack for missing color variable "editor.inactiveSelectionHighlightBackground" (see above: "Editor selection highlight")
+    ".monaco-editor .selectionHighlight": "background-color: var(--vscode-editor-selectionHighlightBackground)",
 
     // Terminals
     //  - HACK Tune bottom offset to 6px to compensate for fixing the gap above (apc.header.height)
