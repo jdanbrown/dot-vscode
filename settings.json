@@ -783,14 +783,33 @@
     // Hide all scrollbars
     ".scrollbar": "display: none",
 
-    // Quick input (cmd-p)
-    //  - Challenge: You can't use element inspector on these! (the quick-input popup disappears)
-    //    - To see the dom/css, manually find .quick-input-widget / .quick-input-list (e.g. scroll through the element inspector)
-    //    - Better solution! Temporarily set "workbench.quickOpen.closeOnFocusLost":false
+    // Quick input (cmd+p)
+    //  - Protip: To use element inspector on these, set "workbench.quickOpen.closeOnFocusLost":false
+    //  - Wider command palette (default 600px is too narrow for long paths)
     ".monaco-workbench": "font-size: 11px",
-    // XXX Nope, these two don't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px :/
+    //  - Files
+    //    - Reorder "file dir" -> "dir/file"
+    //    - Make really wide
+    ".quick-input-widget:has(.monaco-list[aria-label*='Search files'])": "width: 1000px !important; left: calc((100% - 1000px) / 2) !important; margin-left: 0px !important",
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container": "display: flex",
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container": "order: 1; overflow-y: hidden; text-overflow: ellipsis",
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": "font-size: inherit !important; opacity: 1 !important",
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-name-container": "order: 2",
+    ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": "content: '/'",
+    //  - Symbols
+    //    - Move parent to the right edge for vertical alignment ("symbol parent [space]" -> "symbol [space] parent")
+    ".quick-input-widget .monaco-list[aria-label*='name of a symbol'] .monaco-icon-description-container": "float: right",
+
+    // [nope] Quick input: Smaller row height
+    //  - XXX This doesn't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px
     // ".quick-input-list": "line-height: 13px",
     // ".quick-input-list .monaco-list-row": "height: 13px !important",
+    //  - XXX This doesn't work because row elements are dynamically removed/added from the top/bottom as you scroll
+    // ".quick-input-widget .monaco-list-row": "position: relative; top: unset !important",
+    //  - XXX This doesn't work because I can't find a way to include _more_ results in the dynamic list of rows
+    // ".quick-input-widget .monaco-list-row[data-index='0']": "top: calc(13px * 0) !important",
+    // ".quick-input-widget .monaco-list-row[data-index='1']": "top: calc(13px * 1) !important",
+    // ".quick-input-widget .monaco-list-row[data-index='2']": "top: calc(13px * 2) !important",
 
     // Explorer (tree view)
     ".monaco-workbench .codicon[class*=codicon-]": "font-size: 11px",
