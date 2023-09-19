@@ -1059,7 +1059,7 @@
       // "display": "none", // Or hide them, which is confusing in cmd+p (with no input) when terminals and paths are all displayed together
     },
 
-    // Add border on focused editor/terminal
+    // Add border on focused editor/terminal pane
     //  - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
     //    sidebar) doesn't de-.active the .editor-group-container
     //  - NOTE .notebook-editor (and other iframe views) doesn't make a :focus (because iframe), and doesn't expose its
