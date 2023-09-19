@@ -117,6 +117,9 @@
   {"key": "shift+cmd+.", "command": "-editor.action.inPlaceReplace.down", "when": "editorTextFocus && !editorReadonly"},
   {"key": "shift+cmd+.", "command": "-breadcrumbs.toggleToOn", "when": "!config.breadcrumbs.enabled"},
   {"key": "shift+cmd+.", "command": "-editor.action.accessibleViewGoToSymbol", "when": "accessibilityHelpIsShown && accessibleViewGoToSymbolSupported || accessibleViewGoToSymbolSupported && accessibleViewIsShown"},
+  // {"key": "cmd+d", "command": "editor.action.addSelectionToNextFindMatch", "when": "editorFocus"}, // Default
+  {"key": "alt+cmd+d", "command": "editor.action.moveSelectionToNextFindMatch", "when": "editorFocus"},
+  // {"key": "shift+cmd+l", "command": "editor.action.selectHighlights", "when": "editorFocus"}, // Default
   {"key": "ctrl+cmd+g", "command": "jdanbrown.editor.toggleGutter"},
 
   // Move lines up/down
