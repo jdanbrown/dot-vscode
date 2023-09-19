@@ -139,6 +139,19 @@
   //      - insert-unicode has better usability (recents, favorites, etc.)
   "emojisense.languages": {"*": true},
 
+  // Highlight
+  //  - https://github.com/fabiospampinato/vscode-highlight
+  "highlight.regexFlags": "g", // Default: "gi"
+  "highlight.regexes": {
+    "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b": {
+      "decorations": [{"color": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
+    },
+    "(\\t)": {
+      "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
+      "filterFileRegex": ".*(?<!Makefile|.go)$",
+    },
+  },
+
   // Filetypes
   "[markdown]": {
     "editor.quickSuggestions": {
@@ -1142,11 +1155,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "todohighlight.keywordsPattern": "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b",
-  "todohighlight.defaultStyle": {
-    "color": "#ff6e67", // Same as "terminal.ansiBrightRed" (above)
-    "backgroundColor": "inherit"
-  },
   "search.smartCase": true,
   "debug.console.fontSize": 10,
   "jupyter.collapseCellInputCodeByDefault": false,
