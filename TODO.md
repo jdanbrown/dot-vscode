@@ -60,9 +60,9 @@
   - [x] Hide/shrink gutter
     - [ ] Add key to toggle back on because probably sometimes very useful
 - Filetypes
-  - *
+  - `*`
     - [x] Don't underline links in editor
-  - *.md
+  - `*.md`
     - [x] Highlight `...` code expressions
 
 # Keybindings

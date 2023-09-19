@@ -1100,6 +1100,22 @@
     ".monaco-editor .detected-link-active": {
       "text-decoration": "inherit",
     },
+  },
+  "apc.iframe.style": {
+
+    // Override default WebView/iframe styles
+    //  - Code: https://github.com/microsoft/vscode/blob/main/extensions/markdown-language-features/media/markdown.css
+    ".vscode-high-contrast.showEditorSelection .code-active-line:before": {
+      "border-left-color": "#4f97d7b3 !important",
+    },
+    ".vscode-high-contrast.showEditorSelection .code-line:hover:before": {
+      "border-left-color": "#4f97d7 !important",
+    },
+
+    // Markdown Preview
+    ".markdown-body ul": {
+      "padding-inline-start": "32px",
+    },
 
   },
 
@@ -1169,6 +1185,9 @@
   "markdown-checkbox.showStatusBarItem": false,
   "markdown-checkbox.strikeThroughWhenChecked": false,
   "markdown-checkbox.typeOfBulletPoint": "-",
+  "markdown.preview.lineHeight": 1.5,
+  "markdown.extension.list.indentationSize": "inherit",
+  "markdown.extension.theming.decoration.renderCodeSpan": false,
   "scm.diffDecorationsGutterVisibility": "hover",
   "editor.wordBasedSuggestionsMode": "allDocuments",
   "explorer.openEditors.visible": 50,
