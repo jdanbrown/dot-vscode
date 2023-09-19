@@ -11,6 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
   fixLostFocusBug(context);
   registerCommandsTerminalScrollHalfPage(context);
+  registerCommandsToggleGutter(context);
   _attic(context);
 }
 
@@ -124,6 +125,32 @@ export function registerCommandsTerminalScrollHalfPage(context: vscode.Extension
     vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', () => terminalScrollHalfPage('up')),
     vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', () => terminalScrollHalfPage('down')),
   );
+
+}
+
+export function registerCommandsToggleGutter(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsToggleGutter');
+
+  // Toggle gutter visibility
+  //  - Useful e.g. for showing debug breakpoint decorations
+  //  - Here we only toggle glyphMargin because that's the only one we ever care about
+  //    - https://code.visualstudio.com/docs/getstarted/settings
+  //        // Controls whether the editor should render the vertical glyph margin. Glyph margin is mostly used for debugging.
+  //        "editor.glyphMargin": true,
+  //  - What are all the parts of the gutter?
+  //    - https://github.com/microsoft/vscode/issues/30795#issuecomment-410998882
+  //        "editor.glyphMargin": false,
+  //        "editor.folding": false,
+  //        "editor.lineNumbers": "off",
+  //        "workbench.activityBar.visible": false
+  //        "editor.lineDecorationsWidth": 0, // undocumented
+  //        "editor.lineNumbersMinChars": 0,  // undocumented
+  //  - Example code for how to use Configuration
+  //    - https://github.com/microsoft/vscode-extension-samples/blob/main/configuration-sample/src/extension.ts
+  vscode.commands.registerCommand('jdanbrown.editor.toggleGutter', async () => {
+    const config = vscode.workspace.getConfiguration();
+    await config.update('editor.glyphMargin', !config.get<boolean>('editor.glyphMargin'), vscode.ConfigurationTarget.Workspace);
+  });
 
 }
 

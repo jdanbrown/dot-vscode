@@ -117,6 +117,7 @@
   {"key": "shift+cmd+.", "command": "-editor.action.inPlaceReplace.down", "when": "editorTextFocus && !editorReadonly"},
   {"key": "shift+cmd+.", "command": "-breadcrumbs.toggleToOn", "when": "!config.breadcrumbs.enabled"},
   {"key": "shift+cmd+.", "command": "-editor.action.accessibleViewGoToSymbol", "when": "accessibilityHelpIsShown && accessibleViewGoToSymbolSupported || accessibleViewGoToSymbolSupported && accessibleViewIsShown"},
+  {"key": "ctrl+cmd+g", "command": "jdanbrown.editor.toggleGutter"},
 
   // Move lines up/down
   //  - TODO(practice)
