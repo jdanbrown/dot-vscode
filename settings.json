@@ -233,6 +233,7 @@
   "vim.showmodename": false,
   "vim.textwidth": 120,
   "vim.visualstar": true,
+  "vim.joinspaces": false,
   // ReplaceWithRegister
   //  - https://github.com/VSCodeVim/Vim#replacewithregister
   //  - yank -> gr<motion> to paste
