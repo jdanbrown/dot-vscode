@@ -506,6 +506,12 @@
     "terminal.findMatchHighlightBackground": "#ff0d", // All other matches (like "vim.searchHighlightColor")
     "terminal.findMatchHighlightBorder": "#0000", // All other matches
 
+    // Links
+    "editorLink.activeForeground": "#4f97d7", // Default: #00ffff
+    "notificationLink.foreground": "#4f97d7", // Default: #3794ff
+    "textLink.foreground": "#4f97d7", // Default: #3794ff
+    "textLink.activeForeground": "#4f97d7", // Default: #3794ff
+
   },
 
   // Custom syntax colors
