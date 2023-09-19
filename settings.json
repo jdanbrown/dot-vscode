@@ -737,7 +737,9 @@
   "apc.header": {
     // HACK Tune height to 13px to avoid a gap at the bottom of editors/terminals/notebooks
     //  - This is caused by (and coupled with) our tabs css sizing below
-    "height": 13,
+    "height": 13, // If "workbench.editor.tabHeight" not specified
+    "normal": 13, // If "workbench.editor.tabHeight": "normal"
+    "compact": 13, // If "workbench.editor.tabHeight":" compact"
     "fontSize": 12,
   },
   // Status bar
