@@ -131,6 +131,18 @@
     "~/hack"
   ],
 
+  // Symbols
+  "outline.showArrays": false,
+  "outline.showBooleans": false,
+  "outline.showConstants": false,
+  "outline.showEnumMembers": false,
+  "outline.showFields": false,
+  "outline.showNull": false,
+  "outline.showNumbers": false,
+  "outline.showProperties": false,
+  "outline.showStrings": false,
+  "outline.showVariables": false,
+
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
   //  - https://github.com/mattbierner/vscode-emojisense -- cmd+i
