@@ -1,0 +1,3 @@
+#!/bin/bash -eux
+
+exec jdanbrown/bin/install-local
