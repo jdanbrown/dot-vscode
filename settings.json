@@ -177,10 +177,10 @@
   "colorize.include": [
     // The Color Theme guide says that *-color-theme.json files get colors by default, but I don't see any
     //  - https://code.visualstudio.com/api/extension-guides/color-theme
-    "**/*-color-theme.json",
+    // "**/*-color-theme.json",
     // Enable my old atom syntax style files until I'm done migrating from them
-    "**/atom-jdanbrown-syntax/styles/*.less",
-    // Toggle this when editing colors in this file (don't leave on all the time else it's very slow)
+    // "**/atom-jdanbrown-syntax/styles/*.less",
+    // Toggle this when editing colors in this file (don't leave on all the time else it's insanely slow)
     // "**/settings.json",
   ],
 
@@ -457,7 +457,7 @@
     //  - TODO "list.activeSelectionForeground": How to keep git decoration color instead of changing to white?
     //  - TODO "list.activeSelectionBackground": How to change to "list.focusBackground" when they overlap?
     "list.activeSelectionBackground": "#404040",
-    "list.inactiveFocusBackground": null,
+    "list.inactiveFocusBackground": "#0000",
     "list.inactiveSelectionBackground": "#404040",
     "list.focusBackground": "#666",
     "list.hoverBackground": "#666",
@@ -550,8 +550,8 @@
   //  - TODO Flesh this out using a color theme: https://code.visualstudio.com/api/extension-guides/color-theme#create-a-new-color-theme
   //      - Currently we don't have full coverage of textmate syntax categories
   //  - https://code.visualstudio.com/api/extension-guides/color-theme
-  //  - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#scope-inspector
-  //  - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide#theming
+  //  - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
+  //  - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
   //  - https://code.visualstudio.com/api/references/theme-color
   //  - Keys:
   //    - https://stackoverflow.com/a/45637405
@@ -559,6 +559,10 @@
   "editor.tokenColorCustomizations": {
     // Generated from: "Developer: Generate Color Theme From Current Settings"
 
+    // Reference for schema (w/ all scope names)
+    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/color-theme.json
+    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/textmate-colors.json
+    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/token-styling.json
     // TODO Match atom style
     "textMateRules": [
       {"scope": ["meta.embedded", "source.groovy.embedded"], "settings": {"foreground": "#FFFFFF"}},
@@ -767,6 +771,9 @@
       {"scope": "token.debug-token", "settings": {"foreground": "#B267E6"}}
     ]
 
+  },
+  "editor.semanticTokenColorCustomizations": {
+    // TODO
   },
 
   // Tabs + breadcrumbs
