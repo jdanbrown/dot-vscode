@@ -164,6 +164,26 @@
     },
   },
 
+  // Colorize
+  //  - https://github.com/kamikillerto/vscode-colorize
+  //  - Enable selectively, else editors with color highlights will become veeery slow at basic scrolling/typing
+  //  - No, definitely don't crawl all files: https://github.com/KamiKillertO/vscode-colorize/issues/174
+  "colorize.enable_search_variables": false,
+  //  - Don't hide colors on active line (doesn't make typing any faster, unfortunately)
+  "colorize.hide_current_line_decorations": false,
+  //  - Don't enable for any language by default (use selective file includes instead)
+  "colorize.languages": [],
+  //  - Only enable very selectively for these files
+  "colorize.include": [
+    // The Color Theme guide says that *-color-theme.json files get colors by default, but I don't see any
+    //  - https://code.visualstudio.com/api/extension-guides/color-theme
+    "**/*-color-theme.json",
+    // Enable my old atom syntax style files until I'm done migrating from them
+    "**/atom-jdanbrown-syntax/styles/*.less",
+    // Toggle this when editing colors in this file (don't leave on all the time else it's very slow)
+    // "**/settings.json",
+  ],
+
   // Filetypes
   "[markdown]": {
     "editor.quickSuggestions": {
