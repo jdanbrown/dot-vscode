@@ -156,7 +156,7 @@
   "highlight.regexFlags": "g", // Default: "gi"
   "highlight.regexes": {
     "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b": {
-      "decorations": [{"color": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
+      "decorations": [{"color": "#ff6e67", "fontWeight": "bold"}], // Same as "terminal.ansiBrightRed" (above)
     },
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
@@ -402,6 +402,15 @@
   //    - https://glitchbone.github.io/vscode-base16-term/#/summerfruit-dark
   //    - https://glitchbone.github.io/vscode-base16-term/#/google-dark
   //    - https://glitchbone.github.io/vscode-base16-term/#/spacemacs
+  //  - My classic colors
+  //    - #777777 -black
+  //    - #6871ff -blue
+  //    - #60fdff -cyan
+  //    - #5ffa68 -green
+  //    - #ff77ff -magenta
+  //    - #ff6e67 -red
+  //    - #ffffff -white
+  //    - #fffc67 -yellow
   "workbench.colorCustomizations": {
 
     "bookmarks.overviewRuler": "#0000", // Disable
@@ -509,12 +518,20 @@
     "tab.unfocusedInactiveModifiedBorder": "#0000",
 
     // Terminal
-    //  - Copied my classic colors from iTerm2
     //  - https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
     //  - https://glitchbone.github.io/vscode-base16-term
+    //  - My classic colors
+    //    - #777777 -black
+    //    - #6871ff -blue
+    //    - #60fdff -cyan
+    //    - #5ffa68 -green
+    //    - #ff77ff -magenta
+    //    - #ff6e67 -red
+    //    - #ffffff -white
+    //    - #fffc67 -yellow
     "terminal.background": "#000000",
     "terminal.foreground": "#ffffff",
-    "terminal.ansiBrightBlack": "#686868",
+    "terminal.ansiBrightBlack": "#777777",
     "terminal.ansiBrightBlue": "#6871ff",
     "terminal.ansiBrightCyan": "#60fdff",
     "terminal.ansiBrightGreen": "#5ffa68",
@@ -522,7 +539,7 @@
     "terminal.ansiBrightRed": "#ff6e67",
     "terminal.ansiBrightWhite": "#ffffff",
     "terminal.ansiBrightYellow": "#fffc67",
-    "terminal.ansiBlack": "#686868",
+    "terminal.ansiBlack": "#777777",
     "terminal.ansiBlue": "#6871ff",
     "terminal.ansiCyan": "#60fdff",
     "terminal.ansiGreen": "#5ffa68",
@@ -547,233 +564,218 @@
   },
 
   // Custom syntax colors
-  //  - TODO Flesh this out using a color theme: https://code.visualstudio.com/api/extension-guides/color-theme#create-a-new-color-theme
-  //      - Currently we don't have full coverage of textmate syntax categories
-  //  - https://code.visualstudio.com/api/extension-guides/color-theme
-  //  - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
-  //  - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
-  //  - https://code.visualstudio.com/api/references/theme-color
-  //  - Keys:
-  //    - https://stackoverflow.com/a/45637405
-  //    - https://github.com/Microsoft/vscode/pull/29393/files
-  "editor.tokenColorCustomizations": {
-    // Generated from: "Developer: Generate Color Theme From Current Settings"
-
-    // Reference for schema (w/ all scope names)
-    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/color-theme.json
-    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/textmate-colors.json
-    //  - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.47.3/schemas/token-styling.json
-    // TODO Match atom style
-    "textMateRules": [
-      {"scope": ["meta.embedded", "source.groovy.embedded"], "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "emphasis", "settings": {"fontStyle": "italic"}},
-      {"scope": "strong", "settings": {"fontStyle": "bold"}},
-      {"scope": "meta.diff.header", "settings": {"foreground": "#000080"}},
-      {"scope": "constant.language", "settings": {"foreground": "#FF77FF"}},
-      {
-        "scope": [
-          "constant.numeric",
-          "constant.other.color.rgb-value",
-          "constant.other.rgb-value",
-          "support.constant.color"
-        ],
-        "settings": {"foreground": "#B5CEA8"}
-      },
-      {"scope": "constant.regexp", "settings": {"foreground": "#B46695"}},
-      {"scope": "constant.character", "settings": {"foreground": "#FF77FF"}},
-      {"scope": "entity.name.tag", "settings": {"foreground": "#569CD6"}},
-      {"scope": "entity.name.tag.css", "settings": {"foreground": "#D7BA7D"}},
-      {"scope": "entity.other.attribute-name", "settings": {"foreground": "#9CDCFE"}},
-      {
-        "scope": [
-          "entity.other.attribute-name.class.css",
-          "entity.other.attribute-name.class.mixin.css",
-          "entity.other.attribute-name.id.css",
-          "entity.other.attribute-name.parent-selector.css",
-          "entity.other.attribute-name.pseudo-class.css",
-          "entity.other.attribute-name.pseudo-element.css",
-          "source.css.less entity.other.attribute-name.id",
-          "entity.other.attribute-name.scss"
-        ],
-        "settings": {"foreground": "#D7BA7D"}
-      },
-      {"scope": "invalid", "settings": {"foreground": "#F44747"}},
-      {"scope": "markup.underline", "settings": {"fontStyle": "underline"}},
-      {"scope": "markup.bold", "settings": {"fontStyle": "bold"}},
-      {"scope": "markup.heading", "settings": {"foreground": "#5FFA68"}},
-      {"scope": "markup.italic", "settings": {"fontStyle": "italic"}},
-      {"scope": "markup.inserted", "settings": {"foreground": "#B5CEA8"}},
-      {"scope": "markup.deleted", "settings": {"foreground": "#CE9178"}},
-      {"scope": "markup.changed", "settings": {"foreground": "#569CD6"}},
-      {"scope": "markup.inline.raw.string.markdown", "settings": {"foreground": "#FF77FF"}},
-      {"scope": "punctuation.definition.list.begin.markdown", "settings": {"foreground": "#FF77FF"}},
-      {
-        "scope": [
-          // FIXME This highlights markdown `[x]` but not `[ ]` (and it incorrectly highlights `[foo]`)
-          // "punctuation.definition.string.begin.markdown",
-          // "punctuation.definition.string.end.markdown",
-        ],
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {"scope": ["punctuation.definition.tag"], "settings": {"foreground": "#808080"}},
-      {"scope": "meta.preprocessor", "settings": {"foreground": "#569CD6"}},
-      {"scope": "meta.preprocessor.string", "settings": {"foreground": "#CE9178"}},
-      {"scope": "meta.preprocessor.numeric", "settings": {"foreground": "#B5CEA8"}},
-      {"scope": "meta.structure.dictionary.key.python", "settings": {"foreground": "#9CDCFE"}},
-      {"scope": "storage", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "storage.type", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "storage.modifier", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "string", "settings": {"foreground": "#CE9178"}},
-      {"scope": "string.tag", "settings": {"foreground": "#CE9178"}},
-      {"scope": "string.value", "settings": {"foreground": "#CE9178"}},
-      {"scope": "string.regexp", "settings": {"foreground": "#D16969"}},
-      {
-        "scope": [
-          "punctuation.definition.template-expression.begin",
-          "punctuation.definition.template-expression.end",
-          "punctuation.section.embedded"
-        ],
-        "settings": {"foreground": "#FF77FF"}
-      },
-      {"scope": ["meta.template.expression"], "settings": {"foreground": "#FFFFFF"}},
-      {
-        "scope": [
-          "support.type.vendored.property-name",
-          "support.type.property-name",
-          "variable.css",
-          "variable.scss",
-          "variable.other.less",
-          "source.coffee.embedded"
-        ],
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {"scope": "keyword", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "keyword.control", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "keyword.operator", "settings": {"foreground": "#FFFFFF"}},
-      {
-        "scope": [
-          "keyword.operator.new",
-          "keyword.operator.expression",
-          "keyword.operator.cast",
-          "keyword.operator.sizeof",
-          "keyword.operator.logical.python",
-          "keyword.operator.type"
-        ],
-        "settings": {"foreground": "#FFFC67"}
-      },
-      {"scope": "keyword.other.unit", "settings": {"foreground": "#B5CEA8"}},
-      {"scope": "support.function.git-rebase", "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "constant.sha.git-rebase", "settings": {"foreground": "#B5CEA8"}},
-      {
-        "scope": [
-          "storage.modifier.import.java",
-          "variable.language.wildcard.java",
-          "storage.modifier.package.java"
-        ],
-        "settings": {"foreground": "#FFFFFF"}
-      },
-      {"scope": "variable.language.this", "settings": {"foreground": "#FFFC67"}},
-      {
-        "scope": [
-          "entity.name.function",
-          "support.function",
-          "support.constant.handlebars",
-          "source.powershell variable.other.member"
-        ],
-        "settings": {"foreground": "#DCDCAA"}
-      },
-      {
-        "scope": [
-          "meta.return-type",
-          "support.class",
-          "support.type",
-          "entity.name.type",
-          "entity.name.namespace",
-          "entity.name.scope-resolution",
-          "entity.name.class",
-          "storage.type.cs",
-          "storage.type.generic.cs",
-          "storage.type.modifier.cs",
-          "storage.type.variable.cs",
-          "storage.type.annotation.java",
-          "storage.type.generic.java",
-          "storage.type.java",
-          "storage.type.object.array.java",
-          "storage.type.primitive.array.java",
-          "storage.type.primitive.java",
-          "storage.type.token.java",
-          "storage.type.groovy",
-          "storage.type.annotation.groovy",
-          "storage.type.parameters.groovy",
-          "storage.type.generic.groovy",
-          "storage.type.object.array.groovy",
-          "storage.type.primitive.array.groovy",
-          "storage.type.primitive.groovy"
-        ],
-        "settings": {"foreground": "#4EC9B0"}
-      },
-      {
-        "scope": [
-          "meta.type.cast.expr",
-          "meta.type.new.expr",
-          "support.constant.math",
-          "support.constant.dom",
-          "support.constant.json",
-          "entity.other.inherited-class"
-        ],
-        "settings": {"foreground": "#60FDFF"}
-      },
-      {
-        "scope": [
-          "keyword.control",
-          "source.cpp keyword.operator.new",
-          "source.cpp keyword.operator.delete",
-          "keyword.other.using",
-          "keyword.other.operator"
-        ],
-        "settings": {"foreground": "#C586C0"}
-      },
-      {"scope": ["variable", "meta.definition.variable.name", "support.variable"], "settings": {"foreground": "#FFFFFF"}},
-      {"scope": ["meta.object-literal.key"], "settings": {"foreground": "#FF77FF"}},
-      {
-        "scope": [
-          "support.constant.property-value",
-          "support.constant.font-name",
-          "support.constant.media-type",
-          "support.constant.media",
-          "constant.other.color.rgb-value",
-          "constant.other.rgb-value",
-          "support.constant.color"
-        ],
-        "settings": {"foreground": "#CE9178"}
-      },
-      {"scope": "meta.resultLinePrefix.contextLinePrefix.search", "settings": {"foreground": "#CBEDCB"}},
-      {"scope": "comment", "settings": {"foreground": "#777777"}},
-      {"scope": "punctuation.definition.comment", "settings": {"foreground": "#777777"}},
-      {"scope": "string", "settings": {"foreground": "#FF77FF"}},
-      {"scope": "meta.embedded.assembly", "settings": {"foreground": "#FF77FF"}},
-      {"scope": "keyword - keyword.operator", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "keyword.control", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "storage", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "storage.type", "settings": {"foreground": "#FFFC67"}},
-      {"scope": "constant.numeric", "settings": {"foreground": "#FF77FF"}},
-      {"scope": ["entity.name.type"], "settings": {"foreground": "#60FDFF"}},
-      {"scope": "entity.name.class", "settings": {"foreground": "#60FDFF"}},
-      {"scope": "support.type", "settings": {"foreground": "#60FDFF"}},
-      {"scope": "support.class", "settings": {"foreground": "#60FDFF"}},
-      {"scope": "entity.name.function", "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "support.function", "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "variable", "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "entity.name.variable", "settings": {"foreground": "#FFFFFF"}},
-      {"scope": "token.info-token", "settings": {"foreground": "#6796E6"}},
-      {"scope": "token.warn-token", "settings": {"foreground": "#008000"}},
-      {"scope": "token.error-token", "settings": {"foreground": "#FF0000"}},
-      {"scope": "token.debug-token", "settings": {"foreground": "#B267E6"}}
-    ]
-
-  },
+  //  - TODO TODO
+  //  - Docs
+  //    - https://code.visualstudio.com/api/extension-guides/color-theme
+  //    - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
+  //    - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
+  //    - https://code.visualstudio.com/api/references/theme-color
+  //  - Schema reference (w/ all scope names)
+  //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/color-theme.json
+  //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/token-styling.json -- semanticTokenColorCustomizations
+  //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/textmate-colors.json -- tokenColorCustomizations
+  //  - My classic colors
+  //    - #777777 -black
+  //    - #6871ff -blue
+  //    - #60fdff -cyan
+  //    - #5ffa68 -green
+  //    - #ff77ff -magenta
+  //    - #ff6e67 -red
+  //    - #ffffff -white
+  //    - #fffc67 -yellow
+  //  - Use semantic highlighting when it's available, and fallback to syntax highlighting when it's not
+  //    - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
+  // //    - XXX Actually nvm, I don't think I like semantic highlighting at all, disable it
+  // //      - (It can also be disabled per language, if I ever want it in some languages but not others)
+  // "editor.semanticHighlighting.enabled": false,
   "editor.semanticTokenColorCustomizations": {
-    // TODO
+    "rules": {
+
+      // Standard
+      //  - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
+      "class":         {"foreground": "#60fdff", "fontStyle": "bold"},
+      "comment":       {"foreground": "#777777", "fontStyle": "bold"},
+      "decorator":     {"foreground": "#60fdff", "fontStyle": "bold"},
+      "enum":          {"foreground": "#60fdff", "fontStyle": "bold"},
+      "enumMember":    {"foreground": "#ff77ff", "fontStyle": "bold"},
+      "event":         {"foreground": "#60fdff", "fontStyle": "bold"},
+      "function":      {"foreground": "#60fdff", "fontStyle": "bold"},
+      "interface":     {"foreground": "#60fdff", "fontStyle": "bold"},
+      "keyword":       {"foreground": "#fffc67", "fontStyle": "bold"},
+      "label":         {"foreground": "#fffc67", "fontStyle": "bold"},
+      "macro":         {"foreground": "#6871ff", "fontStyle": "bold"},
+      "method":        {"foreground": "#60fdff", "fontStyle": "bold"},
+      "namespace":     {"foreground": "#ffffff", "fontStyle": ""},
+      "number":        {"foreground": "#ff77ff", "fontStyle": "bold"},
+      "operator":      {"foreground": "#fffc67", "fontStyle": "bold"},
+      "parameter":     {"foreground": "#ffffff", "fontStyle": ""},
+      "property":      {"foreground": "#ffffff", "fontStyle": ""},
+      "regexp":        {"foreground": "#ff77ff", "fontStyle": "bold"},
+      "string":        {"foreground": "#ff77ff", "fontStyle": "bold"},
+      "struct":        {"foreground": "#60fdff", "fontStyle": "bold"},
+      "type":          {"foreground": "#60fdff", "fontStyle": "bold"},
+      "typeParameter": {"foreground": "#ffffff", "fontStyle": ""},
+      "variable":      {"foreground": "#ffffff", "fontStyle": ""},
+
+      // Python
+      //  - https://github.com/microsoft/pylance-release
+      "*.typeHint:python":       {"foreground": "#fffc67", "fontStyle": "bold"},
+      "clsParameter:python":     {"foreground": "#60fdff", "fontStyle": "bold"},
+      "intrinsic:python":        {"foreground": "#ffffff", "fontStyle": ""},
+      "magicFunction:python":    {"foreground": "#60fdff", "fontStyle": "bold"}, // (dunder methods)
+      "member:python":           {"foreground": "#ffffff", "fontStyle": ""},
+      "module:python":           {"foreground": "#ffffff", "fontStyle": ""},
+      "selfParameter:python":    {"foreground": "#60fdff", "fontStyle": "bold"},
+
+    },
+  },
+  //  - Use semantic highlighting when it's available, and fallback to syntax highlighting when it's not
+  //    - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+
+      {"scope": "comment",                                                  "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "constant.character",                                       "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.language",                                        "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.numeric",                                         "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.other.caps",                                      "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.other.color.rgb-value",                           "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.other.option",                                    "settings": {"foreground": "#ffffff", "fontStyle": ""}}, // shellscript
+      {"scope": "constant.other.rgb-value",                                 "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.regexp",                                          "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "constant.sha.git-rebase",                                  "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "emphasis",                                                 "settings": {"fontStyle": "italic"}},
+      {"scope": "entity.name.class",                                        "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.name.command.shell",                                "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "entity.name.function",                                     "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.name.namespace",                                    "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "entity.name.scope-resolution",                             "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.name.tag",                                          "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "entity.name.type",                                         "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.name.variable",                                     "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "entity.other.attribute-name.attribute",                    "settings": {"foreground": "#ffffff", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.css",                          "settings": {"foreground": "#5ffa68", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.class.css",                    "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.class.mixin.css",              "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.id.css",                       "settings": {"foreground": "#5ffa68", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.parent-selector.css",          "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.pseudo-class.css",             "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "entity.other.attribute-name.pseudo-element.css",           "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "entity.other.inherited-class",                             "settings": {"foreground": "#5ffa68", "fontStyle": "bold"}},
+      {"scope": "invalid",                                                  "settings": {"foreground": "#ff6e67", "fontStyle": "bold"}},
+      {"scope": "keyword",                                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.control",                                          "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.control.import",                                   "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "keyword.operator",                                         "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.cast",                                    "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.expression",                              "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.logical",                                 "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.logical.python",                          "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.new",                                     "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.sizeof",                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.type",                                    "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.operator.type.annotation",                         "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "keyword.other.operator",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "keyword.other.unit",                                       "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "keyword.other.using",                                      "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "markup.bold",                                              "settings": {"fontStyle": "bold"}},
+      {"scope": "markup.changed",                                           "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "markup.deleted",                                           "settings": {"foreground": "#ff6e67", "fontStyle": "bold"}},
+      {"scope": "markup.heading",                                           "settings": {"foreground": "#5ffa68", "fontStyle": "bold"}},
+      {"scope": "markup.inline.raw.string.markdown",                        "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "markup.inserted",                                          "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "markup.italic",                                            "settings": {"fontStyle": "italic"}},
+      {"scope": "markup.strikethrough",                                     "settings": {"fontStyle": "strikethrough"}},
+      {"scope": "markup.underline",                                         "settings": {"fontStyle": "underline"}},
+      {"scope": "meta.definition.variable.name",                            "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "meta.diff.header",                                         "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "meta.embedded",                                            "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "meta.function-call",                                       "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "meta.function-call.arguments",                             "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "meta.function-call punctuation",                           "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      // {"scope": "meta.function.parameters.python",                          "settings": {"foreground": "#fffc67", "fontStyle": ""}}, // Types on function args
+      // {"scope": "meta.function.parameters.python support.type",             "settings": {"foreground": "#fffc67", "fontStyle": ""}}, // Types on function args
+      {"scope": "meta.embedded.assembly",                                   "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "meta.object-literal.key",                                  "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "meta.preprocessor",                                        "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "meta.preprocessor.numeric",                                "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "meta.preprocessor.string",                                 "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "meta.resultLinePrefix.contextLinePrefix.search",           "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "meta.return-type",                                         "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "meta.template.expression",                                 "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "meta.type.cast.expr",                                      "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "meta.type.new.expr",                                       "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.arguments",                         "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "punctuation.definition.comment",                           "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.list.begin.markdown",               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.parameters",                        "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      // FIXME These highlights markdown `[x]` but not `[ ]` (and it incorrectly highlights `[foo]`)
+      // {"scope": "punctuation.definition.string.begin.markdown",             "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      // {"scope": "punctuation.definition.string.end.markdown",               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.tag",                               "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.template-expression.begin",         "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "punctuation.definition.template-expression.end",           "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "punctuation.section.embedded",                             "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "punctuation.separator",                                    "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "source.coffee.embedded",                                   "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "source.cpp keyword.operator.delete",                       "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "source.cpp keyword.operator.new",                          "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "source.groovy.embedded",                                   "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "source.powershell variable.other.member",                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage",                                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.modifier",                                         "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.modifier.import",                                  "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "storage.modifier.package",                                 "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "storage.type",                                             "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.annotation",                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.generic",                                     "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.modifier",                                    "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.object.array",                                "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.parameters",                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.primitive.array",                             "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.primitive",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.string.python",                               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}}, // f"..."
+      {"scope": "storage.type.token",                                       "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "storage.type.variable",                                    "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "string meta.image.inline.markdown",                        "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "string",                                                   "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.regexp",                                            "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.tag",                                               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.value",                                             "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.quoted.double.shell",                               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.quoted.single.shell",                               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "string.unquoted.argument.shell",                           "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "strong",                                                   "settings": {"fontStyle": "bold"}},
+      {"scope": "support.class",                                            "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "support.constant.color",                                   "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.dom",                                     "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "support.constant.font-name",                               "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.handlebars",                              "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.json",                                    "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.math",                                    "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.media",                                   "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.media-type",                              "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.constant.property-value",                          "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
+      {"scope": "support.function",                                         "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "support.function.git-rebase",                              "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "support.type",                                             "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "support.type.primitive",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "support.type.property-name",                               "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "support.type.vendored.property-name",                      "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "support.variable",                                         "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "token.debug-token",                                        "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "token.error-token",                                        "settings": {"foreground": "#ff6e67", "fontStyle": "bold"}},
+      {"scope": "token.info-token",                                         "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "token.warn-token",                                         "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "variable",                                                 "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "variable.language.this",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "variable.language.wildcard",                               "settings": {"foreground": "#fffc67", "fontStyle": ""}},
+      {"scope": "variable.legacy.builtin.python",                           "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "variable.other.less",                                      "settings": {"foreground": "#6871ff", "fontStyle": ""}},
+      {"scope": "variable.language.special.self.python",                    "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "variable.parameter.function.language.special.self.python", "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+
+    ],
   },
 
   // Tabs + breadcrumbs
