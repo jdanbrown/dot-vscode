@@ -402,6 +402,11 @@
   //    - https://glitchbone.github.io/vscode-base16-term/#/summerfruit-dark
   //    - https://glitchbone.github.io/vscode-base16-term/#/google-dark
   //    - https://glitchbone.github.io/vscode-base16-term/#/spacemacs
+  //  - Tools for converting rgba->rgb<->hsl
+  //    - https://rgbacolorpicker.com/rgba-to-hex
+  //      - e.g. rgba(255,106,105,0.3) -> #ff6a694d
+  //    - https://colordesigner.io/convert/hsltohex
+  //      - e.g. show rgba -> truncate to rbg -> convert to hsl -> tune lightness -> diff tuned tab color with original rgba color
   //  - My classic colors
   //    - #777777 -black
   //    - #6871ff -blue
@@ -418,6 +423,28 @@
     "contrastActiveBorder": "#0000", // Disable
     // "contrastBorder": "#777",
     "contrastBorder": "#404040",
+
+    // Git diff
+    //  - Red/green color samples from a github commit with "Dark high contrast" (https://github.com/settings/appearance)
+    //    - Green: #09b43a (text), #26cd4d4d (line)
+    //    - Red:   #ff6a69 (text), #ff6a694d (line)
+    //  - Red/green color samples: Atom colors w/ scaled HSL lightness
+    //    - Green: #2d571a (atom, dark) -> #4b8c30 (bright) -> #6cc644 (very bright)
+    //    - Red:   #910000 (atom, dark) -> #a62c2e (bright) -> #ff4444 (very bright)
+    // "diffEditor.border": "#404040", // (Default, from "contrastBorder")
+    "diffEditor.diagonalFill": "#373b41", // Default: Some gray color w/ diagonal lines -- changed to solid in css below
+    "diffEditor.insertedLineBackground": "#105620", // Github line rgba (#26cd4d4d) -> fiddle with hsl to get matching rgb with no alpha
+    "diffEditor.insertedTextBackground": "#09b43abb", // Github text + alpha
+    "diffEditor.removedLineBackground": "#712a2b", // Github line rgba (#ff6a694d) -> fiddle with hsl to get matching rgb with no alpha
+    "diffEditor.removedTextBackground": "#ff6a6988", // Github text + alpha
+    "diffEditorOverview.insertedForeground": "#09b43a", // Github text
+    "diffEditorOverview.removedForeground":  "#ff6a69", // Github text
+    "diffEditor.insertedTextBorder": "#0000", // Default: #33ff2e
+    "diffEditor.removedTextBorder": "#0000",  // Default: #ff008f
+    // "diffEditor.move.border": "#8b8b8b9c",     // When does move happen? (haven't seen them yet)
+    // "diffEditor.moveActive.border": "#ffa500", // When does move happen? (haven't seen them yet)
+    // "diffEditorGutter.insertedLineBackground": null, // Don't care about the gutter (and I don't see them with gutter on anyway)
+    // "diffEditorGutter.removedLineBackground": null,  // Don't care about the gutter (and I don't see them with gutter on anyway)
 
     "editor.background": "#000000",
     "editor.foreground": "#ffffff",
@@ -1167,6 +1194,19 @@
     ".monaco-editor .detected-link-active": {
       "text-decoration": "inherit",
     },
+
+    // Git diff editor
+    //  - Make negative areas solid instead of diagonal fill (e.g. what to show on left when lines added on right)
+    ".monaco-editor .diagonal-fill": {
+      "background-color": "var(--vscode-diffEditor-diagonalFill)",
+      "background-image": "unset",
+      "background-size": "unset",
+    },
+    //  - In the overview ruler, move red/green above the scrollbar (preserve color) instead of below it (dimmed color)
+    ".monaco-diff-editor .diffOverview .diffOverviewRuler": {
+      "z-index": "11", // Above z-index:10 of the scrollbar (.diffOverview .diffViewport)
+    },
+
   },
   "apc.iframe.style": {
 
