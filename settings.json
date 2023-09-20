@@ -601,6 +601,10 @@
   //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/color-theme.json
   //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/token-styling.json -- semanticTokenColorCustomizations
   //    - https://github.com/wraith13/vscode-schemas/blob/master/en/v1.82.2/schemas/textmate-colors.json -- tokenColorCustomizations
+  //  - My atom syntax colors
+  //    - https://github.com/jdanbrown/atom-jdanbrown-syntax/blob/master/styles/colors.less
+  //    - https://github.com/jdanbrown/atom-jdanbrown-syntax/blob/master/styles/syntax-variables.less
+  //    - https://github.com/jdanbrown/atom-jdanbrown-syntax/blob/master/styles/base.less
   //  - My classic colors
   //    - #777777 -black
   //    - #6871ff -blue
