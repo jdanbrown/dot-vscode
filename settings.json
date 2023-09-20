@@ -910,6 +910,13 @@
     ".monaco-workbench .codicon[class*=codicon-]": {
       "font-size": "11px",
     },
+    //  - Color dirs blue
+    //    - But leave alone when git modified (orange) or ignored (gray)
+    //    - And leave the expand/collapse icons as is (white), since we can't apply orange/gray to the modified/ignored ones
+    ".explorer-folders-view .monaco-list-row:has(.folder-icon):not(:has(.monaco-icon-label[class*=monaco-decoration-])) .label-name": {
+      "color": "#6871ff",
+      "font-weight": "bold",
+    },
 
     // Hide ruler (editor right margin)
     //  - https://github.com/microsoft/vscode/issues/85418
