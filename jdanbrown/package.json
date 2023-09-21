@@ -17,7 +17,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./out/extension.js",
+  "main": "./out/init.js",
   "contributes": {
     "commands": [
       {"command": "jdanbrown.terminal.scrollDownHalfPage", "title": "[jdanbrown] Terminal: Scroll Down (Half Page)"},
