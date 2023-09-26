@@ -14,8 +14,7 @@
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
   "workspace-path-status-bar.enable": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "workbench.reduceMotion": "on", // Disable animations
-  "workbench.editor.focusRecentEditorAfterClose": false, // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
+  "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
   "files.refactoring.autoSave": false,
 
   // Fonts
@@ -26,13 +25,28 @@
   // "editor.fontWeight": "bold",
 
   // Explorer
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "none",
   "workbench.list.defaultFindMatchType": "contiguous",
+  "explorer.openEditors.visible": 50,
+  "explorer.compactFolders": false,
+  "explorer.excludeGitIgnore": true,
+  "explorer.decorations.badges": false,
+  "explorer.confirmDragAndDrop": false,
 
   // Indent/tabs
   //  - https://code.visualstudio.com/docs/editor/codebasics#_indentation
   "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
+  //  - TODO Find a good compromise with Move Line Up/Down
+  //    - "full" messes up indentation when you Move Line Up/Down
+  //    - "advanced" is _almost_ good, but still some cases that surprised me when I tried it out
+  "editor.autoIndent": "full", // The editor will keep the current line's indentation, honor language defined brackets, invoke special onEnterRules defined by languages, and honor indentationRules defined by languages.
+  // "editor.autoIndent": "advanced", // The editor will keep the current line's indentation, honor language defined brackets and invoke special onEnterRules defined by languages.
+  // "editor.autoIndent": "brackets", // The editor will keep the current line's indentation and honor language defined brackets.
+  // "editor.autoIndent": "keep", // The editor will keep the current line's indentation.
+  // "editor.autoIndent": "none", // The editor will not insert indentation automatically."
 
   // Editor
   //  - FIXME vim L/H keeps scrolling down/up if you repeat it: https://github.com/VSCodeVim/Vim/issues/1393
@@ -108,10 +122,62 @@
     "workbench.action.toggleKeybindingsLog"
   ],
 
+  // Search / Search Editor
+  "search.searchEditor.defaultNumberOfContextLines": 0,
+  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
+  "search.searchEditor.reusePriorSearchConfiguration": true,
+  "search.quickOpen.includeHistory": false,
+  "search.decorations.badges": false,
+  "search.exclude": {
+    "build/**": true
+  },
+  "search.mode": "newEditor",
+  "search.seedWithNearestWord": true,
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+  "search.useParentIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": true,
+
+  // Git
+  "scm.alwaysShowRepositories": true,
+  "scm.countBadge": "off",
+  "scm.defaultViewMode": "tree",
+  "scm.inputFontSize": 11,
+  "scm.inputFontFamily": "editor",
+  "scm.diffDecorationsGutterPattern": {
+    "modified": false
+  },
+  "git.openRepositoryInParentFolders": "never",
+  "git.enableStatusBarSync": false,
+  "git.showCommitInput": false,
+  "git.verboseCommit": true,
+  //  - Disable annoying flashing badge on sidebar icon
+  //    - https://github.com/microsoft/vscode/issues/71297
+  //    - https://github.com/microsoft/vscode/issues/179418
+  "git.showProgress": false,
+
   // GitLens
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.views.commits.files.compact": false,
+  "gitlens.views.commitDetails.files.compact": false,
+  "gitlens.views.repositories.files.compact": false,
+  "gitlens.views.fileHistory.files.compact": false,
+  "gitlens.views.branches.files.compact": false,
+  "gitlens.views.remotes.files.compact": false,
+  "gitlens.views.stashes.files.compact": false,
+  "gitlens.views.tags.files.compact": false,
+  "gitlens.views.worktrees.files.compact": false,
+  "gitlens.views.contributors.files.compact": false,
+  "gitlens.views.searchAndCompare.files.compact": false,
+
+  // Debug
+  "debug.console.fontSize": 11,
+  "debug.console.wordWrap": false,
+  "debug.toolBarLocation": "docked",
+  "debug.openDebug": "openOnDebugBreak", // From dart: https://dartcode.org/docs/recommended-settings/
 
   // NOTE Disabled because it adds spelling errors to the Problems list, which is too noisy
   //  - Instead, manually use alfred 'spell' -- which actually has a really great interactive mode!
@@ -123,13 +189,10 @@
   // "cSpell.showAutocompleteSuggestions": true,
   // "cSpell.hideAddToDictionaryCodeActions": true,
 
-  // Project Manager
-  //  - https://github.com/alefragnani/vscode-project-manager
-  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
-  "projectManager.supportSymlinksOnBaseFolders": true,
-  "projectManager.git.baseFolders": [
-    "~/hack"
-  ],
+  // Navigation
+  "editor.gotoLocation.alternativeDeclarationCommand": "",
+  "editor.gotoLocation.alternativeDefinitionCommand": "",
+  "editor.gotoLocation.alternativeTypeDefinitionCommand": "",
 
   // Symbols
   "outline.showArrays": false,
@@ -160,9 +223,21 @@
     },
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
-      "filterFileRegex": ".*(?<!Makefile|.go)$",
+      "filterFileRegex": ".*(?<!COMMIT_EDITMSG|Makefile|.go)$",
     },
   },
+
+  // highlight-words
+  //  - https://github.com/rsbondi/highlight-words
+  "highlightwords.colors": [
+    {"dark": "#ffd966", "light": "#ffd966"}, // Yellow
+    {"dark": "#ff6666", "light": "#ff6666"}, // Red
+    {"dark": "#66ff8c", "light": "#66ff8c"}, // Green
+    {"dark": "#ff66d9", "light": "#ff66d9"}, // Magenta
+    {"dark": "#b266ff", "light": "#b266ff"}, // Purple
+    {"dark": "#668cff", "light": "#668cff"}, // Blue
+    {"dark": "#66ffff", "light": "#66ffff"}, // Cyan
+  ],
 
   // Colorize
   //  - https://github.com/kamikillerto/vscode-colorize
@@ -184,6 +259,14 @@
     // "**/settings.json",
   ],
 
+  // Project Manager
+  //  - https://github.com/alefragnani/vscode-project-manager
+  "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+  "projectManager.supportSymlinksOnBaseFolders": true,
+  "projectManager.git.baseFolders": [
+    "~/hack"
+  ],
+
   // Filetypes
   "[markdown]": {
     "editor.quickSuggestions": {
@@ -199,6 +282,9 @@
   },
   "[python]": {
     "editor.tabSize": 4,
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[dart]": {
     //
@@ -247,10 +333,15 @@
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
-  "debug.openDebug": "openOnDebugBreak",
   "dart.closingLabels": false,
   "dart.lineLength": 120,
   "dart.showTodos": false,
+  "dart.previewLsp": true,
+  "dart.debugExternalLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "dart.enableSnippets": false,
+  "dart.hotReloadProgress": "statusBar",
+  "dart.flutterGutterIcons": false,
 
   // Allow trailing commas in ~/.code/*.json
   //  - https://github.com/microsoft/vscode/issues/102061
@@ -293,20 +384,28 @@
   "vim.searchHighlightTextColor": "#000",
   "vim.searchMatchColor": "#fff", // Color for the first match while typing before hitting enter (short lived)
   "vim.searchMatchTextColor": "#000",
+  //  - textobj-arguments
+  //    - https://github.com/VSCodeVim/Vim#vim-textobj-arguments
+  "vim.argumentObjectOpeningDelimiters": ["(", "[", "{"],
+  "vim.argumentObjectClosingDelimiters": [")", "]", "}"],
+  //  - Keybindings
   "vim.normalModeKeyBindingsNonRecursive": [
 
-    // XXX No actually, this makes vim undo/redo behave really weird, with the wrong granularity of edits
+    // NOTE [2023-09-22] Hmm no wait, maybe this is actually better than vim's undo stack, which has its own issues:
+    //  - Undo groups aren't always what I expect, so it often undoes too many edits
+    //  - Redo often shits itself by creating something I didn't do (races?), which means I can't redo back to where I started 👎
+    // XXX [2023-09-14] No actually, this makes vim undo/redo behave really weird, with the wrong granularity of edits
     //  - iiuc these issues are about weirdness when you _mix_ vim u/^R with vscode cmd+z/shift+cmd+z, so let's just not do that
-    // // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
-    // //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
-    // //  - https://github.com/VSCodeVim/Vim/issues/2007
-    // {"before": ["u"], "commands": ["undo"]},
-    // {"before": ["<c-r>"], "commands": ["redo"]},
+    // Avoid vscode-vim's separate undo/redo stack, use vscode's instead
+    //  - https://github.com/VSCodeVim/Vim/issues/1490#issuecomment-352167221
+    //  - https://github.com/VSCodeVim/Vim/issues/2007
+    {"before": ["u"], "commands": ["undo"]},
+    {"before": ["<c-r>"], "commands": ["redo"]},
 
     // Clear search on esc
-    {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", ":"]},
+    {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", "highlightwords.removeAllHighlights", ":"]},
     //  - Also on \\ (old habits die hard)
-    {"before": ["\\", "\\"], "commands": [":nohl", "highlightwords.removeAllHighlights"]},
+    {"before": ["\\", "\\"], "commands": [":nohl", "highlightwords.removeAllHighlights", ":"]},
 
     // Save
     {"before": [",", ","], "commands": ["workbench.action.files.save"]},
@@ -319,12 +418,48 @@
     // Comment
     {"before": ["\\", "c"], "after": ["g", "c"]},
 
-    // ctrl-space to show hover (like gh)
-    // {"before": ["<c-space>"], "commands": ["editor.action.showHover"]},
+    // Search
+    //  - Relies on "search.seedWithNearestWord":true to search for the current word without selecting anything
+    {"before": [",", "a"], "commands": ["search.action.openNewEditorToSide"]},
 
-    // Go to / Search
-    {"before": [",", "a"], "after": ["v", "i", "w"], "commands": ["search.action.openNewEditorToSide"]},
-    {"before": [",", "A"], "commands": ["editor.action.goToReferences"]},
+    // Peek
+    //  - TODO(practice)
+    {"before": [",", "p", "r"], "commands": ["editor.action.referenceSearch.trigger"]},
+    {"before": [",", "p", "d"], "commands": ["editor.action.peekDefinition"]},
+    {"before": [",", "p", "i"], "commands": ["editor.action.peekImplementation"]},
+    {"before": [",", "p", "c"], "commands": ["editor.showCallHierarchy"]},
+    {"before": [",", "p", "l"], "commands": ["editor.action.peekDeclaration"]},
+    {"before": [",", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
+    {"before": [",", "p", "h"], "commands": ["editor.showTypeHierarchy"]},
+
+    // Edge motion
+    {"before": ["["], "after": ["<leader>", "["]},
+    {"before": ["]"], "after": ["<leader>", "]"]},
+
+    // Bookmarks
+    //  - TODO(practice)
+    {"before": ["<leader>", "b"], "commands": ["bookmarks.toggle"]},
+    {"before": ["<leader>", "B"], "commands": ["bookmarksExplorer.focus"]},
+    {"before": ["<leader>", "l"], "commands": ["bookmarks.list"]},
+    {"before": ["<leader>", "L"], "commands": ["bookmarks.listFromAllFiles"]},
+
+    // Git
+    //  - (See keybindings.json for centralized comments)
+    //  - Views
+    {"before": ["g", "s"], "commands": ["workbench.view.scm"]},
+    {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
+    {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
+    {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
+    //  - Commands
+    {"before": ["g", "d"], "commands": ["git.openChange"]},
+    {"before": ["g", "D"], "commands": ["git.openAllChanges"]},
+    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
+    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
+    {"before": ["g", "A"], "commands": ["git.stage"]},
+    {"before": ["g", "U"], "commands": ["git.unstage"]},
+    {"before": ["g", "c"], "commands": ["git.commitStaged"]},
+    // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
 
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -333,20 +468,77 @@
     {"before": ["Y"], "after": ["\"", "+", "y"]},
 
     // Indent/unindent
-    //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
     {"before": ["<tab>"], "commands": ["editor.action.indentLines"]},
     {"before": ["<shift+tab>"], "commands": ["editor.action.outdentLines"]},
 
     // Shrink/expand selection
     //  - https://code.visualstudio.com/docs/editor/codebasics#_shrinkexpand-selection
-    //  - TODO(practice)
     {"before": ["o"], "commands": ["editor.action.smartSelect.expand"]},
     {"before": ["O"], "commands": ["editor.action.smartSelect.shrink"]},
+
+    // Search
+    //  - Relies on "search.seedWithNearestWord":true to search for the current word without selecting anything
+    {"before": [",", "a"], "commands": ["search.action.openNewEditorToSide"]},
+
+    // textobj-arguments
+    //  - https://github.com/VSCodeVim/Vim#vim-textobj-arguments
+    {"before": ["i", ","], "after": ["i", "a"]},
+    {"before": ["a", ","], "after": ["a", "a"]},
+
+    // Edge motion
+    {"before": ["["], "after": ["<leader>", "["]},
+    {"before": ["]"], "after": ["<leader>", "]"]},
+
+    // Git
+    //  - (See keybindings.json for comments)
+    //  - Views
+    {"before": ["g", "s"], "commands": ["workbench.view.scm"]},
+    {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
+    {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
+    {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
+    //  - Commands
+    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges", "extension.vim_escape"]},
+    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges", "extension.vim_escape"]},
+    {"before": ["g", "A"], "commands": ["git.stage"]},
+    {"before": ["g", "U"], "commands": ["git.unstage"]},
+    {"before": ["g", "c"], "commands": ["git.commitStaged"]},
+    // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
+
+  ],
+  "vim.operatorPendingModeKeyBindings": [
+
+    // textobj-arguments
+    //  - https://github.com/VSCodeVim/Vim#vim-textobj-arguments
+    {"before": ["i", ","], "after": ["i", "a"]},
+    {"before": ["a", ","], "after": ["a", "a"]},
+
+    // Edge motion
+    {"before": ["["], "after": ["<leader>", "["]},
+    {"before": ["]"], "after": ["<leader>", "]"]},
 
   ],
 
   // multi-commands
   "multiCommand.commands": [
+
+    // Search Editor
+    {
+      "command": "multiCommand.search.action.unfocusQueryEditorWidget",
+      "sequence": ["search.action.focusNextSearchResult", "extension.vim_escape",],
+    },
+
+    // Navigation
+    //  - Add color highlight on goto references + peek references
+    //    - Requires an extra manual esc when done, which I think is fine
+    {
+      "command": "multiCommand.addHighlightAnd.editor.action.goToReferences",
+      "sequence": ["highlightwords.addHighlight", "editor.action.goToReferences"],
+    },
+    {
+      "command": "multiCommand.addHighlightAnd.editor.action.referenceSearch.trigger",
+      "sequence": ["highlightwords.addHighlight", "editor.action.referenceSearch.trigger"],
+    },
 
     // Notebook
     {
@@ -408,14 +600,19 @@
   //    - https://colordesigner.io/convert/hsltohex
   //      - e.g. show rgba -> truncate to rbg -> convert to hsl -> tune lightness -> diff tuned tab color with original rgba color
   //  - My classic colors
-  //    - #777777 -black
-  //    - #6871ff -blue
-  //    - #60fdff -cyan
-  //    - #5ffa68 -green
-  //    - #ff77ff -magenta
-  //    - #ff6e67 -red
-  //    - #ffffff -white
-  //    - #fffc67 -yellow
+  //    - #777777 -- black
+  //    - #6871ff -- blue
+  //    - #60fdff -- cyan
+  //    - #5ffa68 -- green
+  //    - #ff77ff -- magenta
+  //    - #ff6e67 -- red
+  //    - #ffffff -- white
+  //    - #fffc67 -- yellow
+  //  - git colors (from git builtins, I think)
+  //    - #5ffa69 -- green (git status staged)
+  //    - #f96e67 -- red (git status unstaged)
+  //    - #8cf77b -- green (git diff inserted)
+  //    - #ed776d -- red (git diff deleted)
   "workbench.colorCustomizations": {
 
     "bookmarks.overviewRuler": "#0000", // Disable
@@ -502,6 +699,23 @@
     "list.filterMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
     "list.filterMatchBorder": "#0000",
 
+    // Peek
+    // "peekView.border": "#404040",
+    // "peekViewEditor.background": "#000000",
+    // "peekViewEditor.matchHighlightBackground": null,
+    // "peekViewEditor.matchHighlightBorder": "#00000000",
+    // "peekViewEditorGutter.background": "#000000",
+    // "peekViewEditorStickyScroll.background": "#000000",
+    // "peekViewResult.background": "#000000",
+    // "peekViewResult.fileForeground": "#ffffff",
+    // "peekViewResult.lineForeground": "#ffffff",
+    // "peekViewResult.matchHighlightBackground": null,
+    "peekViewResult.selectionBackground": "#666", // Default: null (invisible)
+    // "peekViewResult.selectionForeground": "#ffffff",
+    "peekViewTitle.background": "#404040", // Default: #000
+    // "peekViewTitleDescription.foreground": "#ffffff99",
+    // "peekViewTitleLabel.foreground": "#ffffff",
+
     "quickInputList.focusBackground": "#404040",
 
     // Search Editor find/search highlight
@@ -548,14 +762,14 @@
     //  - https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
     //  - https://glitchbone.github.io/vscode-base16-term
     //  - My classic colors
-    //    - #777777 -black
-    //    - #6871ff -blue
-    //    - #60fdff -cyan
-    //    - #5ffa68 -green
-    //    - #ff77ff -magenta
-    //    - #ff6e67 -red
-    //    - #ffffff -white
-    //    - #fffc67 -yellow
+    //    - #777777 -- black
+    //    - #6871ff -- blue
+    //    - #60fdff -- cyan
+    //    - #5ffa68 -- green
+    //    - #ff77ff -- magenta
+    //    - #ff6e67 -- red
+    //    - #ffffff -- white
+    //    - #fffc67 -- yellow
     "terminal.background": "#000000",
     "terminal.foreground": "#ffffff",
     "terminal.ansiBrightBlack": "#777777",
@@ -591,7 +805,6 @@
   },
 
   // Custom syntax colors
-  //  - TODO TODO
   //  - Docs
   //    - https://code.visualstudio.com/api/extension-guides/color-theme
   //    - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
@@ -606,14 +819,19 @@
   //    - https://github.com/jdanbrown/atom-jdanbrown-syntax/blob/master/styles/syntax-variables.less
   //    - https://github.com/jdanbrown/atom-jdanbrown-syntax/blob/master/styles/base.less
   //  - My classic colors
-  //    - #777777 -black
-  //    - #6871ff -blue
-  //    - #60fdff -cyan
-  //    - #5ffa68 -green
-  //    - #ff77ff -magenta
-  //    - #ff6e67 -red
-  //    - #ffffff -white
-  //    - #fffc67 -yellow
+  //    - #777777 -- black
+  //    - #6871ff -- blue
+  //    - #60fdff -- cyan
+  //    - #5ffa68 -- green
+  //    - #ff77ff -- magenta
+  //    - #ff6e67 -- red
+  //    - #ffffff -- white
+  //    - #fffc67 -- yellow
+  //  - git colors (from git builtins, I think)
+  //    - #5ffa69 -- green (git status staged)
+  //    - #f96e67 -- red (git status unstaged)
+  //    - #8cf77b -- green (git diff inserted)
+  //    - #ed776d -- red (git diff deleted)
   //  - Use semantic highlighting when it's available, and fallback to syntax highlighting when it's not
   //    - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
   // //    - XXX Actually nvm, I don't think I like semantic highlighting at all, disable it
@@ -710,16 +928,20 @@
       {"scope": "keyword.other.unit",                                       "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
       {"scope": "keyword.other.using",                                      "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
       {"scope": "markup.bold",                                              "settings": {"fontStyle": "bold"}},
-      {"scope": "markup.changed",                                           "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
-      {"scope": "markup.deleted",                                           "settings": {"foreground": "#ff6e67", "fontStyle": "bold"}},
+      {"scope": "markup.changed",                                           "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "markup.deleted",                                           "settings": {"foreground": "#f96e67", "fontStyle": "bold"}},
       {"scope": "markup.heading",                                           "settings": {"foreground": "#5ffa68", "fontStyle": "bold"}},
       {"scope": "markup.inline.raw.string.markdown",                        "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
-      {"scope": "markup.inserted",                                          "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "markup.inserted",                                          "settings": {"foreground": "#5ffa69", "fontStyle": "bold"}},
       {"scope": "markup.italic",                                            "settings": {"fontStyle": "italic"}},
       {"scope": "markup.strikethrough",                                     "settings": {"fontStyle": "strikethrough"}},
       {"scope": "markup.underline",                                         "settings": {"fontStyle": "underline"}},
       {"scope": "meta.definition.variable.name",                            "settings": {"foreground": "#ffffff", "fontStyle": ""}},
-      {"scope": "meta.diff.header",                                         "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "meta.diff.header",                                         "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "meta.diff.header.from-file",                               "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "meta.diff.header.to-file",                                 "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
+      {"scope": "meta.diff.index",                                          "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
+      {"scope": "meta.diff.range",                                          "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
       {"scope": "meta.embedded",                                            "settings": {"foreground": "#ffffff", "fontStyle": ""}},
       {"scope": "meta.function-call",                                       "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
       {"scope": "meta.function-call.arguments",                             "settings": {"foreground": "#ffffff", "fontStyle": ""}},
@@ -885,9 +1107,26 @@
       // "-webkit-text-stroke-width": ".1px",
     },
 
+    // Change default global font-size, affects basically everything that isn't an editor:
+    //  - Settings editor
+    //  - Keyboard Shortcuts editor
+    //  - Extensions sidebar view
+    //  - Peek view insets
+    //  - etc.
+    ".monaco-workbench .part > .content": {
+      // "font-size": "13px", // Default, too big
+      "font-size": "12px", // Seems good
+      // "font-size": "11px", // Editor font size, but a bit too small
+    },
+
     // Hide all scrollbars
     ".scrollbar": {
       "display": "none",
+    },
+
+    // Make icons default to our font size
+    ".monaco-workbench .codicon[class*=codicon-]": {
+      "font-size": "11px",
     },
 
     // Quick input (cmd+p)
@@ -929,26 +1168,161 @@
     },
 
     // [nope] Quick input: Smaller row height
-    //  - XXX This doesn't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px
+    //  - [nope] This doesn't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px
     // ".quick-input-list": { "line-height": "13px" },
     // ".quick-input-list .monaco-list-row": { "height": "13px !important" },
-    //  - XXX This doesn't work because row elements are dynamically removed/added from the top/bottom as you scroll
+    //  - [nope] This doesn't work because row elements are dynamically removed/added from the top/bottom as you scroll
     // ".quick-input-widget .monaco-list-row": { "position": "relative", "top": "unset !important" },
-    //  - XXX This doesn't work because I can't find a way to include _more_ results in the dynamic list of rows
+    //  - [nope] This doesn't work because I can't find a way to include _more_ results in the dynamic list of rows
     // ".quick-input-widget .monaco-list-row[data-index='0']": { "top": "calc(13px * 0) !important" },
     // ".quick-input-widget .monaco-list-row[data-index='1']": { "top": "calc(13px * 1) !important" },
     // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
 
-    // Explorer (tree view)
-    ".monaco-workbench .codicon[class*=codicon-]": {
-      "font-size": "11px",
+    // Sidebar
+    "#workbench\\.parts\\.sidebar .monaco-list:focus::before": {
+      "display": "none",
     },
+    "#workbench\\.parts\\.sidebar .pane:has(:focus)::before": {
+      "content": "''",
+      "pointer-events": "none",
+      "position": "absolute",
+      "top": "0",
+      "left": "0",
+      "width": "100%",
+      "height": "100%",
+      "outline": "1px solid #fff",
+      "outline-offset": "-1px",
+      "z-index": "1",
+    },
+
+    // Sidebar: Explorer
     //  - Color dirs blue
     //    - But leave alone when git modified (orange) or ignored (gray)
-    //    - And leave the expand/collapse icons as is (white), since we can't apply orange/gray to the modified/ignored ones
+    ".explorer-folders-view .monaco-list-row:has(.rootfolder-icon, .folder-icon) .label-name": {
+      "font-weight": "bold",
+    },
     ".explorer-folders-view .monaco-list-row:has(.folder-icon):not(:has(.monaco-icon-label[class*=monaco-decoration-])) .label-name": {
       "color": "#6871ff",
+    },
+    //  - Color the expand/collapse dir icons blue
+    //    - We can't apply orange/gray to the modified/ignored ones, so just color them all blue
+    ".explorer-folders-view .monaco-list-row .monaco-tl-twistie.codicon": {
+      "color": "#6871ff",
       "font-weight": "bold",
+    },
+    //  - Color symlinks cyan
+    //    - We can't use the first selector because symbolic links have an empty decoration
+    //    - Which means symlink colors (cyan) clobber git colors (modified/added)
+    // ".explorer-folders-view .monaco-list-row:has(.monaco-icon-label[title*='Symbolic Link']):not(:has(.monaco-icon-label[class*=monaco-decoration-])) .label-name": {
+    ".explorer-folders-view .monaco-list-row:has(.monaco-icon-label[title*='Symbolic Link']) .label-name": {
+      "color": "#60fdff",
+      "font-weight": "bold",
+    },
+    //  - Adjust position of the expand/collapse dir icons
+    ".explorer-folders-view .codicon-tree-item-expanded::before": {
+      "font-size": "10px", // Make expand/collapse icons smaller than the surrounding font-size:11px
+      "position": "absolute", // (Overridding position:static -- will this cause problems?)
+      "top": "1px", // Center vertically
+      "right": "6px", // Reduce gap from icon to text
+    },
+    ".explorer-folders-view .monaco-list-row .monaco-icon-label::after": {
+      "margin": "0 8px 0 5px",
+    },
+    ".explorer-folders-view .monaco-list-row .monaco-icon-label.rootfolder-icon::after": {
+      "margin": "0 4px 0 5px",
+    },
+    ".explorer-folders-view .monaco-list-row .monaco-icon-label.folder-icon::after": {
+      "margin": "0 4px 0 5px",
+    },
+
+    // Sidebar: Git
+    //  - Hide Commit button + manually move parent/top elements to get rid of the 40px blank space
+    ".scm-view .monaco-list-rows": {
+      "top": "-40px !important",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-label$=Commit]": {
+      "display": "none",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row:nth-of-type(1)": {
+      "top": "40px !important",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes']": {
+      "color": "#f96e67",
+      "font-weight": "bold",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Staged Changes']": {
+      "color": "#5ffa69",
+      "font-weight": "bold",
+    },
+    //  - Hide all action buttons except the few I actually (have to) use
+    //    - I have to use +/- because there aren't yet keybindings for stage/unstage from scm view :/
+    //    - https://github.com/microsoft/vscode/issues/194214 In Source Control view, add commands/keybindings for "Stage File" / "Unstage File"
+    //    - https://github.com/microsoft/vscode/issues/24916 SCM: Support keyboard shortcuts
+    ".scm-view .monaco-list-row .actions-container .action-item[title$='Checkout Branch/Tag...'] .codicon": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions-container .action-item[title='Show Commit Graph']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions-container .action-item[title='Commit']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions-container .action-item[title='Refresh']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions .action-item[title='Open File']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions .action-item[title='Discard Changes']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions .action-item[title='Discard All Changes']": {
+      "display": "none !important",
+    },
+    ".scm-view .monaco-list-row .actions .action-item[title='Stash All Changes']": {
+      "display": "none !important",
+    },
+    //  - Color dirs blue
+    ".scm-view .monaco-list-row .scm-provider .label .name": {
+      "font-weight": "bold",
+      "color": "#6871ff",
+    },
+    ".scm-view .monaco-list-row:has(.folder-icon) .label-name": {
+      "font-weight": "bold",
+      "color": "#6871ff",
+    },
+    //  - Color the expand/collapse dir icons blue
+    //    - We can't apply orange/gray to the modified/ignored ones, so just color them all blue
+    ".scm-view .monaco-list-row .monaco-tl-twistie.codicon": {
+      "color": "#6871ff",
+      "font-weight": "bold",
+    },
+    //  - Adjust position of the expand/collapse dir icons
+    ".scm-view .codicon-tree-item-expanded::before": {
+      "font-size": "10px", // Make expand/collapse icons smaller than the surrounding font-size:11px
+      "position": "absolute", // (Overridding position:static -- will this cause problems?)
+      "top": "1px", // Center vertically
+      "right": "6px", // Reduce gap from icon to text
+    },
+    ".scm-view .monaco-list-row .monaco-icon-label::after": {
+      "margin": "0 7px 0 5px !important",
+    },
+    ".scm-view .monaco-list-row .monaco-icon-label.rootfolder-icon::after": {
+      "margin": "0 3px 0 0.5px !important",
+    },
+    ".scm-view .monaco-list-row .monaco-icon-label.folder-icon::after": {
+      "margin": "0 3px 0 0.5px !important",
+    },
+    //  - Adjust position/sizes of the action icons (for vertical alignment)
+    ".scm-view .monaco-list-row .actions .codicon": {
+      "font-size": "9px !important",
+      "padding-top": "0px !important",
+      "padding-bottom": "0px !important",
+      "padding": "0px !important",
+      "height": "13px",
+    },
+    ".scm-view .monaco-list-row .count": {
+      "margin-left": "-2.5px",
     },
 
     // Hide ruler (editor right margin)
@@ -972,6 +1346,13 @@
     },
     ".tabs-and-actions-container .tab": {
       "padding-right": "10px",
+    },
+    ".tabs-and-actions-container .tab .monaco-icon-label .monaco-icon-label-container": {
+      // When multiple tabs are open with the same name (.label-name), they gain a dir label too (.label-description),
+      // which wraps in a bad way and gets hidden because of my other styling edits. Adding flex+nowrap keeps both
+      // labels on one (wide) line.
+      "display": "flex",
+      "flex-wrap": "nowrap",
     },
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container": {
       "height": "17px !important",
@@ -1158,38 +1539,96 @@
     },
 
     // Add border on focused editor/terminal pane
-    //  - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
-    //    sidebar) doesn't de-.active the .editor-group-container
-    //  - NOTE .notebook-editor (and other iframe views) doesn't make a :focus (because iframe), and doesn't expose its
-    //    own .focused/.focus state on .notebook-editor, so we rely on .active alone and let it incorrectly stay
-    //    outlined when focus switches to Explorer/etc.
-    //  - NOTE z-index arms race because various things keep appearing with higher z-indexes 🤷
-    //  - Top
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after": {
-      "background-color": "#fff !important",
+    //  - Bugs/gotchas
+    //    - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
+    //      sidebar) doesn't de-.active the .editor-group-container
+    //    - .notebook-editor (and other iframe views) doesn't make a :focus (bug?), and doesn't expose its own
+    //      .focused/.focus state on .notebook-editor, so we rely on .active alone and let it incorrectly stay outlined
+    //      when focus switches to Explorer/etc.
+    //    - z-index arms race because various things keep appearing with higher z-indexes 🤷
+    //  - Bottom/left/right
+    //    - Handle top separately because the top of this .editor-group-container is below breadcrumbs, not above it
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::before": {
+      "content": "''",
+      "pointer-events": "none",
+      "position": "absolute",
+      "top": "0",
+      "left": "0",
+      "width": "calc(100% - 2px)",
+      "height": "calc(100% - 1px)",
+      "border-width": "0px 1px 1px 1px",
+      "border-style": "solid",
+      "border-color": "#fff",
+      "z-index": "21", // z-index:21 to override notebook cells
     },
-    //  - Bottom
-    //    - z-index:21 to override notebook cells
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after": {
-      "background-color":"#fff", "width":"100%", "height":"1px", "z-index":"21", "bottom":"0", "right":"0", "position":"absolute", "content":"' '", "pointer-events":"none",
+    //  - Top: Use the bottom of .tabs-and-actions-container, which is above breadcrumbs (and below tabs/actions)
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::before": {
+      "content": "''",
+      "pointer-events": "none",
+      "position": "absolute",
+      "bottom": "0",
+      "right": "0",
+      "width": "100%",
+      "height": "1px",
+      "background-color": "#fff",
+      "z-index": "21",
     },
-    //  - Left
-    //    - z-index:1 to override .tabs borders
-    //    - z-index:10 to override some weird thing with nested alternating .split-view-view's 🤷
-    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before": {
-      "background-color":"#fff !important", "height":"100% !important", "width":"1px !important", "z-index":"10 !important", "top":"0 !important", "left":"0 !important", "position":"absolute", "content":"' '", "pointer-events":"none",
-    },
-    //  - Right
-    ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after": {
-      "background-color":"#fff !important", "height":"100% !important", "width":"1px !important", "z-index":"10 !important", "top":"0 !important", "right":"0 !important", "position":"absolute", "content":"' '", "pointer-events":"none",
-    },
-    //  - Fix up z-index overlaps with left/right
+    //  - Hack z-index to hide left/right overflow through tabs/actions (want it to stop after breadcrumbs)
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container": {
-      "z-index": "11",
+      "z-index": "22", // z-index:22 to override z-index:21 above
     },
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": {
-      "z-index": "0 !important",
-    },
+
+    // XXX [after git commit]
+    // //  - Top
+    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after": {
+    //   "background-color": "#fff !important",
+    // },
+    // //  - Bottom
+    // //    - z-index:21 to override notebook cells
+    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after": {
+    //   "content": "''",
+    //   "pointer-events": "none",
+    //   "position": "absolute",
+    //   "bottom": "0",
+    //   "right": "0",
+    //   "width": "100%",
+    //   "height": "1px",
+    //   "background-color": "#fff",
+    //   "z-index": "21",
+    // },
+    // //  - Left
+    // //    - z-index:1 to override .tabs borders
+    // //    - z-index:10 to override some weird thing with nested alternating .split-view-view's 🤷
+    // ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before": {
+    //   "content": "''",
+    //   "pointer-events": "none",
+    //   "position": "absolute",
+    //   "top": "0 !important",
+    //   "left": "0 !important",
+    //   "width": "1px !important",
+    //   "height": "100% !important",
+    //   "background-color": "#fff !important",
+    //   "z-index": "10 !important",
+    // },
+    // //  - Right
+    // ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after": {
+    //   "content": "''",
+    //   "pointer-events": "none",
+    //   "position": "absolute",
+    //   "top": "0 !important",
+    //   "right": "0 !important",
+    //   "width": "1px !important",
+    //   "height": "100% !important",
+    //   "background-color": "#fff !important",
+    //   "z-index": "10 !important",
+    // },
+    // //  - Fix up z-index overlaps with left/right
+    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container": {
+    //   "z-index": "11",
+    // },
+    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": {
+    //   "z-index": "0 !important",
+    // },
 
     // Disable underlines for detected links
     ".monaco-editor .detected-link": {
@@ -1209,6 +1648,14 @@
     //  - In the overview ruler, move red/green above the scrollbar (preserve color) instead of below it (dimmed color)
     ".monaco-diff-editor .diffOverview .diffOverviewRuler": {
       "z-index": "11", // Above z-index:10 of the scrollbar (.diffOverview .diffViewport)
+    },
+
+    // Peek
+    ".peekview-widget": {
+      "font-size": "11px",
+    },
+    ".peekview-widget .head .peekview-title": {
+      "font-size": "11px !important",
     },
 
   },
@@ -1253,14 +1700,11 @@
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "search.smartCase": true,
-  "debug.console.fontSize": 10,
   "jupyter.collapseCellInputCodeByDefault": false,
   "jupyter.disableJupyterAutoStart": true,
   "jupyter.enableScrollingForCellOutputs": false,
   "jupyter.showKernelSelectionOnInteractiveWindow": true,
   "workbench.commandPalette.history": 0,
-  "search.quickOpen.includeHistory": false,
   "task.quickOpen.history": 0,
   "workbench.editorAssociations": {
     // TODO(notebook): Do we still need this? Probably from before they launched stable notebook support
@@ -1268,7 +1712,6 @@
   },
   "jupyter.insidersChannel": "off",
   "jupyter.alwaysTrustNotebooks": true,
-  "explorer.confirmDragAndDrop": false,
   "vscode-advanced-open-file.groupDirectoriesFirst": true,
   "workbench.quickOpen.preserveInput": true,
   "editor.matchBrackets": "near",
@@ -1276,9 +1719,6 @@
   "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
   "bookmarks.navigateThroughAllFiles": true,
   "bookmarks.sideBar.expanded": true,
-  "search.searchEditor.reusePriorSearchConfiguration": true,
-  "search.searchEditor.defaultNumberOfContextLines": 0,
-  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "customizeUI.listRowHeight": 20,
   "editor.multiCursorModifier": "alt",
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -1294,22 +1734,12 @@
   "markdown.preview.lineHeight": 1.5,
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.theming.decoration.renderCodeSpan": false,
-  "scm.diffDecorationsGutterVisibility": "hover",
   "editor.wordBasedSuggestionsMode": "allDocuments",
-  "explorer.openEditors.visible": 50,
   "breadcrumbs.symbolPath": "off",
-  "dart.previewLsp": true,
-  "explorer.compactFolders": false,
-  "dart.debugExternalLibraries": false,
-  "dart.debugSdkLibraries": false,
   "problems.showCurrentInStatus": true,
-  "git.enableStatusBarSync": false,
   "editor.acceptSuggestionOnEnter": "off",
-  "dart.enableSnippets": false,
-  "dart.hotReloadProgress": "statusBar",
-  "dart.flutterGutterIcons": false,
   "editor.suggest.showSnippets": false,
-  "notebook.globalToolbarShowLabel": false,
+  "notebook.globalToolbarShowLabel": "never",
   "notebook.insertToolbarLocation": "notebookToolbar",
   "notebook.showCellStatusBar": "hidden",
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
@@ -1321,29 +1751,19 @@
   "editor.occurrencesHighlight": false,
   "ActiveFileInStatusBar.revealFile": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-  "search.exclude": {
-    "build/**": true
-  },
   "editor.comments.ignoreEmptyLines": false,
   "update.showReleaseNotes": false,
-  "git.openRepositoryInParentFolders": "never",
   "jupyter.interactiveWindow.creationMode": "perFile",
-  "scm.alwaysShowRepositories": true,
-  "scm.countBadge": "off",
-  "scm.defaultViewMode": "tree",
-  "scm.inputFontSize": 11,
-  "scm.inputFontFamily": "editor",
   "editor.linkedEditing": true,
   "bookmarks.sideBar.countBadge": "off",
   "testing.countBadge": "off",
-  "explorer.excludeGitIgnore": true,
   "workbench.hover.delay": 500,
   "workbench.tips.enabled": false,
-  "workbench.tree.renderIndentGuides": "none",
   "workbench.editor.autoLockGroups": {
     "terminalEditor": false
   },
   "workbench.editor.untitled.hint": "hidden",
   "editor.accessibilitySupport": "off",
+  "prettier.printWidth": 120,
 
 }

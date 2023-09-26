@@ -5,20 +5,26 @@
 //  - shift+cmd+p -> "Preferences: Open Default Keyboard Shortcuts (JSON)"
 //    - Reference for default keyboard shortcuts
 //    - Reference for all available commands
+//  - https://code.visualstudio.com/api/references/commands
+//    - Reference for commands that take arguments [do these even work here? haven't tried yet]
+//  - https://code.visualstudio.com/api/references/when-clause-contexts
+//    - Reference for when clauses
 //  - https://github.com/codebling/vs-code-default-keybindings/blob/master/macos.keybindings.json
 //    - (Only reference I can find on the web)
 //
 [
 
   // Workspace
+  // {"key": "cmd+,", "command": "workbench.action.openSettings"}, // (Default) Open Settings editor
+  {"key": "shift+cmd+,", "command": "workbench.action.openSettingsJson"}, // Open settings.json
+  {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"}, // Open Keyboard Shortcuts editor
+  {"key": "ctrl+up", "command": "workbench.action.openGlobalKeybindingsFile"}, // Open keybindings.json file
   {"key": "ctrl+shift+r", "command": "workbench.action.reloadWindow"},
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
   {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
-  {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"},
   // {"key": "shift+ctrl+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
-  {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
-  {"key": "ctrl+up", "command": "workbench.action.toggleKeybindingsLog"}, // ctrl+up = ctrl+shift+cmd+k (because karabiner?)
+  {"key": "ctrl+shift+cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
   // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
   {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
   {"key": "cmd+r", "command": "workbench.action.gotoSymbol", "when": "!inSearchEditor"},
@@ -29,11 +35,48 @@
   //  - Default: Allow just cmd+w when no editors remaining
   {"key": "cmd+w", "command": "-workbench.action.closeWindow", "when": "!editorIsOpen && !multipleEditorGroups"},
 
-  // Sidebar
+  // Sidebar: Show/hide
+  //  - Bug: https://github.com/microsoft/vscode/issues/193737 Focus into Side Bar commands don't focus the sidebar if the sidebar wasn't already visible
+  //  - Bug: https://github.com/microsoft/vscode/issues/193741 gitlens doesn't set sideBarFocus, making sidbar keybindings difficult
   {"key": "cmd+\\", "command": "workbench.action.toggleSidebarVisibility"},
-  {"key": "shift+cmd+\\", "command": "workbench.view.explorer"},
-  {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable because it conflicts in terminal, so learn shift+cmd+\ instead
-  // {"key": "shift+cmd+x", "command": "workbench.view.extensions", "when": "viewContainer.workbench.view.extensions.enabled"} // Default
+  {"key": "shift+cmd+\\", "command": "workbench.action.focusSideBar", "when": "!sideBarFocus"},
+  {"key": "shift+cmd+\\", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"}, // Unfocus sidebar, but leave it open
+  {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus"}, // Unfocus sidebar, but leave it open
+  {"key": "shift+escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"}, // Which of these two do I like better? (pick one)
+  {"key": "cmd+escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},   // Which of these two do I like better? (pick one)
+
+  // Sidebar: Focus/switch views
+  //  - NOTE Must manually keep these number-view mappings up to date as new tabs come and go
+  {"key": "shift+cmd+1", "command": "workbench.view.explorer",                  "when": "true"},
+  {"key": "shift+cmd+2", "command": "workbench.view.extension.bookmarks",       "when": "true"},
+  {"key": "shift+cmd+3", "command": "workbench.view.scm",                       "when": "true"},
+  {"key": "shift+cmd+4", "command": "workbench.view.extension.gitlens",         "when": "true"},
+  {"key": "shift+cmd+5", "command": "workbench.view.extension.gitlensInspect",  "when": "true"},
+  {"key": "shift+cmd+8", "command": "workbench.view.debug",                     "when": "true"},
+  {"key": "shift+cmd+9", "command": "workbench.view.extensions",                "when": "true"},
+  {"key": "ctrl+tab", "command": "workbench.action.nextSideBarView", "when": "sideBarFocus"},
+  {"key": "ctrl+shift+tab", "command": "workbench.action.previousSideBarView", "when": "sideBarFocus"},
+  {"key": "shift+cmd+1", "command": "-search.action.replaceAllInFolder", "when": "folderMatchFocus && isEditableItem && replaceActive && searchViewletVisible"},
+  {"key": "shift+cmd+1", "command": "-search.action.replaceAllInFile", "when": "fileMatchFocus && isEditableItem && replaceActive && searchViewletVisible"},
+  {"key": "shift+cmd+1", "command": "-search.action.replace", "when": "isEditableItem && matchFocus && replaceActive && searchViewletVisible"},
+  {"key": "shift+cmd+1", "command": "-editor.action.replaceOne", "when": "editorFocus && findWidgetVisible"},
+  {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable (conflicts in terminal w/ select line down)
+  {"key": "cmd+0", "command": "-workbench.action.focusSideBar"}, // Disable (need it for reset zoom)
+
+  // XXX [after git commit]
+  // // Sidebar: Switch views by number
+  // //  - NOTE Must manually keep these number-view mappings up to date as new tabs come and go
+  // {"key": "cmd+1", "command": "workbench.view.explorer",                  "when": "sideBarFocus && activeViewlet != 'workbench.view.explorer'"},
+  // {"key": "cmd+2", "command": "workbench.view.extension.bookmarks",       "when": "sideBarFocus && activeViewlet != 'workbench.view.extension.bookmarks'"},
+  // {"key": "cmd+3", "command": "workbench.view.scm",                       "when": "sideBarFocus && activeViewlet != 'workbench.view.scm'"},
+  // //  - TODO Enable gitlens views in the sidebar after the fix the sideBarFocus bug (~impossible to make these keybindings work otherwise)
+  // //    - https://github.com/gitkraken/vscode-gitlens/issues/2930 gitlens doesn't set sideBarFocus, making sidbar keybindings difficult
+  // // {"key": "cmd+4", "command": "workbench.view.extension.gitlens",         "when": "sideBarFocus && activeViewlet != 'workbench.view.extension.gitlens'"},
+  // // {"key": "cmd+5", "command": "workbench.view.extension.gitlensInspect",  "when": "sideBarFocus && activeViewlet != 'workbench.view.extension.gitlensInspect'"},
+  // {"key": "cmd+4", "command": "workbench.view.debug",                     "when": "sideBarFocus && activeViewlet != 'workbench.view.debug'"},
+  // {"key": "cmd+5", "command": "workbench.view.extension.test",            "when": "sideBarFocus && activeViewlet != 'workbench.view.extension.test'"},
+  // {"key": "cmd+6", "command": "workbench.view.extensions",                "when": "sideBarFocus && activeViewlet != 'workbench.view.extensions'"},
+  // {"key": "cmd+9", "command": "workbench.view.extensions",                "when": "sideBarFocus && activeViewlet != 'workbench.view.extensions'"},
 
   // Navigate editors (and terminals, notebooks, etc.)
   //  - TODO(practice)
@@ -52,10 +95,10 @@
   {"key": "ctrl+cmd+c", "command": "search.action.copyPath", "when": "fileMatchOrFolderMatchWithResourceFocus"},
 
   // Panes ("editors" and "panels")
+  {"key": "ctrl+tab", "command": "workbench.action.nextEditorInGroup", "when": "!sideBarFocus && !panelFocus"},
   {"key": "ctrl+tab", "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"},
-  {"key": "ctrl+tab", "command": "workbench.action.nextEditorInGroup"},
+  {"key": "ctrl+shift+tab", "command": "workbench.action.previousEditorInGroup", "when": "!sideBarFocus && !panelFocus"},
   {"key": "ctrl+shift+tab", "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"},
-  {"key": "ctrl+shift+tab", "command": "workbench.action.previousEditorInGroup"},
   {"key": "cmd+h", "command": "workbench.action.focusLeftGroup"},
   {"key": "cmd+k", "command": "-workbench.action.terminal.clear", "when": "terminalFocus && terminalProcessSupported"},
   {"key": "cmd+k", "command": "workbench.action.focusAboveGroup"},
@@ -67,14 +110,24 @@
   {"key": "ctrl+alt+cmd+j", "command": "workbench.action.splitEditorToBelowGroup", "when": "!terminalFocus"},
   {"key": "ctrl+alt+cmd+h", "command": "workbench.action.splitEditorToLeftGroup", "when": "!terminalFocus"},
   {"key": "ctrl+alt+cmd+k", "command": "workbench.action.splitEditorToAboveGroup", "when": "!terminalFocus"},
-  {"key": "cmd+1", "command": "workbench.action.openEditorAtIndex1"},
-  {"key": "cmd+2", "command": "workbench.action.openEditorAtIndex2"},
-  {"key": "cmd+3", "command": "workbench.action.openEditorAtIndex3"},
-  {"key": "cmd+4", "command": "workbench.action.openEditorAtIndex4"},
-  {"key": "cmd+5", "command": "workbench.action.openEditorAtIndex5"},
-  {"key": "cmd+6", "command": "workbench.action.openEditorAtIndex6"},
-  {"key": "cmd+7", "command": "workbench.action.openEditorAtIndex7"},
-  {"key": "cmd+8", "command": "workbench.action.openEditorAtIndex8"},
+  {"key": "cmd+1", "command": "workbench.action.openEditorAtIndex1", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+2", "command": "workbench.action.openEditorAtIndex2", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+3", "command": "workbench.action.openEditorAtIndex3", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+4", "command": "workbench.action.openEditorAtIndex4", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+5", "command": "workbench.action.openEditorAtIndex5", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+6", "command": "workbench.action.openEditorAtIndex6", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+7", "command": "workbench.action.openEditorAtIndex7", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+8", "command": "workbench.action.openEditorAtIndex8", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+9", "command": "workbench.action.lastEditorInGroup", "when": "!sideBarFocus && !panelFocus"},
+  {"key": "cmd+1", "command": "-workbench.action.focusFirstEditorGroup"},
+  {"key": "cmd+2", "command": "-workbench.action.focusSecondEditorGroup"},
+  {"key": "cmd+3", "command": "-workbench.action.focusThirdEditorGroup"},
+  {"key": "cmd+4", "command": "-workbench.action.focusFourthEditorGroup"},
+  {"key": "cmd+5", "command": "-workbench.action.focusFifthEditorGroup"},
+  {"key": "cmd+6", "command": "-workbench.action.focusSixthEditorGroup"},
+  {"key": "cmd+7", "command": "-workbench.action.focusSeventhEditorGroup"},
+  {"key": "cmd+8", "command": "-workbench.action.focusEighthEditorGroup"},
+  {"key": "cmd+9", "command": "-workbench.action.lastEditorInGroup"},
   {"key": "ctrl+1", "command": "-workbench.action.openEditorAtIndex1"},
   {"key": "ctrl+2", "command": "-workbench.action.openEditorAtIndex2"},
   {"key": "ctrl+3", "command": "-workbench.action.openEditorAtIndex3"},
@@ -144,50 +197,89 @@
   // Multi-cursor
   {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus"},
   {"key": "alt+cmd+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus"},
-  {
-    "key": "cmd+u",
-    "command": "-cursorUndo",
-    "when": "textInputFocus"
-  },
+  {"key": "cmd+u", "command": "-cursorUndo", "when": "textInputFocus"},
 
   // Search Editor
+  //  - https://github.com/VSCodeVim/Vim/issues/6619 Focus next search result enters visual mode
+  //  - https://github.com/VSCodeVim/Vim/issues/3372 How to disable Visual Mode in VSCodeVim?
+  //  - https://github.com/VSCodeVim/Vim/issues/7254 <C-Up> and <C-Down> cause editor to enter Visual mode #7254
+  //  - https://github.com/VSCodeVim/Vim/issues/5716 Select Mode
   {"key": "shift+cmd+f", "command": "search.action.openNewEditorToSide"},
   {"key": "shift+cmd+f", "command": "-workbench.view.search", "when": "!searchViewletVisible"},
   {"key": "shift+cmd+f", "command": "-workbench.action.findInFiles"},
-  {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
-  {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor && inSearchEditor"},
-  {"key": "backspace", "command": "search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && inSearchEditor"},
-  {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "f4", "command": "-search.action.focusNextSearchResult", "when": "hasSearchResult || inSearchEditor"},
-  {"key": "shift+f4", "command": "-search.action.focusPreviousSearchResult", "when": "hasSearchResult || inSearchEditor"},
-  {"key": "escape", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+n", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
-  {"key": "ctrl+p", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
+  {"key": "escape", "command": "multiCommand.search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
+  {"key": "escape", "command": "-search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
+  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "ctrl+r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor"},
+  {"key": "shift+cmd+r", "command": "-rerunSearchEditorSearch", "when": "inSearchEditor"}, // Confusion with symbols search
   {"key": "cmd+g", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
   {"key": "shift+cmd+g", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
-  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "escape", "command": "-search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
-  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+r", "command": "-toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+c", "command": "-toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "alt+cmd+w", "command": "-toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "alt+-", "command": "-decreaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "alt+=", "command": "-increaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "o", "command": "search.action.openResult", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "ctrl+o", "command": "search.action.openResultToSide", "when": "inSearchEditor"},
-  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
-  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor"},
-  {"key": "r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "shift+cmd+r", "command": "-rerunSearchEditorSearch", "when": "inSearchEditor"},
-  {"key": "-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "cmd+r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor"},
+  {"key": "ctrl+n", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
+  {"key": "ctrl+p", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
+  // {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},     // Nope, eats normal mode key
+  // {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"}, // Nope, eats normal mode key
+  {"key": "backspace", "command": "search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor"}, // Confusion with File Delete
+  //  - To open results, use Peek Definition / Go To Definition
+  //    - TODO(practice)
+  //    - https://code.visualstudio.com/docs/editor/codebasics#_search-editor
+  //      - Use Goto/Peek on the results
+  //    - https://stackoverflow.com/questions/63106163/vscode-navigate-search-editor-using-keyboard-only/63107297#63107297
+  //      - Use Goto/Peek on the filename headers to peek all of its results at once -- useful!
+  //    - Confusingly, the "search.action.*" commands are for the Search sidebar panel, they don't work in the Search Editor
+  //      - https://github.com/microsoft/vscode/issues/193855 Search Editor: Can't open result with any keybindings, only with double-click
+  //    - TODO After they fix this issue, add shift+o for open-to-the-side (like double-click)
+  //      - https://github.com/microsoft/vscode/issues/194044 Search Editor: Add keybinding for double-click action, e.g. to open to the side
+  {"key": "ctrl+o", "command": "editor.action.peekDefinition", "when": "inSearchEditor && !searchInputBoxFocus"}, // ctrl to be fluid w/ ctrl+n/ctrl+p
+  {"key": "o", "command": "editor.action.revealDefinition", "when": "inSearchEditor && !searchInputBoxFocus"}, // Open result in current editor group
+  // {"key": "shift+o", "command": "...", "when": "inSearchEditor && !searchInputBoxFocus"}, // Open result to the side
+
+  // Navigation
+  //  - TODO(practice)
+  {"key": "cmd+]", "command": "workbench.action.navigateForward", "when": "canNavigateForward"},
+  {"key": "cmd+[", "command": "workbench.action.navigateBack", "when": "canNavigateBack"},
+  {"key": "ctrl+]", "command": "editor.action.revealDefinition", "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
+  {"key": "ctrl+[", "command": "multiCommand.addHighlightAnd.editor.action.goToReferences", "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"},
+  {"key": "ctrl+cmd+]", "command": "editor.action.peekDefinition", "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
+  {"key": "ctrl+cmd+[", "command": "multiCommand.addHighlightAnd.editor.action.referenceSearch.trigger", "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"},
+
+  // Git
+  //  - Duplicated in:
+  //    - keybindings.json -> Git
+  //    - settings.json -> vim.normalModeKeyBindingsNonRecursive
+  //    - settings.json -> vim.visualModeKeyBindingsNonRecursive
+  //  - These keys are for when not in vim in an editor view (e.g. sidebar panel, Settings editor)
+  //  - Don't make any "g *" keys here _with editorFocus_, else vim.normalModeKeyBindings will stop receiving "g *" keys
+  //    - e.g. {"key": "g s", "command": "workbench.view.scm", "when": "!inputFocus || editorFocus && vim.mode =~ /^(Normal|Visual.*)$/"},
+  //    - [Or maybe it is possible? https://github.com/VSCodeVim/Vim#remapping-more-complex-key-combinations]
+  //  - Wishlist
+  //    - A command for Stage/Unstage File in the gs list view
+  //      - https://github.com/microsoft/vscode/issues/194214 In Source Control view, add commands/keybindings for "Stage File" / "Unstage File"
+  //      - https://github.com/microsoft/vscode/issues/24916 SCM: Support keyboard shortcuts
+  //    - A command for Stage/Unstage Current Hunk in Diff Editor view
+  //      - https://github.com/microsoft/vscode/issues/26067 SCM: Add "stage ranges" action/button to diff view
+  //    - A command for Open Staged Changes from an editor, like the existing Open Changes (gd)
+  //      - [TODO Open issue]
+  //  - Views
+  {"key": "g s", "command": "workbench.view.scm", "when": "!inputFocus"},
+  {"key": "g l", "command": "gitlens.showCommitsView", "when": "!inputFocus"},
+  {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
+  {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
+  {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"},
+  //  - Diff editor
+  {"key": "ctrl+n", "command": "workbench.action.compareEditor.nextChange", "when": "textCompareEditorActive"},
+  {"key": "ctrl+p", "command": "workbench.action.compareEditor.previousChange", "when": "textCompareEditorActive"},
+  //  - Commands
+  {"key": "g shift+a", "command": "git.stageAll", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"},
+  {"key": "g shift+u", "command": "git.unstageAll", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"},
+  {"key": "g c", "command": "git.commitStaged", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"},
+  // {"key": "g shift+c", "command": "git.commitStagedAmend", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"}, // Want?
 
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
@@ -304,8 +396,6 @@
 
   // TODO Organize
   {"key": "cmd+b", "command": "-workbench.action.toggleSidebarVisibility"},
-  {"key": "ctrl+tab", "command": "workbench.action.nextSideBarView", "when": "sideBarFocus"},
-  {"key": "ctrl+shift+tab", "command": "workbench.action.previousSideBarView", "when": "sideBarFocus"},
   {"key": "cmd+0", "command": "workbench.action.zoomReset"},
   {"key": "cmd+numpad0", "command": "-workbench.action.zoomReset"},
   {"key": "m", "command": "renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
