@@ -1246,12 +1246,12 @@
     ".scm-view .monaco-list-rows .monaco-list-row:nth-of-type(1)": {
       "top": "40px !important",
     },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes']": {
-      "color": "#f96e67",
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes'] .name": {
+      "color": "#f96e67 !important",
       "font-weight": "bold",
     },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Staged Changes']": {
-      "color": "#5ffa69",
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Staged Changes'] .name": {
+      "color": "#5ffa69 !important",
       "font-weight": "bold",
     },
     //  - Hide all action buttons except the few I actually (have to) use
@@ -1285,16 +1285,16 @@
     //  - Color dirs blue
     ".scm-view .monaco-list-row .scm-provider .label .name": {
       "font-weight": "bold",
-      "color": "#6871ff",
+      "color": "#6871ff !important",
     },
     ".scm-view .monaco-list-row:has(.folder-icon) .label-name": {
       "font-weight": "bold",
-      "color": "#6871ff",
+      "color": "#6871ff !important",
     },
     //  - Color the expand/collapse dir icons blue
     //    - We can't apply orange/gray to the modified/ignored ones, so just color them all blue
     ".scm-view .monaco-list-row .monaco-tl-twistie.codicon": {
-      "color": "#6871ff",
+      "color": "#6871ff !important",
       "font-weight": "bold",
     },
     //  - Adjust position of the expand/collapse dir icons
