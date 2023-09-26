@@ -147,9 +147,16 @@ export function registerCommandsToggleGutter(context: vscode.ExtensionContext) {
   //        "editor.lineNumbersMinChars": 0,  // undocumented
   //  - Example code for how to use Configuration
   //    - https://github.com/microsoft/vscode-extension-samples/blob/main/configuration-sample/src/extension.ts
+  //  - Docs
+  //    - https://code.visualstudio.com/api/references/vscode-api#WorkspaceConfiguration
   vscode.commands.registerCommand('jdanbrown.editor.toggleGutter', async () => {
     const config = vscode.workspace.getConfiguration();
+    // Toggle visibility for:
+    //  - breakpoints -- glyphMargin
+    //  - bookmarks -- glyphMargin
+    //  - git decorations -- folding
     await config.update('editor.glyphMargin', !config.get<boolean>('editor.glyphMargin'), vscode.ConfigurationTarget.Workspace);
+    await config.update('editor.folding', !config.get<boolean>('editor.folding'), vscode.ConfigurationTarget.Workspace);
   });
 
 }
