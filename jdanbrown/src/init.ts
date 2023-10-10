@@ -11,59 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
   fixLostFocusBug(context);
   registerCommandsTerminalScrollHalfPage(context);
+  registerCommandsTerminalRerunCommandInRecentTerminal(context);
   registerCommandsToggleGutter(context);
-  _attic(context);
-}
-
-export function _attic(context: vscode.ExtensionContext) {
-  const config = vscode.workspace.getConfiguration();
-  const output = vscode.window.createOutputChannel('init.ts');
-
-  // output.appendLine(`terminals: ${jsonPretty(vscode.window.terminals.map(x => ({name: x.name, processId: x.processId})))}`);
-  // output.appendLine(`workspace: ${jsonPretty({
-  //   name: vscode.workspace.name,
-  //   workspaceFile: vscode.workspace.workspaceFile,
-  //   rootPath: vscode.workspace.rootPath,
-  // })}`);
-  // output.appendLine(`context: ${jsonPretty({
-  //   workspaceState: {
-  //     keys: context.workspaceState.keys(),
-  //   },
-  // })}`);
-
-  // NOTE Howto persist state (across restart/reload) at workspace scope (global scope also available, which we don't want)
-  //  - https://code.visualstudio.com/api/references/vscode-api#ExtensionContext
-  //  - https://code.visualstudio.com/api/references/vscode-api#Memento
-  // await context.workspaceState.update('junk-0', 'a');       // Update key
-  // await context.workspaceState.update('junk-0', undefined); // Delete key
-
-  // // TODO
-  // //  - Rename command
-  // //  - Good otherwise?
-  // vscode.commands.registerCommand('userInitTs.terminal.new', () => {
-  //   const workspacePath = vscode.workspace.workspaceFile.path // TODO Don't persist terminals if no path (i.e. workspace isn't saved)
-  //   const workspacePathBasename = workspacePath.split('/').pop().split('.')[0];
-  //   const nowStr = new Date().toISOString().replace(/[-:.]/g, '');
-  //   const termUid = `${workspacePathBasename}-${sha1HexShort(workspacePath)}-${nowStr}`;
-  //   // output.appendLine(`termUid: ${termUid}`);
-  //   // vscode.window.showInformationMessage(`termUid: ${termUid}`);
-  //   vscode.window.createTerminal({
-  //     // shellPath: 'bash', shellArgs: ['-l'], // XXX Debug
-  //     shellPath: 'tmux-new-or-attach-vscode-term-uid', // NOTE Requires "terminal.integrated.inheritEnv":true (default)
-  //     env: {VSCODE_TERM_UID: termUid}, // For tmux-new-or-attach-vscode-term-uid
-  //   });
-  // });
-
-  // TODO Terminal persistence
-  //  - [updated] Review vscode's WIP first
-  //    - https://github.com/microsoft/vscode/labels/terminal-persistence
-  //  - How to reopen `foo-*` terms after restart? (reload already works, via its own magic)
-  //    - Add a command that lists them and then manually opens them all
-  //    - Pane positions/layout won't be restored, but that's fine (and status quo)
-  //  - https://code.visualstudio.com/api/references/vscode-api
-  //    - https://code.visualstudio.com/api/references/vscode-api#Terminal
-  //    - https://code.visualstudio.com/api/references/vscode-api#TerminalOptions
-
+  registerCommandsQuickOpenMagit(context);
+  console.info('[jdanbrown] activate: Done');
 }
 
 // HACK Fix lost-focus bug when a terminal editor closes because the process exits (e.g. ^D in a shell)
@@ -128,6 +79,51 @@ export function registerCommandsTerminalScrollHalfPage(context: vscode.Extension
 
 }
 
+export function registerCommandsTerminalRerunCommandInRecentTerminal(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsTerminalRerunCommandInRecentTerminal');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.terminal.rerunCommandInRecentTerminal', async () => {
+      const config = vscode.workspace.getConfiguration();
+
+      // Save focused editor
+      //  - "The active editor is the one that currently has focus or, when none has focus, the one that has changed input most recently"
+      //    - https://code.visualstudio.com/api/references/vscode-api#window
+      //  - TODO Only save if active editor is focused
+      //    - Blocked on this request to add isFocused to the api:
+      //      - https://github.com/microsoft/vscode/issues/117980 API to determine whether integrated terminal has focus
+      //    - Workaround: Guard the whole command on "when":"editorFocus" in keybindings.json, so that we never save unfocused editors
+      const textEditor = vscode.window.activeTextEditor;
+      if (textEditor) {
+        await textEditor.document.save();
+      }
+
+      // Get last focused terminal
+      //  - "The active terminal is the one that currently has focus or most recently had focus"
+      //    - https://code.visualstudio.com/api/references/vscode-api#window
+      const terminal = vscode.window.activeTerminal;
+      if (terminal) {
+
+        // Make terminal visible in case it wasn't
+        //  - Do this to give the user feedback that they triggered this, e.g. in case it was unintentional
+        terminal.show(true); // true to preserve existing focus (don't switch focus to the terminal)
+
+        // Send control characters
+        //  - http://xtermjs.org/docs/api/vtfeatures/
+        const esc = '\x1B';
+        const csi = `${esc}[`;
+        const up = `${csi}A`;
+        const enter = '\n';
+        const keys = [
+          // up, enter, // Oops, nope, I disabled up/down arrow keys in .inputrc
+          esc, 'k', enter, // This works if .inputrc uses `editing-mode vi`
+        ];
+        terminal.sendText(keys.join(''), false); // false for no final newline
+
+      }
+    }),
+  );
+}
+
 export function registerCommandsToggleGutter(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] registerCommandsToggleGutter');
 
@@ -149,16 +145,27 @@ export function registerCommandsToggleGutter(context: vscode.ExtensionContext) {
   //    - https://github.com/microsoft/vscode-extension-samples/blob/main/configuration-sample/src/extension.ts
   //  - Docs
   //    - https://code.visualstudio.com/api/references/vscode-api#WorkspaceConfiguration
-  vscode.commands.registerCommand('jdanbrown.editor.toggleGutter', async () => {
-    const config = vscode.workspace.getConfiguration();
-    // Toggle visibility for:
-    //  - breakpoints -- glyphMargin
-    //  - bookmarks -- glyphMargin
-    //  - git decorations -- folding
-    await config.update('editor.glyphMargin', !config.get<boolean>('editor.glyphMargin'), vscode.ConfigurationTarget.Workspace);
-    await config.update('editor.folding', !config.get<boolean>('editor.folding'), vscode.ConfigurationTarget.Workspace);
-  });
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.editor.toggleGutter', async () => {
+      const config = vscode.workspace.getConfiguration();
+      // Toggle visibility for:
+      //  - breakpoints -- glyphMargin
+      //  - bookmarks -- glyphMargin
+      //  - git decorations -- folding
+      await config.update('editor.glyphMargin', !config.get<boolean>('editor.glyphMargin'), vscode.ConfigurationTarget.Workspace);
+      await config.update('editor.folding', !config.get<boolean>('editor.folding'), vscode.ConfigurationTarget.Workspace);
+    }),
+  );
 
+}
+
+export function registerCommandsQuickOpenMagit(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsQuickOpenMagit');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.workbench.action.quickOpen.magit', () => {
+      vscode.commands.executeCommand('workbench.action.quickOpen', '>magit:');
+    }),
+  );
 }
 
 //

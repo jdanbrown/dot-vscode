@@ -34,6 +34,11 @@
   "explorer.decorations.badges": false,
   "explorer.confirmDragAndDrop": false,
 
+  // Problems
+  "problems.sortOrder": "position",
+  "problems.defaultViewMode": "table",
+  "problems.showCurrentInStatus": true,
+
   // Indent/tabs
   //  - https://code.visualstudio.com/docs/editor/codebasics#_indentation
   "editor.detectIndentation": false, // So we can override editor.tabSize in "[foo]" filetypes below
@@ -151,12 +156,41 @@
   "git.enableStatusBarSync": false,
   "git.showCommitInput": false,
   "git.verboseCommit": true,
+  "git.checkoutType": [
+    "local",
+    // "remote",
+    // "tags"
+  ],
   //  - Disable annoying flashing badge on sidebar icon
   //    - https://github.com/microsoft/vscode/issues/71297
   //    - https://github.com/microsoft/vscode/issues/179418
   "git.showProgress": false,
 
+  // magit
+  //  - https://github.com/kahole/edamagit
+  //  - https://github.com/kahole/edamagit/blob/develop/TUTORIAL.md
+  //  - https://github.com/kahole/edamagit/blob/develop/package.json#L392
+  //  - https://magit.vc/manual/magit/
+  "magit.display-buffer-function": "same-column",
+  "magit.forge-enabled": true,
+  // "magit.quick-switch-enabled": false, // Default
+  "magit.hide-status-sections": [
+    // Default: none
+    "issues",
+    "pull requests",
+    "recent commits",
+    // "staged",
+    "stashes",
+    "unmerged",
+    "unpulled",
+    "unpushed",
+    // "unstaged",
+    "untracked"
+  ],
+
   // GitLens
+  //  - https://github.com/gitkraken/vscode-gitlens
+  //  - https://www.gitkraken.com/gitlens
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.currentLine.enabled": false,
@@ -172,6 +206,26 @@
   "gitlens.views.worktrees.files.compact": false,
   "gitlens.views.contributors.files.compact": false,
   "gitlens.views.searchAndCompare.files.compact": false,
+  "gitlens.views.formats.commits.label": "${(tips) • }${message}",
+  "gitlens.views.commits.showBranchComparison": false,
+  "gitlens.views.branches.showBranchComparison": false,
+  "gitlens.views.repositories.showBranchComparison": false,
+  "gitlens.views.repositories.branches.showBranchComparison": false,
+  "gitlens.views.worktrees.showBranchComparison": false,
+  "gitlens.graph.layout": "editor",
+  "gitlens.graph.dimMergeCommits": true,
+  "gitlens.graph.minimap.additionalTypes": ["localBranches", "stashes", "tags"],
+  "gitlens.graph.scrollMarkers.additionalTypes": ["localBranches", "stashes", "tags"],
+  "gitlens.graph.minimap.dataType": "lines",
+  "gitlens.graph.commitOrdering": "topo",
+  "gitlens.graph.highlightRowsOnRefHover": false,
+
+  // Github
+  //  - https://github.com/Microsoft/vscode-pull-request-github
+  "githubIssues.assignWhenWorking": false,
+  "githubPullRequests.defaultMergeMethod": "squash",
+  "githubPullRequests.focusedMode": "overview",
+  "githubPullRequests.showPullRequestNumberInTree": true,
 
   // Debug
   "debug.console.fontSize": 11,
@@ -206,6 +260,12 @@
   "outline.showStrings": false,
   "outline.showVariables": false,
 
+  // advanced-open-file
+  //  - https://github.com/ytakhs/vscode-advanced-open-file
+  "vscode-advanced-open-file.groupDirectoriesFirst": true,
+  "vscode-advanced-open-file.includeDotDotItemForParent": false,
+  "vscode-advanced-open-file.matchType": "contiguous",
+
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
   //  - https://github.com/mattbierner/vscode-emojisense -- cmd+i
@@ -213,6 +273,8 @@
   //      - https://github.com/brunnerh/insert-unicode/issues/43
   //      - insert-unicode has better usability (recents, favorites, etc.)
   "emojisense.languages": {"*": true},
+  "emojisense.emojiDecoratorsEnabled": false,
+  "emojisense.markupCompletionsEnabled": false,
 
   // Highlight
   //  - https://github.com/fabiospampinato/vscode-highlight
@@ -224,6 +286,8 @@
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
       "filterFileRegex": ".*(?<!COMMIT_EDITMSG|Makefile|.go)$",
+      // language:'log' is for the Output bottom panel (discovered via Inspect Editor Tokens and Scopes)
+      "filterLanguageRegex": "(?<!log)$",
     },
   },
 
@@ -268,6 +332,12 @@
   ],
 
   // Filetypes
+  "[magit]": {
+    // "editor.showFoldingControls": "never",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "[markdown]": {
     "editor.quickSuggestions": {
       "comments": "off",
@@ -365,7 +435,6 @@
   "vim.disableAnnoyingNeovimMessage": true,
   "vim.hlsearch": true,
   "vim.leader": ",",
-  "vim.mouseSelectionGoesIntoVisualMode": false,
   "vim.showmodename": false,
   "vim.textwidth": 120,
   "vim.visualstar": true,
@@ -401,6 +470,10 @@
     //  - https://github.com/VSCodeVim/Vim/issues/2007
     {"before": ["u"], "commands": ["undo"]},
     {"before": ["<c-r>"], "commands": ["redo"]},
+
+    // Unbind confusing commands
+    {"before": ["<c-i>"], "after": []},
+    {"before": ["<c-o>"], "after": []},
 
     // Clear search on esc
     {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", "highlightwords.removeAllHighlights", ":"]},
@@ -443,11 +516,15 @@
     {"before": ["<leader>", "l"], "commands": ["bookmarks.list"]},
     {"before": ["<leader>", "L"], "commands": ["bookmarks.listFromAllFiles"]},
 
-    // Git
+    // Git/magit
     //  - (See keybindings.json for centralized comments)
     //  - Views
-    {"before": ["g", "s"], "commands": ["workbench.view.scm"]},
-    {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "s"], "commands": ["magit.status"]},
+    // {"before": ["g", "s"], "commands": ["workbench.view.scm"]}, // Use shift+cmd+3
+    // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
     {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
     {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
     {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
@@ -456,10 +533,16 @@
     {"before": ["g", "D"], "commands": ["git.openAllChanges"]},
     {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
     {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
+    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges"]},
     {"before": ["g", "A"], "commands": ["git.stage"]},
     {"before": ["g", "U"], "commands": ["git.unstage"]},
-    {"before": ["g", "c"], "commands": ["git.commitStaged"]},
+    // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
     // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
+    {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
+    //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
+    //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
+    {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
+    {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
 
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -489,21 +572,27 @@
     {"before": ["["], "after": ["<leader>", "["]},
     {"before": ["]"], "after": ["<leader>", "]"]},
 
-    // Git
+    // Git/magit
     //  - (See keybindings.json for comments)
     //  - Views
-    {"before": ["g", "s"], "commands": ["workbench.view.scm"]},
-    {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "s"], "commands": ["magit.status"]},
+    // {"before": ["g", "s"], "commands": ["workbench.view.scm"]}, // Use shift+cmd+3
+    // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
     {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
     {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
     {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
     //  - Commands
     {"before": ["g", "a"], "commands": ["git.stageSelectedRanges", "extension.vim_escape"]},
     {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges", "extension.vim_escape"]},
+    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges", "extension.vim_escape"]},
     {"before": ["g", "A"], "commands": ["git.stage"]},
     {"before": ["g", "U"], "commands": ["git.unstage"]},
-    {"before": ["g", "c"], "commands": ["git.commitStaged"]},
+    // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
     // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
+    {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
 
   ],
   "vim.operatorPendingModeKeyBindings": [
@@ -521,6 +610,17 @@
 
   // multi-commands
   "multiCommand.commands": [
+
+    // Bottom panel
+    //  - Workaround for focus jumping to weird places on workbench.action.togglePanel
+    {
+      "command": "multiCommand.workbench.action.togglePanel.focusBackOnEditor",
+      "sequence": ["workbench.action.togglePanel", "workbench.action.focusActiveEditorGroup",],
+    },
+    {
+      "command": "multiCommand.workbench.action.togglePanel.focusBackOnSidebar",
+      "sequence": ["workbench.action.togglePanel", "workbench.action.focusSideBar",],
+    },
 
     // Search Editor
     {
@@ -583,6 +683,13 @@
       ],
     },
 
+    // Git/magit
+    {"command": "multiCommand.magit.stage", "sequence": ["magit.stage", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.stage-all", "sequence": ["magit.stage-all", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.unstage", "sequence": ["magit.unstage", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.unstage-all", "sequence": ["magit.unstage-all", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.discard-at-point", "sequence": ["magit.discard-at-point", "extension.vim_escape"]},
+
   ],
 
   // Colors
@@ -616,6 +723,11 @@
   "workbench.colorCustomizations": {
 
     "bookmarks.overviewRuler": "#0000", // Disable
+
+    "button.background": "#666", // Primary buttons (most of them)
+    "button.hoverBackground": "#808080", // #666 + 10L (https://hslpicker.com)
+    "button.secondaryBackground": "#404040", // Secondary buttons (e.g. in Notifications)
+    "button.secondaryHoverBackground": "#808080", // Same as hoverBackground
 
     "contrastActiveBorder": "#0000", // Disable
     // "contrastBorder": "#777",
@@ -694,6 +806,7 @@
     "list.inactiveSelectionBackground": "#404040",
     "list.focusBackground": "#666",
     "list.hoverBackground": "#666",
+    "list.errorForeground": "#ff6e67", // Color for files with problems
 
     // List find/search highlight (Explorer)
     "list.filterMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
@@ -727,8 +840,14 @@
     "settings.focusedRowBorder": "#a6a6a6", // Override focusBorder (blue -> gray)
 
     "statusBar.background": "#404040",
-    "statusBar.foreground": "#a6a6a6",
+    // "statusBar.foreground": "#a6a6a6", // Medium gray like all other scaffolding text
+    "statusBar.foreground": "#fff", // Hmm actually, very white because there's important stuff down there that changes
     "statusBarItem.remoteBackground": "#0000",
+
+    // "statusBar.debuggingBackground": "#ba592c", // Default (some orange that doesn't work well with my other colors)
+    // "statusBar.debuggingForeground": "#a6a6a6", // Default (the same grey as statusBar.foreground)
+    "statusBar.debuggingBackground": "#800600", // Dark red (#ff6e67 70L -> 25L)
+    "statusBar.debuggingForeground": "#fff", // Very white on dark red
 
     // "tab.activeBackground": "#404040", // Don't highlight background of active tab, only foreground (like atom)
     "tab.activeBackground": "#666", // Do highlight background of active tab (I think this is better than atom)
@@ -866,6 +985,10 @@
       "typeParameter": {"foreground": "#ffffff", "fontStyle": ""},
       "variable":      {"foreground": "#ffffff", "fontStyle": ""},
 
+      // Magit
+      //  - https://github.com/kahole/edamagit/pull/271
+      "magit-ref-name": {"foreground": "#fffc67", "fontStyle": "bold"},
+
       // Python
       //  - https://github.com/microsoft/pylance-release
       "*.typeHint:python":       {"foreground": "#fffc67", "fontStyle": "bold"},
@@ -880,6 +1003,8 @@
   },
   //  - Use semantic highlighting when it's available, and fallback to syntax highlighting when it's not
   //    - https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
+  //    - https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide#semantic-coloring-in-color-themes
+  //      - Schema reference on foreground/fontStyle
   "editor.tokenColorCustomizations": {
     "textMateRules": [
 
@@ -927,6 +1052,8 @@
       {"scope": "keyword.other.operator",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
       {"scope": "keyword.other.unit",                                       "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
       {"scope": "keyword.other.using",                                      "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
+      {"scope": "magit.header",                                             "settings": {"foreground": "#6871ff", "fontStyle": "bold underline"}},
+      {"scope": "magit.subheader",                                          "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
       {"scope": "markup.bold",                                              "settings": {"fontStyle": "bold"}},
       {"scope": "markup.changed",                                           "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
       {"scope": "markup.deleted",                                           "settings": {"foreground": "#f96e67", "fontStyle": "bold"}},
@@ -1046,6 +1173,13 @@
   // Monospace everywhere
   "apc.font.family": "Consolas",
   "apc.monospace.font.family": "Consolas",
+  // Activity bar
+  //  - Change large icons on the left edge of window -> small icons at the bottom of Explorer view (only visible when Sidebar is)
+  "apc.activityBar": {
+    "position": "bottom",
+    "size": 26,
+    "itemMargin": 0,
+  },
   // Tabs
   "apc.header": {
     // HACK Tune height to 13px to avoid a gap at the bottom of editors/terminals/notebooks
@@ -1064,13 +1198,6 @@
   "apc.listRow": {
     "height": 13,
     "fontSize": 11,
-  },
-  // Activity bar
-  //  - Change large icons always visibile on the left -> small icons at the bottom of Explorer view
-  "apc.activityBar": {
-    "position": "bottom",
-    "size": 26,
-    "itemMargin": 0,
   },
   // XXX Nope, don't use apc.imports
   //  - https://github.com/drcika/apc-extension#apcimports
@@ -1128,6 +1255,10 @@
     ".monaco-workbench .codicon[class*=codicon-]": {
       "font-size": "11px",
     },
+    ".monaco-action-bar .action-item .codicon": {
+      "width": "13px",
+      "height": "13px",
+    },
 
     // Quick input (cmd+p)
     //  - Protip: To use element inspector on these, set "workbench.quickOpen.closeOnFocusLost":false
@@ -1178,7 +1309,29 @@
     // ".quick-input-widget .monaco-list-row[data-index='1']": { "top": "calc(13px * 1) !important" },
     // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
 
+    // Activity Bar
+    "#workbench\\.parts\\.activitybar": {
+      "background-color": "#404040 !important",
+    },
+
     // Sidebar
+    //  - Re-style titlebars
+    "#workbench\\.parts\\.sidebar > .title": {
+      "background-color": "#404040",
+    },
+    "#workbench\\.parts\\.sidebar .pane-header": {
+      "background-color": "#404040 !important",
+      // "height": "16px !important", // Nope, position:absolute w/ top
+    },
+    //  - Icon sizing
+    "#workbench\\.parts\\.sidebar > .title > .title-actions .codicon": {
+      "display": "flex",
+      "align-items": "center",
+      "justify-content": "center",
+      "line-height": "1",
+      "font-size": "13px",
+    },
+    //  - Add border on focused view
     "#workbench\\.parts\\.sidebar .monaco-list:focus::before": {
       "display": "none",
     },
@@ -1235,16 +1388,19 @@
       "margin": "0 4px 0 5px",
     },
 
-    // Sidebar: Git
+    // Sidebar: Git (SCM)
     //  - Hide Commit button + manually move parent/top elements to get rid of the 40px blank space
     ".scm-view .monaco-list-rows": {
       "top": "-40px !important",
     },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-label$=Commit]": {
-      "display": "none",
-    },
     ".scm-view .monaco-list-rows .monaco-list-row:nth-of-type(1)": {
       "top": "40px !important",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Commit']": {
+      "display": "none",
+    },
+    ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Sync Changes']": {
+      "display": "none",
     },
     ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes'] .name": {
       "color": "#f96e67 !important",
@@ -1254,6 +1410,7 @@
       "color": "#5ffa69 !important",
       "font-weight": "bold",
     },
+
     //  - Hide all action buttons except the few I actually (have to) use
     //    - I have to use +/- because there aren't yet keybindings for stage/unstage from scm view :/
     //    - https://github.com/microsoft/vscode/issues/194214 In Source Control view, add commands/keybindings for "Stage File" / "Unstage File"
@@ -1268,7 +1425,7 @@
       "display": "none !important",
     },
     ".scm-view .monaco-list-row .actions-container .action-item[title='Refresh']": {
-      "display": "none !important",
+      // "display": "none !important",
     },
     ".scm-view .monaco-list-row .actions .action-item[title='Open File']": {
       "display": "none !important",
@@ -1282,6 +1439,7 @@
     ".scm-view .monaco-list-row .actions .action-item[title='Stash All Changes']": {
       "display": "none !important",
     },
+
     //  - Color dirs blue
     ".scm-view .monaco-list-row .scm-provider .label .name": {
       "font-weight": "bold",
@@ -1325,7 +1483,100 @@
       "margin-left": "-2.5px",
     },
 
-    // Hide ruler (editor right margin)
+    // Sidebar: Debug
+    ".debug-pane .session .codicon": {
+      "line-height": "13px !important",
+    },
+    ".debug-pane .monaco-list-row .monaco-action-bar .action-label": {
+      "padding": "0px 1px",
+    },
+    ".debug-pane .monaco-count-badge.long": {
+      "padding-top": "0px",
+      "padding-bottom": "0px",
+    },
+    ".debug-pane .monaco-list-row input[type='checkbox' i]": {
+      "margin-top": "0px",
+      "margin-bottom": "0px",
+    },
+    ".debug-pane .debug-breakpoints .breakpoint > .codicon": {
+      "height": "13px",
+    },
+    ".debug-pane .monaco-list-row .monaco-count-badge": {
+      "padding-top": "0px",
+      "padding-bottom": "0px",
+      "min-height": "13px",
+    },
+
+    // Bottom panel
+    //  - Re-style titlebar
+    "#workbench\\.parts\\.panel .title": {
+      "background-color": "#404040",
+      "padding-left": "0px !important",
+      "height": "30px !important",
+    },
+    "#workbench\\.parts\\.panel .title .title-actions": {
+      "height": "30px !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .monaco-action-bar": {
+      "height": "100% !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item": {
+      "padding-left": "7px !important",
+      "padding-right": "7px !important",
+      "margin-right": "0px !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item.checked": {
+      "background-color": "#666 !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item:hover": {
+      "background-color": "#666 !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item:hover .action-label": {
+      "color": "#fff !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item .action-label": {
+      "font-size": "12px",
+      "color": "#a6a6a6 !important",
+      "padding": "0px !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item.checked .action-label": {
+      "color": "#fff !important",
+    },
+    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item .active-item-indicator": {
+      "display": "none",
+    },
+    "#workbench\\.parts\\.panel .title .action-label": {
+      "color": "#a6a6a6 !important",
+    },
+    "#workbench\\.parts\\.panel .title .action-label:hover": {
+      "color": "#fff !important",
+    },
+    //  - TODO Is there any way to add a border on the focused bottom panel? .focus doesn't work, and I don't see any custom selectors (e.g. .active)
+    // "#workbench\\.parts\\.panel:has(.active, .focus, .synthetic-focus, ...) .content::before": {
+    //   "content": "''",
+    //   "pointer-events": "none",
+    //   "position": "absolute",
+    //   "top": "0",
+    //   "left": "0",
+    //   "width": "100%",
+    //   "height": "100%",
+    //   "outline": "1px solid #fff",
+    //   "outline-offset": "-1px",
+    //   "z-index": "1",
+    // },
+
+    // Notifications
+    //  - Add border on focused view
+    //    - The Notifications list view happens when you shift+cmd+\ (notifications.showList)
+    //    - The Notification Toasts view happens when you click the standalone notifications (which doesn't activate the notifications list)
+    ".notifications-center:has(:focus)": {
+      "border-color": "#fff !important",
+    },
+    ".notification-toast:has(:focus)": {
+      "border-color": "#fff !important",
+    },
+
+    // Editor: Hide overview ruler (editor right margin / scrollbar)
     //  - https://github.com/microsoft/vscode/issues/85418
     ".decorationsOverviewRuler": {
       "display": "none !important",
@@ -1389,7 +1640,6 @@
     },
     ".tab .tab-label": {
       "line-height": "17px !important",
-      "font-family": "Consolas",
     },
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit": {
       "width": "inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
@@ -1457,34 +1707,62 @@
     },
 
     // Breadcrumbs
+    ".breadcrumbs-control": {
+      "height": "17px !important",
+    },
     ".monaco-breadcrumbs": {
       "height": "17px !important",
     },
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control": {
+    ".monaco-breadcrumbs .monaco-breadcrumb-item .monaco-icon-label": {
       "height": "17px !important",
+      "line-height": "17px !important",
     },
-    ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-breadcrumbs .breadcrumbs-control .monaco-icon-label": {
-      "line-height": "15px !important",
-      "height": "17px !important",
-    },
-    ".tabs-breadcrumbs .monaco-breadcrumb-item .label-name": {
+    ".monaco-breadcrumbs .monaco-breadcrumb-item .label-name": {
       "font-size": "11px !important",
-      "font-family": "Consolas !important",
     },
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:first-of-type:not(.root_folder) .label-name::before": {
+    ".monaco-breadcrumbs .monaco-breadcrumb-item .codicon-breadcrumb-separator": {
+      "display": "none", // Replace with '/' (below)
+    },
+    ".monaco-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after": {
       "content": "'/'",
     },
-    ".tabs-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after": {
+    //  - This used to work before the 1.83.0 upgrade, when it appears they removed .root_folder
+    // ".monaco-breadcrumbs .monaco-breadcrumb-item:not(.root_folder):first-of-type .label-name::before": {
+    //   "content": "'/'",
+    // },
+    //  - This is a very hacky hack for ≥1.83.0 that might work sometimes but doesn't really seem reliable at all
+    ".monaco-breadcrumbs .monaco-breadcrumb-item:first-of-type:has(.monaco-icon-label[title^='/']) .label-name::before": {
       "content": "'/'",
-    },
-    ".tabs-breadcrumbs .codicon-breadcrumb-separator": {
-      "display": "none",
-      "font-size": "11px !important",
     },
 
     // Status bar
     ".statusbar .statusbar-item .codicon": {
       "font-size": "13px !important",
+    },
+
+    // Status bar: Problems
+    //  - Numbers: Gray when no problems, white when problems
+    ".statusbar #status\\.problems[aria-label='No Problems']": {
+      "color": "#a6a6a6 !important",
+    },
+    ".statusbar #status\\.problems[aria-label!='No Problems']": {
+      "color": "#fff !important",
+    },
+    //  - Icons: Gray when no problems, red/yellow/cyan when problems (plus bold to stand out)
+    ".statusbar #status\\.problems .codicon": {
+      "color": "#a6a6a6 !important",
+    },
+    ".statusbar #status\\.problems[aria-label*='Errors:'] .codicon-error": {
+      "color": "#ff6e67 !important",
+      "font-weight": "bold",
+    },
+    ".statusbar #status\\.problems[aria-label*='Warnings:'] .codicon-warning": {
+      "color": "#fffc67 !important",
+      "font-weight": "bold",
+    },
+    ".statusbar #status\\.problems[aria-label*='Infos:'] .codicon-info": {
+      "color": "#60fdff !important",
+      "font-weight": "bold",
     },
 
     // Editor
@@ -1542,13 +1820,16 @@
     //  - Bugs/gotchas
     //    - Use :focus in addition to .editor-group-container.active, because focusing other views (e.g. Explorer in the
     //      sidebar) doesn't de-.active the .editor-group-container
-    //    - .notebook-editor (and other iframe views) doesn't make a :focus (bug?), and doesn't expose its own
-    //      .focused/.focus state on .notebook-editor, so we rely on .active alone and let it incorrectly stay outlined
-    //      when focus switches to Explorer/etc.
+    //    - .notebook-editor and webview/iframe views doesn't make a :focus (bug?), and doesn't expose its own .focused/.focus
+    //      state on .notebook-editor, so we rely on .active alone and let it incorrectly stay outlined when focus
+    //      switches to Explorer/etc.
+    //    - webview iframes use a weird dom indirection that looks like this:
+    //      - <div class="editor-instance"><div id="webview-editor-element-$UID1" data-keybinding-context="$NUM" aria-flowto="$UID2" /></div>
+    //      - <div class="monaco-workbench"><div id="$UID2" data-parent-flow-to-element-id="webview-editor-element-$UID1" ...>...</div>
     //    - z-index arms race because various things keep appearing with higher z-indexes 🤷
     //  - Bottom/left/right
     //    - Handle top separately because the top of this .editor-group-container is below breadcrumbs, not above it
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::before": {
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor, div[id^='webview-editor-element-'])::before": {
       "content": "''",
       "pointer-events": "none",
       "position": "absolute",
@@ -1562,7 +1843,7 @@
       "z-index": "21", // z-index:21 to override notebook cells
     },
     //  - Top: Use the bottom of .tabs-and-actions-container, which is above breadcrumbs (and below tabs/actions)
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::before": {
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor, div[id^='webview-editor-element-']) .tabs-and-actions-container::before": {
       "content": "''",
       "pointer-events": "none",
       "position": "absolute",
@@ -1574,61 +1855,9 @@
       "z-index": "21",
     },
     //  - Hack z-index to hide left/right overflow through tabs/actions (want it to stop after breadcrumbs)
-    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container": {
+    ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor, div[id^='webview-editor-element-']) .tabs-and-actions-container": {
       "z-index": "22", // z-index:22 to override z-index:21 above
     },
-
-    // XXX [after git commit]
-    // //  - Top
-    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container::after": {
-    //   "background-color": "#fff !important",
-    // },
-    // //  - Bottom
-    // //    - z-index:21 to override notebook cells
-    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor)::after": {
-    //   "content": "''",
-    //   "pointer-events": "none",
-    //   "position": "absolute",
-    //   "bottom": "0",
-    //   "right": "0",
-    //   "width": "100%",
-    //   "height": "1px",
-    //   "background-color": "#fff",
-    //   "z-index": "21",
-    // },
-    // //  - Left
-    // //    - z-index:1 to override .tabs borders
-    // //    - z-index:10 to override some weird thing with nested alternating .split-view-view's 🤷
-    // ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::before": {
-    //   "content": "''",
-    //   "pointer-events": "none",
-    //   "position": "absolute",
-    //   "top": "0 !important",
-    //   "left": "0 !important",
-    //   "width": "1px !important",
-    //   "height": "100% !important",
-    //   "background-color": "#fff !important",
-    //   "z-index": "10 !important",
-    // },
-    // //  - Right
-    // ".split-view-view:has(> .editor-group-container.active:not(.empty) :focus, > .editor-group-container.active:not(.empty) .notebook-editor)::after": {
-    //   "content": "''",
-    //   "pointer-events": "none",
-    //   "position": "absolute",
-    //   "top": "0 !important",
-    //   "right": "0 !important",
-    //   "width": "1px !important",
-    //   "height": "100% !important",
-    //   "background-color": "#fff !important",
-    //   "z-index": "10 !important",
-    // },
-    // //  - Fix up z-index overlaps with left/right
-    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs-and-actions-container": {
-    //   "z-index": "11",
-    // },
-    // ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor) .tabs.title.title-border-bottom:has(.tabs-breadcrumbs)::after": {
-    //   "z-index": "0 !important",
-    // },
 
     // Disable underlines for detected links
     ".monaco-editor .detected-link": {
@@ -1712,7 +1941,6 @@
   },
   "jupyter.insidersChannel": "off",
   "jupyter.alwaysTrustNotebooks": true,
-  "vscode-advanced-open-file.groupDirectoriesFirst": true,
   "workbench.quickOpen.preserveInput": true,
   "editor.matchBrackets": "near",
   "editor.lightbulb.enabled": false,
@@ -1736,7 +1964,6 @@
   "markdown.extension.theming.decoration.renderCodeSpan": false,
   "editor.wordBasedSuggestionsMode": "allDocuments",
   "breadcrumbs.symbolPath": "off",
-  "problems.showCurrentInStatus": true,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.suggest.showSnippets": false,
   "notebook.globalToolbarShowLabel": "never",
@@ -1763,7 +1990,9 @@
     "terminalEditor": false
   },
   "workbench.editor.untitled.hint": "hidden",
+  "workbench.editor.empty.hint": "hidden",
   "editor.accessibilitySupport": "off",
   "prettier.printWidth": 120,
+  "accessibility.verbosity.terminal": false,
 
 }
