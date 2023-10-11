@@ -180,7 +180,7 @@ function range(n: number): Array<number> {
   if (!Number.isInteger(n)) {
     throw new Error(`Must be integer: n[${n}]`);
   }
-  return [...Array(n).keys()];
+  return Array.from(Array(n).keys());
 }
 
 // function sha1HexShort(x: string, n: number = 8): string {
