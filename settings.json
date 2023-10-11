@@ -57,6 +57,15 @@
   //  - FIXME vim L/H keeps scrolling down/up if you repeat it: https://github.com/VSCodeVim/Vim/issues/1393
   //    - 0 fixes H, but L still scrolls down by 1
   "editor.cursorSurroundingLines": 0,
+  "files.hotExit": "off",
+  "files.simpleDialog.enable": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  //  - HACK Use insertFinalNewline:false everywhere as a workaround for notebooks not yet exposing a filetype (see "[notebook-todo]" below)
+  //    - https://github.com/microsoft/vscode/issues/195011 Language specific settings for ipynb (jupyter-notebook) files
+  //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
+  // "files.insertFinalNewline": true, // Want for everything except notebooks
+  "files.insertFinalNewline": false, // But do this globally for now, else every notebook cell gets a final blank line at the bottom on save (poop)
 
   // Completions
   //  - https://github.com/microsoft/vscode/issues/76322
@@ -142,6 +151,19 @@
   "search.smartCase": true,
   "search.useParentIgnoreFiles": true,
   "search.useGlobalIgnoreFiles": true,
+
+  // Notebook/jupyter
+  "jupyter.collapseCellInputCodeByDefault": false,
+  "jupyter.disableJupyterAutoStart": true,
+  "jupyter.enableScrollingForCellOutputs": false,
+  "jupyter.showKernelSelectionOnInteractiveWindow": true,
+  "jupyter.insidersChannel": "off",
+  "jupyter.alwaysTrustNotebooks": true,
+  "jupyter.interactiveWindow.creationMode": "perFile",
+  "notebook.globalToolbarShowLabel": "never",
+  "notebook.insertToolbarLocation": "notebookToolbar",
+  "notebook.showCellStatusBar": "hidden",
+  "notebook.output.textLineLimit": 100,
 
   // Git
   "scm.alwaysShowRepositories": true,
@@ -332,6 +354,12 @@
   ],
 
   // Filetypes
+  //  - https://code.visualstudio.com/docs/languages/identifiers
+  "workbench.editorAssociations": {
+    // Always open .ipynb in notebook editor instead of text editor
+    //  - To manually toggle, use "View: Reopen Editor With..."
+    "*.ipynb": "jupyter-notebook"
+  },
   "[magit]": {
     // "editor.showFoldingControls": "never",
   },
@@ -347,8 +375,11 @@
     "editor.wordWrap": "off",
     "editor.wrappingIndent": "indent"
   },
-  "[jupyter]": {
-    "editor.tabSize": 4,
+  //  - TODO I want insertFinalNewline:false in notebooks, once a filetype control is exposed for notebook editors
+  //    - https://github.com/microsoft/vscode/issues/195011 Language specific settings for ipynb (jupyter-notebook) files
+  //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
+  "[notebook-todo]": {
+    "files.insertFinalNewline": false,
   },
   "[python]": {
     "editor.tabSize": 4,
@@ -1918,29 +1949,14 @@
   "editor.renderLineHighlight": "none",
   "editor.cursorBlinking": "solid",
   "editor.minimap.enabled": false,
-  "files.hotExit": "off",
-  "files.insertFinalNewline": true,
-  "files.simpleDialog.enable": true,
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
   "workbench.commandPalette.preserveInput": true,
   "workbench.iconTheme": null,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "jupyter.collapseCellInputCodeByDefault": false,
-  "jupyter.disableJupyterAutoStart": true,
-  "jupyter.enableScrollingForCellOutputs": false,
-  "jupyter.showKernelSelectionOnInteractiveWindow": true,
   "workbench.commandPalette.history": 0,
   "task.quickOpen.history": 0,
-  "workbench.editorAssociations": {
-    // TODO(notebook): Do we still need this? Probably from before they launched stable notebook support
-    // "*.ipynb": "jupyter-notebook"
-  },
-  "jupyter.insidersChannel": "off",
-  "jupyter.alwaysTrustNotebooks": true,
   "workbench.quickOpen.preserveInput": true,
   "editor.matchBrackets": "near",
   "editor.lightbulb.enabled": false,
@@ -1966,9 +1982,6 @@
   "breadcrumbs.symbolPath": "off",
   "editor.acceptSuggestionOnEnter": "off",
   "editor.suggest.showSnippets": false,
-  "notebook.globalToolbarShowLabel": "never",
-  "notebook.insertToolbarLocation": "notebookToolbar",
-  "notebook.showCellStatusBar": "hidden",
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
   "editor.guides.indentation": false,
   "editor.bracketPairColorization.enabled": false,
@@ -1980,7 +1993,6 @@
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   "editor.comments.ignoreEmptyLines": false,
   "update.showReleaseNotes": false,
-  "jupyter.interactiveWindow.creationMode": "perFile",
   "editor.linkedEditing": true,
   "bookmarks.sideBar.countBadge": "off",
   "testing.countBadge": "off",
