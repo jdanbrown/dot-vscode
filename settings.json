@@ -458,6 +458,11 @@
     },
   ],
 
+  // Extensions
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://galenwong.github.io/blog/2021-03-22-vscode-neovim-vs-vscodevim/
@@ -1985,9 +1990,6 @@
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
   "editor.guides.indentation": false,
   "editor.bracketPairColorization.enabled": false,
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  },
   "editor.occurrencesHighlight": false,
   "ActiveFileInStatusBar.revealFile": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
