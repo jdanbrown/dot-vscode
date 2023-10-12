@@ -166,6 +166,7 @@
   "notebook.output.textLineLimit": 100,
 
   // Git
+  "scm.showActionButton": false, // Hide action button at top of sidebar ('Commit', 'Sync Changes', etc.)
   "scm.alwaysShowRepositories": true,
   "scm.countBadge": "off",
   "scm.defaultViewMode": "tree",
@@ -1424,28 +1425,29 @@
       "margin": "0 4px 0 5px",
     },
 
-    // Sidebar: Git (SCM)
-    //  - Hide Commit button + manually move parent/top elements to get rid of the 40px blank space
-    ".scm-view .monaco-list-rows": {
-      "top": "-40px !important",
-    },
-    ".scm-view .monaco-list-rows .monaco-list-row:nth-of-type(1)": {
-      "top": "40px !important",
-    },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Commit']": {
-      "display": "none",
-    },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Sync Changes']": {
-      "display": "none",
-    },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes'] .name": {
-      "color": "#f96e67 !important",
-      "font-weight": "bold",
-    },
-    ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Staged Changes'] .name": {
-      "color": "#5ffa69 !important",
-      "font-weight": "bold",
-    },
+    // XXX Replaced by scm.showActionButton:false
+    // // Sidebar: Git (SCM)
+    // //  - Hide Commit button + manually move parent/top elements to get rid of the 40px blank space
+    // ".scm-view .monaco-list-rows": {
+    //   "top": "-40px !important",
+    // },
+    // ".scm-view .monaco-list-rows .monaco-list-row:nth-of-type(1)": {
+    //   "top": "40px !important",
+    // },
+    // ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Commit']": {
+    //   "display": "none",
+    // },
+    // ".scm-view .monaco-list-rows .monaco-list-row[aria-label*='Sync Changes']": {
+    //   "display": "none",
+    // },
+    // ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Changes'] .name": {
+    //   "color": "#f96e67 !important",
+    //   "font-weight": "bold",
+    // },
+    // ".scm-view .monaco-list-rows .monaco-list-row[aria-level='2'][aria-label='Staged Changes'] .name": {
+    //   "color": "#5ffa69 !important",
+    //   "font-weight": "bold",
+    // },
 
     //  - Hide all action buttons except the few I actually (have to) use
     //    - I have to use +/- because there aren't yet keybindings for stage/unstage from scm view :/
