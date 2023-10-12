@@ -1778,6 +1778,12 @@
       "font-size": "13px !important",
     },
 
+    // Status bar: Git
+    //  - Hide branch icon next to branch name
+    ".statusbar [id^='status.scm.'] .codicon-git-branch::before": {
+      "display": "none",
+    },
+
     // Status bar: Problems
     //  - Numbers: Gray when no problems, white when problems
     ".statusbar #status\\.problems[aria-label='No Problems']": {
