@@ -402,8 +402,8 @@
   {"key": "ctrl+k",        "command": "magit.move-previous-hunk",       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   //  - NOTE These steal from multi-key keybindings like gZ* (and idk how to fix)
   //    - https://github.com/VSCodeVim/Vim#vim-modes
-  {"key": "s",             "command": "multiCommand.magit.stage",            "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  {"key": "shift+s",       "command": "multiCommand.magit.stage-all",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "a",             "command": "multiCommand.magit.stage",            "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+a",       "command": "multiCommand.magit.stage-all",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "u",             "command": "multiCommand.magit.unstage",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "shift+u",       "command": "multiCommand.magit.unstage-all",      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "d",             "command": "multiCommand.magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
