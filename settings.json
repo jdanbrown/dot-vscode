@@ -431,6 +431,7 @@
   "python.languageServer": "Pylance",
   "python.analysis.typeCheckingMode": "strict",
   "python.terminal.activateEnvironment": false,
+  "python.analysis.autoImportCompletions": true,
   "jupyter.interactiveWindow.viewColumn": "beside",
 
   // Dart
