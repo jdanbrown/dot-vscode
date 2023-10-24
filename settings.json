@@ -429,9 +429,13 @@
   // Python
   "python.showStartPage": false,
   "python.languageServer": "Pylance",
-  "python.analysis.typeCheckingMode": "strict",
+  // "python.analysis.typeCheckingMode": "strict", // TODO Want, but goes nuts in zoolander
+  // "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
+  "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
   "python.terminal.activateEnvironment": false,
   "python.analysis.autoImportCompletions": true,
+  "python.interpreter.infoVisibility": "always",
+  "python.analysis.extraPaths": [],
   "jupyter.interactiveWindow.viewColumn": "beside",
 
   // Dart
