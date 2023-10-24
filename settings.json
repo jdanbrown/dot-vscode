@@ -287,7 +287,7 @@
   //  - https://github.com/ytakhs/vscode-advanced-open-file
   "vscode-advanced-open-file.groupDirectoriesFirst": true,
   "vscode-advanced-open-file.includeDotDotItemForParent": false,
-  "vscode-advanced-open-file.matchType": "contiguous",
+  "vscode-advanced-open-file.matchType": "sparse",
 
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
