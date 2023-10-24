@@ -58,8 +58,12 @@
   {"key": "ctrl+cmd+o", "command": "workbench.action.files.openFile"},
   {"key": "shift+cmd+backspace", "command": "fileutils.removeFile", "when": "editorFocus"},
   {"key": "ctrl+m", "command": "fileutils.moveFile", "when": "editorFocus"},
-  {"key": "shift+cmd+c", "command": "copyFilePath"},
+  {"key": "shift+cmd+c", "command": "copyRelativeFilePath", "when": "editorFocus"},
   {"key": "shift+cmd+c", "command": "-workbench.action.terminal.openNativeConsole", "when": "!terminalFocus"},
+  {"key": "alt+cmd+c", "command": "-copyFilePath", "when": "!editorFocus"},
+  {"key": "cmd+k alt+cmd+c", "command": "-copyFilePath", "when": "editorFocus"},
+  {"key": "shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "!editorFocus"},
+  {"key": "cmd+k shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "editorFocus"},
   {"key": "ctrl+cmd+c", "command": "search.action.copyPath", "when": "fileMatchOrFolderMatchWithResourceFocus"},
 
   // Sidebar
