@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsTerminalRerunCommandInRecentTerminal(context);
   registerCommandsToggleGutter(context);
   registerCommandsQuickOpenMagit(context);
+  registerCommandsFixWorkspaceSettings(context);
   console.info('[jdanbrown] activate: Done');
 }
 
@@ -164,6 +165,21 @@ export function registerCommandsQuickOpenMagit(context: vscode.ExtensionContext)
   context.subscriptions.push(
     vscode.commands.registerCommand('jdanbrown.workbench.action.quickOpen.magit', () => {
       vscode.commands.executeCommand('workbench.action.quickOpen', '>magit:');
+    }),
+  );
+}
+
+export function registerCommandsFixWorkspaceSettings(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsFixWorkspaceSettings');
+  context.subscriptions.push(
+    // HACK One of the databricks extensions keeps writing "jupyter.interactiveWindow.cellMarker.default": "# COMMAND ----------"
+    //  - It only does it in the workspace settings
+    //  - Not sure what causes it to trigger, but it seems to pretty reliably happen within ~1d or so
+    //  - Not sure which databricks extension is doing it (official Databricks, or 3p Databricks Power Tools)
+    //  - It messes up the "Jupyter: Insert Cell *" commands, because cellMarker is what those commands use for the `# %%` line
+    vscode.commands.registerCommand('jdanbrown.fixWorkspaceSetting.jupyter.cellMarker', async () => {
+      const config = vscode.workspace.getConfiguration();
+      await config.update('jupyter.interactiveWindow.cellMarker.default', '# %%', vscode.ConfigurationTarget.Workspace);
     }),
   );
 }

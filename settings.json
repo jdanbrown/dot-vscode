@@ -11,11 +11,17 @@
   "window.newWindowDimensions": "inherit",
   "window.nativeFullScreen": false,
   "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
   "workspace-path-status-bar.enable": false,
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
   "files.refactoring.autoSave": false,
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.quickOpen.preserveInput": true,
+  "workbench.commandPalette.history": 0,
+  "search.quickOpen.includeHistory": false,
+  "task.quickOpen.history": 0,
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
@@ -26,7 +32,9 @@
 
   // Explorer
   "workbench.tree.indent": 12,
-  "workbench.tree.renderIndentGuides": "none",
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.enableStickyScroll": true,
+  "workbench.tree.stickyScrollMaxItemCount": 50,
   "workbench.list.defaultFindMatchType": "contiguous",
   "explorer.openEditors.visible": 50,
   "explorer.compactFolders": false,
@@ -69,7 +77,7 @@
 
   // Completions
   //  - https://github.com/microsoft/vscode/issues/76322
-  "editor.wordBasedSuggestions": true, // Complete on any word -- only if no other provider has a completion
+  "editor.wordBasedSuggestions": "matchingDocuments", // Complete on any word -- only if no other provider has a completion
   "editor.quickSuggestions": {
     "comments": true, // Complete in comments
     "strings": true, // Complete in strings
@@ -82,6 +90,7 @@
   "editor.lineNumbers": "off",
   "editor.glyphMargin": false,
   "editor.folding": false,
+  // "editor.showFoldingControls": "never", // XXX Makes notebook cells display weird (hides left margin), and doesn't affect normal editor display
   "editor.lineNumbersMinChars": 0,  // Undocumented
   "editor.lineDecorationsWidth": 3, // Undocumented
 
@@ -135,15 +144,15 @@
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog"
   ],
+  "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
 
   // Search / Search Editor
   "search.searchEditor.defaultNumberOfContextLines": 0,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.searchEditor.reusePriorSearchConfiguration": true,
-  "search.quickOpen.includeHistory": false,
   "search.decorations.badges": false,
   "search.exclude": {
-    "build/**": true
+    "build/**": true,
   },
   "search.mode": "newEditor",
   "search.seedWithNearestWord": true,
@@ -160,10 +169,12 @@
   "jupyter.insidersChannel": "off",
   "jupyter.alwaysTrustNotebooks": true,
   "jupyter.interactiveWindow.creationMode": "perFile",
-  "notebook.globalToolbarShowLabel": "never",
-  "notebook.insertToolbarLocation": "notebookToolbar",
+  "jupyter.interactiveWindow.textEditor.cellFolding": false,
+  "notebook.insertToolbarLocation": "hidden",
+  "notebook.output.textLineLimit": 1000,
+  "notebook.globalToolbar": false,
   "notebook.showCellStatusBar": "hidden",
-  "notebook.output.textLineLimit": 100,
+  "notebook.stickyScroll.enabled": true,
 
   // Git
   "scm.showActionButton": false, // Hide action button at top of sidebar ('Commit', 'Sync Changes', etc.)
@@ -308,7 +319,7 @@
     },
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
-      "filterFileRegex": ".*(?<!COMMIT_EDITMSG|Makefile|.go)$",
+      "filterFileRegex": ".*(?<!.gitconfig|COMMIT_EDITMSG|Makefile|.go)$",
       // language:'log' is for the Output bottom panel (discovered via Inspect Editor Tokens and Scopes)
       "filterLanguageRegex": "(?<!log)$",
     },
@@ -385,6 +396,12 @@
   "[python]": {
     "editor.tabSize": 4,
   },
+  "[starlark]": {
+    "editor.tabSize": 4,
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
@@ -433,10 +450,22 @@
   // "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
   "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
   "python.terminal.activateEnvironment": false,
-  "python.analysis.autoImportCompletions": true,
   "python.interpreter.infoVisibility": "always",
   "python.analysis.extraPaths": [],
+  "python.analysis.ignore": [
+    // Disable checking in notebooks
+    //  - Because e.g. a single `from x import *` renders it completely useless
+    "**/*.ipynb",
+  ],
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
+  "jupyter.interactiveWindow.codeLens.enable": false,
   "jupyter.interactiveWindow.viewColumn": "beside",
+  "notebook.cellToolbarLocation": {
+    "default": "hidden"
+  },
+  "notebook.showFoldingControls": "never",
+  "notebook.markup.fontSize": 12,
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
@@ -514,8 +543,8 @@
     {"before": ["<c-r>"], "commands": ["redo"]},
 
     // Unbind confusing commands
-    {"before": ["<c-i>"], "after": []},
-    {"before": ["<c-o>"], "after": []},
+    {"before": ["<c-i>"], "after": []}, // Used in keybindings.json (Navigation)
+    {"before": ["<c-o>"], "after": []}, // Used in keybindings.json (Navigation)
 
     // Clear search on esc
     {"before": ["<esc>"], "after": ["<esc>"], "commands": [":nohl", "highlightwords.removeAllHighlights", ":"]},
@@ -550,6 +579,13 @@
     // Edge motion
     {"before": ["["], "after": ["<leader>", "["]},
     {"before": ["]"], "after": ["<leader>", "]"]},
+
+    // Notebooks
+    //  - HACK Can't do this zz in keybindings.json because there's no when clause to exclude single-char replace mode (`r`)
+    //    - It will _almost_ work, except the `z` in `rz` will get shadowed
+    //    - `vim.mode == 'Replace'` only works in `R`, not `r`
+    //    - https://github.com/VSCodeVim/Vim/issues/7256 vim.mode == 'Normal' in key binding is triggering in replace mode
+    {"before": ["z", "z"], "after": ["z", "z"], "commands": ["notebook.centerActiveCell"]},
 
     // Bookmarks
     //  - TODO(practice)
@@ -653,6 +689,12 @@
   // multi-commands
   "multiCommand.commands": [
 
+    // Workspace
+    {
+      "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor",
+      "sequence": ["workbench.action.toggleKeybindingsLog", "workbench.action.focusActiveEditorGroup",],
+    },
+
     // Bottom panel
     //  - Workaround for focus jumping to weird places on workbench.action.togglePanel
     {
@@ -666,8 +708,34 @@
 
     // Search Editor
     {
-      "command": "multiCommand.search.action.unfocusQueryEditorWidget",
-      "sequence": ["search.action.focusNextSearchResult", "extension.vim_escape",],
+      "command": "multiCommand:search.action.focusQueryEditorWidget+workbench.action.search.toggleQueryDetails",
+      "sequence": ["search.action.focusQueryEditorWidget", "workbench.action.search.toggleQueryDetails"],
+    },
+    {
+      "command": "multiCommand:search.action.unfocusQueryEditorWidget",
+      // Don't also do "search.action.focusPreviousSearchResult" because next->previous gives wrong outcome on first use in new search
+      "sequence": ["search.action.focusNextSearchResult", "extension.vim_escape"],
+    },
+    {
+      "command": "multiCommand:search.action.focusNextSearchResult+editor.action.peekDefinition",
+      "sequence": ["search.action.focusNextSearchResult", "editor.action.peekDefinition"],
+    },
+    {
+      "command": "multiCommand:search.action.focusPreviousSearchResult+editor.action.peekDefinition",
+      "sequence": ["search.action.focusPreviousSearchResult", "editor.action.peekDefinition"],
+    },
+    // {
+    //   "command": "multiCommand:search.action.focusNextSearchResult+extension.vim_escape",
+    //   "sequence": ["search.action.focusNextSearchResult", "extension.vim_escape"],
+    // },
+    // {
+    //   // Nope, repeating this one gets you stuck because of how escape leaves the cursor
+    //   "command": "multiCommand:search.action.focusPreviousSearchResult+extension.vim_escape",
+    //   "sequence": ["search.action.focusPreviousSearchResult", "extension.vim_escape"],
+    // },
+    {
+      "command": "multiCommand:editor.action.peekDefinition+extension.vim_home+search.action.focusNextSearchResult",
+      "sequence": ["editor.action.peekDefinition", "extension.vim_home", "search.action.focusNextSearchResult"],
     },
 
     // Navigation
@@ -682,10 +750,49 @@
       "sequence": ["highlightwords.addHighlight", "editor.action.referenceSearch.trigger"],
     },
 
+    // Terminal
+    {
+      "command": "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal",
+      "sequence": ["workbench.action.files.save", "jdanbrown.terminal.rerunCommandInRecentTerminal",],
+    },
+
     // Notebook
     {
+      "command": "multiCommand.notebook.cell.edit.NormalMode",
+      "sequence": ["notebook.cell.edit", "extension.vim_escape"],
+    },
+    {
       "command": "multiCommand.notebook.cell.edit.InsertMode",
-      "sequence": ["notebook.cell.edit", "extension.vim_insert"],
+      // HACK Do vim_escape first, else vim_insert when you're already in insert will put you in replace mode (weird)
+      "sequence": ["notebook.cell.edit", "extension.vim_escape", "extension.vim_insert"],
+    },
+    {
+      "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellAbove",
+      "sequence": ["jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "jupyter.insertCellAbove"],
+    },
+    {
+      "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellBelow",
+      "sequence": ["jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "jupyter.insertCellBelow"],
+    },
+    {
+      "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellBelowPosition",
+      "sequence": ["jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "jupyter.insertCellBelowPosition"],
+    },
+    {
+      "command": "multiCommand:list.focusDown+list.selectAndPreserveFocus",
+      "sequence": ["list.focusDown", "list.selectAndPreserveFocus"],
+    },
+    {
+      "command": "multiCommand:list.focusUp+list.selectAndPreserveFocus",
+      "sequence": ["list.focusUp", "list.selectAndPreserveFocus"],
+    },
+    {
+      "command": "multiCommand:notebook.fold+list.selectAndPreserveFocus",
+      "sequence": ["notebook.fold", "list.selectAndPreserveFocus"],
+    },
+    {
+      "command": "multiCommand:notebook.unfold+list.selectAndPreserveFocus",
+      "sequence": ["notebook.unfold", "list.selectAndPreserveFocus"],
     },
 
     // Scrolling
@@ -853,6 +960,33 @@
     // List find/search highlight (Explorer)
     "list.filterMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
     "list.filterMatchBorder": "#0000",
+
+    // Notebook
+    // "notebook.cellBorderColor": "#404040",
+    // "notebook.cellEditorBackground": null,
+    // "notebook.cellHoverBackground": null,
+    // "notebook.cellInsertionIndicator": "#4f97d7",
+    // "notebook.cellStatusBarItemHoverBackground": "#ffffff26",
+    // "notebook.cellToolbarSeparator": "#404040",
+    // "notebook.editorBackground": null,
+    // "notebook.focusedCellBackground": null,
+    // "notebook.focusedCellBorder": "#4f97d7",
+    "notebook.focusedCellBorder": "#0000", // Disable gutter color (coupled with apc.stylesheet: "Border color on selected cell")
+    // "notebook.focusedEditorBorder": "#4f97d7",
+    "notebook.inactiveFocusedCellBorder": "#0000", // Default: #404040
+    // "notebook.inactiveSelectedCellBorder": "#4f97d7",
+    // "notebook.outputContainerBackgroundColor": null,
+    // "notebook.outputContainerBorderColor": null,
+    // "notebook.selectedCellBackground": null,
+    // "notebook.selectedCellBorder": "#404040",
+    // "notebook.symbolHighlightBackground": null,
+    // "notebookEditorOverviewRuler.runningCellForeground": "#89d185",
+    // "notebookScrollbarSlider.activeBackground": "#404040",
+    // "notebookScrollbarSlider.background": "#40404099",
+    // "notebookScrollbarSlider.hoverBackground": "#404040cc",
+    // "notebookStatusErrorIcon.foreground": "#f48771",
+    // "notebookStatusRunningIcon.foreground": "#ffffff",
+    // "notebookStatusSuccessIcon.foreground": "#89d185",
 
     // Peek
     // "peekView.border": "#404040",
@@ -1390,7 +1524,7 @@
       "z-index": "1",
     },
 
-    // Sidebar: Explorer
+    // Sidebar: Explorer (tree)
     //  - Color dirs blue
     //    - But leave alone when git modified (orange) or ignored (gray)
     ".explorer-folders-view .monaco-list-row:has(.rootfolder-icon, .folder-icon) .label-name": {
@@ -1428,6 +1562,11 @@
     },
     ".explorer-folders-view .monaco-list-row .monaco-icon-label.folder-icon::after": {
       "margin": "0 4px 0 5px",
+    },
+    //  - Add a border below the sticky header list items
+    //    - https://code.visualstudio.com/updates/v1_85#_sticky-scroll-in-trees
+    ".explorer-folders-view .monaco-tree-sticky-container": {
+      "border-bottom": "2px solid #404040",
     },
 
     // XXX Replaced by scm.showActionButton:false
@@ -1785,12 +1924,21 @@
 
     // Status bar: Git
     //  - Hide branch icon next to branch name
+    ".statusbar [id^='status.scm.']": {
+      "order": "-9", // First
+    },
     ".statusbar [id^='status.scm.'] .codicon-git-branch::before": {
       "display": "none",
     },
 
     // Status bar: Problems
     //  - Numbers: Gray when no problems, white when problems
+    ".statusbar #status\\.problems": {
+      "order": "-8", // Second
+    },
+    ".statusbar #statusbar\\.currentProblem": {
+      "order": "8", // Second-to-last (else it jerks all the middle stuff back and forth)
+    },
     ".statusbar #status\\.problems[aria-label='No Problems']": {
       "color": "#a6a6a6 !important",
     },
@@ -1812,6 +1960,11 @@
     ".statusbar #status\\.problems[aria-label*='Infos:'] .codicon-info": {
       "color": "#60fdff !important",
       "font-weight": "bold",
+    },
+
+    // Status bar: Vim
+    ".statusbar #vscodevim\\.vim\\.primary": {
+      "order": "9", // Last
     },
 
     // Editor
@@ -1936,6 +2089,50 @@
       "font-size": "11px !important",
     },
 
+    // Notebooks
+    //  - Hide ruler
+    ".notebook-editor .notebook-overview-ruler-container": {
+      "display": "none",
+    },
+    //  - Hide folding arrows on markdown cells
+    ".notebook-editor .notebook-folding-indicator": {
+      "display": "none !important",
+    },
+    //  - Hide three dots on cell outputs
+    ".notebook-editor .code-cell-row .output .cell-output-toolbar .codicon-toolbar-more": {
+      "display": "none",
+    },
+    //  - Hide run buttons on cells
+    ".notebook-editor .code-cell-row .cell .run-button-container": {
+      "display": "none",
+    },
+    //  - Border (white) on selected cell
+    //    - Coupled with workbench.colorCustomizations: "notebook.focusedCellBorder":"#0000"
+    ".notebook-editor:focus-within .code-cell-row.focused.selected .cell-editor-part::before": {
+      "outline": "solid 1px #fff",
+    },
+    //  - Border (blue) on selected cell in edit mode
+    ".notebook-editor:focus-within .code-cell-row.focused.selected .cell-editor-focus .cell-editor-part::before": {
+      "outline": "solid 1px #4f97d7",
+    },
+    ".notebook-editor:not(:focus-within) .code-cell-row.focused.selected .cell-editor-focus .cell-editor-part::before": {
+      "outline-style": "solid !important", // Override dashed (when .notebook-editor loses focus while cell is in edit mode)
+    },
+    //  - Border (yellow) when a cell is running
+    ".notebook-editor .code-cell-row .cell .cell-editor-part:has(.monaco-progress-container:not([aria-hidden='true']))::before": {
+      "outline": "solid 1px #ffd966 !important", // Add !important to override blue border when cell has inputFocus
+    },
+    //  - Move cell execution counter from bottom to top
+    ".notebook-editor .code-cell-row .cell-focus-indicator-left .execution-count-label": {
+      "top": "12px !important",
+      "font-size": "11px !important",
+      "line-height": "13px !important",
+    },
+    //  - Disable code folding controls in cell editors
+    ".notebook-editor .code-cell-row .cell .cell-editor-part .margin .codicon-folding-expanded": {
+      "display": "none",
+    },
+
   },
   "apc.iframe.style": {
 
@@ -1951,6 +2148,63 @@
     // Markdown Preview
     ".markdown-body ul": {
       "padding-inline-start": "32px",
+    },
+
+    // Notebooks
+    //  - Border (gray) on outputs
+    //  - Border (red) on error outputs
+    //  - Adjust padding/margin on outputs
+    ".cell_container .output_container .output": {
+      "border": "1px solid #404040",
+      // "padding": "0px !important", // Nope, keep this one
+    },
+    ".cell_container .output_container .output.error": {
+      "border": "1px solid #ff6666",
+      "box-shadow": "inset 0 1px 0 0 #ff6666", // HACK No room for top border (precomputed height), use inset instead
+    },
+    ".cell_container .output_container .output .data-table:has(.text-output)": { "padding": "0px !important", },
+    ".cell_container .output_container .output .data-table .text-output":      { "padding": "0px !important", },
+    ".cell_container .output_container .output .output_html":                  { "padding": "0px !important", },
+    ".cell_container .output_container .output .display":                      { "padding": "0px !important", },
+    //  - Don't wrap output text
+    //  - Don't limit output lines (no scrolling)
+    ".cell_container .output_container .output .text-output": { "white-space": "pre", "max-height": "inherit", },
+    ".cell_container .output_container .output pre":          { "white-space": "pre", "max-height": "inherit", },
+    ".cell_container .output_container .output code":         { "white-space": "pre", "max-height": "inherit", },
+    ".cell_container .output_container .output kbd":          { "white-space": "pre", "max-height": "inherit", },
+    ".cell_container .output_container .output samp":         { "white-space": "pre", "max-height": "inherit", },
+    //  - Don't wrap text in df table cells
+    ".cell_container .output_container .output .dataframe tr": { "white-space": "nowrap", },
+    ".cell_container .output_container .output .dataframe th": { "white-space": "nowrap", "padding": "0px 8px", },
+    ".cell_container .output_container .output .dataframe td": { "white-space": "nowrap", "padding": "0px 8px", },
+    //  - Don't wrap text in other table cells (e.g. some logs present this way)
+    ".cell_container .output_container .output .data-table":   { "white-space": "nowrap", },
+    //  - Hide copy/save buttons on image/plot outputs
+    ".cell_container .output_container .output button.plotIcon": {
+      "display": "none",
+      // (And here's a better styling if I want to re-enable any of them in the future)
+      "background-color": "#000",
+      "border": "1px solid #fff",
+      "stroke": "#fff",
+      "opacity": "0.5",
+    },
+    //  - Databricks: Re-style outputs created by the databricks web UI / Databricks Power Tools extension
+    //    - The output is totally different html than when created by the vscode notebook 🤷
+    ".cell_container .output_container .output .ansiout": {
+      "white-space": "pre",
+      "font-family": "Consolas",
+      "font-size": "11px",
+      "line-height": "13px",
+      "font-weight": "inherit",
+      "color": "#fff",
+    },
+    ".cell_container .output_container .output .text-output code": {
+      "background-color": "#000",
+      "border-radius": "unset",
+      "padding": "1px 0px",
+    },
+    ".cell_container .output_container .output .data-table form": {
+      "height": "unset !important",
     },
 
   },
@@ -1973,11 +2227,8 @@
   "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
-  "workbench.commandPalette.history": 0,
-  "task.quickOpen.history": 0,
-  "workbench.quickOpen.preserveInput": true,
   "editor.matchBrackets": "near",
-  "editor.lightbulb.enabled": false,
+  "editor.lightbulb.enabled": "off",
   "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
   "bookmarks.navigateThroughAllFiles": true,
   "bookmarks.sideBar.expanded": true,
@@ -2003,7 +2254,7 @@
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
   "editor.guides.indentation": false,
   "editor.bracketPairColorization.enabled": false,
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "ActiveFileInStatusBar.revealFile": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   "editor.comments.ignoreEmptyLines": false,
@@ -2016,10 +2267,14 @@
   "workbench.editor.autoLockGroups": {
     "terminalEditor": false
   },
-  "workbench.editor.untitled.hint": "hidden",
   "workbench.editor.empty.hint": "hidden",
   "editor.accessibilitySupport": "off",
   "prettier.printWidth": 120,
   "accessibility.verbosity.terminal": false,
+  "vale.doNotShowWarningForFileToBeSavedBeforeLinting": true,
+  "jupyter.askForKernelRestart": false,
+  "interactiveWindow.collapseCellInputCode": "never",
+  "shellcheck.enable": false,
+  "gitlens.ai.experimental.generateCommitMessage.enabled": false,
 
 }

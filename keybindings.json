@@ -9,6 +9,8 @@
 //    - Reference for commands that take arguments [do these even work here? haven't tried yet]
 //  - https://code.visualstudio.com/api/references/when-clause-contexts
 //    - Reference for when clauses
+//  - https://www.whitphx.info/posts/20230217-vscode-undocumented-contexts/
+//    - Post on undocumented when clauses
 //  - https://github.com/codebling/vs-code-default-keybindings/blob/master/macos.keybindings.json
 //    - (Only reference I can find on the web)
 //
@@ -31,24 +33,34 @@
   // Workspace
   // {"key": "cmd+,", "command": "workbench.action.openSettings"}, // (Default) Open Settings editor
   {"key": "shift+cmd+,", "command": "workbench.action.openSettingsJson"}, // Open settings.json
+  {"key": "ctrl+shift+cmd+,", "command": "workbench.action.openSettingsJson"}, // Open settings.json (add ctrl to match keybindings.json)
   {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"}, // Open Keyboard Shortcuts editor
+  //  - NOTE ctrl+up = ctrl+shift+cmd+k (because Karabiner?)
   {"key": "ctrl+up", "command": "workbench.action.openGlobalKeybindingsFile"}, // Open keybindings.json file
   {"key": "ctrl+shift+r", "command": "workbench.action.reloadWindow"},
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
   {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
-  // {"key": "shift+ctrl+cmd+k", "command": "workbench.action.toggleKeybindingsLog"},
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
-  {"key": "ctrl+shift+cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
-  // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.keybindingsReference"},
+  {"key": "ctrl+shift+cmd+.", "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor"},
+  // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"}, // Used by workbench.action.openGlobalKeybindingsFile
 
   // Command palettes
   // {"key": "shift+cmd+p", "command": "workbench.action.showCommands"}, // Default
   // {"key": "cmd+p", "command": "workbench.action.quickOpen"}, // Default
   {"key": "cmd+p", "command": "-workbench.action.quickOpenNavigateNextInFilePicker", "when": "inFilesPicker && inQuickOpen"},
   {"key": "shift+cmd+p", "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker", "when": "inFilesPicker && inQuickOpen"},
-  {"key": "cmd+r", "command": "workbench.action.gotoSymbol", "when": "!inSearchEditor"},
-  {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
+  //  - Try quickTextSearch for cmd+r, keep showAllSymbols for shift+cmd+r (or invent a third keybinding for gotoSymbol)
+  //    - (%) quickTextSearch -- "Quick Text Search" / "Quick Search" / "Quick Access text search"
+  //      - https://code.visualstudio.com/updates/v1_82#_quick-access-text-search
+  //      - https://code.visualstudio.com/updates/v1_86#_quick-search-improvements
+  //    - (@) gotoSymbol -- "Go to Symbol in Editor" / "Go to Symbol in File"
+  //      - https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_go-to-symbol-in-file
+  //    - (#) showAllSymbols -- "Go to Symbol in Workspace"
+  //      - https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_go-to-symbol-in-workspace
+  {"key": "cmd+r", "command": "workbench.action.experimental.quickTextSearch", "when": "!inSearchEditor"},
+  // {"key": "cmd+r", "command": "workbench.action.gotoSymbol", "when": "!inSearchEditor"},
   {"key": "shift+cmd+r", "command": "workbench.action.showAllSymbols"},
+  {"key": "cmd+r", "command": "-workbench.action.reloadWindow", "when": "isDevelopment"},
   {"key": "shift+cmd+r", "command": "-rerunSearchEditorSearch", "when": "inSearchEditor"},
 
   // Files
@@ -58,13 +70,16 @@
   {"key": "ctrl+cmd+o", "command": "workbench.action.files.openFile"},
   {"key": "shift+cmd+backspace", "command": "fileutils.removeFile", "when": "editorFocus"},
   {"key": "ctrl+m", "command": "fileutils.moveFile", "when": "editorFocus"},
-  {"key": "shift+cmd+c", "command": "copyRelativeFilePath", "when": "editorFocus"},
+  {"key": "shift+cmd+c", "command": "copyRelativeFilePath", "when": "editorFocus || notebookEditorFocused"},
   {"key": "shift+cmd+c", "command": "-workbench.action.terminal.openNativeConsole", "when": "!terminalFocus"},
   {"key": "alt+cmd+c", "command": "-copyFilePath", "when": "!editorFocus"},
   {"key": "cmd+k alt+cmd+c", "command": "-copyFilePath", "when": "editorFocus"},
   {"key": "shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "!editorFocus"},
   {"key": "cmd+k shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "editorFocus"},
   {"key": "ctrl+cmd+c", "command": "search.action.copyPath", "when": "fileMatchOrFolderMatchWithResourceFocus"},
+  {"key": "ctrl+o", "command": "extension.advancedOpenFile.addCurrentFolderToWorkspace", "when": "extension.advancedOpenFile.active"},
+  {"key": "ctrl+a", "command": "-extension.advancedOpenFile.addCurrentFolderToWorkspace", "when": "extension.advancedOpenFile.active"},
+  {"key": "ctrl+d", "command": "-extension.advancedOpenFile.deleteActiveFile", "when": "extension.advancedOpenFile.active"},
 
   // Sidebar
   //  - NOTE Must manually keep these number-view mappings up to date as new tabs come and go
@@ -79,11 +94,14 @@
   {"key": "cmd+j", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   {"key": "cmd+k", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   {"key": "cmd+l", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
+  //  - To discover these, use: "Developer: Inspect Context Keys" -> click activity bar -> open dev console -> expand object -> `activeViewlet: "..."`
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
   {"key": "shift+cmd+2", "command": "workbench.view.extension.bookmarks",            "when": "true"},
   {"key": "shift+cmd+3", "command": "workbench.view.scm",                            "when": "true"},
   {"key": "shift+cmd+4", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
   {"key": "shift+cmd+5", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
+  {"key": "shift+cmd+6", "command": "workbench.view.extension.databricksBar",        "when": "true"},
+  {"key": "shift+cmd+7", "command": "workbench.view.extension.databricksPowerTools", "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
   {"key": "shift+cmd+8", "command": "workbench.view.debug",                          "when": "true"},
   {"key": "shift+cmd+9", "command": "workbench.view.extensions",                     "when": "true"},
@@ -206,24 +224,24 @@
   {"key": "alt+cmd+l", "command": "workbench.action.moveEditorToRightGroup", "when": "!sideBarFocus && !panelFocus"},
   {"key": "ctrl+cmd+h", "command": "workbench.action.moveEditorLeftInGroup", "when": "!sideBarFocus && !panelFocus"},
   {"key": "ctrl+cmd+l", "command": "workbench.action.moveEditorRightInGroup", "when": "!sideBarFocus && !panelFocus"},
-  {"key": "ctrl+cmd+z", "command": "workbench.action.toggleEditorWidths", "when": "!sideBarFocus && !panelFocus"}, // Maximize editor group
+  {"key": "ctrl+cmd+z", "command": "workbench.action.toggleMaximizeEditorGroup", "when": "!sideBarFocus && !panelFocus"}, // Maximize editor group
   {"key": "alt+cmd+t", "command": "-workbench.action.closeOtherEditors"}, // Dangerous, disable
 
   // Lists
-  {"key": "ctrl+e", "command": "list.scrollDown", "when": "listFocus && !inputFocus"},
-  {"key": "ctrl+y", "command": "list.scrollUp", "when": "listFocus && !inputFocus"},
-  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "listFocus"},
-  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "listFocus"},
+  {"key": "ctrl+e", "command": "list.scrollDown", "when": "listFocus && !notebookEditorFocused && !inputFocus"},
+  {"key": "ctrl+y", "command": "list.scrollUp", "when": "listFocus && !notebookEditorFocused && !inputFocus"},
+  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "listFocus && !notebookEditorFocused"},
+  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "listFocus && !notebookEditorFocused"},
   //  - Find
   //    - TODO(practice)
-  // {"key": "cmd+f", "command": "list.find", "when": "listFocus && listSupportsFind"}, // Default
-  {"key": "/", "command": "list.find", "when": "listFocus && listSupportsFind"},
-  // {"key": "j", "command": "list.focusDown", "when": "listFocus && !inputFocus"}, // Default
-  // {"key": "k", "command": "list.focusUp", "when": "listFocus && !inputFocus"}, // Default
-  // {"key": "down", "command": "list.focusDown", "when": "listFocus && !inputFocus"}, // Default
-  // {"key": "up", "command": "list.focusUp", "when": "listFocus && !inputFocus"}, // Default
-  {"key": "cmd+g", "command": "list.focusDown", "when": "listFocus"},
-  {"key": "shift+cmd+g", "command": "list.focusUp", "when": "listFocus"},
+  // {"key": "cmd+f", "command": "list.find", "when": "listFocus && !notebookEditorFocused && listSupportsFind"}, // Default
+  {"key": "/", "command": "list.find", "when": "listFocus && !notebookEditorFocused && listSupportsFind"},
+  // {"key": "j", "command": "list.focusDown", "when": "listFocus && !notebookEditorFocused && !inputFocus"}, // Default
+  // {"key": "k", "command": "list.focusUp", "when": "listFocus && !notebookEditorFocused && !inputFocus"}, // Default
+  // {"key": "down", "command": "list.focusDown", "when": "listFocus && !notebookEditorFocused && !inputFocus"}, // Default
+  // {"key": "up", "command": "list.focusUp", "when": "listFocus && !notebookEditorFocused && !inputFocus"}, // Default
+  {"key": "cmd+g", "command": "list.focusDown", "when": "listFocus && !notebookEditorFocused"},
+  {"key": "shift+cmd+g", "command": "list.focusUp", "when": "listFocus && !notebookEditorFocused"},
 
   // Editor
   {"key": "ctrl+space", "command": "editor.action.showHover"}, // Alias for gh (vim)
@@ -254,8 +272,8 @@
   {"key": "shift+escape", "command": "extension.vim_escape", "when": "vim.active && !inDebugRepl && vim.mode != 'Normal'"},
 
   // Multi-cursor
-  {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus && editorLangId != 'magit'"},
-  {"key": "ctrl+k", "command": "editor.action.insertCursorAbove", "when": "editorTextFocus && editorLangId != 'magit'"},
+  {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus && !inSearchEditor && editorLangId != 'magit'"},
+  {"key": "ctrl+k", "command": "editor.action.insertCursorAbove", "when": "editorTextFocus && !inSearchEditor && editorLangId != 'magit'"},
   {"key": "alt+cmd+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus"},
   {"key": "alt+cmd+up", "command": "-editor.action.insertCursorAbove", "when": "editorTextFocus"},
   {"key": "cmd+u", "command": "-cursorUndo", "when": "textInputFocus"},
@@ -268,23 +286,34 @@
   {"key": "shift+cmd+f", "command": "search.action.openNewEditorToSide"},
   {"key": "shift+cmd+f", "command": "-workbench.view.search", "when": "!searchViewletVisible"},
   {"key": "shift+cmd+f", "command": "-workbench.action.findInFiles"},
-  {"key": "escape", "command": "multiCommand.search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
+  {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "cmd+i", "command": "search.action.focusFilesToInclude", "when": "inSearchEditor"},
+  {"key": "cmd+e", "command": "search.action.focusFilesToExclude", "when": "inSearchEditor"},
+  {"key": "cmd+f", "command": "multiCommand:search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && searchInputBoxFocus"},
+  {"key": "enter", "command": "multiCommand:search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && inputBoxFocus"},
+  {"key": "escape", "command": "multiCommand:search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && inputBoxFocus"},
   {"key": "escape", "command": "-search.action.focusQueryEditorWidget", "when": "inSearchEditor"},
-  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
-  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor && searchInputBoxFocus"},
-  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
-  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "cmd+g", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !referenceSearchVisible"},
+  {"key": "shift+cmd+g", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !referenceSearchVisible"},
+  {"key": "cmd+g", "command": "multiCommand:search.action.focusNextSearchResult+editor.action.peekDefinition", "when": "inSearchEditor && referenceSearchVisible"},
+  {"key": "shift+cmd+g", "command": "multiCommand:search.action.focusPreviousSearchResult+editor.action.peekDefinition", "when": "inSearchEditor && referenceSearchVisible"},
+  {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !inputBoxFocus && !referenceSearchVisible"},
+  {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !inputBoxFocus && !referenceSearchVisible"},
+  {"key": "j", "command": "multiCommand:search.action.focusNextSearchResult+editor.action.peekDefinition", "when": "inSearchEditor && !inputBoxFocus && referenceSearchVisible"},
+  {"key": "k", "command": "multiCommand:search.action.focusPreviousSearchResult+editor.action.peekDefinition", "when": "inSearchEditor && !inputBoxFocus && referenceSearchVisible"},
+  {"key": "ctrl+j", "command": "extension.vim_down", "when": "inSearchEditor && !inputBoxFocus"}, // Manually recover normal j/k
+  {"key": "ctrl+k", "command": "extension.vim_up", "when": "inSearchEditor && !inputBoxFocus"}, // Manually recover normal j/k
+  {"key": "shift+cmd+i", "command": "workbench.action.search.toggleQueryDetails", "when": "inSearchEditor && !inputBoxFocus"},
+  {"key": "shift+cmd+e", "command": "workbench.action.search.toggleQueryDetails", "when": "inSearchEditor && !inputBoxFocus"},
+  {"key": "shift+cmd+i", "command": "multiCommand:search.action.focusQueryEditorWidget+workbench.action.search.toggleQueryDetails", "when": "inSearchEditor && inputBoxFocus"}, // Workaround focus trap
+  {"key": "shift+cmd+e", "command": "multiCommand:search.action.focusQueryEditorWidget+workbench.action.search.toggleQueryDetails", "when": "inSearchEditor && inputBoxFocus"}, // Workaround focus trap
   {"key": "ctrl+r", "command": "rerunSearchEditorSearch", "when": "inSearchEditor"},
-  {"key": "cmd+g", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
-  {"key": "shift+cmd+g", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
-  {"key": "ctrl+n", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor"},
-  {"key": "ctrl+p", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor"},
-  // {"key": "j", "command": "search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"},     // Nope, eats normal mode key
-  // {"key": "k", "command": "search.action.focusPreviousSearchResult", "when": "inSearchEditor && !searchInputBoxFocus"}, // Nope, eats normal mode key
-  {"key": "backspace", "command": "search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "ctrl+c", "command": "toggleSearchEditorCaseSensitive", "when": "inSearchEditor"},
+  {"key": "ctrl+w", "command": "toggleSearchEditorWholeWord", "when": "inSearchEditor"},
+  {"key": "ctrl+/", "command": "toggleSearchEditorRegex", "when": "inSearchEditor"},
+  {"key": "ctrl+=", "command": "increaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "ctrl+-", "command": "decreaseSearchEditorContextLines", "when": "inSearchEditor"},
+  {"key": "backspace", "command": "search.searchEditor.action.deleteFileResults", "when": "inSearchEditor && !inputBoxFocus"},
   {"key": "shift+cmd+backspace", "command": "-search.searchEditor.action.deleteFileResults", "when": "inSearchEditor"}, // Confusion with File Delete
   //  - To open results, use Peek Definition / Go To Definition
   //    - TODO(practice)
@@ -296,13 +325,18 @@
   //      - https://github.com/microsoft/vscode/issues/193855 Search Editor: Can't open result with any keybindings, only with double-click
   //    - TODO After they fix this issue, add shift+o for open-to-the-side (like double-click)
   //      - https://github.com/microsoft/vscode/issues/194044 Search Editor: Add keybinding for double-click action, e.g. to open to the side
-  {"key": "ctrl+o", "command": "editor.action.peekDefinition", "when": "inSearchEditor && !searchInputBoxFocus"}, // ctrl to be fluid w/ ctrl+n/ctrl+p
-  {"key": "o", "command": "editor.action.revealDefinition", "when": "inSearchEditor && !searchInputBoxFocus"}, // Open result in current editor group
-  // {"key": "shift+o", "command": "...", "when": "inSearchEditor && !searchInputBoxFocus"}, // Open result to the side
+  {"key": "o", "command": "editor.action.peekDefinition", "when": "inSearchEditor && !searchInputBoxFocus && vim.mode =~ /^(Visual.*)$/"},
+  {"key": "o", "command": "multiCommand:editor.action.peekDefinition+extension.vim_home+search.action.focusNextSearchResult", "when": "inSearchEditor && !searchInputBoxFocus && vim.mode == 'Normal'"},
+  {"key": "enter", "command": "editor.action.revealDefinition", "when": "inSearchEditor && !searchInputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/"}, // Open result in current editor group
+  // {"key": "shift+o", "command": "...", "when": "inSearchEditor && !searchInputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/"}, // Open result to the side
 
   // Navigation
-  {"key": "cmd+]", "command": "workbench.action.navigateForward", "when": "canNavigateForward"},
-  {"key": "cmd+[", "command": "workbench.action.navigateBack", "when": "canNavigateBack"},
+  // {"key": "cmd+]", "command": "workbench.action.navigateForward", "when": "canNavigateForward"}, // Conflicts with notebook go to next/previous cell
+  // {"key": "cmd+[", "command": "workbench.action.navigateBack", "when": "canNavigateBack"},       // Conflicts with notebook go to next/previous cell
+  {"key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "canNavigateForward && vim.mode == 'Normal'"},
+  {"key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "canNavigateBack && vim.mode == 'Normal'"},
+  {"key": "ctrl+i", "command": "-extension.vim_ctrl+i", "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"},
+  {"key": "ctrl+o", "command": "-extension.vim_ctrl+o", "when": "editorTextFocus && vim.active && vim.use<C-o> && !inDebugRepl"},
   {"key": "ctrl+]", "command": "editor.action.revealDefinition", "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
   {"key": "ctrl+[", "command": "multiCommand.addHighlightAnd.editor.action.goToReferences", "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"},
   {"key": "ctrl+cmd+]", "command": "editor.action.peekDefinition", "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
@@ -382,7 +416,7 @@
   {"key": "g s",           "command": "magit.status",                   "when": "!inputFocus"},
   {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
   {"key": "shift+o",       "command": "magit.toggle-all-folds-for-change-views", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "r",             "command": "magit.refresh",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {
@@ -471,6 +505,14 @@
   // {"key": "...",           "command": "-magit.stage-file",              "when": "false"},
   // {"key": "...",           "command": "-magit.unstage-file",            "when": "false"},
 
+  // Github Copilot
+  {"key": "cmd+enter", "command": "github.copilot.acceptCursorPanelSolution", "when": "resourceScheme == 'copilot'"},
+  {"key": "cmd+]", "command": "github.copilot.nextPanelSolution", "when": "resourceScheme == 'copilot'"},
+  {"key": "cmd+[", "command": "github.copilot.previousPanelSolution", "when": "resourceScheme == 'copilot'"},
+  {"key": "ctrl+/", "command": "-github.copilot.acceptCursorPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
+  {"key": "alt+]", "command": "-github.copilot.nextPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
+  {"key": "alt+[", "command": "-github.copilot.previousPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
+
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
@@ -493,7 +535,10 @@
   // Terminal
   {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
   {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
-  {"key": "ctrl+a ctrl+enter", "command": "jdanbrown.terminal.rerunCommandInRecentTerminal", "when": "editorFocus"},
+  //  - XXX Free up ctrl+a for Notebook add cell
+  //  - XXX Free up ctrl+enter for GitHub Copilot: Open Completions Panel (github.copilot.generate)
+  // {"key": "ctrl+a ctrl+enter", "command": "jdanbrown.terminal.rerunCommandInRecentTerminal", "when": "editorFocus && vim.mode != 'Insert'"},
+  {"key": "alt+enter", "command": "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal", "when": "editorFocus"},
   //  - Recall recent cmds/dirs
   {"key": "cmd+r", "command": "workbench.action.terminal.runRecentCommand", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   //    - Disable cmd+g for Go To Dir (conflicts with Find Next)
@@ -518,63 +563,130 @@
   {"key": "ctrl+k", "command": "workbench.action.terminal.focusAccessibleBuffer", "when": "terminalFocus && terminalHasBeenCreated && terminalTabFocusMode || terminalFocus && terminalHasBeenCreated && !terminalAccessibleBufferFocus || terminalFocus && terminalProcessSupported && terminalTabFocusMode || terminalFocus && terminalProcessSupported && !terminalAccessibleBufferFocus"},
   // Open detected links
   //  - TODO(practice)
-  {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"},
-  {"key": "shift+cmd+o", "command": "-workbench.action.terminal.openDetectedLink", "when": "terminalAccessibleBufferFocus && terminalHasBeenCreated || terminalFocus && terminalHasBeenCreated"}, // Default
+  {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalFocus"},
+  {"key": "shift+cmd+o", "command": "-workbench.action.terminal.openDetectedLink", "when": "terminalFocus && terminalHasBeenCreated"},
+  {"key": "shift+cmd+g", "command": "-workbench.action.terminal.openDetectedLink", "when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"},
 
-  // Notebooks
+  // Notebooks: ipynb
+  //  - TODO Copy from atom: https://github.com/jdanbrown/atom-hydrogen-extras/blob/master/keymaps/notebook.cson
+  //  - Editing modes (notebook/normal/insert)
+  //    - 💡 Use cmd+escape for notebook/normal, separate from escape for normal/insert
+  // {"key": "escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
+  // {"key": "cmd+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl"},
+  {"key": "cmd+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && !inDebugRepl"},   // Left hand
+  {"key": "shift+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && !inDebugRepl"}, // Right hand (?)
+  {"key": "escape", "command": "-notebook.cell.quitEdit", "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible"},
+  {"key": "escape", "command": "-notebook.cell.quitEdit", "when": "notebookEditorFocused && notebookOutputFocused"},
+  {"key": "escape", "command": "-notebook.cell.quitEdit", "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"},
+  {"key": "enter", "command": "multiCommand.notebook.cell.edit.NormalMode", "when": "notebookCellListFocused && notebookEditable && !editorHoverFocused && !inputFocus"},
+  {"key": "enter", "command": "-notebook.cell.edit", "when": "notebookCellListFocused && notebookEditable && !editorHoverFocused && !inputFocus"},
+  {"key": "i", "command": "multiCommand.notebook.cell.edit.InsertMode", "when": "notebookCellListFocused && notebookEditable && !editorHoverFocused && !inputFocus"},
+  //  - Go to cell and don't focus editor
+  //    - Add list.selectAndPreserveFocus for when no list item is selected (e.g. hit escape on a selected cell: white border -> no white border)
+  {"key": "j", "command": "multiCommand:list.focusDown+list.selectAndPreserveFocus", "when": "notebookEditorFocused && listFocus && !inputFocus && !editorHoverFocused"},
+  {"key": "k", "command": "multiCommand:list.focusUp+list.selectAndPreserveFocus", "when": "notebookEditorFocused && listFocus && !inputFocus && !editorHoverFocused"},
+  //  - Go to cell and focus editor
+  {"key": "cmd+]", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus && resourceScheme != 'copilot'"},
+  {"key": "cmd+[", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus && resourceScheme != 'copilot'"},
+  {"key": "cmd+]", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && !inputFocus && resourceScheme != 'copilot'"},
+  {"key": "cmd+[", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && !inputFocus && resourceScheme != 'copilot'"},
   {"key": "cmd+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly"},
   {"key": "cmd+]", "command": "-editor.action.indentLines", "when": "editorTextFocus && !editorReadonly"},
   {"key": "shift+cmd+]", "command": "-workbench.action.nextEditor"},
   {"key": "shift+cmd+[", "command": "-workbench.action.previousEditor"},
-  {"key": ", ,", "command": "workbench.action.files.save", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
-  {"key": "shift+escape", "command": "notebook.cell.quitEdit", "when": "notebookEditorFocused && vim.active && !inDebugRepl"},
-  {"key": "i", "command": "notebook.cell.edit", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "shift+i", "command": "multiCommand.notebook.cell.edit.InsertMode", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "cmd+]", "command": "notebook.focusNextEditor", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "cmd+[", "command": "notebook.focusPreviousEditor", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "cmd+]", "command": "list.focusDown", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "cmd+[", "command": "list.focusUp", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "u", "command": "undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "z", "command": "-undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && vim.active && !inDebugRepl && vim.mode == 'Normal'"},
-  //  - Disable j/k movements at cell boundaries, more often confusing than helpful
+  //  - Keep these j/k at cell boundary defaults, I actually find them more helpful than confusing
   //    - Ref: notebookEditorCursorAtBoundary = 'none' | 'top' | 'bottom' | 'both'
   //    - https://github.com/microsoft/vscode/blob/f25f1abf/src/vs/workbench/contrib/notebook/common/notebookCommon.ts#L687-L688
-  {"key": "j", "command": "-notebook.focusNextEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"},
-  {"key": "k", "command": "-notebook.focusPreviousEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"},
-  //  - Move cells up/down
+  // {"key": "j", "command": "-notebook.focusNextEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'none' && notebookEditorCursorAtBoundary != 'top'"},
+  // {"key": "k", "command": "-notebook.focusPreviousEditor", "when": "editorTextFocus && inputFocus && notebookEditorFocused && vim.mode == 'Normal' && notebookEditorCursorAtBoundary != 'bottom' && notebookEditorCursorAtBoundary != 'none'"},
+  //  - Manipulate cells
+  {"key": "ctrl+a", "command": "notebook.cell.insertCodeCellAbove", "when": "notebookEditorFocused"},
+  {"key": "ctrl+b", "command": "notebook.cell.insertCodeCellBelow", "when": "notebookEditorFocused"},
+  {"key": "ctrl+s", "command": "notebook.cell.split", "when": "notebookEditorFocused"},
+  {"key": "ctrl+m", "command": "notebook.cell.joinBelow", "when": "notebookEditorFocused"},
+  {"key": "ctrl+x", "command": "notebook.cell.cut", "when": "notebookEditorFocused"},
+  // {"key": "ctrl+c", "command": "notebook.cell.copy", "when": "notebookEditorFocused"}, // Nope, conflicts with notebook.interruptExecution
+  {"key": "ctrl+v", "command": "notebook.cell.paste", "when": "notebookEditorFocused"},
+  {"key": "ctrl+z", "command": "undo", "when": "notebookEditorFocused"},
+  {"key": "u", "command": "undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "z", "command": "-undo", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   {"key": "ctrl+cmd+j", "command": "notebook.cell.moveDown", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   {"key": "ctrl+cmd+k", "command": "notebook.cell.moveUp", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  //  - Folding
-  {"key": "h", "command": "notebook.fold", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  {"key": "l", "command": "notebook.unfold", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   //  - Scrolling
-  {"key": "ctrl+e", "command": "list.scrollDown", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "ctrl+y", "command": "list.scrollUp", "when": "notebookEditorFocused && inputFocus"},
-  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "notebookEditorFocused && listFocus && inputFocus"},
-  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "notebookEditorFocused && listFocus && inputFocus"},
+  {"key": "ctrl+e", "command": "list.scrollDown", "when": "notebookEditorFocused && vim.mode != 'Insert'"},
+  {"key": "ctrl+y", "command": "list.scrollUp", "when": "notebookEditorFocused && vim.mode != 'Insert'"},
+  //    - TODO These are jank, make user commands 'jdanbrown.notebook.scrollUpHalfPage' like 'jdanbrown.terminal.scrollUpHalfPage' (above)
+  {"key": "ctrl+d", "command": "multiCommand.list.scrollPageDown", "when": "notebookEditorFocused && vim.mode != 'Insert'"},
+  {"key": "ctrl+u", "command": "multiCommand.list.scrollPageUp", "when": "notebookEditorFocused && vim.mode != 'Insert'"},
+  // {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && (!inputFocus || vim.mode == 'Normal') && !notebookOutputInputFocused && !inDebugRepl"},
+  // {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && vim.mode == 'Normal' && vim.mode != 'Replace' && !notebookOutputInputFocused && !inDebugRepl"},
+  // {"key": "z z", "command": "notebook.centerActiveCell", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused && !inDebugRepl"},
+  //    - TODO zt is probably doable, but not sure about zb
+  //      - zt: NotebookEditor.revealRange(NotebookRange(start=activeCell, end=activeCell+1), revealType=.AtTop)
+  //      - zb: NotebookEditor.revealRange(NotebookRange(start=?, end=activeCell), revealType=?)
+  // {"key": "z t", "command": "jdanbrown.notebook.putActiveCellAtTop", "when": "notebookEditorFocused && !inDebugRepl && vim.mode == 'Normal'"},
+  // {"key": "z b", "command": "jdanbrown.notebook.putActiveCellAtBottom", "when": "notebookEditorFocused && !inDebugRepl && vim.mode == 'Normal'"},
+  //  - Folding
+  //    - Add list.selectAndPreserveFocus for when no list item is selected (e.g. hit escape on a selected cell: white border -> no white border)
+  {"key": "h", "command": "multiCommand:notebook.fold+list.selectAndPreserveFocus", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+  {"key": "l", "command": "multiCommand:notebook.unfold+list.selectAndPreserveFocus", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   //  - Kernel management
-  //    - TODO YOU ARE HERE (these maybe all work now? try and see)
-  {"key": "ctrl+cmd+k", "command": "jupyter.switchKernel", "when": "notebookEditorFocused"},
-  {"key": "ctrl+c", "command": "jupyter.notebookeditor.interruptkernel", "when": "notebookEditorFocused"},
-  {"key": "0 0", "command": "jupyter.notebookeditor.restartkernel", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
-  //  - TODO Needs update: Add missing when clauses + update to latest notebook commands
-  // {"key": "cmd+]", "command": "jupyter.gotoNextCellInFile", "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"},
-  // {"key": "ctrl+alt+]", "command": "-jupyter.gotoNextCellInFile", "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"},
-  // {"key": "cmd+[", "command": "jupyter.gotoPrevCellInFile", "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"},
-  // {"key": "ctrl+alt+[", "command": "-jupyter.gotoPrevCellInFile", "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused"},
-  // {"key": "ctrl+cmd+r", "command": "jupyter.notebookeditor.runallcells"},
-  // {"key": "ctrl+cmd+r", "command": "jupyter.runallcells"},
-  // {"key": "cmd+enter", "command": "jupyter.runcell"},
-  // {"key": "ctrl+cmd+a", "command": "jupyter.runallcellsabove.palette"},
-  // {"key": "ctrl+cmd+b", "command": "jupyter.runcurrentcellandallbelow.palette"},
-  // {"key": "cmd+enter", "command": "jupyter.runcurrentcell", "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"},
-  // {"key": "ctrl+enter", "command": "-jupyter.runcurrentcell", "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"},
-  // {"key": "shift+cmd+enter", "command": "jupyter.runcurrentcelladvance", "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"},
-  // {"key": "shift+enter", "command": "-jupyter.runcurrentcelladvance", "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"},
-  // {"key": "cmd+enter", "command": "jupyter.notebookeditor.runselectedcell"},
+  {"key": "alt+up", "command": "_notebook.selectKernel", "when": "notebookEditorFocused"}, // alt+up = ctrl+opt+k
+  {"key": "ctrl+c", "command": "notebook.interruptExecution", "when": "notebookEditorFocused"},
+  {"key": "ctrl+\\", "command": "jupyter.restartkernel", "when": "notebookEditorFocused"},
+  {"key": "alt+down", "command": "-notebook.cell.moveDown", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "alt+up", "command": "-notebook.cell.moveUp", "when": "notebookEditorFocused && !inputFocus"},
+  //  - Run cells
+  {"key": "ctrl+cmd+r", "command": "notebook.execute", "when": "notebookEditorFocused"},
+  {"key": "ctrl+cmd+a", "command": "notebook.cell.executeCellsAbove", "when": "notebookEditorFocused"},
+  {"key": "ctrl+cmd+b", "command": "notebook.cell.executeCellAndBelow", "when": "notebookEditorFocused"},
+  {"key": "cmd+enter", "command": "notebook.cell.execute", "when": "notebookEditorFocused"},
+  {"key": "ctrl+cmd+enter", "command": "notebook.cell.executeAndSelectBelow", "when": "notebookEditorFocused"},
+  {"key": "ctrl+enter", "command": "-notebook.cell.execute", "when": "notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"},
+  {"key": "ctrl+enter", "command": "-notebook.cell.executeAndFocusContainer", "when": "notebookCellListFocused || editorTextFocus && inputFocus && notebookEditorFocused"},
+  {"key": "alt+enter", "command": "-notebook.cell.executeAndInsertBelow", "when": "notebookCellListFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"},
+  {"key": "shift+enter", "command": "-notebook.cell.executeAndSelectBelow", "when": "notebookCellListFocused && !inlineChatFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !inlineChatFocused && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !inlineChatFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !inlineChatFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"},
+  {"key": "shift+enter", "command": "-notebook.cell.executeAndSelectBelow", "when": "notebookCellListFocused && !interactiveEditorFocused && notebookCellType == 'code' || editorTextFocus && inputFocus && notebookEditorFocused && !interactiveEditorFocused"},
+  //  - Outputs
+  {"key": "backspace", "command": "notebook.cell.clearOutputs", "when": "notebookCellEditable && notebookCellHasOutputs && notebookEditable && notebookEditorFocused && (!inputFocus || vim.mode == 'Normal')"},
+  {"key": "alt+delete", "command": "-notebook.cell.clearOutputs", "when": "notebookCellEditable && notebookCellHasOutputs && notebookEditable && notebookEditorFocused && !inputFocus"},
+  {"key": "cmd+backspace", "command": "notebook.clearAllCellsOutputs", "when": "notebookEditable && notebookEditorFocused && (!inputFocus || vim.mode == 'Normal')"},
+  {"key": "cmd+backspace", "command": "-notebook.cell.delete", "when": "notebookEditorFocused && !inputFocus"},
+  {"key": "o", "command": "notebook.cell.collapseCellOutput", "when": "notebookEditorFocused && !inputFocus && notebookCellHasOutputs && notebookCellListFocused && !notebookCellOutputIsCollapsed"},
+  {"key": "o", "command": "notebook.cell.expandCellOutput", "when": "notebookEditorFocused && !inputFocus && notebookCellHasOutputs && notebookCellListFocused && notebookCellOutputIsCollapsed"},
+  {"key": "shift+o", "command": "notebook.cell.collapseAllCellOutputs", "when": "notebookEditorFocused && !inputFocus && notebookCellHasOutputs && notebookCellListFocused && !notebookCellOutputIsCollapsed"},
+  {"key": "shift+o", "command": "notebook.cell.expandAllCellOutputs", "when": "notebookEditorFocused && !inputFocus && notebookCellHasOutputs && notebookCellListFocused && notebookCellOutputIsCollapsed"},
+  {"key": "o", "command": "-notebook.cell.toggleOutputs", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"}, // Defunct command?
+  //  - Disable some defaults
+  {"key": "d d", "command": "-notebook.cell.delete", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
+
+  // Notebooks: py interactive window
+  //  - TODO Copy from atom: https://github.com/jdanbrown/atom-hydrogen-extras/blob/master/keymaps/notebook.cson
+  //  - Go to cell
+  {"key": "cmd+]", "command": "jupyter.gotoNextCellInFile", "when": "editorTextFocus && vim.mode == 'Normal' && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused && resourceScheme != 'copilot'"},
+  {"key": "cmd+[", "command": "jupyter.gotoPrevCellInFile", "when": "editorTextFocus && vim.mode == 'Normal' && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused && resourceScheme != 'copilot'"},
+  {"key": "cmd+]", "command": "jupyter.extendSelectionByCellBelow", "when": "editorTextFocus && vim.mode =~ /^Visual.*/ && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused && resourceScheme != 'copilot'"},
+  {"key": "cmd+[", "command": "jupyter.extendSelectionByCellAbove", "when": "editorTextFocus && vim.mode =~ /^Visual.*/ && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused && resourceScheme != 'copilot'"},
+  //  - Manipulate cells
+  {"key": "ctrl+a", "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellAbove", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+b", "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellBelow", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+s", "command": "multiCommand:jdanbrown.fix.cellMarker+jupyter.insertCellBelowPosition", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+x", "command": "jupyter.deleteCells", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+z", "command": "undo", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+c", "command": "jupyter.interruptkernel", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  //  - Kernel management
+  {"key": "ctrl+\\", "command": "jupyter.restartkernel", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+\\", "command": "databricksClusterItem.restartKernel", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  //  - Run cells
+  {"key": "ctrl+cmd+r", "command": "jupyter.runallcells", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+cmd+a", "command": "jupyter.runallcellsabove.palette", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+cmd+b", "command": "jupyter.runcurrentcellandallbelow.palette", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "cmd+enter", "command": "jupyter.runcurrentcell", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+cmd+enter", "command": "jupyter.runcurrentcelladvance", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
+  {"key": "ctrl+enter", "command": "-jupyter.runcurrentcell", "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !jupyter.havenativecells && !notebookEditorFocused"},
+  {"key": "shift+enter", "command": "-jupyter.runcurrentcelladvance", "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"},
+  //  - Outputs
+  {"key": "cmd+backspace", "command": "jupyter.interactive.clearAllCells", "when": "editorTextFocus && jupyter.hascodecells && !jupyter.webExtension && !notebookEditorFocused"},
 
   // Markdown
   {"key": "cmd+enter", "command": "markdown-checkbox.markCheckbox", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
