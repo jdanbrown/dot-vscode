@@ -17,6 +17,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
   "files.refactoring.autoSave": false,
+  "workbench.editor.wrapTabs": true, // FIXME Can't click on action buttons anymore 🤷
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.quickOpen.preserveInput": true,
   "workbench.commandPalette.history": 0,
@@ -65,6 +66,7 @@
   //  - FIXME vim L/H keeps scrolling down/up if you repeat it: https://github.com/VSCodeVim/Vim/issues/1393
   //    - 0 fixes H, but L still scrolls down by 1
   "editor.cursorSurroundingLines": 0,
+  "editor.dragAndDrop": false,
   "files.hotExit": "off",
   "files.simpleDialog.enable": true,
   "files.trimTrailingWhitespace": true,
@@ -74,6 +76,13 @@
   //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
   // "files.insertFinalNewline": true, // Want for everything except notebooks
   "files.insertFinalNewline": false, // But do this globally for now, else every notebook cell gets a final blank line at the bottom on save (poop)
+
+  // Editor: CodeLens
+  //  - https://code.visualstudio.com/api/language-extensions/programmatic-language-features
+  //  - https://code.visualstudio.com/blogs/2017/02/12/code-lens-roundup
+  "editor.codeLens": false, // I _think_ I don't want any of them
+  "merge-conflict.codeLens.enabled": false, // I don't want this one
+  "jupyter.interactiveWindow.codeLens.enable": false, // I don't want this one
 
   // Completions
   //  - https://github.com/microsoft/vscode/issues/76322
@@ -146,9 +155,9 @@
   ],
   "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
 
-  // Search / Search Editor
+  // Search Editor / Search
   "search.searchEditor.defaultNumberOfContextLines": 0,
-  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
+  "search.searchEditor.doubleClickBehaviour": "selectWord",
   "search.searchEditor.reusePriorSearchConfiguration": true,
   "search.decorations.badges": false,
   "search.exclude": {
@@ -199,6 +208,14 @@
   //    - https://github.com/microsoft/vscode/issues/71297
   //    - https://github.com/microsoft/vscode/issues/179418
   "git.showProgress": false,
+
+  // Git: Diff editor
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderGutterMenu": false,
+  "diffEditor.renderIndicators": false,
+  "diffEditor.renderMarginRevertIcon": false,
+  "diffEditor.renderSideBySideInlineBreakpoint": 950,
 
   // magit
   //  - https://github.com/kahole/edamagit
@@ -395,6 +412,8 @@
   },
   "[python]": {
     "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": false,
   },
   "[starlark]": {
     "editor.tabSize": 4,
@@ -446,9 +465,11 @@
   // Python
   "python.showStartPage": false,
   "python.languageServer": "Pylance",
+  "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
   // "python.analysis.typeCheckingMode": "strict", // TODO Want, but goes nuts in zoolander
-  // "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
-  "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
+  // "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
+  // "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
   "python.terminal.activateEnvironment": false,
   "python.interpreter.infoVisibility": "always",
   "python.analysis.extraPaths": [],
@@ -459,13 +480,13 @@
   ],
   "python.defaultInterpreterPath": "/usr/bin/python3",
   "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
-  "jupyter.interactiveWindow.codeLens.enable": false,
   "jupyter.interactiveWindow.viewColumn": "beside",
   "notebook.cellToolbarLocation": {
     "default": "hidden"
   },
   "notebook.showFoldingControls": "never",
   "notebook.markup.fontSize": 12,
+  "ruff.organizeImports": false,
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
@@ -510,6 +531,8 @@
   "vim.textwidth": 120,
   "vim.visualstar": true,
   "vim.joinspaces": false,
+  "vim.matchpairs": "(:),{:},[:],<:>",
+  "vim.mouseSelectionGoesIntoVisualMode": false,
   // ReplaceWithRegister
   //  - https://github.com/VSCodeVim/Vim#replacewithregister
   //  - yank -> gr<motion> to paste
@@ -562,8 +585,9 @@
     // Comment
     {"before": ["\\", "c"], "after": ["g", "c"]},
 
-    // Search
+    // Search Editor
     //  - Relies on "search.seedWithNearestWord":true to search for the current word without selecting anything
+    {"before": ["<c-f>"], "commands": ["search.action.openNewEditorToSide"]},
     {"before": [",", "a"], "commands": ["search.action.openNewEditorToSide"]},
 
     // Peek
@@ -594,33 +618,42 @@
     {"before": ["<leader>", "l"], "commands": ["bookmarks.list"]},
     {"before": ["<leader>", "L"], "commands": ["bookmarks.listFromAllFiles"]},
 
-    // Git/magit
+    // Git
     //  - (See keybindings.json for centralized comments)
+    //  - Repo
+    {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
     //  - Views
-    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
-    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
-    {"before": ["g", "s"], "commands": ["magit.status"]},
     // {"before": ["g", "s"], "commands": ["workbench.view.scm"]}, // Use shift+cmd+3
+    //  - Commands
+    // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
+    // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
+
+    // Git: Diff editor
+    {"before": ["g", "s"], "commands": ["git.viewChanges"]}, // Diff all files (one pane)
+    {"before": ["g", "S"], "commands": ["git.viewStagedChanges"]}, // Diff staged all files (one pane)
+    {"before": ["g", "d"], "commands": ["git.openChange"]}, // Diff current file
+    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
+    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
+    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges"]},
+    {"before": ["g", "A"], "commands": ["git.stage"]}, // Entire file
+    {"before": ["g", "U"], "commands": ["git.unstage"]}, // Entire file
+
+    // GitLens
     // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
     {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
     {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
     {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
     {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
-    //  - Commands
-    {"before": ["g", "d"], "commands": ["git.openChange"]},
-    {"before": ["g", "D"], "commands": ["git.openAllChanges"]},
-    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
-    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
-    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges"]},
-    {"before": ["g", "A"], "commands": ["git.stage"]},
-    {"before": ["g", "U"], "commands": ["git.unstage"]},
-    // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
-    // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
-    {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
-    //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
-    //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
-    {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
-    {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
+
+    // // magit
+    // //  - Views
+    // {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    // {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    // {"before": ["g", "s"], "commands": ["magit.status"]},
+    // //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
+    // //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
+    // {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
+    // {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
 
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -650,12 +683,9 @@
     {"before": ["["], "after": ["<leader>", "["]},
     {"before": ["]"], "after": ["<leader>", "]"]},
 
-    // Git/magit
+    // Git
     //  - (See keybindings.json for comments)
     //  - Views
-    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
-    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
-    {"before": ["g", "s"], "commands": ["magit.status"]},
     // {"before": ["g", "s"], "commands": ["workbench.view.scm"]}, // Use shift+cmd+3
     // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
     {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
@@ -671,6 +701,11 @@
     // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
     // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
     {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
+
+    // // magit
+    // {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    // {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    // {"before": ["g", "s"], "commands": ["magit.status"]},
 
   ],
   "vim.operatorPendingModeKeyBindings": [
@@ -832,12 +867,12 @@
       ],
     },
 
-    // Git/magit
-    {"command": "multiCommand.magit.stage", "sequence": ["magit.stage", "extension.vim_escape"]},
-    {"command": "multiCommand.magit.stage-all", "sequence": ["magit.stage-all", "extension.vim_escape"]},
-    {"command": "multiCommand.magit.unstage", "sequence": ["magit.unstage", "extension.vim_escape"]},
-    {"command": "multiCommand.magit.unstage-all", "sequence": ["magit.unstage-all", "extension.vim_escape"]},
-    {"command": "multiCommand.magit.discard-at-point", "sequence": ["magit.discard-at-point", "extension.vim_escape"]},
+    // // magit
+    // {"command": "multiCommand.magit.stage", "sequence": ["magit.stage", "extension.vim_escape"]},
+    // {"command": "multiCommand.magit.stage-all", "sequence": ["magit.stage-all", "extension.vim_escape"]},
+    // {"command": "multiCommand.magit.unstage", "sequence": ["magit.unstage", "extension.vim_escape"]},
+    // {"command": "multiCommand.magit.unstage-all", "sequence": ["magit.unstage-all", "extension.vim_escape"]},
+    // {"command": "multiCommand.magit.discard-at-point", "sequence": ["magit.discard-at-point", "extension.vim_escape"]},
 
   ],
 
@@ -882,7 +917,7 @@
     // "contrastBorder": "#777",
     "contrastBorder": "#404040",
 
-    // Git diff
+    // Git: Diff editor
     //  - Red/green color samples from a github commit with "Dark high contrast" (https://github.com/settings/appearance)
     //    - Green: #09b43a (text), #26cd4d4d (line)
     //    - Red:   #ff6a69 (text), #ff6a694d (line)
@@ -890,11 +925,30 @@
     //    - Green: #2d571a (atom, dark) -> #4b8c30 (bright) -> #6cc644 (very bright)
     //    - Red:   #910000 (atom, dark) -> #a62c2e (bright) -> #ff4444 (very bright)
     // "diffEditor.border": "#404040", // (Default, from "contrastBorder")
+    // "multiDiffEditor.border": "#404040",
+    // "multiDiffEditor.background": "#40404066", // Want, but not until they add a similar setting for diffEditor
+    "multiDiffEditor.headerBackground": "#404040",
     "diffEditor.diagonalFill": "#373b41", // Default: Some gray color w/ diagonal lines -- changed to solid in css below
-    "diffEditor.insertedLineBackground": "#105620", // Github line rgba (#26cd4d4d) -> fiddle with hsl to get matching rgb with no alpha
-    "diffEditor.insertedTextBackground": "#09b43abb", // Github text + alpha
-    "diffEditor.removedLineBackground": "#712a2b", // Github line rgba (#ff6a694d) -> fiddle with hsl to get matching rgb with no alpha
-    "diffEditor.removedTextBackground": "#ff6a6988", // Github text + alpha
+    //
+    // v1
+    //  - Nope: text bg too bright, hard to see fg in big swaths of changes
+    // "diffEditor.insertedLineBackground": "#105620", // Github line rgba (#26cd4d4d) -> fiddle with hsl to get matching rgb with no alpha
+    // "diffEditor.insertedTextBackground": "#09b43abb", // Github text + alpha
+    // "diffEditor.removedLineBackground": "#712a2b", // Github line rgba (#ff6a694d) -> fiddle with hsl to get matching rgb with no alpha
+    // "diffEditor.removedTextBackground": "#ff6a6988", // Github text + alpha
+    // v2
+    //  - Nope: line bg too dim, hard to spot bg in small isolated changes
+    // "diffEditor.insertedLineBackground": "#10562088",
+    // "diffEditor.insertedTextBackground": "#105620fe",
+    // "diffEditor.removedLineBackground": "#712a2b88",
+    // "diffEditor.removedTextBackground": "#712a2bfe",
+    // v3
+    //  - Try: set the one working bg color for both line + text, and forget about distinguishing them
+    "diffEditor.insertedLineBackground": "#105620fe",
+    "diffEditor.insertedTextBackground": "#105620fe",
+    "diffEditor.removedLineBackground": "#712a2bfe",
+    "diffEditor.removedTextBackground": "#712a2bfe",
+    //
     "diffEditorOverview.insertedForeground": "#09b43a", // Github text
     "diffEditorOverview.removedForeground":  "#ff6a69", // Github text
     "diffEditor.insertedTextBorder": "#0000", // Default: #33ff2e
@@ -960,6 +1014,28 @@
     // List find/search highlight (Explorer)
     "list.filterMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
     "list.filterMatchBorder": "#0000",
+
+    // git merge
+    "merge.border": "#0000", // Default: "#c3df6f",
+    "merge.commonContentBackground": "#0000",
+    "merge.commonHeaderBackground": "#ff6666",
+    "merge.currentContentBackground": "#0000",
+    "merge.currentHeaderBackground": "#ff6666",
+    "merge.incomingContentBackground": "#0000",
+    "merge.incomingHeaderBackground": "#ff6666",
+    // "mergeEditor.change.background": "#9bb95533",
+    // "mergeEditor.change.word.background": "#9ccc2c33",
+    // "mergeEditor.changeBase.background": "#4b1818",
+    // "mergeEditor.changeBase.word.background": "#6f1313",
+    // "mergeEditor.conflict.handled.minimapOverViewRuler": "#adaca8ee",
+    // "mergeEditor.conflict.handledFocused.border": "#c1c1c1cc",
+    // "mergeEditor.conflict.handledUnfocused.border": "#86868649",
+    // "mergeEditor.conflict.input1.background": null,
+    // "mergeEditor.conflict.input2.background": null,
+    // "mergeEditor.conflict.unhandled.minimapOverViewRuler": "#fcba03",
+    // "mergeEditor.conflict.unhandledFocused.border": "#ffa600",
+    // "mergeEditor.conflict.unhandledUnfocused.border": "#ffa6007a",
+    // "mergeEditor.conflictingLines.background": "#ffea0047",
 
     // Notebook
     // "notebook.cellBorderColor": "#404040",
@@ -1418,8 +1494,8 @@
     //  - etc.
     ".monaco-workbench .part > .content": {
       // "font-size": "13px", // Default, too big
-      "font-size": "12px", // Seems good
-      // "font-size": "11px", // Editor font size, but a bit too small
+      // "font-size": "12px", // Seems good
+      "font-size": "11px", // Editor font size, but a bit too small
     },
 
     // Hide all scrollbars
@@ -1484,6 +1560,14 @@
     // ".quick-input-widget .monaco-list-row[data-index='0']": { "top": "calc(13px * 0) !important" },
     // ".quick-input-widget .monaco-list-row[data-index='1']": { "top": "calc(13px * 1) !important" },
     // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
+
+    // Advanced Open File (cmd+o)
+    //  - Make really wide
+    ".quick-input-widget:has(.monaco-list[aria-label*='Type to narrow down results'])": {
+      "width": "1000px !important",
+      "left": "calc((100% - 1000px) / 2) !important",
+      "margin-left": "0px !important",
+    },
 
     // Activity Bar
     "#workbench\\.parts\\.activitybar": {
@@ -1774,11 +1858,12 @@
 
     // Tabs: Font/height sizing
     ".tabs-and-actions-container": {
-      "height": "17px !important",
+      // "height": "17px !important", // NOTE Disabled for workbench.editor.wrapTabs
       "background": "#404040 !important",
     },
     ".tabs-and-actions-container .tab": {
       "padding-right": "10px",
+      "border-width": "0px !important", // Prevent jank when moving through wrapped tabs (when right border changes 0px->1px, which I don't need)
     },
     ".tabs-and-actions-container .tab .monaco-icon-label .monaco-icon-label-container": {
       // When multiple tabs are open with the same name (.label-name), they gain a dir label too (.label-description),
@@ -1788,7 +1873,7 @@
       "flex-wrap": "nowrap",
     },
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container": {
-      "height": "17px !important",
+      // "height": "17px !important", // NOTE Disabled for workbench.editor.wrapTabs
       "line-height": "17px !important",
     },
     "body.inline-title-bar .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab": {
@@ -1803,7 +1888,7 @@
       "line-height": "17px !important",
     },
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container": {
-      "height": "17px !important",
+      // "height": "17px !important", // NOTE Disabled for workbench.editor.wrapTabs
       "line-height": "17px !important",
     },
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab": {
@@ -1834,11 +1919,17 @@
     },
 
     // Tabs: Icons
+    ".tabs-and-actions-container .tab.dirty .tab-label": {
+      // Color labels of dirty tabs
+      "color": "#de935f", // git orange (gitDecoration.modifiedResourceForeground)
+    },
     ".tabs-and-actions-container .tab.dirty .tab-label::after": {
-      "content": "'\\ea71'",
-      "font-family": "codicon",
-      "padding-right": "0px",
-      "display": "block !important", // Add circle on dirty/unsaved editors
+      // XXX Nope, stop adding the solid circle to the right of dirty tabs, because it doesn't play
+      // well with the new wrapped tab bar. Instead, color the tab label (above).
+      // "content": "'\\ea71'",
+      // "font-family": "codicon",
+      // "padding-right": "0px",
+      // "display": "block !important", // Add circle on dirty/unsaved editors
     },
     ".tabs-and-actions-container .codicon": {
       "font-size": "13px !important",
@@ -1978,6 +2069,8 @@
     //    - 5px = run `cat` to put the block cursor in the bottom-left, then zoom in and to visually match pixels to the left/down
     //    - 1px = adjust to taste
     //    - Total: 6px
+    //  - FIXME This sometimes causes a -4px offset on the top line of the terminal that obscures the top line, e.g. pdbpp up/down
+    //    - But I don't know how to fix it, because the height of the terminal is fixed :/
     ".monaco-workbench .terminal-editor .xterm": {
       "bottom": "6px",
     },
@@ -2069,16 +2162,70 @@
       "text-decoration": "inherit",
     },
 
-    // Git diff editor
+    // Copilot Chat
+    ".interactive-item-container .value .rendered-markdown p": {
+      // "line-height": "1.5em", // Default
+      "line-height": "13px", // Tighter (13px/11px = 1.18em, with font-size:11px in ".monaco-workbench .part > .content")
+    },
+
+    // Git: Diff editor
+    //  - Hide overview ruler + scrollbar (right margin)
+    //    - Use .diffOverview to hide both of them (and whatever else is in that div)
+    ".diffOverview": {
+      "display": "none",
+    },
+    //  - In the overview ruler, move red/green above the scrollbar (preserve color) instead of below it (dimmed color)
+    ".monaco-diff-editor .diffOverview .diffOverviewRuler": {
+      "z-index": "11", // Above z-index:10 of the scrollbar (.diffOverview .diffViewport)
+    },
     //  - Make negative areas solid instead of diagonal fill (e.g. what to show on left when lines added on right)
     ".monaco-editor .diagonal-fill": {
       "background-color": "var(--vscode-diffEditor-diagonalFill)",
       "background-image": "unset",
       "background-size": "unset",
     },
-    //  - In the overview ruler, move red/green above the scrollbar (preserve color) instead of below it (dimmed color)
-    ".monaco-diff-editor .diffOverview .diffOverviewRuler": {
-      "z-index": "11", // Above z-index:10 of the scrollbar (.diffOverview .diffViewport)
+    //  - File header
+    ".monaco-component.multiDiffEditor .multiDiffEntry .header .header-content .file-path .title": {
+      "font-size": "12px !important",
+      "line-height": "17px !important",
+    },
+    //  - "Hidden lines"
+    ".monaco-editor .diff-hidden-lines .center": {
+      "background": "#202020 !important",
+    },
+    ".monaco-editor .diff-hidden-lines": {
+      "font-size": "11px !important",
+      "line-height": "13px !important",
+    },
+    //  - Hide left margins: Split
+    ".monaco-diff-editor.side-by-side .editor.original .monaco-editor .editor-scrollable": {
+      // Split left: Editor
+      // "left": "0px !important", // Nope, keep the left editor right aligned
+    },
+    ".monaco-diff-editor.side-by-side .editor.modified .monaco-editor .margin": {
+      // Split right: Margin
+      "display": "none !important",
+    },
+    ".monaco-diff-editor.side-by-side .editor.modified .monaco-editor .editor-scrollable": {
+      // Split right: Editor
+      "left": "0px !important",
+    },
+    ".monaco-diff-editor.side-by-side .editor.modified .monaco-editor .diff-hidden-lines .center a[title='Show Unchanged Region']": {
+      // Split right: Expand button for "hidden lines"
+      "display": "none !important",
+    },
+    //  - Hide left margins: Unified
+    ".monaco-diff-editor:not(.side-by-side) .editor.original": {
+      // Unified "left" is just a tiny width:5px margin on the left
+      "display": "none !important",
+    },
+    ".monaco-diff-editor:not(.side-by-side) .editor.modified": {
+      // Unified "right" is the actual unified editor with left:5px
+      "left": "0px !important",
+    },
+    ".monaco-diff-editor:not(.side-by-side) .editor.modified .monaco-editor .diff-hidden-lines .center a[title='Show Unchanged Region']": {
+      // Expand button for "hidden lines"
+      "display": "none !important",
     },
 
     // Peek
@@ -2276,5 +2423,11 @@
   "interactiveWindow.collapseCellInputCode": "never",
   "shellcheck.enable": false,
   "gitlens.ai.experimental.generateCommitMessage.enabled": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "remote.SSH.enableDynamicForwarding": false,
+  "chat.editor.fontSize": 11,
+  "notebook.experimental.cellChat": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "search.quickAccess.preserveInput": true,
 
 }
