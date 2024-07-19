@@ -25,7 +25,9 @@
       {"command": "jdanbrown.terminal.rerunCommandInRecentTerminal", "title": "[jdanbrown] Terminal: Rerun Last Command in Most Recent Terminal"},
       {"command": "jdanbrown.editor.toggleGutter", "title": "[jdanbrown] Editor: Toggle gutter"},
       {"command": "jdanbrown.workbench.action.quickOpen.magit", "title": "[jdanbrown] Quick Open: Magit"},
-      {"command": "jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "title": "[jdanbrown] Fix Workspace Setting: jupyter.interactiveWindow.cellMarker.default"}
+      {"command": "jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "title": "[jdanbrown] Fix Workspace Setting: jupyter.interactiveWindow.cellMarker.default"},
+      {"command": "jdanbrown.python.pylance.undisable", "title": "[jdanbrown] Pylance: Un-disable"},
+      {"command": "jdanbrown.python.pylance.disable", "title": "[jdanbrown] Pylance: Disable"}
     ]
   },
   "scripts": {

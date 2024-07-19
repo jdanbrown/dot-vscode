@@ -99,13 +99,13 @@
   {"key": "cmd+l", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   //  - To discover these, use: "Developer: Inspect Context Keys" -> click activity bar -> open dev console -> expand object -> `activeViewlet: "..."`
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
-  {"key": "shift+cmd+2", "command": "workbench.panel.chatSidebar",                   "when": "true"},
-  {"key": "shift+cmd+3", "command": "workbench.view.extension.bookmarks",            "when": "true"},
-  {"key": "shift+cmd+4", "command": "workbench.view.scm",                            "when": "true"},
-  {"key": "shift+cmd+5", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
-  {"key": "shift+cmd+6", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
-  {"key": "shift+cmd+7", "command": "workbench.view.extension.databricksBar",        "when": "true"},
-  // {"key": "shift+cmd+7", "command": "workbench.view.extension.databricksPowerTools", "when": "true"},
+  // {"key": "shift+cmd+2", "command": "workbench.panel.chatSidebar",                   "when": "true"},
+  {"key": "shift+cmd+2", "command": "workbench.view.extension.bookmarks",            "when": "true"},
+  {"key": "shift+cmd+3", "command": "workbench.view.scm",                            "when": "true"},
+  // {"key": "shift+cmd+4", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
+  {"key": "shift+cmd+4", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
+  {"key": "shift+cmd+5", "command": "workbench.view.extension.databricksBar",        "when": "true"},
+  {"key": "shift+cmd+6", "command": "workbench.view.extension.databricksPowerTools", "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
   {"key": "shift+cmd+8", "command": "workbench.view.debug",                          "when": "true"},
   {"key": "shift+cmd+9", "command": "workbench.view.extensions",                     "when": "true"},
@@ -272,6 +272,8 @@
   //  - Save: Rebind cmd+s from "File: Save" to "File: Save without Formatting", to avoid a ~3s delay from black on .py saves
   //    - https://jira.corp.stripe.com/browse/RUN_ZOOLANDER-12140 Allow overriding settings in zoolander/.vscode/settings.json
   //    - https://jira.corp.stripe.com/browse/RUN_PYTHON-125 zoolander/.vscode/settings.json: Remove autoImportCompletions + completeFunctionParens
+  //    - NOTE Duplicated in "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal"
+  //    - [edit] XXX Nope, I instead just disabled black as a formatter
   {"key": "cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
   {"key": "cmd+s", "command": "-workbench.action.files.save"},
   {"key": "shift+alt+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
@@ -385,14 +387,22 @@
   {"key": "ctrl+cmd+[", "command": "multiCommand.addHighlightAnd.editor.action.referenceSearch.trigger", "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"},
 
   // Problems
-  {"key": "cmd+m", "command": "editor.action.marker.next", "when": "true"},
-  {"key": "ctrl+cmd+m", "command": "editor.action.marker.prev", "when": "true"},
-  {"key": "alt+cmd+m", "command": "editor.action.marker.nextInFiles", "when": "true"},
-  {"key": "ctrl+alt+cmd+m", "command": "editor.action.marker.prevInFiles", "when": "true"},
+  {"key": "alt+cmd+n", "command": "editor.action.marker.next", "when": "editorFocus"},
+  {"key": "alt+cmd+p", "command": "editor.action.marker.prev", "when": "editorFocus"},
+  {"key": "ctrl+alt+cmd+n", "command": "editor.action.marker.nextInFiles", "when": "editorFocus"},
+  {"key": "ctrl+alt+cmd+p", "command": "editor.action.marker.prevInFiles", "when": "editorFocus"},
+  // {"key": "cmd+m", "command": "editor.action.marker.next", "when": "editorFocus"},
+  // {"key": "ctrl+cmd+m", "command": "editor.action.marker.prev", "when": "editorFocus"},
+  // {"key": "alt+cmd+m", "command": "editor.action.marker.nextInFiles", "when": "editorFocus"},
+  // {"key": "ctrl+alt+cmd+m", "command": "editor.action.marker.prevInFiles", "when": "editorFocus"},
   {"key": "f8", "command": "-editor.action.marker.nextInFiles", "when": "editorFocus"},
   {"key": "alt+f8", "command": "-editor.action.marker.next", "when": "editorFocus"},
   {"key": "shift+alt+f8", "command": "-editor.action.marker.prev", "when": "editorFocus"},
   {"key": "shift+f8", "command": "-editor.action.marker.prevInFiles", "when": "editorFocus"},
+  {"key": "alt+cmd+n", "command": "-extension.advancedNewFile"},
+  {"key": "alt+cmd+n", "command": "-newFile.createNewFile"},
+  {"key": "alt+cmd+p", "command": "-togglePreserveCase", "when": "editorFocus"},
+  {"key": "ctrl+alt+cmd+n", "command": "-welcome.showNewFileEntries"},
 
   // Debugging
   //  - Defaults, for reference
@@ -455,7 +465,7 @@
   {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
   {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
   {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
-  {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"},
+  // {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"}, // Nope, conflicts with revert in diff editor
 
   // // magit
   // //  - https://github.com/kahole/edamagit
@@ -589,6 +599,9 @@
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
+
+  // Commands
+  {"key": "ctrl+cmd+n", "command": "commands.openNotesMd", "when": "true"},
 
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode

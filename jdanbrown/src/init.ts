@@ -15,6 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsToggleGutter(context);
   registerCommandsQuickOpenMagit(context);
   registerCommandsFixWorkspaceSettings(context);
+  registerCommandsPylance(context);
   console.info('[jdanbrown] activate: Done');
 }
 
@@ -180,6 +181,20 @@ export function registerCommandsFixWorkspaceSettings(context: vscode.ExtensionCo
     vscode.commands.registerCommand('jdanbrown.fixWorkspaceSetting.jupyter.cellMarker', async () => {
       const config = vscode.workspace.getConfiguration();
       await config.update('jupyter.interactiveWindow.cellMarker.default', '# %%', vscode.ConfigurationTarget.Workspace);
+    }),
+  );
+}
+
+export function registerCommandsPylance(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsPylance');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.python.pylance.undisable', async () => {
+      const config = vscode.workspace.getConfiguration();
+      await config.update('python.languageServer', undefined, vscode.ConfigurationTarget.Workspace);
+    }),
+    vscode.commands.registerCommand('jdanbrown.python.pylance.disable', async () => {
+      const config = vscode.workspace.getConfiguration();
+      await config.update('python.languageServer', 'None', vscode.ConfigurationTarget.Workspace);
     }),
   );
 }

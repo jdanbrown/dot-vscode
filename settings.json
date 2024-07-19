@@ -23,6 +23,16 @@
   "workbench.commandPalette.history": 0,
   "search.quickOpen.includeHistory": false,
   "task.quickOpen.history": 0,
+  "workbench.editor.customLabels.patterns": {
+    // Stripe: zoolander
+    //  - https://code.visualstudio.com/updates/v1_88#_custom-labels-for-open-editors
+    "zoolander/src/python/flyte/**/main.py": "${dirname}/${filename}.${extname}",
+    "zoolander/src/python/flyte/**/tests/BUILD.bazel": "${dirname(1)}/${dirname}/${filename}.${extname}",
+    "zoolander/src/python/flyte/**/tests/test_main.py": "${dirname(1)}/${dirname}/${filename}.${extname}",
+    "zoolander/config/py_dependencies/*/deps.yaml": "${dirname}/${filename}.${extname}",
+    "**/BUILD.bazel": "${dirname}/${filename}.${extname}",
+    "**/metadata.yaml": "${dirname}/${filename}.${extname}",
+  },
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
@@ -162,6 +172,17 @@
   "search.decorations.badges": false,
   "search.exclude": {
     "build/**": true,
+    // Stripe: zoolander
+    "**/*.gz": true,
+    "**/*.textproto": true,
+    "**/*.txtpb": true,
+    "iceberg/**": true,
+    "src/python/observability/ast_validation/*/**": true,
+    "src/test/**/*.json": true,
+    "src/test/**/testdata/": true,
+    "src/resources/**/*.json": true,
+    "uppsala/": true,
+    "src/java/": true,
   },
   "search.mode": "newEditor",
   "search.seedWithNearestWord": true,
@@ -208,6 +229,12 @@
   //    - https://github.com/microsoft/vscode/issues/71297
   //    - https://github.com/microsoft/vscode/issues/179418
   "git.showProgress": false,
+  //  - HACK Disable untracked changes for ~100x performance improvement
+  //    - https://github.com/microsoft/vscode/issues/169253
+  //    - [juliannadeau] You can get a 100x performance improvement by setting git.untrackedChanges
+  //      to hidden in your settings. There is a tradeoff in that new files will not show up in this
+  //      UI and you'll have to add them via CLI.
+  // "git.untrackedChanges": "hidden",
 
   // Git: Diff editor
   "diffEditor.hideUnchangedRegions.enabled": true,
@@ -270,6 +297,13 @@
   "gitlens.graph.minimap.dataType": "lines",
   "gitlens.graph.commitOrdering": "topo",
   "gitlens.graph.highlightRowsOnRefHover": false,
+  "gitlens.remotes": [
+    {
+      "domain": "git.corp.stripe.com",
+      "type": "GitHub"
+    }
+  ],
+  "gitlens.ai.experimental.generateCommitMessage.enabled": false,
 
   // Github
   //  - https://github.com/Microsoft/vscode-pull-request-github
@@ -316,6 +350,18 @@
   "vscode-advanced-open-file.groupDirectoriesFirst": true,
   "vscode-advanced-open-file.includeDotDotItemForParent": false,
   "vscode-advanced-open-file.matchType": "sparse",
+
+  // commands
+  //  - https://github.com/usernamehw/vscode-commands
+  //  - https://github.com/usernamehw/vscode-commands/blob/master/docs/documentation.md
+  //  - https://github.com/usernamehw/vscode-commands/blob/master/docs/examples.md
+  "commands.populateCommandPalette": true,
+  "commands.commands": {
+    "commands.openNotesMd": {
+      "command": "commands.openFolder",
+      "args": "${userHome}/notes.md",
+    },
+  },
 
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
@@ -385,9 +431,10 @@
   // Filetypes
   //  - https://code.visualstudio.com/docs/languages/identifiers
   "workbench.editorAssociations": {
-    // Always open .ipynb in notebook editor instead of text editor
-    //  - To manually toggle, use "View: Reopen Editor With..."
-    "*.ipynb": "jupyter-notebook"
+    "*.ipynb": "jupyter-notebook",
+    // Disable GitLens "Interactive Rebase Editor"
+    //  - https://stackoverflow.com/questions/64869489/how-to-disable-vscode-git-rebase-ui
+    "git-rebase-todo": "default"
   },
   "[magit]": {
     // "editor.showFoldingControls": "never",
@@ -414,6 +461,7 @@
     "editor.tabSize": 4,
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": false,
+    "editor.rulers": [99],
   },
   "[starlark]": {
     "editor.tabSize": 4,
@@ -528,7 +576,8 @@
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showmodename": false,
-  "vim.textwidth": 120,
+  // "vim.textwidth": 120,  // TODO Personal
+  "vim.textwidth": 100,  // TODO Stripe (python)
   "vim.visualstar": true,
   "vim.joinspaces": false,
   "vim.matchpairs": "(:),{:},[:],<:>",
@@ -643,7 +692,7 @@
     {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
     {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
     {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
-    {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
+    // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
 
     // // magit
     // //  - Views
@@ -691,7 +740,7 @@
     {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
     {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
     {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
-    {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]},
+    // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
     //  - Commands
     {"before": ["g", "a"], "commands": ["git.stageSelectedRanges", "extension.vim_escape"]},
     {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges", "extension.vim_escape"]},
@@ -773,6 +822,18 @@
       "sequence": ["editor.action.peekDefinition", "extension.vim_home", "search.action.focusNextSearchResult"],
     },
 
+    // Editor
+    //  - HACK A command that approximately does "Next problem || Next merge conflict"
+    //    - XXX Nope, not great (noisy and janky)
+    // {
+    //   "command": "multiCommand:editor.action.marker.next+merge-conflict.next",
+    //   "sequence": ["editor.action.marker.next", "merge-conflict.next"],
+    // },
+    // {
+    //   "command": "multiCommand:editor.action.marker.prev+merge-conflict.previous",
+    //   "sequence": ["editor.action.marker.prev", "merge-conflict.previous"],
+    // },
+
     // Navigation
     //  - Add color highlight on goto references + peek references
     //    - Requires an extra manual esc when done, which I think is fine
@@ -788,7 +849,11 @@
     // Terminal
     {
       "command": "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal",
-      "sequence": ["workbench.action.files.save", "jdanbrown.terminal.rerunCommandInRecentTerminal",],
+      "sequence": [
+        // "workbench.action.files.save",
+        "workbench.action.files.saveWithoutFormatting", // NOTE Duplicated in keybindings.json
+        "jdanbrown.terminal.rerunCommandInRecentTerminal",
+      ],
     },
 
     // Notebook
@@ -928,6 +993,7 @@
     // "multiDiffEditor.border": "#404040",
     // "multiDiffEditor.background": "#40404066", // Want, but not until they add a similar setting for diffEditor
     "multiDiffEditor.headerBackground": "#404040",
+    // "multiDiffEditor.headerBackground": "#808080",
     "diffEditor.diagonalFill": "#373b41", // Default: Some gray color w/ diagonal lines -- changed to solid in css below
     //
     // v1
@@ -960,6 +1026,7 @@
 
     "editor.background": "#000000",
     "editor.foreground": "#ffffff",
+    "editorRuler.foreground": "#101010",  // Very very faint
 
     // Editor find/search highlight
     //  - NOTE This is for cmd+f, vim '/' is set by "vim.searchHighlightColor"
@@ -1081,7 +1148,8 @@
     // "peekViewTitleDescription.foreground": "#ffffff99",
     // "peekViewTitleLabel.foreground": "#ffffff",
 
-    "quickInputList.focusBackground": "#404040",
+    // "quickInputList.focusBackground": "#404040",
+    "quickInputList.focusBackground": "#666666", // Match hover background (e.g. try in Quick Search which has section headers)
 
     // Search Editor find/search highlight
     "searchEditor.findMatchBackground": "#ff0d", // Like "vim.searchHighlightColor"
@@ -1269,7 +1337,7 @@
       {"scope": "constant.other.option",                                    "settings": {"foreground": "#ffffff", "fontStyle": ""}}, // shellscript
       {"scope": "constant.other.rgb-value",                                 "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
       {"scope": "constant.regexp",                                          "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
-      {"scope": "constant.sha.git-rebase",                                  "settings": {"foreground": "#777777", "fontStyle": "bold"}},
+      {"scope": "constant.sha.git-rebase",                                  "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
       {"scope": "emphasis",                                                 "settings": {"fontStyle": "italic"}},
       {"scope": "entity.name.class",                                        "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
       {"scope": "entity.name.command.shell",                                "settings": {"foreground": "#ffffff", "fontStyle": ""}},
@@ -1315,6 +1383,7 @@
       {"scope": "markup.italic",                                            "settings": {"fontStyle": "italic"}},
       {"scope": "markup.strikethrough",                                     "settings": {"fontStyle": "strikethrough"}},
       {"scope": "markup.underline",                                         "settings": {"fontStyle": "underline"}},
+      {"scope": "meta.commit-message.git-rebase",                           "settings": {"foreground": "#ffffff", "fontStyle": "bold"}},
       {"scope": "meta.definition.variable.name",                            "settings": {"foreground": "#ffffff", "fontStyle": ""}},
       {"scope": "meta.diff.header",                                         "settings": {"foreground": "#6871ff", "fontStyle": "bold"}},
       {"scope": "meta.diff.header.from-file",                               "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
@@ -1389,7 +1458,7 @@
       {"scope": "support.constant.media-type",                              "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
       {"scope": "support.constant.property-value",                          "settings": {"foreground": "#ff77ff", "fontStyle": "bold"}},
       {"scope": "support.function",                                         "settings": {"foreground": "#ffffff", "fontStyle": ""}},
-      {"scope": "support.function.git-rebase",                              "settings": {"foreground": "#ffffff", "fontStyle": ""}},
+      {"scope": "support.function.git-rebase",                              "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
       {"scope": "support.type",                                             "settings": {"foreground": "#60fdff", "fontStyle": "bold"}},
       {"scope": "support.type.primitive",                                   "settings": {"foreground": "#fffc67", "fontStyle": "bold"}},
       {"scope": "support.type.property-name",                               "settings": {"foreground": "#ffffff", "fontStyle": ""}},
@@ -1514,13 +1583,15 @@
 
     // Quick input (cmd+p)
     //  - Protip: To use element inspector on these, set "workbench.quickOpen.closeOnFocusLost":false
-    //  - Wider command palette (default 600px is too narrow for long paths)
     ".monaco-workbench": {
       "font-size": "11px",
     },
+    ".quick-input-list .monaco-list-row": {
+      "border-radius": "unset",
+    },
     //  - Files
     //    - Reorder "file dir" -> "dir/file"
-    //    - Make really wide
+    //    - Make really wide (default 600px is too narrow for long paths)
     ".quick-input-widget:has(.monaco-list[aria-label*='Search files'])": {
       "width": "1000px !important",
       "left": "calc((100% - 1000px) / 2) !important",
@@ -1550,6 +1621,43 @@
       "float": "right",
     },
 
+    // Quick search (shift+cmd+f)
+    //  - Reorder "file dir" -> "dir/file"
+    //  - Make really wide (default 600px is too narrow for long paths)
+    ".quick-input-widget:has(.monaco-list[aria-label*='Search for text in your workspace files'])": {
+      "width": "1000px !important",
+      "left": "calc((100% - 1000px) / 2) !important",
+      "margin-left": "0px !important",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container": {
+      "display": "flex",
+      "color": "#ffffff",  // Default has 70% opacity
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-description-container": {
+      "order": "1",
+      "overflow-y": "hidden",
+      "text-overflow": "ellipsis",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": {
+      "font-size": "inherit !important",
+      "opacity": "1 !important",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-name-container": {
+      "order": "2",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": {
+      "content": "'/'",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .quick-input-list-entry.quick-input-list-separator-border": {
+      "border-top-width": "0px",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .quick-input-list-entry.quick-input-list-separator-border .label-name": {
+      "font-weight": "inherit",
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border)": {
+      "background": "#404040",
+    },
+
     // [nope] Quick input: Smaller row height
     //  - [nope] This doesn't work because all .monaco-list-row have a precomputed top:X that's a mutliple of 22px
     // ".quick-input-list": { "line-height": "13px" },
@@ -1562,7 +1670,7 @@
     // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
 
     // Advanced Open File (cmd+o)
-    //  - Make really wide
+    //  - Make really wide (default 600px is too narrow for long paths)
     ".quick-input-widget:has(.monaco-list[aria-label*='Type to narrow down results'])": {
       "width": "1000px !important",
       "left": "calc((100% - 1000px) / 2) !important",
@@ -2185,13 +2293,46 @@
       "background-size": "unset",
     },
     //  - File header
-    ".monaco-component.multiDiffEditor .multiDiffEntry .header .header-content .file-path .title": {
+    //    - Styling
+    //      - Make the file headers _very_ obvious, so it's easy to visually scan across long diffs with many files
+    //      - Remove some borders
+    ".multiDiffEditor .multiDiffEntry .header .header-content": {
+      "background": "#fff !important",
+      "color": "#000 !important",
+      "margin-top": "0px !important",
+      "border": "0px !important",
+    },
+    ".multiDiffEditor .multiDiffEntry .header .header-content .codicon": {
+      "color": "#000 !important",
+    },
+    ".multiDiffEditor .multiDiffEntry .editorParent": {
+      "border-bottom": "0px !important",
+    },
+    //    - Reorder "file dir" -> "dir/file"
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title": {
       "font-size": "12px !important",
       "line-height": "17px !important",
     },
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title .monaco-icon-label-container": {
+      "display": "flex",
+    },
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title .monaco-icon-label-container .monaco-icon-name-container": {
+      "order": "2",
+    },
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title .monaco-icon-label-container .monaco-icon-name-container .label-name:not(:empty)::before": {
+      "content": "'/'",
+    },
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title .monaco-icon-label-container .monaco-icon-description-container": {
+      "order": "1",
+    },
+    ".multiDiffEditor .multiDiffEntry .header .file-path .title .monaco-icon-label-container .monaco-icon-description-container .label-description": {
+      "font-size": "inherit", // Not .9em
+      "opacity": "inherit", // Not .7
+      "margin-left": "0px", // Not .5em
+    },
     //  - "Hidden lines"
     ".monaco-editor .diff-hidden-lines .center": {
-      "background": "#202020 !important",
+      "background": "#404040 !important",
     },
     ".monaco-editor .diff-hidden-lines": {
       "font-size": "11px !important",
@@ -2356,6 +2497,62 @@
 
   },
 
+  // Stripe settings (automatically managed)
+  "update.mode": "none",
+  "security.workspace.trust.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "remote.autoForwardPorts": false,
+  "remote.restoreForwardedPorts": false,
+  "remote.SSH.enableAgentForwarding": false,
+  "remote.SSH.path": "sc-ssh-wrapper",
+  "remote.SSH.useLocalServer": true,
+  "remote.SSH.connectTimeout": 60,
+  "remote.SSH.configFile": "~/.ssh/devboxes",
+  "remote.SSH.enableRemoteCommand": true,
+  "remote.forwardOnOpen": false,
+  "remote.otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  "window.title": "${rootPath}${separator}${activeEditorMedium}",
+  "search.followSymlinks": false,
+  "debug.javascript.automaticallyTunnelRemoteServer": false,
+  "ruby.rubocop.hideDisableSuggestions": true,
+  "typescript.tsdk": "~/stripe/pay-server/frontend/js-scripts/node_modules/typescript/lib",
+  "github.copilot.chat.welcomeMessage": "never",
+  "github.copilot.enable": {
+    "*": false,
+    "apex": true,
+    "erb": true,
+    "go": true,
+    "java": true,
+    "javascript": true,
+    "python": true,
+    "ruby": true,
+    "rust": true,
+    "scala": true,
+    "shellscript": true,
+    "starlark": true,
+    "terraform": true,
+    "typescript": true,
+    "typescriptreact": true
+  },
+  "run-pay.badDayButton.enabled": false,
+  //  - Databricks
+  //    - http://go/databricks-vscode-auth (Notebooks team)
+  //    - http://go/databricks-vscode (architr)
+  //    - https://github.com/databricks/databricks-vscode
+  //    - https://github.com/paiqo/Databricks-VSCode
+  "databricks.lastActiveConnection": "Databricks Extension",
+  // HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection on stripe .yaml files
+  //  - https://github.com/redhat-developer/vscode-yaml/issues/245
+  //  - https://github.com/redhat-developer/vscode-yaml/issues/491
+  "yaml.schemas": {
+    "https://json.schemastore.org/yamllint.json": "*.yaml",
+  },
+  // Disable semgrep because it's been failing to launch for months
+  //  - It makes a nuisance notification on every vscode reload/restart
+  "config-validator.semgrep.activate": false,
+
   // TODO Organize
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.startupEditor": "none",
@@ -2422,7 +2619,6 @@
   "jupyter.askForKernelRestart": false,
   "interactiveWindow.collapseCellInputCode": "never",
   "shellcheck.enable": false,
-  "gitlens.ai.experimental.generateCommitMessage.enabled": false,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "remote.SSH.enableDynamicForwarding": false,
   "chat.editor.fontSize": 11,
