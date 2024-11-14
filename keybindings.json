@@ -79,6 +79,8 @@
   {"key": "cmd+k alt+cmd+c", "command": "-copyFilePath", "when": "editorFocus"},
   {"key": "shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "!editorFocus"},
   {"key": "cmd+k shift+alt+cmd+c", "command": "-copyRelativeFilePath", "when": "editorFocus"},
+  // {"key": "shift+alt+c", "command": "copy-python-path.copy-python-import-statement", "when": "editorTextFocus && resourceLangId == python"},
+  {"key": "shift+alt+c", "command": "copy-python-path.copy-python-path", "when": "editorTextFocus && resourceLangId == python"},
   {"key": "ctrl+cmd+c", "command": "search.action.copyPath", "when": "fileMatchOrFolderMatchWithResourceFocus"},
   {"key": "ctrl+o", "command": "extension.advancedOpenFile.addCurrentFolderToWorkspace", "when": "extension.advancedOpenFile.active"},
   {"key": "ctrl+a", "command": "-extension.advancedOpenFile.addCurrentFolderToWorkspace", "when": "extension.advancedOpenFile.active"},
@@ -274,14 +276,16 @@
   //    - https://jira.corp.stripe.com/browse/RUN_PYTHON-125 zoolander/.vscode/settings.json: Remove autoImportCompletions + completeFunctionParens
   //    - NOTE Duplicated in "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal"
   //    - [edit] XXX Nope, I instead just disabled black as a formatter
-  {"key": "cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
-  {"key": "cmd+s", "command": "-workbench.action.files.save"},
-  {"key": "shift+alt+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
-  {"key": "shift+cmd+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
+  // {"key": "cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
+  // {"key": "cmd+s", "command": "-workbench.action.files.save"},
+  // {"key": "shift+alt+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
+  // {"key": "shift+cmd+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
+  // {"key": "shift+cmd+s", "command": "-workbench.action.files.saveAs"},
+  {"key": "cmd+s", "command": "workbench.action.files.save"},
+  {"key": "shift+cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
   {"key": "shift+cmd+s", "command": "-workbench.action.files.saveAs"},
 
   // Editor
-  {"key": "ctrl+space", "command": "editor.action.showHover"}, // Alias for gh (vim)
   // {"key": "cmd+.", "command": "editor.action.quickFix"}, // Default
   {"key": "shift+cmd+.", "command": "editor.action.openLink"},
   {"key": "ctrl+cmd+w", "command": "editor.action.toggleWordWrap"},
@@ -296,6 +300,24 @@
   // {"key": "shift+cmd+l", "command": "editor.action.selectHighlights", "when": "editorFocus"}, // Default
   {"key": "ctrl+8", "command": "highlightwords.addHighlight"},
 
+  // Popups for hover, parameter hints, suggest
+  //  - Hover
+  //    - TODO https://github.com/microsoft/vscode/issues/222316 Add command editor.action.hideHover + when context hoverVisible
+  {"key": "ctrl+space", "command": "editor.action.showHover", "when": "textInputFocus"}, // Like gh (vim)
+  // {"key": "ctrl+space", "command": "editor.action.showHover", "when": "textInputFocus && !hoverVisible"}, // Toggle on (like gh in vim)
+  // {"key": "ctrl+space", "command": "editor.action.hideHover", "when": "textInputFocus && hoverVisible"}, // Toggle off
+  // {"key": "escape", "command": "editor.action.hideHover", "when": "textInputFocus && hoverVisible && vim.mode == 'Normal'"}, // Don't interfer with escape in Insert/Visual modes
+  //  - Parameter hints
+  {"key": "shift+cmd+space", "command": "-editor.action.triggerParameterHints", "when": "editorTextFocus && editorHasSignatureHelpProvider"}, // Default
+  {"key": "shift+cmd+space", "command": "editor.action.triggerParameterHints", "when": "editorTextFocus && editorHasSignatureHelpProvider && !parameterHintsVisible"}, // Toggle on
+  {"key": "shift+cmd+space", "command": "closeParameterHints", "when": "editorTextFocus && parameterHintsVisible"}, // Toggle off
+  {"key": "escape", "command": "closeParameterHints", "when": "editorTextFocus && parameterHintsVisible && vim.mode == 'Normal'"}, // Don't interfer with escape in Insert/Visual modes
+  //  - Suggest
+  {"key": "alt+escape", "command": "-editor.action.triggerSuggest", "when": "textInputFocus && editorHasCompletionItemProvider && !editorReadonly && !suggestWidgetVisible"}, // Default
+  {"key": "alt+escape", "command": "editor.action.triggerSuggest", "when": "textInputFocus && editorHasCompletionItemProvider && !suggestWidgetVisible"}, // Toggle on
+  {"key": "alt+escape", "command": "hideSuggestWidget", "when": "textInputFocus && suggestWidgetVisible"}, // Toggle off
+  {"key": "escape", "command": "hideSuggestWidget", "when": "textInputFocus && suggestWidgetVisible && vim.mode == 'Normal'"}, // Don't interfer with escape in Insert/Visual modes
+
   // Move lines up/down
   {"key": "ctrl+cmd+j", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly"},
   {"key": "ctrl+cmd+k", "command": "editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly"},
@@ -307,6 +329,8 @@
   {"key": "ctrl+r", "command": "-workbench.action.openRecent"},
   //  - shift+esc is a common typo when typing fast with shift
   {"key": "shift+escape", "command": "extension.vim_escape", "when": "vim.active && !inDebugRepl && vim.mode != 'Normal'"},
+  //  - TODO TODO
+  // {"key": "escape", "command": "highlightwords.addHighlight", "when": "vim.active && !inDebugRepl && vim.mode == 'Normal'"},
 
   // Multi-cursor
   {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus && !inSearchEditor && editorLangId != 'magit'"},

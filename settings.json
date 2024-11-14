@@ -10,15 +10,12 @@
   // Workspace
   "window.newWindowDimensions": "inherit",
   "window.nativeFullScreen": false,
-  "window.titleBarStyle": "native",
-  "window.customTitleBarVisibility": "never",
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
   "workspace-path-status-bar.enable": false,
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
   "files.refactoring.autoSave": false,
-  "workbench.editor.wrapTabs": true, // FIXME Can't click on action buttons anymore 🤷
-  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.editor.wrapTabs": true,
   "workbench.quickOpen.preserveInput": true,
   "workbench.commandPalette.history": 0,
   "search.quickOpen.includeHistory": false,
@@ -123,7 +120,6 @@
   // "editor.scrollbar.horizontalScrollbarSize": 0,
   "editor.scrollbar.vertical": "hidden", // Hides scrollbar and leaves overview ruler shown
   "editor.scrollbar.horizontal": "hidden",
-  "editor.hideCursorInOverviewRuler": true,
   // "editor.overviewRulerBorder": false,
   // "terminal.integrated.scrollbar.vertical": "hidden", // NOTE No such setting, handled in css
 
@@ -180,9 +176,11 @@
     "src/python/observability/ast_validation/*/**": true,
     "src/test/**/*.json": true,
     "src/test/**/testdata/": true,
-    "src/resources/**/*.json": true,
+    "src/resources/": true,
+    "src/test/resources/": true,
     "uppsala/": true,
     "src/java/": true,
+    "datasets/": true,
   },
   "search.mode": "newEditor",
   "search.seedWithNearestWord": true,
@@ -514,18 +512,22 @@
   "python.showStartPage": false,
   "python.languageServer": "Pylance",
   "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
-  // "python.analysis.typeCheckingMode": "strict", // TODO Want, but goes nuts in zoolander
-  // "python.analysis.typeCheckingMode": "standard",
-  "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
-  // "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
-  "python.terminal.activateEnvironment": false,
+  //
+  // HACK Stripe: zoolander -- Disabling all three of these to fix this override error:
+  //  - Error: 'python.analysis.typeCheckingMode' cannot be set when a pyrightconfig.json or pyproject.toml is being used. settings.json(settingsNotOverridable)
+  // // "python.analysis.typeCheckingMode": "strict", // TODO Want, but goes nuts in zoolander
+  // // "python.analysis.typeCheckingMode": "standard",
+  // "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
+  // // "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
+  // "python.analysis.extraPaths": [],
+  // "python.analysis.ignore": [
+  //   // Disable checking in notebooks
+  //   //  - Because e.g. a single `from x import *` renders it completely useless
+  //   "**/*.ipynb",
+  // ],
+  //
   "python.interpreter.infoVisibility": "always",
-  "python.analysis.extraPaths": [],
-  "python.analysis.ignore": [
-    // Disable checking in notebooks
-    //  - Because e.g. a single `from x import *` renders it completely useless
-    "**/*.ipynb",
-  ],
+  "python.terminal.activateEnvironment": false,
   "python.defaultInterpreterPath": "/usr/bin/python3",
   "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
   "jupyter.interactiveWindow.viewColumn": "beside",
@@ -1026,7 +1028,8 @@
 
     "editor.background": "#000000",
     "editor.foreground": "#ffffff",
-    "editorRuler.foreground": "#101010",  // Very very faint
+    // "editorRuler.foreground": "#101010",  // Very very faint [too faint in daylight]
+    "editorRuler.foreground": "#202020",  // Very very faint
 
     // Editor find/search highlight
     //  - NOTE This is for cmd+f, vim '/' is set by "vim.searchHighlightColor"
@@ -1482,8 +1485,6 @@
   // Tabs + breadcrumbs
   "breadcrumbs.icons": false,
   "workbench.editor.tabCloseButton": "off",
-  "workbench.editor.showIcons": false,
-  "workbench.editor.decorations.badges": false,
 
   // Custom css/styling
   //  - https://github.com/drcika/apc-extension
@@ -2568,7 +2569,6 @@
   "workbench.commandPalette.preserveInput": true,
   "workbench.iconTheme": null,
   "workbench.editor.enablePreview": false,
-  "workbench.editor.highlightModifiedTabs": true,
   "zenMode.restore": true,
   "zenMode.hideLineNumbers": false,
   "editor.matchBrackets": "near",
@@ -2625,5 +2625,24 @@
   "notebook.experimental.cellChat": true,
   "github.copilot.editor.enableAutoCompletions": true,
   "search.quickAccess.preserveInput": true,
+  "remote.autoForwardPortsSource": "output",
+  "workbench.activityBar.location": "hidden",
+  "window.density.editorTabHeight": "compact",
+  "workbench.layoutControl.type": "menu",
+  "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "off",
+  "workbench.editor.highlightModifiedTabs": true,
+  "window.customTitleBarVisibility": "never",
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.decorations.badges": false,
+  "workbench.editor.navigationScope": "editor",
+  "workbench.editor.showIcons": false,
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.editor.untitled.labelFormat": "name",
+  "window.dialogStyle": "custom",
+  "window.titleBarStyle": "native",
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.showCommandGuide": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "python.analysis.autoImportCompletions": false,
 
 }
