@@ -449,7 +449,7 @@
       "strings": "off",
       "other": "off"
     },
-    "editor.wordWrap": "off",
+    "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent"
   },
   "[fish]": {
