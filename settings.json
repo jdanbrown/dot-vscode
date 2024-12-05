@@ -449,6 +449,9 @@
     "editor.wordWrap": "off",
     "editor.wrappingIndent": "indent"
   },
+  "[fish]": {
+    "editor.tabSize": 4,
+  },
   //  - TODO I want insertFinalNewline:false in notebooks, once a filetype control is exposed for notebook editors
   //    - https://github.com/microsoft/vscode/issues/195011 Language specific settings for ipynb (jupyter-notebook) files
   //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
