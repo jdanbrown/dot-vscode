@@ -2658,5 +2658,6 @@
   "python.analysis.autoImportCompletions": false,
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.cursorStyleInactive": "none",
+  "window.customTitleBarVisibility": "never",
 
 }
