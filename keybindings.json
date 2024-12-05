@@ -461,8 +461,17 @@
   // {"key": "g s", "command": "workbench.view.scm", "when": "!inputFocus"}, // Use shift+cmd+3
   // {"key": "g d", "command": "git.viewChanges", "when": "!inputFocus"}, // Done in settings.json -> vim
   // {"key": "g d s", "command": "git.viewStagedChanges", "when": "!inputFocus"}, // Done in settings.json -> vim
+  // {"key": "g l", "command": "gitlens.showCommitsView", "when": "!inputFocus"},
+  {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
+  {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
+  {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
+  {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"},
   //  - Diff
   {"key": "ctrl+alt+d", "command": "workbench.files.action.compareFileWith"},
+  //  - Diff editor
+  {"key": "ctrl+n", "command": "workbench.action.compareEditor.nextChange", "when": "textCompareEditorActive"},
+  {"key": "ctrl+p", "command": "workbench.action.compareEditor.previousChange", "when": "textCompareEditorActive"},
+  {"key": "ctrl+w", "command": "diffEditor.switchSide", "when": "textCompareEditorActive"},
   //  - Commands
   // {"key": "g c", "command": "git.commitStaged", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"}, // No, conflicts with gco
   // {"key": "g shift+c", "command": "git.commitStagedAmend", "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"}, // Want?
