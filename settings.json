@@ -202,6 +202,7 @@
   "notebook.globalToolbar": false,
   "notebook.showCellStatusBar": "hidden",
   "notebook.stickyScroll.enabled": true,
+  "notebook.insertFinalNewline": false,
 
   // Git
   "scm.showActionButton": false, // Hide action button at top of sidebar ('Commit', 'Sync Changes', etc.)
@@ -529,8 +530,14 @@
   // ],
   //
   "python.interpreter.infoVisibility": "always",
-  "python.terminal.activateEnvironment": false,
-  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.terminal.activateEnvironment": false, // XXX Stripe?
+  "python.defaultInterpreterPath": "/usr/bin/python3", // XXX Stripe?
+  "python.analysis.extraPaths": [],
+  "python.analysis.ignore": [
+    // Disable checking in notebooks
+    //  - Because e.g. a single `from x import *` renders it completely useless
+    "**/*.ipynb",
+  ],
   "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
   "jupyter.interactiveWindow.viewColumn": "beside",
   "notebook.cellToolbarLocation": {
