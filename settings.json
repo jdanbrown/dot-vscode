@@ -2494,7 +2494,7 @@
     //    - The output is totally different html than when created by the vscode notebook 🤷
     ".cell_container .output_container .output .ansiout": {
       "white-space": "pre",
-      "font-family": "Consolas",
+      "font-family": "Consolas Nerd Font",
       "font-size": "11px",
       "line-height": "13px",
       "font-weight": "inherit",
