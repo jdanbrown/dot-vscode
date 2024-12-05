@@ -963,13 +963,13 @@
   //      - e.g. show rgba -> truncate to rbg -> convert to hsl -> tune lightness -> diff tuned tab color with original rgba color
   //  - My classic colors
   //    - #777777 -- black
-  //    - #6871ff -- blue
-  //    - #60fdff -- cyan
-  //    - #5ffa68 -- green
-  //    - #ff77ff -- magenta
   //    - #ff6e67 -- red
-  //    - #ffffff -- white
+  //    - #5ffa68 -- green
   //    - #fffc67 -- yellow
+  //    - #6871ff -- blue
+  //    - #ff77ff -- magenta
+  //    - #60fdff -- cyan
+  //    - #ffffff -- white
   //  - git colors (from git builtins, I think)
   //    - #5ffa69 -- green (git status staged)
   //    - #f96e67 -- red (git status unstaged)
