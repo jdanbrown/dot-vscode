@@ -491,104 +491,104 @@
   {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
   // {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"}, // Nope, conflicts with revert in diff editor
 
-  // // magit
-  // //  - https://github.com/kahole/edamagit
-  // //  - https://github.com/kahole/edamagit/blob/develop/TUTORIAL.md
-  // //  - https://github.com/kahole/edamagit/blob/develop/package.json#L392
-  // //  - https://magit.vc/manual/magit/
-  // {"key": "g m",           "command": "jdanbrown.workbench.action.quickOpen.magit", "when": "!inputFocus"},
-  // {"key": "g shift+m",     "command": "magit.file-popup",               "when": "!inputFocus"},
-  // {"key": "g s",           "command": "magit.status",                   "when": "!inputFocus"},
-  // {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
-  // {"key": "shift+o",       "command": "magit.toggle-all-folds-for-change-views", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "r",             "command": "magit.refresh",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {
-  //   "key": "ctrl+w", "command": "vim.remap", "args": {"after": [
-  //     "g", "Z", "Q", // magit.move-to-unstaged-changes (see settings.json)
-  //     // "z", "t",
-  //   ]},
-  //   "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/",
-  // },
-  // {
-  //   "key": "ctrl+s", "command": "vim.remap", "args": {"after": [
-  //     // "g", "Z", "Q", // NOTE Jump to Unstaged Changes first, so that if there are no Staged Changes then the zt at least puts us somewhere familiar
-  //     "g", "Z", "W", // magit.move-to-staged-changes
-  //     // "z", "t",
-  //   ]},
-  //   "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/",
-  // },
-  // {"key": "ctrl+n",        "command": "magit.move-next-change",         "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+p",        "command": "magit.move-previous-change",     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+j",        "command": "magit.move-next-hunk",           "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+k",        "command": "magit.move-previous-hunk",       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // //  - NOTE These steal from multi-key keybindings like gZ* (and idk how to fix)
-  // //    - https://github.com/VSCodeVim/Vim#vim-modes
-  // {"key": "a",             "command": "multiCommand.magit.stage",            "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+a",       "command": "multiCommand.magit.stage-all",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "u",             "command": "multiCommand.magit.unstage",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+u",       "command": "multiCommand.magit.unstage-all",      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "d",             "command": "multiCommand.magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "c",             "command": "magit.commit",                        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "enter",         "command": "magit.visit-at-point",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+/",       "command": "magit.help",                          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // //  - Defaults
-  // //    - Ignore dispatch, it's the same as help
-  // //      - https://github.com/kahole/edamagit/blob/develop/src/commands/helpCommands.ts#L9-L15
-  // {"key": "alt+x g",       "command": "-magit.status"},
-  // {"key": "alt+x ctrl+g",  "command": "-magit.dispatch"},
-  // {"key": "alt+x alt+g",   "command": "-magit.file-popup",              "when": "activeEditor"},
-  // {"key": "tab",           "command": "-magit.toggle-fold",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "g",             "command": "-magit.refresh",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+-",       "command": "-magit.help",                    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // //    - Docs on apply, discard, reverse -- warning: destructive!
-  // //      - https://magit.vc/manual/magit/Applying.html
-  // {"key": "a",             "command": "-magit.apply-at-point",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "k",             "command": "-magit.discard-at-point",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "v",             "command": "-magit.reverse-at-point",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "c",             "command": "-magit.commit",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "b",             "command": "-magit.branching",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "m",             "command": "-magit.merging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "r",             "command": "-magit.rebasing",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+x",       "command": "-magit.resetting",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "x",             "command": "-magit.reset-mixed",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+u x",      "command": "-magit.reset-hard",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+m",       "command": "-magit.remoting",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "l",             "command": "-magit.logging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "y",             "command": "-magit.show-refs",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress|Visual).*$/"},
-  // {"key": "d",             "command": "-magit.diffing",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "t",             "command": "-magit.tagging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+a",       "command": "-magit.cherry-picking",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+v",       "command": "-magit.reverting",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "i",             "command": "-magit.ignoring",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+i",       "command": "-magit.ignoring",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+1",       "command": "-magit.running",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+5",       "command": "-magit.worktree",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+p",       "command": "-magit.pushing",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+f",       "command": "-magit.pulling",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "z",             "command": "-magit.stashing",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "o",             "command": "-magit.submodules",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "f",             "command": "-magit.fetching",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "s",             "command": "-magit.stage",                   "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+s",       "command": "-magit.stage-all",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "u",             "command": "-magit.unstage",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+u",       "command": "-magit.unstage-all",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "shift+4",       "command": "-magit.process-log",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "q",             "command": "-magit.quit",                    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+j",        "command": "-magit.move-next-entity",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+k",        "command": "-magit.move-previous-entity",    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+c ctrl+c", "command": "-magit.save-and-close-editor",   "when": "editorTextFocus && editorLangId == 'git-commit'"},
-  // {"key": "ctrl+c ctrl+k", "command": "-magit.clear-and-abort-editor",  "when": "editorTextFocus && editorLangId == 'git-commit'"},
-  // {"key": "ctrl+c ctrl+c", "command": "-magit.save-and-close-editor",   "when": "editorTextFocus && editorLangId == 'git-rebase'"},
-  // {"key": "ctrl+c ctrl+k", "command": "-magit.clear-and-abort-editor",  "when": "editorTextFocus && editorLangId == 'git-rebase'"},
-  // // {"key": "...",           "command": "-magit.blame-file",              "when": "false"},
-  // // {"key": "...",           "command": "-magit.copy-buffer-revision",    "when": "false"},
-  // // {"key": "...",           "command": "-magit.copy-section-value",      "when": "false"},
-  // // {"key": "...",           "command": "-magit.diff-file",               "when": "false"},
-  // // {"key": "...",           "command": "-magit.log-file",                "when": "false"},
-  // // {"key": "...",           "command": "-magit.stage-file",              "when": "false"},
-  // // {"key": "...",           "command": "-magit.unstage-file",            "when": "false"},
+  // magit
+  //  - https://github.com/kahole/edamagit
+  //  - https://github.com/kahole/edamagit/blob/develop/TUTORIAL.md
+  //  - https://github.com/kahole/edamagit/blob/develop/package.json#L392
+  //  - https://magit.vc/manual/magit/
+  {"key": "g m",           "command": "jdanbrown.workbench.action.quickOpen.magit", "when": "!inputFocus"},
+  {"key": "g shift+m",     "command": "magit.file-popup",               "when": "!inputFocus"},
+  {"key": "g s",           "command": "magit.status",                   "when": "!inputFocus"},
+  {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
+  {"key": "shift+o",       "command": "magit.toggle-all-folds-for-change-views", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "r",             "command": "magit.refresh",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {
+    "key": "ctrl+w", "command": "vim.remap", "args": {"after": [
+      "g", "Z", "Q", // magit.move-to-unstaged-changes (see settings.json)
+      // "z", "t",
+    ]},
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/",
+  },
+  {
+    "key": "ctrl+s", "command": "vim.remap", "args": {"after": [
+      // "g", "Z", "Q", // NOTE Jump to Unstaged Changes first, so that if there are no Staged Changes then the zt at least puts us somewhere familiar
+      "g", "Z", "W", // magit.move-to-staged-changes
+      // "z", "t",
+    ]},
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/",
+  },
+  {"key": "ctrl+n",        "command": "magit.move-next-change",         "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+p",        "command": "magit.move-previous-change",     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+j",        "command": "magit.move-next-hunk",           "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+k",        "command": "magit.move-previous-hunk",       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  //  - NOTE These steal from multi-key keybindings like gZ* (and idk how to fix)
+  //    - https://github.com/VSCodeVim/Vim#vim-modes
+  {"key": "a",             "command": "multiCommand.magit.stage",            "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+a",       "command": "multiCommand.magit.stage-all",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "u",             "command": "multiCommand.magit.unstage",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+u",       "command": "multiCommand.magit.unstage-all",      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "d",             "command": "multiCommand.magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "c",             "command": "magit.commit",                        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "enter",         "command": "magit.visit-at-point",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+/",       "command": "magit.help",                          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  //  - Defaults
+  //    - Ignore dispatch, it's the same as help
+  //      - https://github.com/kahole/edamagit/blob/develop/src/commands/helpCommands.ts#L9-L15
+  {"key": "alt+x g",       "command": "-magit.status"},
+  {"key": "alt+x ctrl+g",  "command": "-magit.dispatch"},
+  {"key": "alt+x alt+g",   "command": "-magit.file-popup",              "when": "activeEditor"},
+  {"key": "tab",           "command": "-magit.toggle-fold",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "g",             "command": "-magit.refresh",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+-",       "command": "-magit.help",                    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  //    - Docs on apply, discard, reverse -- warning: destructive!
+  //      - https://magit.vc/manual/magit/Applying.html
+  {"key": "a",             "command": "-magit.apply-at-point",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "k",             "command": "-magit.discard-at-point",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "v",             "command": "-magit.reverse-at-point",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "c",             "command": "-magit.commit",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "b",             "command": "-magit.branching",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "m",             "command": "-magit.merging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "r",             "command": "-magit.rebasing",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+x",       "command": "-magit.resetting",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "x",             "command": "-magit.reset-mixed",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+u x",      "command": "-magit.reset-hard",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+m",       "command": "-magit.remoting",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "l",             "command": "-magit.logging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "y",             "command": "-magit.show-refs",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress|Visual).*$/"},
+  {"key": "d",             "command": "-magit.diffing",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "t",             "command": "-magit.tagging",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+a",       "command": "-magit.cherry-picking",          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+v",       "command": "-magit.reverting",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "i",             "command": "-magit.ignoring",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+i",       "command": "-magit.ignoring",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+1",       "command": "-magit.running",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+5",       "command": "-magit.worktree",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+p",       "command": "-magit.pushing",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+f",       "command": "-magit.pulling",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "z",             "command": "-magit.stashing",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "o",             "command": "-magit.submodules",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "f",             "command": "-magit.fetching",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "s",             "command": "-magit.stage",                   "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+s",       "command": "-magit.stage-all",               "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "u",             "command": "-magit.unstage",                 "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+u",       "command": "-magit.unstage-all",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+4",       "command": "-magit.process-log",             "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "q",             "command": "-magit.quit",                    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+j",        "command": "-magit.move-next-entity",        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+k",        "command": "-magit.move-previous-entity",    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+c ctrl+c", "command": "-magit.save-and-close-editor",   "when": "editorTextFocus && editorLangId == 'git-commit'"},
+  {"key": "ctrl+c ctrl+k", "command": "-magit.clear-and-abort-editor",  "when": "editorTextFocus && editorLangId == 'git-commit'"},
+  {"key": "ctrl+c ctrl+c", "command": "-magit.save-and-close-editor",   "when": "editorTextFocus && editorLangId == 'git-rebase'"},
+  {"key": "ctrl+c ctrl+k", "command": "-magit.clear-and-abort-editor",  "when": "editorTextFocus && editorLangId == 'git-rebase'"},
+  // {"key": "...",           "command": "-magit.blame-file",              "when": "false"},
+  // {"key": "...",           "command": "-magit.copy-buffer-revision",    "when": "false"},
+  // {"key": "...",           "command": "-magit.copy-section-value",      "when": "false"},
+  // {"key": "...",           "command": "-magit.diff-file",               "when": "false"},
+  // {"key": "...",           "command": "-magit.log-file",                "when": "false"},
+  // {"key": "...",           "command": "-magit.stage-file",              "when": "false"},
+  // {"key": "...",           "command": "-magit.unstage-file",            "when": "false"},
 
   // Github Copilot
   //  - Chat
