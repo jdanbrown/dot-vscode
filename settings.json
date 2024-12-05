@@ -2632,7 +2632,7 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "search.quickAccess.preserveInput": true,
   "remote.autoForwardPortsSource": "output",
-  "workbench.activityBar.location": "hidden",
+  "workbench.activityBar.location": "bottom",
   "window.density.editorTabHeight": "compact",
   "workbench.layoutControl.type": "menu",
   "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "off",
@@ -2650,5 +2650,7 @@
   "terminal.integrated.shellIntegration.showCommandGuide": false,
   "editor.hideCursorInOverviewRuler": true,
   "python.analysis.autoImportCompletions": false,
+  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.cursorStyleInactive": "none",
 
 }
