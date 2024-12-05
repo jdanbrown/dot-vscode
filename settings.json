@@ -82,11 +82,7 @@
   "files.simpleDialog.enable": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  //  - HACK Use insertFinalNewline:false everywhere as a workaround for notebooks not yet exposing a filetype (see "[notebook-todo]" below)
-  //    - https://github.com/microsoft/vscode/issues/195011 Language specific settings for ipynb (jupyter-notebook) files
-  //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
-  // "files.insertFinalNewline": true, // Want for everything except notebooks
-  "files.insertFinalNewline": false, // But do this globally for now, else every notebook cell gets a final blank line at the bottom on save (poop)
+  "files.insertFinalNewline": true,
 
   // Editor: CodeLens
   //  - https://code.visualstudio.com/api/language-extensions/programmatic-language-features
