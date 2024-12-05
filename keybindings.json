@@ -653,10 +653,12 @@
   //  - XXX Free up ctrl+enter for GitHub Copilot: Open Completions Panel (github.copilot.generate)
   // {"key": "ctrl+a ctrl+enter", "command": "jdanbrown.terminal.rerunCommandInRecentTerminal", "when": "editorFocus && vim.mode != 'Insert'"},
   {"key": "alt+enter", "command": "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal", "when": "editorFocus"},
+  //  - Copy
+  {"key": "shift+cmd+c", "command": "workbench.action.terminal.copyLastCommandAndLastCommandOutput", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
   //  - Recall recent cmds/dirs
   {"key": "cmd+r", "command": "workbench.action.terminal.runRecentCommand", "when": "terminalFocusInAny && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocusInAny && terminalProcessSupported && !terminalAltBufferActive"},
   //    - Disable cmd+g for Go To Dir (conflicts with Find Next)
-  {"key": "shift+cmd+c", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
+  {"key": "shift+cmd+r", "command": "workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
   {"key": "cmd+g", "command": "-workbench.action.terminal.goToRecentDirectory", "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"},
   //  - Scroll/select with keyboard
   //    - TODO(practice)
