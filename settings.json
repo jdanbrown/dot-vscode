@@ -33,10 +33,14 @@
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
+  "editor.fontFamily": "Consolas Nerd Font",
   "editor.fontSize": 11,
   "editor.lineHeight": 13,
-  "editor.fontFamily": "Consolas",
-  // "editor.fontWeight": "bold",
+  "terminal.integrated.fontSize": 11,
+  "terminal.integrated.lineHeight": 1, // Not sure why this works, but empirically it does (terminal lines visually match editor lines)
+  // "editor.fontWeight": "normal", // Default: White text normal + colored text bold
+  // "terminal.integrated.fontWeight": "normal", // Default: White text normal
+  // "terminal.integrated.fontWeightBold": "bold", // Default: Colored text bold
 
   // Explorer
   "workbench.tree.indent": 12,
@@ -137,9 +141,6 @@
   //     "args": [],
   //   },
   // },
-  "terminal.integrated.fontSize": 11,
-  "terminal.integrated.fontWeight": "bold",
-  // "terminal.integrated.fontWeightBold": "bold",
   "terminal.integrated.allowChords": false,
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.external.osxExec": "iTerm.app",
@@ -1496,8 +1497,8 @@
     "frame": false,
   },
   // Monospace everywhere
-  "apc.font.family": "Consolas",
-  "apc.monospace.font.family": "Consolas",
+  "apc.font.family": "Consolas Nerd Font",
+  "apc.monospace.font.family": "Consolas Nerd Font",
   // Activity bar
   //  - Change large icons on the left edge of window -> small icons at the bottom of Explorer view (only visible when Sidebar is)
   "apc.activityBar": {
