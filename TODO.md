@@ -141,7 +141,7 @@
 - [unorganized]
   - https://github.com/microsoft/vscode-jupyter/issues/1402 — Turn on custom editor support for stable VS code release
   - https://github.com/microsoft/vscode-jupyter/issues/1326 — Make use of VS Code custom editor support
-  - https://github.com/microsoft/vscode-jupyter/issues/1541 — Request for 'Create New View For Output` like Jupyterlab for Interactive Window and Notebook
+  - https://github.com/microsoft/vscode-jupyter/issues/1541 — Request for 'Create New View For Output' like Jupyterlab for Interactive Window and Notebook
     - https://github.com/microsoft/vscode-jupyter/issues/1120 — Add support for sidecar or tear-off style widgets (Support for separate windows for output rather than inline)
   - https://github.com/microsoft/vscode-jupyter/issues/1182 — Jupyter Notebook: add access to cell metadata
   - https://github.com/microsoft/vscode-jupyter/issues/1190 — Can't copy cell output with preview notebook editor
