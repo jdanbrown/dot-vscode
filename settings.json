@@ -2447,39 +2447,6 @@
       "border-left-color": "#4f97d7 !important",
     },
 
-    // Notebooks
-    //  - Don't wrap output text
-    ".cell_container .output_container .output .text-output": { "white-space": "pre", },
-    ".cell_container .output_container .output pre":          { "white-space": "pre", },
-    ".cell_container .output_container .output code":         { "white-space": "pre", },
-    ".cell_container .output_container .output kbd":          { "white-space": "pre", },
-    ".cell_container .output_container .output samp":         { "white-space": "pre", },
-    //  - Don't wrap text in df table cells
-    ".cell_container .output_container .output .dataframe tr": { "white-space": "nowrap", },
-    ".cell_container .output_container .output .dataframe th": { "white-space": "nowrap", "padding": "0px 8px", },
-    ".cell_container .output_container .output .dataframe td": { "white-space": "nowrap", "padding": "0px 8px", },
-    //  - Don't wrap text in other table cells (e.g. some logs present this way)
-    ".cell_container .output_container .output .data-table":   { "white-space": "nowrap", },
-    //  - Re-style text output created by databricks web UI
-    //    - The output is totally different html than when created by the vscode notebook 🤷
-    ".cell_container .output_container .output .ansiout": {
-      "white-space": "pre",
-      "font-family": "Consolas Nerd Font",
-      "font-size": "11px",
-      "line-height": "13px",
-      "font-weight": "inherit",
-      "color": "#fff",
-    },
-    //  - Hide copy/save buttons on image/plot outputs
-    ".cell_container .output_container .output button.plotIcon": {
-      "display": "none",
-      // (And here's a better styling if I want to re-enable any of them in the future)
-      "background-color": "#000",
-      "border": "1px solid #fff",
-      "stroke": "#fff",
-      "opacity": "0.5",
-    },
-
     // Markdown Preview
     ".markdown-body ul": {
       "padding-inline-start": "32px",
