@@ -268,21 +268,6 @@
   {"key": "cmd+g", "command": "list.focusDown", "when": "listFocus && !notebookEditorFocused"},
   {"key": "shift+cmd+g", "command": "list.focusUp", "when": "listFocus && !notebookEditorFocused"},
 
-  // Stripe: zoolander
-  //  - Save: Rebind cmd+s from "File: Save" to "File: Save without Formatting", to avoid a ~3s delay from black on .py saves
-  //    - https://jira.corp.stripe.com/browse/RUN_ZOOLANDER-12140 Allow overriding settings in zoolander/.vscode/settings.json
-  //    - https://jira.corp.stripe.com/browse/RUN_PYTHON-125 zoolander/.vscode/settings.json: Remove autoImportCompletions + completeFunctionParens
-  //    - NOTE Duplicated in "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal"
-  //    - [edit] XXX Nope, I instead just disabled black as a formatter
-  // {"key": "cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
-  // {"key": "cmd+s", "command": "-workbench.action.files.save"},
-  // {"key": "shift+alt+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
-  // {"key": "shift+cmd+s", "command": "workbench.action.files.save"}, // Save with formatting (because zoolander/.vscode/settings.json)
-  // {"key": "shift+cmd+s", "command": "-workbench.action.files.saveAs"},
-  {"key": "cmd+s", "command": "workbench.action.files.save"},
-  {"key": "shift+cmd+s", "command": "workbench.action.files.saveWithoutFormatting"},
-  {"key": "shift+cmd+s", "command": "-workbench.action.files.saveAs"},
-
   // Editor
   // {"key": "cmd+.", "command": "editor.action.quickFix"}, // Default
   {"key": "shift+cmd+.", "command": "editor.action.openLink"},
@@ -390,10 +375,6 @@
   {"key": "l", "command": "editor.action.revealDefinitionAside", "when": "inSearchEditor && !inputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/"}, // Open result to the side
   {"key": "shift+o", "command": "editor.action.revealDefinitionAside", "when": "inSearchEditor && !inputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/"}, // Open result to the side
   {"key": "shift+enter", "command": "editor.action.revealDefinitionAside", "when": "inSearchEditor && !inputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/"}, // Open result to the side
-
-  // livegrep! (stripe)
-  // {"key": "shift+cmd+f", "command": "pay.cmd.livegrep.search", "when": "!editorHasSelection"},
-  // {"key": "shift+cmd+f", "command": "pay.cmd.livegrep.search.currentSelection", "when": "editorHasSelection"},
 
   // Navigation
   // {"key": "cmd+]", "command": "workbench.action.navigateForward", "when": "canNavigateForward"}, // Conflicts with notebook go to next/previous cell

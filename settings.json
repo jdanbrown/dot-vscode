@@ -8,6 +8,9 @@
 {
 
   // Workspace
+  "update.mode": "manual",
+  "security.workspace.trust.enabled": false, // https://code.visualstudio.com/docs/editor/workspace-trust
+  "window.title": "${appName}${separator}${activeRepositoryName}",
   "window.newWindowDimensions": "inherit",
   "window.nativeFullScreen": false,
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
@@ -21,14 +24,8 @@
   "search.quickOpen.includeHistory": false,
   "task.quickOpen.history": 0,
   "workbench.editor.customLabels.patterns": {
-    // Stripe: zoolander
-    //  - https://code.visualstudio.com/updates/v1_88#_custom-labels-for-open-editors
-    "zoolander/src/python/flyte/**/main.py": "${dirname}/${filename}.${extname}",
-    "zoolander/src/python/flyte/**/tests/BUILD.bazel": "${dirname(1)}/${dirname}/${filename}.${extname}",
-    "zoolander/src/python/flyte/**/tests/test_main.py": "${dirname(1)}/${dirname}/${filename}.${extname}",
-    "zoolander/config/py_dependencies/*/deps.yaml": "${dirname}/${filename}.${extname}",
-    "**/BUILD.bazel": "${dirname}/${filename}.${extname}",
-    "**/metadata.yaml": "${dirname}/${filename}.${extname}",
+    // Custom tab labels
+    //  - https://code.visualstudio.com/docs/getstarted/userinterface#_customize-tab-labels
   },
 
   // Fonts
@@ -167,19 +164,7 @@
   "search.decorations.badges": false,
   "search.exclude": {
     "build/**": true,
-    // Stripe: zoolander
     "**/*.gz": true,
-    "**/*.textproto": true,
-    "**/*.txtpb": true,
-    "iceberg/**": true,
-    "src/python/observability/ast_validation/*/**": true,
-    "src/test/**/*.json": true,
-    "src/test/**/testdata/": true,
-    "src/resources/": true,
-    "src/test/resources/": true,
-    "uppsala/": true,
-    "src/java/": true,
-    "datasets/": true,
   },
   "search.mode": "newEditor",
   "search.seedWithNearestWord": true,
@@ -187,6 +172,7 @@
   "search.smartCase": true,
   "search.useParentIgnoreFiles": true,
   "search.useGlobalIgnoreFiles": true,
+  "search.followSymlinks": false,
 
   // Notebook/jupyter
   "jupyter.collapseCellInputCodeByDefault": false,
@@ -295,12 +281,6 @@
   "gitlens.graph.minimap.dataType": "lines",
   "gitlens.graph.commitOrdering": "topo",
   "gitlens.graph.highlightRowsOnRefHover": false,
-  "gitlens.remotes": [
-    {
-      "domain": "git.corp.stripe.com",
-      "type": "GitHub"
-    }
-  ],
   "gitlens.ai.experimental.generateCommitMessage.enabled": false,
 
   // Github
@@ -309,6 +289,16 @@
   "githubPullRequests.defaultMergeMethod": "squash",
   "githubPullRequests.focusedMode": "overview",
   "githubPullRequests.showPullRequestNumberInTree": true,
+
+  // Github Copilot
+  //  - https://code.visualstudio.com/docs/copilot/overview
+  "github.copilot.chat.welcomeMessage": "never",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+  },
 
   // Debug
   "debug.console.fontSize": 11,
@@ -426,6 +416,13 @@
     "~/hack"
   ],
 
+  // HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection
+  //  - https://github.com/redhat-developer/vscode-yaml/issues/245
+  //  - https://github.com/redhat-developer/vscode-yaml/issues/491
+  "yaml.schemas": {
+    "https://json.schemastore.org/yamllint.json": "*.yaml",
+  },
+
   // Filetypes
   //  - https://code.visualstudio.com/docs/languages/identifiers
   "workbench.editorAssociations": {
@@ -515,23 +512,11 @@
   "python.showStartPage": false,
   "python.languageServer": "Pylance",
   "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
-  //
-  // HACK Stripe: zoolander -- Disabling all three of these to fix this override error:
-  //  - Error: 'python.analysis.typeCheckingMode' cannot be set when a pyrightconfig.json or pyproject.toml is being used. settings.json(settingsNotOverridable)
-  // // "python.analysis.typeCheckingMode": "strict", // TODO Want, but goes nuts in zoolander
-  // // "python.analysis.typeCheckingMode": "standard",
-  // "python.analysis.typeCheckingMode": "basic", // HACK Nope, this still has some FPs in zoolander too
-  // // "python.analysis.typeCheckingMode": "off", // HACK Trying this in zoolander instead
-  // "python.analysis.extraPaths": [],
-  // "python.analysis.ignore": [
-  //   // Disable checking in notebooks
-  //   //  - Because e.g. a single `from x import *` renders it completely useless
-  //   "**/*.ipynb",
-  // ],
-  //
+  // "python.analysis.typeCheckingMode": "strict",
+  // "python.analysis.typeCheckingMode": "standard",
+  // "python.analysis.typeCheckingMode": "basic",
+  // "python.analysis.typeCheckingMode": "off",
   "python.interpreter.infoVisibility": "always",
-  "python.terminal.activateEnvironment": false, // XXX Stripe?
-  "python.defaultInterpreterPath": "/usr/bin/python3", // XXX Stripe?
   "python.analysis.extraPaths": [],
   "python.analysis.ignore": [
     // Disable checking in notebooks
@@ -587,8 +572,7 @@
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showmodename": false,
-  // "vim.textwidth": 120,  // TODO Personal
-  "vim.textwidth": 100,  // TODO Stripe (python)
+  "vim.textwidth": 120,
   "vim.visualstar": true,
   "vim.joinspaces": false,
   "vim.matchpairs": "(:),{:},[:],<:>",
@@ -860,11 +844,7 @@
     // Terminal
     {
       "command": "multiCommand:workbench.action.files.save+jdanbrown.terminal.rerunCommandInRecentTerminal",
-      "sequence": [
-        // "workbench.action.files.save",
-        "workbench.action.files.saveWithoutFormatting", // NOTE Duplicated in keybindings.json
-        "jdanbrown.terminal.rerunCommandInRecentTerminal",
-      ],
+      "sequence": ["workbench.action.files.save", "jdanbrown.terminal.rerunCommandInRecentTerminal"],
     },
 
     // Notebook
@@ -2490,82 +2470,8 @@
       "stroke": "#fff",
       "opacity": "0.5",
     },
-    //  - Databricks: Re-style outputs created by the databricks web UI / Databricks Power Tools extension
-    //    - The output is totally different html than when created by the vscode notebook 🤷
-    ".cell_container .output_container .output .ansiout": {
-      "white-space": "pre",
-      "font-family": "Consolas Nerd Font",
-      "font-size": "11px",
-      "line-height": "13px",
-      "font-weight": "inherit",
-      "color": "#fff",
-    },
-    ".cell_container .output_container .output .text-output code": {
-      "background-color": "#000",
-      "border-radius": "unset",
-      "padding": "1px 0px",
-    },
-    ".cell_container .output_container .output .data-table form": {
-      "height": "unset !important",
-    },
 
   },
-
-  // Stripe settings (automatically managed)
-  "update.mode": "none",
-  "security.workspace.trust.enabled": false,
-  "telemetry.telemetryLevel": "off",
-  "remote.autoForwardPorts": false,
-  "remote.restoreForwardedPorts": false,
-  "remote.SSH.enableAgentForwarding": false,
-  "remote.SSH.path": "sc-ssh-wrapper",
-  "remote.SSH.useLocalServer": true,
-  "remote.SSH.connectTimeout": 60,
-  "remote.SSH.configFile": "~/.ssh/devboxes",
-  "remote.SSH.enableRemoteCommand": true,
-  "remote.forwardOnOpen": false,
-  "remote.otherPortsAttributes": {
-    "onAutoForward": "ignore"
-  },
-  "window.title": "${rootPath}${separator}${activeEditorMedium}",
-  "search.followSymlinks": false,
-  "debug.javascript.automaticallyTunnelRemoteServer": false,
-  "ruby.rubocop.hideDisableSuggestions": true,
-  "typescript.tsdk": "~/stripe/pay-server/frontend/js-scripts/node_modules/typescript/lib",
-  "github.copilot.chat.welcomeMessage": "never",
-  "github.copilot.enable": {
-    "*": false,
-    "apex": true,
-    "erb": true,
-    "go": true,
-    "java": true,
-    "javascript": true,
-    "python": true,
-    "ruby": true,
-    "rust": true,
-    "scala": true,
-    "shellscript": true,
-    "starlark": true,
-    "terraform": true,
-    "typescript": true,
-    "typescriptreact": true
-  },
-  "run-pay.badDayButton.enabled": false,
-  //  - Databricks
-  //    - http://go/databricks-vscode-auth (Notebooks team)
-  //    - http://go/databricks-vscode (architr)
-  //    - https://github.com/databricks/databricks-vscode
-  //    - https://github.com/paiqo/Databricks-VSCode
-  "databricks.lastActiveConnection": "Databricks Extension",
-  // HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection on stripe .yaml files
-  //  - https://github.com/redhat-developer/vscode-yaml/issues/245
-  //  - https://github.com/redhat-developer/vscode-yaml/issues/491
-  "yaml.schemas": {
-    "https://json.schemastore.org/yamllint.json": "*.yaml",
-  },
-  // Disable semgrep because it's been failing to launch for months
-  //  - It makes a nuisance notification on every vscode reload/restart
-  "config-validator.semgrep.activate": false,
 
   // TODO Organize
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
