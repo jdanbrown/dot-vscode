@@ -8,25 +8,54 @@
 {
 
   // Workspace
-  "update.mode": "manual",
-  "security.workspace.trust.enabled": false, // https://code.visualstudio.com/docs/editor/workspace-trust
-  "window.title": "${appName}${separator}${activeRepositoryName}",
-  "window.newWindowDimensions": "inherit",
-  "window.nativeFullScreen": false,
-  "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
-  "workspace-path-status-bar.enable": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
-  "files.refactoring.autoSave": false,
-  "workbench.editor.wrapTabs": true,
-  "workbench.quickOpen.preserveInput": true,
-  "workbench.commandPalette.history": 0,
-  "search.quickOpen.includeHistory": false,
+  "accessibility.verbosity.terminal": false,
   "task.quickOpen.history": 0,
+  "testing.countBadge": "off",
+  "security.workspace.trust.enabled": false, // https://code.visualstudio.com/docs/editor/workspace-trust
+  "security.workspace.trust.untrustedFiles": "open",
+  "update.mode": "manual",
+  "update.showReleaseNotes": false,
+  "window.customTitleBarVisibility": "never",
+  "window.density.editorTabHeight": "compact",
+  "window.dialogStyle": "custom",
+  "window.nativeFullScreen": false,
+  "window.newWindowDimensions": "inherit",
+  "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
+  "window.title": "${appName}${separator}${activeRepositoryName}",
+  "window.titleBarStyle": "native",
+  "workbench.activityBar.location": "bottom",
+  "workbench.colorTheme": "Default High Contrast",
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.editor.autoLockGroups": {
+    "terminalEditor": false
+  },
   "workbench.editor.customLabels.patterns": {
     // Custom tab labels
     //  - https://code.visualstudio.com/docs/getstarted/userinterface#_customize-tab-labels
   },
+  "workbench.editor.decorations.badges": false,
+  "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "off",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.navigationScope": "editor",
+  "workbench.editor.showIcons": false,
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.editor.untitled.labelFormat": "name",
+  "workbench.editor.wrapTabs": true,
+  "workbench.hover.delay": 300,
+  "workbench.iconTheme": null,
+  "workbench.layoutControl.enabled": false,
+  "workbench.layoutControl.type": "menu",
+  "workbench.quickOpen.preserveInput": true,
+  "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+  "workspace-path-status-bar.enable": false,
+  "workbench.commandPalette.history": 0,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.restore": true,
 
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
@@ -73,9 +102,35 @@
   // Editor
   //  - FIXME vim L/H keeps scrolling down/up if you repeat it: https://github.com/VSCodeVim/Vim/issues/1393
   //    - 0 fixes H, but L still scrolls down by 1
+  "editor.renderWhitespace": "none",
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingOvertype": "never",
+  "editor.autoClosingQuotes": "never",
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.renderLineHighlight": "none",
+  "editor.cursorBlinking": "solid",
+  "editor.minimap.enabled": false,
   "editor.cursorSurroundingLines": 0,
+  "editor.matchBrackets": "near",
+  "editor.lightbulb.enabled": "off",
   "editor.dragAndDrop": false,
+  "editor.multiCursorModifier": "alt",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.suggestSelection": "first",
+  "editor.wordBasedSuggestionsMode": "allDocuments",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.suggest.showSnippets": false,
+  "editor.guides.indentation": false,
+  "editor.bracketPairColorization.enabled": false,
+  "editor.occurrencesHighlight": "off",
+  "editor.comments.ignoreEmptyLines": false,
+  "editor.linkedEditing": true,
+  "editor.accessibilitySupport": "off",
+  "editor.hideCursorInOverviewRuler": true,
   "files.hotExit": "off",
+  "files.refactoring.autoSave": false,
   "files.simpleDialog.enable": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
@@ -135,6 +190,8 @@
   //   },
   // },
   "terminal.integrated.allowChords": false,
+  "terminal.integrated.cursorStyleInactive": "none",
+  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.showExitAlert": false,
@@ -156,11 +213,16 @@
     "workbench.action.toggleKeybindingsLog"
   ],
   "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.showCommandGuide": false,
 
   // Search Editor / Search
   "search.searchEditor.defaultNumberOfContextLines": 0,
   "search.searchEditor.doubleClickBehaviour": "selectWord",
   "search.searchEditor.reusePriorSearchConfiguration": true,
+  "search.quickAccess.preserveInput": true,
+  "search.quickOpen.includeHistory": false,
   "search.decorations.badges": false,
   "search.exclude": {
     "build/**": true,
@@ -178,11 +240,13 @@
   "jupyter.collapseCellInputCodeByDefault": false,
   "jupyter.disableJupyterAutoStart": true,
   "jupyter.enableScrollingForCellOutputs": false,
+  "jupyter.askForKernelRestart": false,
   "jupyter.showKernelSelectionOnInteractiveWindow": true,
   "jupyter.insidersChannel": "off",
   "jupyter.alwaysTrustNotebooks": true,
   "jupyter.interactiveWindow.creationMode": "perFile",
   "jupyter.interactiveWindow.textEditor.cellFolding": false,
+  "interactiveWindow.collapseCellInputCode": "never",
   "notebook.insertToolbarLocation": "hidden",
   "notebook.output.textLineLimit": 1000,
   "notebook.globalToolbar": false,
@@ -290,15 +354,18 @@
   "githubPullRequests.focusedMode": "overview",
   "githubPullRequests.showPullRequestNumberInTree": true,
 
-  // Github Copilot
+  // Copilot
   //  - https://code.visualstudio.com/docs/copilot/overview
   "github.copilot.chat.welcomeMessage": "never",
+  "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
   },
+  "chat.editor.fontSize": 11,
+  "notebook.experimental.cellChat": true,
 
   // Debug
   "debug.console.fontSize": 11,
@@ -315,6 +382,11 @@
   // "cSpell.checkOnlyEnabledFileTypes": false,
   // "cSpell.showAutocompleteSuggestions": true,
   // "cSpell.hideAddToDictionaryCodeActions": true,
+
+  // Vale
+  //  - https://github.com/errata-ai/vale
+  //  - https://vale.sh/
+  "vale.doNotShowWarningForFileToBeSavedBeforeLinting": true,
 
   // Navigation
   "editor.gotoLocation.alternativeDeclarationCommand": "",
@@ -408,6 +480,13 @@
     // "**/settings.json",
   ],
 
+  // Bookmarks
+  //  - https://github.com/alefragnani/vscode-bookmarks
+  "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
+  "bookmarks.navigateThroughAllFiles": true,
+  "bookmarks.sideBar.expanded": true,
+  "bookmarks.sideBar.countBadge": "off",
+
   // Project Manager
   //  - https://github.com/alefragnani/vscode-project-manager
   "projectManager.openInNewWindowWhenClickingInStatusBar": true,
@@ -416,9 +495,36 @@
     "~/hack"
   ],
 
-  // HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection
-  //  - https://github.com/redhat-developer/vscode-yaml/issues/245
-  //  - https://github.com/redhat-developer/vscode-yaml/issues/491
+  // Active File in Status Bar
+  //  - https://github.com/RoscoP/ActiveFileInStatusBar
+  "ActiveFileInStatusBar.revealFile": true,
+
+  // Prettier
+  //  - https://github.com/prettier/prettier-vscode
+  "prettier.printWidth": 120,
+
+  // ShellCheck
+  //  - https://github.com/vscode-shellcheck/vscode-shellcheck
+  "shellcheck.enable": false,
+
+  // Markdown
+  "markdown.preview.lineHeight": 1.5,
+  "markdown.extension.list.indentationSize": "inherit",
+  "markdown.extension.theming.decoration.renderCodeSpan": false,
+  "markdown-checkbox.checkmark": "x",
+  "markdown-checkbox.dateWhenChecked": false,
+  "markdown-checkbox.italicWhenChecked": false,
+  "markdown-checkbox.showStatusBarItem": false,
+  "markdown-checkbox.strikeThroughWhenChecked": false,
+  "markdown-checkbox.typeOfBulletPoint": "-",
+
+  // Swift
+  "swiftformat.path": "/opt/homebrew/bin/swiftformat",
+
+  // yaml
+  //  - HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection
+  //    - https://github.com/redhat-developer/vscode-yaml/issues/245
+  //    - https://github.com/redhat-developer/vscode-yaml/issues/491
   "yaml.schemas": {
     "https://json.schemastore.org/yamllint.json": "*.yaml",
   },
@@ -448,12 +554,6 @@
   },
   "[fish]": {
     "editor.tabSize": 4,
-  },
-  //  - TODO I want insertFinalNewline:false in notebooks, once a filetype control is exposed for notebook editors
-  //    - https://github.com/microsoft/vscode/issues/195011 Language specific settings for ipynb (jupyter-notebook) files
-  //    - https://github.com/microsoft/vscode/issues/195223 Setting files.insertFinalNewline inserts final newlines into notebook cells
-  "[notebook-todo]": {
-    "files.insertFinalNewline": false,
   },
   "[python]": {
     "editor.tabSize": 4,
@@ -511,6 +611,7 @@
   // Python
   "python.showStartPage": false,
   "python.languageServer": "Pylance",
+  "python.analysis.autoImportCompletions": false, // Lots of FPs that I have to discover and delete later
   "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
   // "python.analysis.typeCheckingMode": "strict",
   // "python.analysis.typeCheckingMode": "standard",
@@ -563,6 +664,10 @@
     "vscodevim.vim": 1
   },
 
+  // neovim
+  //  - https://github.com/vscode-neovim/vscode-neovim
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+
   // vim
   //  - https://github.com/VSCodeVim/Vim
   //  - https://galenwong.github.io/blog/2021-03-22-vscode-neovim-vs-vscodevim/
@@ -577,10 +682,10 @@
   "vim.joinspaces": false,
   "vim.matchpairs": "(:),{:},[:],<:>",
   "vim.mouseSelectionGoesIntoVisualMode": false,
-  // ReplaceWithRegister
-  //  - https://github.com/VSCodeVim/Vim#replacewithregister
-  //  - yank -> gr<motion> to paste
-  //  - TODO(practice)
+  //  - ReplaceWithRegister
+  //    - https://github.com/VSCodeVim/Vim#replacewithregister
+  //    - yank -> gr<motion> to paste
+  //    - TODO(practice)
   "vim.replaceWithRegister": true,
   //  - Cursor style
   "vim.cursorStylePerMode.visual": "underline-thin",
@@ -1473,6 +1578,7 @@
 
   // Tabs + breadcrumbs
   "breadcrumbs.icons": false,
+  "breadcrumbs.symbolPath": "off",
   "workbench.editor.tabCloseButton": "off",
 
   // Custom css/styling
@@ -2472,98 +2578,5 @@
     },
 
   },
-
-  // TODO Organize
-  "workbench.welcomePage.walkthroughs.openOnInstall": false,
-  "workbench.startupEditor": "none",
-  "workbench.colorTheme": "Default High Contrast",
-  "editor.renderWhitespace": "none",
-  "editor.autoClosingBrackets": "never",
-  "editor.autoClosingOvertype": "never",
-  "editor.autoClosingQuotes": "never",
-  "editor.copyWithSyntaxHighlighting": false,
-  "editor.renderLineHighlight": "none",
-  "editor.cursorBlinking": "solid",
-  "editor.minimap.enabled": false,
-  "workbench.commandPalette.preserveInput": true,
-  "workbench.iconTheme": null,
-  "workbench.editor.enablePreview": false,
-  "zenMode.restore": true,
-  "zenMode.hideLineNumbers": false,
-  "editor.matchBrackets": "near",
-  "editor.lightbulb.enabled": "off",
-  "bookmarks.label.suggestion": "suggestWhenSelectedOrLineWhenNoSelected",
-  "bookmarks.navigateThroughAllFiles": true,
-  "bookmarks.sideBar.expanded": true,
-  "customizeUI.listRowHeight": 20,
-  "editor.multiCursorModifier": "alt",
-  "editor.acceptSuggestionOnCommitCharacter": false,
-  "editor.snippetSuggestions": "bottom",
-  "editor.suggestOnTriggerCharacters": false,
-  "editor.suggestSelection": "first",
-  "markdown-checkbox.checkmark": "x",
-  "markdown-checkbox.dateWhenChecked": false,
-  "markdown-checkbox.italicWhenChecked": false,
-  "markdown-checkbox.showStatusBarItem": false,
-  "markdown-checkbox.strikeThroughWhenChecked": false,
-  "markdown-checkbox.typeOfBulletPoint": "-",
-  "markdown.preview.lineHeight": 1.5,
-  "markdown.extension.list.indentationSize": "inherit",
-  "markdown.extension.theming.decoration.renderCodeSpan": false,
-  "editor.wordBasedSuggestionsMode": "allDocuments",
-  "breadcrumbs.symbolPath": "off",
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.suggest.showSnippets": false,
-  "swiftformat.path": "/opt/homebrew/bin/swiftformat",
-  "editor.guides.indentation": false,
-  "editor.bracketPairColorization.enabled": false,
-  "editor.occurrencesHighlight": "off",
-  "ActiveFileInStatusBar.revealFile": true,
-  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-  "editor.comments.ignoreEmptyLines": false,
-  "update.showReleaseNotes": false,
-  "editor.linkedEditing": true,
-  "bookmarks.sideBar.countBadge": "off",
-  "testing.countBadge": "off",
-  "workbench.hover.delay": 500,
-  "workbench.tips.enabled": false,
-  "workbench.editor.autoLockGroups": {
-    "terminalEditor": false
-  },
-  "workbench.editor.empty.hint": "hidden",
-  "editor.accessibilitySupport": "off",
-  "prettier.printWidth": 120,
-  "accessibility.verbosity.terminal": false,
-  "vale.doNotShowWarningForFileToBeSavedBeforeLinting": true,
-  "jupyter.askForKernelRestart": false,
-  "interactiveWindow.collapseCellInputCode": "never",
-  "shellcheck.enable": false,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "remote.SSH.enableDynamicForwarding": false,
-  "chat.editor.fontSize": 11,
-  "notebook.experimental.cellChat": true,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "search.quickAccess.preserveInput": true,
-  "remote.autoForwardPortsSource": "output",
-  "workbench.activityBar.location": "bottom",
-  "window.density.editorTabHeight": "compact",
-  "workbench.layoutControl.type": "menu",
-  "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "off",
-  "workbench.editor.highlightModifiedTabs": true,
-  "workbench.layoutControl.enabled": false,
-  "workbench.editor.decorations.badges": false,
-  "workbench.editor.navigationScope": "editor",
-  "workbench.editor.showIcons": false,
-  "workbench.editor.tabActionCloseVisibility": false,
-  "workbench.editor.untitled.labelFormat": "name",
-  "window.dialogStyle": "custom",
-  "window.titleBarStyle": "native",
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.shellIntegration.showCommandGuide": false,
-  "editor.hideCursorInOverviewRuler": true,
-  "python.analysis.autoImportCompletions": false,
-  "terminal.integrated.macOptionIsMeta": true,
-  "terminal.integrated.cursorStyleInactive": "none",
-  "window.customTitleBarVisibility": "never",
 
 }
