@@ -307,6 +307,7 @@
   // Popups for hover, parameter hints, suggest
   //  - Hover
   //    - TODO https://github.com/microsoft/vscode/issues/222316 Add command editor.action.hideHover + when context hoverVisible
+  //    - TODO Fixed once this PR is released! -- https://github.com/microsoft/vscode/pull/235806/files
   {"key": "ctrl+space", "command": "editor.action.showHover", "when": "textInputFocus"}, // Like gh (vim)
   // {"key": "ctrl+space", "command": "editor.action.showHover", "when": "textInputFocus && !hoverVisible"}, // Toggle on (like gh in vim)
   // {"key": "ctrl+space", "command": "editor.action.hideHover", "when": "textInputFocus && hoverVisible"}, // Toggle off
