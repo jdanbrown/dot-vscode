@@ -91,8 +91,10 @@
   //  - Bug: https://github.com/microsoft/vscode/issues/193737 Focus into Side Bar commands don't focus the sidebar if the sidebar wasn't already visible
   //  - Bug: https://github.com/microsoft/vscode/issues/193741 gitlens doesn't set sideBarFocus, making sidbar keybindings difficult
   {"key": "cmd+;", "command": "workbench.action.toggleSidebarVisibility"},
+  {"key": "cmd+b", "command": "-workbench.action.toggleSidebarVisibility"},
   {"key": "shift+cmd+;", "command": "workbench.action.focusSideBar", "when": "!sideBarFocus"},
   {"key": "shift+cmd+;", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"}, // Unfocus sidebar, but leave it open
+  {"key": "shift+cmd+;", "command": "-breadcrumbs.focus", "when": "breadcrumbsPossible"},
   {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus"}, // Unfocus sidebar, but leave it open
   {"key": "shift+escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   {"key": "cmd+h", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
@@ -117,6 +119,13 @@
   {"key": "shift+cmd+1", "command": "-editor.action.replaceOne", "when": "editorFocus && findWidgetVisible"},
   {"key": "shift+cmd+e", "command": "-workbench.view.explorer"}, // Disable (conflicts in terminal w/ select line down)
   {"key": "cmd+0", "command": "-workbench.action.focusSideBar"}, // Disable (need it for reset zoom)
+
+  // Sidebar: Explorer
+  {"key": "m", "command": "renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
+  {"key": "enter", "command": "-renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
+  {"key": "enter", "command": "explorer.openAndPassFocus", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"},
+  {"key": "cmd+down", "command": "-explorer.openAndPassFocus", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"},
+  {"key": "n", "command": "explorer.newFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
 
   // Bottom panel
   //  - focusBackOn* is a workaround for focus jumping to weird places on workbench.action.togglePanel
@@ -143,6 +152,7 @@
   {"key": "shift+cmd+m", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.markers.view'"},
   {"key": "shift+cmd+o", "command": "workbench.action.output.toggleOutput", "when": "workbench.panel.output.active && focusedView != 'workbench.panel.output'"},
   {"key": "shift+cmd+o", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.output'"},
+  {"key": "shift+cmd+o", "command": "-workbench.action.gotoSymbol"},
   {"key": "shift+cmd+u", "command": "-workbench.action.output.toggleOutput", "when": "workbench.panel.output.active"},
   {"key": "shift+cmd+d", "command": "workbench.debug.action.toggleRepl", "when": "workbench.panel.output.active && focusedView != 'workbench.panel.repl.view'"},
   {"key": "shift+cmd+d", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.repl.view'"},
@@ -283,6 +293,12 @@
   // {"key": "shift+cmd+l", "command": "editor.action.selectHighlights", "when": "editorFocus"}, // Default
   {"key": "ctrl+8", "command": "highlightwords.addHighlight"},
 
+  // Breadcrumbs
+  {"key": "alt+o", "command": "breadcrumbs.focusAndSelect", "when": "breadcrumbsPossible"},
+  {"key": "alt+o", "command": "breadcrumbs.selectEditor", "when": "breadcrumbsActive && breadcrumbsVisible"},
+  {"key": "l", "command": "breadcrumbs.focusNextWithPicker", "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"},
+  {"key": "h", "command": "breadcrumbs.focusPreviousWithPicker", "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"},
+
   // Popups for hover, parameter hints, suggest
   //  - Hover
   //    - TODO https://github.com/microsoft/vscode/issues/222316 Add command editor.action.hideHover + when context hoverVisible
@@ -317,6 +333,7 @@
 
   // Multi-cursor
   {"key": "ctrl+j", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus && !inSearchEditor && editorLangId != 'magit'"},
+  {"key": "ctrl+j", "command": "-editor.action.joinLines", "when": "editorTextFocus && !editorReadonly"},
   {"key": "ctrl+k", "command": "editor.action.insertCursorAbove", "when": "editorTextFocus && !inSearchEditor && editorLangId != 'magit'"},
   {"key": "alt+cmd+down", "command": "-editor.action.insertCursorBelow", "when": "editorTextFocus"},
   {"key": "alt+cmd+up", "command": "-editor.action.insertCursorAbove", "when": "editorTextFocus"},
@@ -793,20 +810,5 @@
   {"key": "shift+cmd+c", "command": "-markdown-checkbox.createCheckbox", "when": "editorTextFocus"},
   {"key": "shift+cmd+v", "command": "markdown.showPreviewToSide", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
   {"key": "shift+cmd+v", "command": "-markdown.showPreview", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
-
-  // TODO Organize
-  {"key": "cmd+b", "command": "-workbench.action.toggleSidebarVisibility"},
-  {"key": "m", "command": "renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
-  {"key": "enter", "command": "-renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
-  {"key": "enter", "command": "explorer.openAndPassFocus", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"},
-  {"key": "cmd+down", "command": "-explorer.openAndPassFocus", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"},
-  {"key": "l", "command": "breadcrumbs.focusNextWithPicker", "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"},
-  {"key": "h", "command": "breadcrumbs.focusPreviousWithPicker", "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"},
-  {"key": "shift+cmd+;", "command": "-breadcrumbs.focus", "when": "breadcrumbsPossible"},
-  {"key": "shift+cmd+o", "command": "-workbench.action.gotoSymbol"},
-  {"key": "alt+o", "command": "breadcrumbs.focusAndSelect", "when": "breadcrumbsPossible"},
-  {"key": "alt+o", "command": "breadcrumbs.selectEditor", "when": "breadcrumbsActive && breadcrumbsVisible"},
-  {"key": "ctrl+j", "command": "-editor.action.joinLines", "when": "editorTextFocus && !editorReadonly"},
-  {"key": "n", "command": "explorer.newFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"},
 
 ]
