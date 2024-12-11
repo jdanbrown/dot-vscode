@@ -804,6 +804,11 @@
     {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
     {"before": ["g", "M"], "commands": ["magit.file-popup"]},
     {"before": ["g", "s"], "commands": ["magit.status"]},
+    {"before": ["g", "c"], "commands": ["magit.commit"]},
+    {"before": ["g", "P"], "commands": ["magit.pushing"]},
+    {"before": ["g", "p"], "commands": ["magit.pulling"]},
+    {"before": ["g", "f"], "commands": ["magit.fetching"]},
+    {"before": ["g", "b"], "commands": ["magit.branching"]},
     //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
     //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
     {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
@@ -860,6 +865,11 @@
     {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
     {"before": ["g", "M"], "commands": ["magit.file-popup"]},
     {"before": ["g", "s"], "commands": ["magit.status"]},
+    {"before": ["g", "c"], "commands": ["magit.commit"]},
+    {"before": ["g", "P"], "commands": ["magit.pushing"]},
+    {"before": ["g", "p"], "commands": ["magit.pulling"]},
+    {"before": ["g", "f"], "commands": ["magit.fetching"]},
+    {"before": ["g", "b"], "commands": ["magit.branching"]},
 
   ],
   "vim.operatorPendingModeKeyBindings": [

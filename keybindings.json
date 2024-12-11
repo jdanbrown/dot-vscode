@@ -509,6 +509,8 @@
   {"key": "g m",           "command": "jdanbrown.workbench.action.quickOpen.magit", "when": "!inputFocus"},
   {"key": "g shift+m",     "command": "magit.file-popup",               "when": "!inputFocus"},
   {"key": "g s",           "command": "magit.status",                   "when": "!inputFocus"},
+  {"key": "g c",           "command": "magit.commit",                   "when": "!inputFocus"},
+  {"key": "g p",           "command": "magit.pushing",                  "when": "!inputFocus"},
   {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
@@ -541,6 +543,10 @@
   {"key": "shift+u",       "command": "multiCommand.magit.unstage-all",      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "d",             "command": "multiCommand.magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "c",             "command": "magit.commit",                        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "shift+p",       "command": "magit.pushing",                       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "p",             "command": "magit.pulling",                       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "f",             "command": "magit.fetching",                      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "b",             "command": "magit.branching",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "enter",         "command": "magit.visit-at-point",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "shift+/",       "command": "magit.help",                          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   //  - Defaults
