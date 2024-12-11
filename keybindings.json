@@ -510,7 +510,10 @@
   {"key": "g shift+m",     "command": "magit.file-popup",               "when": "!inputFocus"},
   {"key": "g s",           "command": "magit.status",                   "when": "!inputFocus"},
   {"key": "g c",           "command": "magit.commit",                   "when": "!inputFocus"},
-  {"key": "g p",           "command": "magit.pushing",                  "when": "!inputFocus"},
+  {"key": "g shift+p",     "command": "magit.pushing",                  "when": "!inputFocus"},
+  {"key": "g p",           "command": "magit.pulling",                  "when": "!inputFocus"},
+  {"key": "g f",           "command": "magit.fetching",                 "when": "!inputFocus"},
+  {"key": "g b",           "command": "magit.branching",                "when": "!inputFocus"},
   {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
