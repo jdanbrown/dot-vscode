@@ -103,13 +103,17 @@
   {"key": "cmd+k", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   {"key": "cmd+l", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
   //  - To discover these, use: "Developer: Inspect Context Keys" -> click activity bar -> open dev console -> expand object -> `activeViewlet: "..."`
+  //    - To filter: { let x = temp1; Object.fromEntries(Object.entries(x).filter(([k,v]) => k === 'activeViewlet' || (v === true && k.match(/^view\.|sideBarFocus/i)))) }
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
-  // {"key": "shift+cmd+2", "command": "workbench.panel.chatSidebar",                   "when": "true"},
-  {"key": "shift+cmd+2", "command": "workbench.view.extension.bookmarks",            "when": "true"},
-  {"key": "shift+cmd+3", "command": "workbench.view.scm",                            "when": "true"},
-  {"key": "shift+cmd+4", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
-  {"key": "shift+cmd+5", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
+  {"key": "shift+cmd+2", "command": "workbench.panel.chat.view.copilot.focus",       "when": "!(sideBarFocus && activeViewlet == 'workbench.panel.chat')"},
+  {"key": "shift+cmd+2", "command": "workbench.action.focusActiveEditorGroup",       "when": "sideBarFocus && activeViewlet == 'workbench.panel.chat'"},
+  {"key": "shift+cmd+3", "command": "workbench.panel.chatEditing",                   "when": "true"},
+  {"key": "shift+cmd+4", "command": "workbench.view.scm",                            "when": "true"},
+  {"key": "shift+cmd+5", "command": "workbench.view.extension.github-pull-request",  "when": "true"},
+  {"key": "shift+cmd+6", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
+  // {"key": "shift+cmd+5", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
+  {"key": "shift+cmd+7", "command": "workbench.view.extension.bookmarks",            "when": "true"},
   {"key": "shift+cmd+8", "command": "workbench.view.debug",                          "when": "true"},
   {"key": "shift+cmd+9", "command": "workbench.view.extensions",                     "when": "true"},
   {"key": "ctrl+tab", "command": "workbench.action.nextSideBarView", "when": "sideBarFocus"},
@@ -597,7 +601,7 @@
   // {"key": "...",           "command": "-magit.unstage-file",            "when": "false"},
 
   // Github Copilot
-  //  - Chat
+  //  - Chat panel
   {"key": "cmd+i", "command": "workbench.action.chat.openInEditor", "when": "!inSearchEditor"},
   {"key": "cmd+i", "command": "-inlineChat.start", "when": "editorFocus && inlineChatHasProvider && !editorReadonly"},
   {"key": "cmd+i", "command": "-workbench.action.chat.startVoiceChat", "when": "hasChatProvider && hasSpeechProvider && inChatInput && !chatSessionRequestInProgress && !editorFocus && !inlineChatHasActiveRequest && !inlineVoiceChatInProgress && !quickVoiceChatInProgress && !voiceChatGettingReady && !voiceChatInEditorInProgress && !voiceChatInViewInProgress || hasChatProvider && hasSpeechProvider && inlineChatFocused && !chatSessionRequestInProgress && !editorFocus && !inlineChatHasActiveRequest && !inlineVoiceChatInProgress && !quickVoiceChatInProgress && !voiceChatGettingReady && !voiceChatInEditorInProgress && !voiceChatInViewInProgress"},
@@ -611,6 +615,24 @@
   {"key": "cmd+i", "command": "-emojisense.quickEmoji", "when": "editorTextFocus"},
   {"key": "cmd+i", "command": "-emojisense.quickEmojiTerminal", "when": "terminalFocus"},
   {"key": "cmd+i", "command": "-github.copilot.terminal.suggestCommand", "when": "terminalFocus"},
+  {"key": "cmd+i", "command": "-inlineChat.start", "when": "editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly"},
+  {"key": "cmd+i", "command": "-inlineChat.startWithCurrentLine", "when": "editorFocus && github.copilot.chat.editor.enableLineTrigger && inlineChatHasProvider && !editorReadonly && !inlineChatVisible"},
+  {"key": "cmd+i", "command": "-workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"},
+  {"key": "cmd+i", "command": "-workbench.action.chat.startVoiceChat", "when": "chatIsEnabled && hasSpeechProvider && inChatInput && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress && !terminalChatActiveRequest || chatIsEnabled && hasSpeechProvider && inlineChatFocused && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress && !terminalChatActiveRequest"},
+  {"key": "cmd+i", "command": "-workbench.action.chat.stopListeningAndSubmit", "when": "inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'terminal' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'terminal' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'view'"},
+  {"key": "cmd+i", "command": "-notebook.cell.chat.start", "when": "config.notebook.experimental.cellChat && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus || config.notebook.experimental.generate && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus"},
+  {"key": "cmd+i", "command": "-workbench.action.chat.holdToVoiceChatInChatView", "when": "chatIsEnabled && hasSpeechProvider && !chatSessionRequestInProgress && !editorFocus && !inChatInput && !inlineChatFocused && !notebookEditorFocused"},
+  //  - Inline chat
+  {"key": "ctrl+cmd+i", "command": "inlineChat.start", "when": "editorFocus && vim.mode == 'Normal' && inlineChatHasProvider && !editorReadonly"},
+  {"key": "ctrl+cmd+i", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"},
+  {"key": "ctrl+cmd+i", "command": "notebook.cell.chat.start", "when": "config.notebook.experimental.cellChat && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus || config.notebook.experimental.generate && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus"},
+  {"key": "ctrl+cmd+i", "command": "-workbench.panel.chat", "when": "workbench.panel.chat.view.copilot.active"},
+  {"key": "ctrl+cmd+i", "command": "-workbench.action.chat.open", "when": "chatPanelParticipantRegistered"},
+  //  - Chat history
+  {"key": "shift+cmd+i", "command": "workbench.action.chat.history"},
+  {"key": "shift+cmd+i", "command": "-workbench.action.chat.openEditSession", "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"},
+  {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitext", "when": "editorTextFocus"},
+  {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitextTerminal", "when": "terminalFocus"},
   //  - Editor: Completions (inline)
   {"key": "alt+\\", "command": "editor.action.inlineSuggest.trigger", "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible"},
   //  - Editor: Suggestions (new window)
@@ -621,10 +643,6 @@
   {"key": "ctrl+/", "command": "-github.copilot.acceptCursorPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
   {"key": "alt+]", "command": "-github.copilot.nextPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
   {"key": "alt+[", "command": "-github.copilot.previousPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
-  //  - Editor: Chat
-  {"key": "ctrl+enter", "command": "inlineChat.start", "when": "editorFocus && vim.mode == 'Normal' && inlineChatHasProvider && !editorReadonly"},
-  //  - Terminal: Chat
-  // {"key": "cmd+i", "command": "github.copilot.terminal.suggestCommand", "when": "terminalFocus"},
 
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
@@ -639,11 +657,9 @@
   //  - https://github.com/mattbierner/vscode-emojisense
   //    - For autocomplete (:thumbsup: -> 👍)
   {"key": "cmd+e", "command": "insert-unicode.insertEmojiText", "when": "editorTextFocus && vim.mode == 'Insert'"},
-  {"key": "shift+cmd+i", "command": "insert-unicode.insertText", "when": "editorTextFocus && vim.mode == 'Insert'"},
   {"key": "cmd+e", "command": "-actions.findWithSelection"},
   {"key": "cmd+e", "command": "-editor.action.toggleScreenReaderAccessibilityMode", "when": "accessibilityHelpIsShown"},
-  {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitext", "when": "editorTextFocus"},
-  {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitextTerminal", "when": "terminalFocus"},
+  {"key": "shift+cmd+e", "command": "insert-unicode.insertText", "when": "editorTextFocus && vim.mode == 'Insert'"},
 
   // Terminal
   {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
