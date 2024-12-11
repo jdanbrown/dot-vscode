@@ -7,6 +7,13 @@
 //
 {
 
+  // Title bar
+  "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
+  "window.commandCenter": false,
+  "workbench.navigationControl.enabled": false,
+  "chat.commandCenter.enabled": false,
+
   // Workspace
   "accessibility.verbosity.terminal": false,
   "task.quickOpen.history": 0,
@@ -15,14 +22,12 @@
   "security.workspace.trust.untrustedFiles": "open",
   "update.mode": "manual",
   "update.showReleaseNotes": false,
-  "window.customTitleBarVisibility": "never",
   "window.density.editorTabHeight": "compact",
   "window.dialogStyle": "custom",
   "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
   "window.openFoldersInNewWindow": "on", // Else opening/reopening a workspace will overwrite the current window's workspace :/
   "window.title": "${appName}${separator}${activeRepositoryName}",
-  "window.titleBarStyle": "native",
   "workbench.activityBar.location": "bottom",
   "workbench.colorTheme": "Default High Contrast",
   "workbench.commandPalette.preserveInput": true,
@@ -2612,5 +2617,7 @@
     },
 
   },
+
+  // TODO Organize any that show up here (automatically added)
 
 }
