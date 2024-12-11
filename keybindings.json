@@ -36,6 +36,7 @@
   {"key": "ctrl+shift+cmd+,", "command": "workbench.action.openSettingsJson"}, // Open settings.json (add ctrl to match keybindings.json)
   {"key": "shift+cmd+k", "command": "workbench.action.openGlobalKeybindings"}, // Open Keyboard Shortcuts editor
   //  - NOTE ctrl+up = ctrl+shift+cmd+k (because Karabiner?)
+  //    - TODO Doesn't work in terminal
   {"key": "ctrl+up", "command": "workbench.action.openGlobalKeybindingsFile"}, // Open keybindings.json file
   {"key": "ctrl+shift+r", "command": "workbench.action.reloadWindow"},
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},

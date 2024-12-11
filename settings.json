@@ -213,7 +213,12 @@
     "workbench.action.toggleKeybindingsLog"
   ],
   "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // HACK Shell integration -- must do manually because fish + starship
+  //  - Part 1 in ~/.code/settings.json
+  //  - Part 2 in ~/.config/fish/config.fish
+  //  - https://github.com/microsoft/vscode/issues/208465
+  "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.showCommandGuide": false,
 
