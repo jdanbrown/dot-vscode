@@ -465,10 +465,10 @@
   // {"key": "g d", "command": "git.viewChanges", "when": "!inputFocus"}, // Done in settings.json -> vim
   // {"key": "g d s", "command": "git.viewStagedChanges", "when": "!inputFocus"}, // Done in settings.json -> vim
   // {"key": "g l", "command": "gitlens.showCommitsView", "when": "!inputFocus"},
-  {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
-  {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
-  {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
-  {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"},
+  // {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
+  // {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
+  // {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
+  // {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"},
   //  - Diff
   {"key": "ctrl+alt+d", "command": "workbench.files.action.compareFileWith"},
   //  - Diff editor
@@ -494,12 +494,12 @@
   // {"key": "z shift+r", "command": "multiDiffEditor.expandAll", "when": "inMultiDiffEditor"},
   // {"key": "z shift+m", "command": "multiDiffEditor.collapseAll", "when": "inMultiDiffEditor"},
 
-  // GitLens
-  // {"key": "g l", "command": "gitlens.showCommitsView", "when": "!inputFocus"},
-  {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
-  {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
-  {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
-  // {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"}, // Nope, conflicts with revert in diff editor
+  // // GitLens
+  // // {"key": "g l", "command": "gitlens.showCommitsView", "when": "!inputFocus"},
+  // {"key": "g l", "command": "gitlens.showGraph", "when": "!inputFocus"},
+  // {"key": "g b", "command": "gitlens.showBranchesView", "when": "!inputFocus"},
+  // {"key": "g t", "command": "gitlens.showTagsView", "when": "!inputFocus"},
+  // // {"key": "g r", "command": "gitlens.showRemotesView", "when": "!inputFocus"}, // Nope, conflicts with revert in diff editor
 
   // magit
   //  - https://github.com/kahole/edamagit

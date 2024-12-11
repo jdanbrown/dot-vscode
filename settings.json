@@ -302,8 +302,8 @@
   //  - https://github.com/kahole/edamagit/blob/develop/TUTORIAL.md
   //  - https://github.com/kahole/edamagit/blob/develop/package.json#L392
   //  - https://magit.vc/manual/magit/
-  "magit.display-buffer-function": "same-column",
   "magit.forge-enabled": true,
+  // "magit.display-buffer-function": "same-column", // Default: "other-column"
   // "magit.quick-switch-enabled": false, // Default
   "magit.hide-status-sections": [
     // Default: none
@@ -319,38 +319,38 @@
     "untracked"
   ],
 
-  // GitLens
-  //  - https://github.com/gitkraken/vscode-gitlens
-  //  - https://www.gitkraken.com/gitlens
-  "gitlens.showWelcomeOnInstall": false,
-  "gitlens.showWhatsNewAfterUpgrades": false,
-  "gitlens.currentLine.enabled": false,
-  "gitlens.codeLens.enabled": false,
-  "gitlens.views.commits.files.compact": false,
-  "gitlens.views.commitDetails.files.compact": false,
-  "gitlens.views.repositories.files.compact": false,
-  "gitlens.views.fileHistory.files.compact": false,
-  "gitlens.views.branches.files.compact": false,
-  "gitlens.views.remotes.files.compact": false,
-  "gitlens.views.stashes.files.compact": false,
-  "gitlens.views.tags.files.compact": false,
-  "gitlens.views.worktrees.files.compact": false,
-  "gitlens.views.contributors.files.compact": false,
-  "gitlens.views.searchAndCompare.files.compact": false,
-  "gitlens.views.formats.commits.label": "${(tips) • }${message}",
-  "gitlens.views.commits.showBranchComparison": false,
-  "gitlens.views.branches.showBranchComparison": false,
-  "gitlens.views.repositories.showBranchComparison": false,
-  "gitlens.views.repositories.branches.showBranchComparison": false,
-  "gitlens.views.worktrees.showBranchComparison": false,
-  "gitlens.graph.layout": "editor",
-  "gitlens.graph.dimMergeCommits": true,
-  "gitlens.graph.minimap.additionalTypes": ["localBranches", "stashes", "tags"],
-  "gitlens.graph.scrollMarkers.additionalTypes": ["localBranches", "stashes", "tags"],
-  "gitlens.graph.minimap.dataType": "lines",
-  "gitlens.graph.commitOrdering": "topo",
-  "gitlens.graph.highlightRowsOnRefHover": false,
-  "gitlens.ai.experimental.generateCommitMessage.enabled": false,
+  // // GitLens
+  // //  - https://github.com/gitkraken/vscode-gitlens
+  // //  - https://www.gitkraken.com/gitlens
+  // "gitlens.showWelcomeOnInstall": false,
+  // "gitlens.showWhatsNewAfterUpgrades": false,
+  // "gitlens.currentLine.enabled": false,
+  // "gitlens.codeLens.enabled": false,
+  // "gitlens.views.commits.files.compact": false,
+  // "gitlens.views.commitDetails.files.compact": false,
+  // "gitlens.views.repositories.files.compact": false,
+  // "gitlens.views.fileHistory.files.compact": false,
+  // "gitlens.views.branches.files.compact": false,
+  // "gitlens.views.remotes.files.compact": false,
+  // "gitlens.views.stashes.files.compact": false,
+  // "gitlens.views.tags.files.compact": false,
+  // "gitlens.views.worktrees.files.compact": false,
+  // "gitlens.views.contributors.files.compact": false,
+  // "gitlens.views.searchAndCompare.files.compact": false,
+  // "gitlens.views.formats.commits.label": "${(tips) • }${message}",
+  // "gitlens.views.commits.showBranchComparison": false,
+  // "gitlens.views.branches.showBranchComparison": false,
+  // "gitlens.views.repositories.showBranchComparison": false,
+  // "gitlens.views.repositories.branches.showBranchComparison": false,
+  // "gitlens.views.worktrees.showBranchComparison": false,
+  // "gitlens.graph.layout": "editor",
+  // "gitlens.graph.dimMergeCommits": true,
+  // "gitlens.graph.minimap.additionalTypes": ["localBranches", "stashes", "tags"],
+  // "gitlens.graph.scrollMarkers.additionalTypes": ["localBranches", "stashes", "tags"],
+  // "gitlens.graph.minimap.dataType": "lines",
+  // "gitlens.graph.commitOrdering": "topo",
+  // "gitlens.graph.highlightRowsOnRefHover": false,
+  // "gitlens.ai.experimental.generateCommitMessage.enabled": false,
 
   // Github
   //  - https://github.com/Microsoft/vscode-pull-request-github
@@ -782,32 +782,32 @@
     // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
     // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
 
-    // Git: Diff editor
-    {"before": ["g", "s"], "commands": ["git.viewChanges"]}, // Diff all files (one pane)
-    {"before": ["g", "S"], "commands": ["git.viewStagedChanges"]}, // Diff staged all files (one pane)
-    {"before": ["g", "d"], "commands": ["git.openChange"]}, // Diff current file
-    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
-    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
-    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges"]},
-    {"before": ["g", "A"], "commands": ["git.stage"]}, // Entire file
-    {"before": ["g", "U"], "commands": ["git.unstage"]}, // Entire file
+    // // Git: Diff editor
+    // {"before": ["g", "s"], "commands": ["git.viewChanges"]}, // Diff all files (one pane)
+    // {"before": ["g", "S"], "commands": ["git.viewStagedChanges"]}, // Diff staged all files (one pane)
+    // {"before": ["g", "d"], "commands": ["git.openChange"]}, // Diff current file
+    // {"before": ["g", "a"], "commands": ["git.stageSelectedRanges"]},
+    // {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges"]},
+    // {"before": ["g", "r"], "commands": ["git.revertSelectedRanges"]},
+    // {"before": ["g", "A"], "commands": ["git.stage"]}, // Entire file
+    // {"before": ["g", "U"], "commands": ["git.unstage"]}, // Entire file
 
-    // GitLens
-    // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
-    {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
-    {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
-    {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
-    // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
+    // // GitLens
+    // // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    // {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
+    // {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
+    // {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
+    // // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
 
-    // // magit
-    // //  - Views
-    // {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
-    // {"before": ["g", "M"], "commands": ["magit.file-popup"]},
-    // {"before": ["g", "s"], "commands": ["magit.status"]},
-    // //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
-    // //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
-    // {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
-    // {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
+    // magit
+    //  - Views
+    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "s"], "commands": ["magit.status"]},
+    //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
+    //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
+    {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
+    {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
 
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -841,25 +841,25 @@
     //  - (See keybindings.json for comments)
     //  - Views
     // {"before": ["g", "s"], "commands": ["workbench.view.scm"]}, // Use shift+cmd+3
-    // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
-    {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
-    {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
-    {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
-    // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
+    // // {"before": ["g", "l"], "commands": ["gitlens.showCommitsView"]},
+    // {"before": ["g", "l"], "commands": ["gitlens.showGraph"]},
+    // {"before": ["g", "b"], "commands": ["gitlens.showBranchesView"]},
+    // {"before": ["g", "t"], "commands": ["gitlens.showTagsView"]},
+    // // {"before": ["g", "r"], "commands": ["gitlens.showRemotesView"]}, // Nope, conflicts with revert in diff editor
     //  - Commands
-    {"before": ["g", "a"], "commands": ["git.stageSelectedRanges", "extension.vim_escape"]},
-    {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges", "extension.vim_escape"]},
-    {"before": ["g", "r"], "commands": ["git.revertSelectedRanges", "extension.vim_escape"]},
-    {"before": ["g", "A"], "commands": ["git.stage"]},
-    {"before": ["g", "U"], "commands": ["git.unstage"]},
-    // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
-    // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
+    // {"before": ["g", "a"], "commands": ["git.stageSelectedRanges", "extension.vim_escape"]},
+    // {"before": ["g", "u"], "commands": ["git.unstageSelectedRanges", "extension.vim_escape"]},
+    // {"before": ["g", "r"], "commands": ["git.revertSelectedRanges", "extension.vim_escape"]},
+    // {"before": ["g", "A"], "commands": ["git.stage"]},
+    // {"before": ["g", "U"], "commands": ["git.unstage"]},
+    // // {"before": ["g", "c"], "commands": ["git.commitStaged"]}, // No, conflicts with gco
+    // // {"before": ["g", "C"], "commands": ["git.commitStagedAmend"]}, // Want?
     {"before": ["g", "c", "o"], "commands": ["git.checkout"]},
 
-    // // magit
-    // {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
-    // {"before": ["g", "M"], "commands": ["magit.file-popup"]},
-    // {"before": ["g", "s"], "commands": ["magit.status"]},
+    // magit
+    {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
+    {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "s"], "commands": ["magit.status"]},
 
   ],
   "vim.operatorPendingModeKeyBindings": [
@@ -1033,12 +1033,12 @@
       ],
     },
 
-    // // magit
-    // {"command": "multiCommand.magit.stage", "sequence": ["magit.stage", "extension.vim_escape"]},
-    // {"command": "multiCommand.magit.stage-all", "sequence": ["magit.stage-all", "extension.vim_escape"]},
-    // {"command": "multiCommand.magit.unstage", "sequence": ["magit.unstage", "extension.vim_escape"]},
-    // {"command": "multiCommand.magit.unstage-all", "sequence": ["magit.unstage-all", "extension.vim_escape"]},
-    // {"command": "multiCommand.magit.discard-at-point", "sequence": ["magit.discard-at-point", "extension.vim_escape"]},
+    // magit
+    {"command": "multiCommand.magit.stage", "sequence": ["magit.stage", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.stage-all", "sequence": ["magit.stage-all", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.unstage", "sequence": ["magit.unstage", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.unstage-all", "sequence": ["magit.unstage-all", "extension.vim_escape"]},
+    {"command": "multiCommand.magit.discard-at-point", "sequence": ["magit.discard-at-point", "extension.vim_escape"]},
 
   ],
 
