@@ -607,7 +607,7 @@
   // {"key": "...",           "command": "-magit.unstage-file",            "when": "false"},
 
   // Github Copilot
-  //  - Chat panel
+  //  - Chat editor ("Chat: Open Chat in Editor")
   {"key": "cmd+i", "command": "workbench.action.chat.openInEditor", "when": "!inSearchEditor"},
   {"key": "cmd+i", "command": "-inlineChat.start", "when": "editorFocus && inlineChatHasProvider && !editorReadonly"},
   {"key": "cmd+i", "command": "-workbench.action.chat.startVoiceChat", "when": "hasChatProvider && hasSpeechProvider && inChatInput && !chatSessionRequestInProgress && !editorFocus && !inlineChatHasActiveRequest && !inlineVoiceChatInProgress && !quickVoiceChatInProgress && !voiceChatGettingReady && !voiceChatInEditorInProgress && !voiceChatInViewInProgress || hasChatProvider && hasSpeechProvider && inlineChatFocused && !chatSessionRequestInProgress && !editorFocus && !inlineChatHasActiveRequest && !inlineVoiceChatInProgress && !quickVoiceChatInProgress && !voiceChatGettingReady && !voiceChatInEditorInProgress && !voiceChatInViewInProgress"},
@@ -634,11 +634,15 @@
   {"key": "ctrl+cmd+i", "command": "notebook.cell.chat.start", "when": "config.notebook.experimental.cellChat && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus || config.notebook.experimental.generate && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus"},
   {"key": "ctrl+cmd+i", "command": "-workbench.panel.chat", "when": "workbench.panel.chat.view.copilot.active"},
   {"key": "ctrl+cmd+i", "command": "-workbench.action.chat.open", "when": "chatPanelParticipantRegistered"},
-  //  - Chat history
+  //  - Chat history ("Chat: Show Chats...")
   {"key": "shift+cmd+i", "command": "workbench.action.chat.history"},
   {"key": "shift+cmd+i", "command": "-workbench.action.chat.openEditSession", "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"},
   {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitext", "when": "editorTextFocus"},
   {"key": "shift+cmd+i", "command": "-emojisense.quickEmojitextTerminal", "when": "terminalFocus"},
+  //  - Sidebar: Chat
+  {"key": "cmd+n", "command": "workbench.action.chat.newChat", "when": "view == 'workbench.panel.chat.view.copilot'"},
+  //  - Sidebar: Copilot Edits
+  {"key": "cmd+n", "command": "workbench.action.chat.newChat", "when": "view == 'workbench.panel.chat.view.edits'"},
   //  - Editor: Completions (inline)
   {"key": "alt+\\", "command": "editor.action.inlineSuggest.trigger", "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible"},
   //  - Editor: Suggestions (new window)
