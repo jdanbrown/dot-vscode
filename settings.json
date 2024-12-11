@@ -1082,6 +1082,25 @@
   //    - #ed776d -- red (git diff deleted)
   "workbench.colorCustomizations": {
 
+    // "activityBar.activeBackground": null,
+    // "activityBar.activeBorder": "#404040",
+    // "activityBar.activeFocusBorder": null,
+    // "activityBar.background": "#000000",
+    // "activityBar.border": "#404040",
+    // "activityBar.dropBorder": null,
+    // "activityBar.foreground": "#ffffff",
+    // "activityBar.inactiveForeground": "#ffffff",
+    // "activityBarBadge.background": "#000000",
+    // "activityBarBadge.foreground": "#ffffff",
+    // "activityBarTop.activeBackground": null,
+    "activityBarTop.activeBackground": "#666",
+    "activityBarTop.activeBorder": "#0000", // Default: #404040
+    // "activityBarTop.background": null,
+    // "activityBarTop.dropBorder": "#ffffff",
+    // "activityBarTop.foreground": "#ffffff",
+    // "activityBarTop.inactiveForeground": "#ffffff",
+    // "sideBarActivityBarTop.border": "#404040",
+
     "bookmarks.overviewRuler": "#0000", // Disable
 
     "button.background": "#666", // Primary buttons (most of them)
