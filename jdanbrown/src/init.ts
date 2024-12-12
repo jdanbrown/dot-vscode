@@ -1,8 +1,8 @@
 // Tracking
 //  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
 
-import * as vscode from 'vscode';
-import { spawn } from 'child_process';
+import * as vscode from "vscode";
+import { spawn } from "child_process";
 
 // Used to have these, add them back to package.json if we need them again
 // import * as CryptoJS from 'crypto-js';
@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsQuickOpenMagit(context);
   registerCommandsFixWorkspaceSettings(context);
   registerCommandsPylance(context);
+  registerImageViewer(context);
   console.info('[jdanbrown] activate: Done');
 }
 
@@ -234,6 +235,125 @@ export function registerCommandsPylance(context: vscode.ExtensionContext) {
       await config.update('python.languageServer', 'None', vscode.ConfigurationTarget.Workspace);
     }),
   );
+}
+
+//
+// ImageViewer
+//
+
+export function registerImageViewer(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerImageViewer');
+  context.subscriptions.push(
+    vscode.window.registerCustomEditorProvider("imageViewer", new ImageViewerProvider(context), {
+      supportsMultipleEditorsPerDocument: true,
+    })
+  );
+}
+
+class ImageViewerProvider implements vscode.CustomEditorProvider<ImageDocument> {
+  private readonly context: vscode.ExtensionContext;
+
+  constructor(context: vscode.ExtensionContext) {
+    this.context = context;
+  }
+
+  async openCustomDocument(
+    uri: vscode.Uri,
+    openContext: vscode.CustomDocumentOpenContext,
+    token: vscode.CancellationToken
+  ): Promise<ImageDocument> {
+    return new ImageDocument(uri);
+  }
+
+  async resolveCustomEditor(
+    document: ImageDocument,
+    webviewPanel: vscode.WebviewPanel,
+    token: vscode.CancellationToken
+  ): Promise<void> {
+    webviewPanel.webview.options = {
+      enableScripts: true,
+    };
+
+    const imageUri = webviewPanel.webview.asWebviewUri(document.uri);
+    webviewPanel.webview.html = this.makeHtml(imageUri.toString());
+  }
+
+  private makeHtml(imageSrc: string): string {
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: var(--vscode-editor-background);
+            }
+            img {
+              max-width: 100%;
+              max-height: 100%;
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${imageSrc}" />
+        </body>
+      </html>
+    `;
+  }
+
+  // Noop
+  onDidChangeCustomDocument: vscode.Event<vscode.CustomDocumentContentChangeEvent<ImageDocument>> =
+    new vscode.EventEmitter<vscode.CustomDocumentContentChangeEvent<ImageDocument>>().event;
+
+  // Noop
+  saveCustomDocument(document: ImageDocument, cancellation: vscode.CancellationToken): Thenable<void> {
+    return Promise.resolve();
+  }
+
+  // Noop
+  saveCustomDocumentAs(
+    document: ImageDocument,
+    destination: vscode.Uri,
+    cancellation: vscode.CancellationToken
+  ): Thenable<void> {
+    return Promise.resolve();
+  }
+
+  // Noop
+  revertCustomDocument(document: ImageDocument, cancellation: vscode.CancellationToken): Thenable<void> {
+    return Promise.resolve();
+  }
+
+  // Noop
+  backupCustomDocument(
+    document: ImageDocument,
+    context: vscode.CustomDocumentBackupContext,
+    cancellation: vscode.CancellationToken
+  ): Thenable<vscode.CustomDocumentBackup> {
+    return Promise.resolve({
+      id: document.uri.toString(),
+      delete: () => {},
+    });
+  }
+
+}
+
+class ImageDocument implements vscode.CustomDocument {
+  readonly uri: vscode.Uri;
+
+  constructor(uri: vscode.Uri) {
+    this.uri = uri;
+  }
+
+  dispose(): void {
+    // Clean up resources if needed
+  }
 }
 
 //

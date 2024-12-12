@@ -29,6 +29,16 @@
       {"command": "jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "title": "[jdanbrown] Fix Workspace Setting: jupyter.interactiveWindow.cellMarker.default"},
       {"command": "jdanbrown.python.pylance.undisable", "title": "[jdanbrown] Pylance: Un-disable"},
       {"command": "jdanbrown.python.pylance.disable", "title": "[jdanbrown] Pylance: Disable"}
+    ],
+    "customEditors": [
+      {
+        "viewType": "imageViewer",
+        "displayName": "Image Viewer",
+        "priority": "default",
+        "selector": [
+          {"filenamePattern": "*.{png,jpg,jpeg,gif,webp,bmp,ico,tiff,tif,svg,avif}"}
+        ]
+      }
     ]
   },
   "scripts": {
