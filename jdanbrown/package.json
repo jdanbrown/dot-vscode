@@ -32,11 +32,21 @@
     ],
     "customEditors": [
       {
-        "viewType": "imageViewer",
-        "displayName": "Image Viewer",
+        "viewType": "jdanbrown.imageViewer",
+        "displayName": "[jdanbrown] Image Viewer",
         "priority": "default",
         "selector": [
-          {"filenamePattern": "*.{png,jpg,jpeg,gif,webp,bmp,ico,tiff,tif,svg,avif}"}
+          {"filenamePattern": "*.png"},
+          {"filenamePattern": "*.jpg"},
+          {"filenamePattern": "*.jpeg"},
+          {"filenamePattern": "*.gif"},
+          {"filenamePattern": "*.webp"},
+          {"filenamePattern": "*.bmp"},
+          {"filenamePattern": "*.ico"},
+          {"filenamePattern": "*.tiff"},
+          {"filenamePattern": "*.tif"},
+          {"filenamePattern": "*.svg"},
+          {"filenamePattern": "*.avif"}
         ]
       }
     ]

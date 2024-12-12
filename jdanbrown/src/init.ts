@@ -240,12 +240,29 @@ export function registerCommandsPylance(context: vscode.ExtensionContext) {
 
 //
 // ImageViewer
+//  - Config:
+//      // settings.json
+//      "workbench.editorAssociations": {
+//        // For images, use jdanbrown.imageViewer instead of the builtin media-preview
+//        //  - https://github.com/microsoft/vscode/tree/main/extensions/media-preview
+//        "*.png": "jdanbrown.imageViewer",
+//        "*.jpg": "jdanbrown.imageViewer",
+//        "*.jpeg": "jdanbrown.imageViewer",
+//        "*.gif": "jdanbrown.imageViewer",
+//        "*.webp": "jdanbrown.imageViewer",
+//        "*.bmp": "jdanbrown.imageViewer",
+//        "*.ico": "jdanbrown.imageViewer",
+//        "*.tiff": "jdanbrown.imageViewer",
+//        "*.tif": "jdanbrown.imageViewer",
+//        "*.svg": "jdanbrown.imageViewer",
+//        "*.avif": "jdanbrown.imageViewer",
+//      },
 //
 
 export function registerImageViewer(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] registerImageViewer');
   context.subscriptions.push(
-    vscode.window.registerCustomEditorProvider("imageViewer", new ImageViewerProvider(context), {
+    vscode.window.registerCustomEditorProvider("jdanbrown.imageViewer", new ImageViewerProvider(context), {
       supportsMultipleEditorsPerDocument: true,
     })
   );

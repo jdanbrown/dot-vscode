@@ -543,9 +543,20 @@
   //  - https://code.visualstudio.com/docs/languages/identifiers
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook",
-    // Disable GitLens "Interactive Rebase Editor"
-    //  - https://stackoverflow.com/questions/64869489/how-to-disable-vscode-git-rebase-ui
-    "git-rebase-todo": "default"
+    "git-rebase-todo": "default",
+    // For images, use jdanbrown.imageViewer instead of the builtin media-preview
+    //  - https://github.com/microsoft/vscode/tree/main/extensions/media-preview
+    "*.png": "jdanbrown.imageViewer",
+    "*.jpg": "jdanbrown.imageViewer",
+    "*.jpeg": "jdanbrown.imageViewer",
+    "*.gif": "jdanbrown.imageViewer",
+    "*.webp": "jdanbrown.imageViewer",
+    "*.bmp": "jdanbrown.imageViewer",
+    "*.ico": "jdanbrown.imageViewer",
+    "*.tiff": "jdanbrown.imageViewer",
+    "*.tif": "jdanbrown.imageViewer",
+    "*.svg": "jdanbrown.imageViewer",
+    "*.avif": "jdanbrown.imageViewer",
   },
   "[magit]": {
     // "editor.showFoldingControls": "never",
