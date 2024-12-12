@@ -2,6 +2,7 @@
 //  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
 
 import * as vscode from 'vscode';
+import { spawn } from 'child_process';
 
 // Used to have these, add them back to package.json if we need them again
 // import * as CryptoJS from 'crypto-js';
@@ -10,6 +11,7 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
   fixLostFocusBug(context);
+  registerCommandsQuitAndRestart(context);
   registerCommandsTerminalScrollHalfPage(context);
   registerCommandsTerminalRerunCommandInRecentTerminal(context);
   registerCommandsToggleGutter(context);
@@ -28,6 +30,41 @@ export function fixLostFocusBug(context: vscode.ExtensionContext) {
     // console.log(editor) // XXX Debug
     vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
   });
+}
+
+export function registerCommandsQuitAndRestart(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsQuitAndRestart');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.quitAndRestart', async () => {
+      // Distinguish "Visual Studio Code" vs. "Visual Studio Code - Insiders"
+      const appName = vscode.env.appName;
+      // vscode doesn't expose electron `app.quit(); app.relaunch()`, so we have to DIY this
+      //  - Poll for the app to finish exiting, else the relaunch will do nothing
+      //  - To relaunch, I do `.../bin/code` instead of `open -a "${appName}"` because the latter does nothing (with detach)
+      //    - [claude] Maybe because `open` goes through macos LaunchServices, which gets messed up under detach 🤷
+      const command = `
+        osascript \
+          -e 'quit app "${appName}"' \
+          -e 'repeat with i from 1 to 100' \
+          -e '  if not (application "${appName}" is running) then exit repeat' \
+          -e '  delay 0.1' \
+          -e 'end repeat' \
+          && '/Applications/${appName}.app/Contents/Resources/app/bin/code'
+      `;
+      console.info(`[jdanbrown.quitAndRestart] spawn: ${command}`);
+      // Must spawn (not exec) for the child process to keep running after our process exits
+      //  - https://nodejs.org/api/child_process.html#child_processspawncommand-args-options
+      const subprocess = spawn(command, {
+        // Detach from the parent
+        detached: true,
+        stdio: 'ignore',
+        // Run command in a shell
+        shell: true,
+      });
+      // Prevent the parent from waiting for the detached child to exit
+      subprocess.unref();
+    }),
+  );
 }
 
 export function registerCommandsTerminalScrollHalfPage(context: vscode.ExtensionContext) {
