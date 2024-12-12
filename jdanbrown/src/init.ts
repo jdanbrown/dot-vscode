@@ -1,6 +1,7 @@
 // Tracking
 //  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
 
+import * as path from "path";
 import * as vscode from "vscode";
 import { spawn } from "child_process";
 
@@ -272,8 +273,10 @@ class ImageViewerProvider implements vscode.CustomEditorProvider<ImageDocument> 
   ): Promise<void> {
     webviewPanel.webview.options = {
       enableScripts: true,
+      localResourceRoots: [
+        vscode.Uri.file(path.dirname(document.uri.fsPath))
+      ],
     };
-
     const imageUri = webviewPanel.webview.asWebviewUri(document.uri);
     webviewPanel.webview.html = this.makeHtml(imageUri.toString());
   }
