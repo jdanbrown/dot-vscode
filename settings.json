@@ -65,13 +65,48 @@
   // Fonts
   "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
   "editor.fontFamily": "Consolas Nerd Font",
-  "editor.fontSize": 11,
-  "editor.lineHeight": 13,
-  "terminal.integrated.fontSize": 11,
-  "terminal.integrated.lineHeight": 1, // Not sure why this works, but empirically it does (terminal lines visually match editor lines)
   // "editor.fontWeight": "normal", // Default: White text normal + colored text bold
   // "terminal.integrated.fontWeight": "normal", // Default: White text normal
   // "terminal.integrated.fontWeightBold": "bold", // Default: Colored text bold
+  //
+  // Classic 11px/13px sizing
+  //  - I used this before apc-extension broke (which provided knobs you can't do in css: "apc.listRow", "apc.statusBar", "apc.header")
+  //  - But to size everything across the workbench to 11px/13px, I had to do a _lot_ of gnarly css tweaking (fontSize, lineHeight, height, padding, etc.)
+  // "editor.fontSize": 11,
+  // "editor.lineHeight": 13,
+  // "terminal.integrated.fontSize": 11,
+  //
+  // New approach: Zoom the entire workspace smaller, manually tune fontSize/lineHeight bigger to approximate 11px/13px -- and do less css tweaking! 🎉
+  //  - Constraints:
+  //    - editor fontSize can be fractional, but lineHeight can't
+  //    - terminal fontSize and lineHeight behave in weird ways that I don't understand
+  //  - To manually tune:
+  //    - Set vscode to classic 11px/13px ("editor.fontSize": 11, "editor.lineHeight": 13, "terminal.integrated.fontSize": 11)
+  //    - Hide tab bar and breadcrumbs ("workbench.editor.showTabs": "none", "breadcrumbs.enabled": false)
+  //    - Screenshot the whole screen (Screenshot.app -> "Capture Entire Screen")
+  //    - Open the screenshot in vscode (using jdanbrown.imageViewer, not the builtin media-preview)
+  //    - Set vscode back to the target sizes (~13px/15px)
+  //    - Switch tabs back and forth for visual overlay
+  //
+  // Set lineHeight:15, then tune zoomLevel + fontSize to match classic (11px/13px)
+  //  - e.g. Explorer:
+  //    - fontSize: 84.3% * 13px = 10.959px 🟢 vs. 11px
+  //    - lineHeight: 84.3% * 20px = 16.86px 🟡 vs. 13px
+  "window.zoomLevel": -0.785, // 84.3% = 1-(0.785*.20) (window size = zoomLevel * 20% larger/smaller)
+  "editor.lineHeight": 15,
+  "editor.fontSize": 12.7,
+  "terminal.integrated.fontSize": 13, // 🟢 Weird, 13 is visually right and 12.7 is too small (test: llt ~/hack/birdgram/model/data/recordings/)
+  "terminal.integrated.lineHeight": 1, // 🟢 Not sure why this works, but empirically it does (terminal lines visually match editor lines)
+  //
+  // Set lineHeight:16, then tune zoomLevel + fontSize to match classic (11px/13px)
+  //  - e.g. Explorer:
+  //    - fontSize: 77.2% * 13px = 10.036px ❌ vs. 11px
+  //    - lineHeight: 77.2% * 20px = 15.44px 🟡 vs. 13px
+  // "window.zoomLevel": -1.139, // 77.2% = 1-(1.139*.20) (window size = zoomLevel * 20% larger/smaller)
+  // "editor.lineHeight": 16,
+  // "editor.fontSize": 13.55,
+  // "terminal.integrated.fontSize": 14, // ❌ Nope: 13 too small, 15 too big, and 15 leaves a big blank space at the top (tall monitor)
+  // "terminal.integrated.lineHeight": 1, // 🟢 Not sure why this works, but empirically it does (terminal lines visually match editor lines)
 
   // Explorer
   "workbench.tree.indent": 12,
