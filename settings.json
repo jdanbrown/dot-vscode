@@ -904,6 +904,12 @@
   // multi-commands
   "multiCommand.commands": [
 
+    // Custom css/styling
+    {
+      "command": "multiCommand:custom-ui-style.reload+fixChecksums.apply+jdanbrown.quitAndRestart",
+      "sequence": ["custom-ui-style.reload", "fixChecksums.apply", "jdanbrown.quitAndRestart"],
+    },
+
     // Workspace
     {
       "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor",
@@ -1631,6 +1637,44 @@
   "breadcrumbs.symbolPath": "off",
   "workbench.editor.tabCloseButton": "off",
 
+  // Custom css/styling
+  //  - https://github.com/subframe7536/vscode-custom-ui-style
+  //  - Workaround error: "Installation appears to be corrupt [Unsupported]"
+  //    - https://github.com/RimuruChan/vscode-fix-checksums
+  //    - https://stackoverflow.com/a/78996147/397334
+  //    - https://code.visualstudio.com/docs/supporting/faq#_installation-appears-to-be-corrupt-unsupported
+  //  - Commands to reload:
+  //    - "Custom UI Style: Reload"
+  //    - "Fix Checksums: Apply"
+  //    - Quit + restart
+  //    - TODO Make a multiCommand
+  //
+  // Monospace everywhere
+  "custom-ui-style.font.monospace": "Consolas Nerd Font",
+  "custom-ui-style.font.sansSerif": "Consolas Nerd Font",
+  //
+  // Electron BrowserWindow options
+  //  - https://www.electronjs.org/docs/latest/api/base-window
+  //  - https://www.electronjs.org/docs/latest/api/browser-window
+  "custom-ui-style.electron": {
+    // Frameless window (no title bar, no traffic light buttons)
+    //  - https://www.electronjs.org/docs/latest/tutorial/custom-window-styles#frameless-windows
+    //  - https://www.electronjs.org/docs/latest/tutorial/custom-title-bar
+    "frame": false,
+    // "titleBarStyle": "hidden", // Nope, this re-shows the traffic light buttons
+    // Preserve "maximized across two screens" on hide/show
+    //  - Neat!
+    "enableLargerThanScreen": true,
+    // Disable rounded corners
+    //  - "Setting this property to false will prevent the window from being fullscreenable"
+    "roundedCorners": false,
+    // Don't pass "webPreferences", it breaks vscode! (blank window at startup)
+    //  - This is because these options are injected as a code string, and webPreferences get passed twice
+    // "webPreferences": {...},
+  },
+
+  // FIXME apc-extension broke in vscode 1.94
+  //
   // Custom css/styling
   //  - https://github.com/drcika/apc-extension
   //  - apc is the newer approach to customize-ui -- yay! (2023-09-09)
