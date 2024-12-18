@@ -1682,7 +1682,10 @@
   //    - "Custom UI Style: Reload"
   //    - "Fix Checksums: Apply"
   //    - Quit + restart
-  //    - TODO Make a multiCommand
+  //
+  // Settings
+  "custom-ui-style.reloadWithoutPrompting": true,
+  "custom-ui-style.watch": false,
   //
   // Monospace everywhere
   "custom-ui-style.font.monospace": "Consolas Nerd Font",
@@ -1706,6 +1709,10 @@
     // Don't pass "webPreferences", it breaks vscode! (blank window at startup)
     //  - This is because these options are injected as a code string, and webPreferences get passed twice
     // "webPreferences": {...},
+  },
+  "custom-ui-style.stylesheet": {
+  },
+  "custom-ui-style.webview.stylesheet": {
   },
 
   // FIXME apc-extension broke in vscode 1.94
