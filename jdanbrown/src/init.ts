@@ -27,11 +27,25 @@ export function activate(context: vscode.ExtensionContext) {
 //  - [2023-09-18] I can't even find a github issue about it :/ (and I haven't slowed down to file one, but I should)
 export function fixLostFocusBug(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] fixLostFocusBug');
-  vscode.window.onDidCloseTerminal((editor: vscode.Terminal) => {
+  vscode.window.onDidCloseTerminal(async (editor: vscode.Terminal) => {
     if (!editor) { return; }
     // console.log(editor) // XXX Debug
-    vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+    await vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
   });
+}
+
+export function registerCommandsCustomUIStyleReloadPlusQuitAndRestart(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsCustomUIStyleReloadPlusQuitAndRestart');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown:custom-ui-style.reload+quitAndRestart', async () => {
+      console.log('[XXX] one'); // XXX Dev
+      // await vscode.commands.executeCommand('custom-ui-style.reload');
+      vscode.commands.executeCommand('custom-ui-style.reload');
+      console.log('[XXX] two'); // XXX Dev
+      await vscode.commands.executeCommand('jdanbrown.quitAndRestart');
+      console.log('[XXX] three'); // XXX Dev
+    }),
+  );
 }
 
 export function registerCommandsQuitAndRestart(context: vscode.ExtensionContext) {
@@ -72,7 +86,7 @@ export function registerCommandsQuitAndRestart(context: vscode.ExtensionContext)
 export function registerCommandsTerminalScrollHalfPage(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] registerCommandsTerminalScrollHalfPage');
 
-  function terminalScrollHalfPage(direction: 'up' | 'down') {
+  async function terminalScrollHalfPage(direction: 'up' | 'down') {
 
     // Get terminal
     const terminal = vscode.window.activeTerminal;
@@ -105,7 +119,7 @@ export function registerCommandsTerminalScrollHalfPage(context: vscode.Extension
     //      - https://code.visualstudio.com/api/references/vscode-api#NotebookEditor -> revealRange
     //      - https://code.visualstudio.com/api/references/vscode-api#Terminal -> nope
     for (let _ in range(Math.floor(rows / 2))) {
-      vscode.commands.executeCommand({
+      await vscode.commands.executeCommand({
         'down': 'workbench.action.terminal.scrollDown',
         'up': 'workbench.action.terminal.scrollUp',
       }[direction]);
@@ -114,8 +128,8 @@ export function registerCommandsTerminalScrollHalfPage(context: vscode.Extension
   }
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', () => terminalScrollHalfPage('up')),
-    vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', () => terminalScrollHalfPage('down')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollUpHalfPage', async () => await terminalScrollHalfPage('up')),
+    vscode.commands.registerCommand('jdanbrown.terminal.scrollDownHalfPage', async () => await terminalScrollHalfPage('down')),
   );
 
 }
@@ -203,8 +217,8 @@ export function registerCommandsToggleGutter(context: vscode.ExtensionContext) {
 export function registerCommandsQuickOpenMagit(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] registerCommandsQuickOpenMagit');
   context.subscriptions.push(
-    vscode.commands.registerCommand('jdanbrown.workbench.action.quickOpen.magit', () => {
-      vscode.commands.executeCommand('workbench.action.quickOpen', '>magit:');
+    vscode.commands.registerCommand('jdanbrown.workbench.action.quickOpen.magit', async () => {
+      await vscode.commands.executeCommand('workbench.action.quickOpen', '>magit:');
     }),
   );
 }
