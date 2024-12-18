@@ -1314,7 +1314,7 @@
     // "notebook.editorBackground": null,
     // "notebook.focusedCellBackground": null,
     // "notebook.focusedCellBorder": "#4f97d7",
-    "notebook.focusedCellBorder": "#0000", // Disable gutter color (coupled with apc.stylesheet: "Border color on selected cell")
+    "notebook.focusedCellBorder": "#0000", // Disable gutter color (coupled with custom-ui-style.stylesheet: "Border color on selected cell")
     // "notebook.focusedEditorBorder": "#4f97d7",
     "notebook.inactiveFocusedCellBorder": "#0000", // Default: #404040
     // "notebook.inactiveSelectedCellBorder": "#4f97d7",
