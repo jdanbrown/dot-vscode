@@ -39,7 +39,7 @@
   //    - TODO Doesn't work in terminal
   {"key": "ctrl+up", "command": "workbench.action.openGlobalKeybindingsFile"}, // Open keybindings.json file
   {"key": "ctrl+shift+r", "command": "workbench.action.reloadWindow"},
-  {"key": "ctrl+shift+cmd+r", "command": "multiCommand:custom-ui-style.reload+fixChecksums.apply+jdanbrown.quitAndRestart"},
+  {"key": "ctrl+shift+cmd+r", "command": "jdanbrown:custom-ui-style.reload+quitAndRestart"},
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
   {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},

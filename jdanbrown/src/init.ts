@@ -12,6 +12,7 @@ import { spawn } from "child_process";
 export function activate(context: vscode.ExtensionContext) {
   console.info('[jdanbrown] activate');
   fixLostFocusBug(context);
+  registerCommandsCustomUIStyleReloadPlusQuitAndRestart(context);
   registerCommandsQuitAndRestart(context);
   registerCommandsTerminalScrollHalfPage(context);
   registerCommandsTerminalRerunCommandInRecentTerminal(context);

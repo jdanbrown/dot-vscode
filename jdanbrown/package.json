@@ -20,6 +20,7 @@
   "main": "./out/init.js",
   "contributes": {
     "commands": [
+      {"command": "jdanbrown:custom-ui-style.reload+quitAndRestart", "title": "[jdanbrown] Custom UI Style: Reload + Quit and Restart"},
       {"command": "jdanbrown.quitAndRestart", "title": "[jdanbrown] Quit and Restart"},
       {"command": "jdanbrown.terminal.scrollDownHalfPage", "title": "[jdanbrown] Terminal: Scroll Down (Half Page)"},
       {"command": "jdanbrown.terminal.scrollUpHalfPage", "title": "[jdanbrown] Terminal: Scroll Up (Half Page)"},
