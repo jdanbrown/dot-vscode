@@ -1722,10 +1722,8 @@
     //  - This is because these options are injected as a code string, and webPreferences get passed twice
     // "webPreferences": {...},
   },
+  // TODO TODO
   "custom-ui-style.stylesheet": {
-
-    // TODO TODO 1
-    //
 
     // // Fix font smoothing
     // //  - Solution
@@ -2620,14 +2618,8 @@
     //   "display": "none",
     // },
 
-    //
-    // TODO TODO 1
-
   },
   "custom-ui-style.webview.stylesheet": {
-
-    // TODO TODO 2
-    //
 
     // // Override default WebView/iframe styles
     // //  - Code: https://github.com/microsoft/vscode/blob/main/extensions/markdown-language-features/media/markdown.css
@@ -2681,9 +2673,6 @@
     //   "stroke": "#fff",
     //   "opacity": "0.5",
     // },
-
-    //
-    // TODO TODO 2
 
   },
 
