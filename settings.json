@@ -150,7 +150,6 @@
   "editor.renderLineHighlight": "none",
   "editor.cursorBlinking": "solid",
   "editor.minimap.enabled": false,
-  "editor.cursorSurroundingLines": 0,
   "editor.matchBrackets": "near",
   "editor.lightbulb.enabled": "off",
   "editor.dragAndDrop": false,
@@ -175,6 +174,19 @@
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
   "files.insertFinalNewline": true,
+
+  // Editor: scrolloff
+  //  - TODO Bug: cursorSurroundingLines is buggy in vim
+  //    - https://github.com/VSCodeVim/Vim/issues/4912 H/L with cursorSurroundingLines causes editor to scroll
+  //      - 🎉 Fixed in 1.28.0: https://github.com/VSCodeVim/Vim/pull/9150 fix #4912 broken H and L motions
+  //    - https://github.com/VSCodeVim/Vim/issues/1393 L selects the right line, but also scrolls down one
+  //      - ❓ Test if this was also fixed by #9150 (issue is still open)
+  //  - TODO Bug: cursorSurroundingLines broken by stickyScroll
+  //    - https://github.com/microsoft/vscode/issues/204193 Editor.cursorSurroundingLines broken with update to 1.86
+  //    - https://github.com/VSCodeVim/Vim/issues/9141 Sticky Scroll partially breaks zt
+  "editor.cursorSurroundingLines": 0, // Default: 0
+  "editor.stickyScroll.enabled": true, // Default: true
+  "editor.stickyScroll.maxLineCount": 5, // Default: 5
 
   // Editor: CodeLens
   //  - https://code.visualstudio.com/api/language-extensions/programmatic-language-features
