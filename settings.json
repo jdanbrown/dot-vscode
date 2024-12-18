@@ -737,7 +737,7 @@
   "vim.visualstar": true,
   "vim.joinspaces": false,
   "vim.matchpairs": "(:),{:},[:],<:>",
-  "vim.mouseSelectionGoesIntoVisualMode": false,
+  // "vim.mouseSelectionGoesIntoVisualMode": false, // Hmm, why did I set this to false? I think I like visual mode better
   //  - ReplaceWithRegister
   //    - https://github.com/VSCodeVim/Vim#replacewithregister
   //    - yank -> gr<motion> to paste
