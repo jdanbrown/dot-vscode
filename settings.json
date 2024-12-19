@@ -963,6 +963,25 @@
       "sequence": ["workbench.action.toggleKeybindingsLog", "workbench.action.focusActiveEditorGroup",],
     },
 
+    // HACK Workaround: Simplify to workbench.action.focus*GroupWithoutWrap after this bug is fixed
+    //  - https://github.com/microsoft/vscode/issues/236648 workbench.action.focus*GroupWithoutWrap commands fail to focus *-most group when sibebar/panel is focused
+    {
+      "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusLeftGroupWithoutWrap",
+      "sequence": ["workbench.action.focusActiveEditorGroup", "workbench.action.focusLeftGroupWithoutWrap",],
+    },
+    {
+      "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusRightGroupWithoutWrap",
+      "sequence": ["workbench.action.focusActiveEditorGroup", "workbench.action.focusRightGroupWithoutWrap",],
+    },
+    {
+      "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusBelowGroupWithoutWrap",
+      "sequence": ["workbench.action.focusActiveEditorGroup", "workbench.action.focusBelowGroupWithoutWrap",],
+    },
+    {
+      "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusAboveGroupWithoutWrap",
+      "sequence": ["workbench.action.focusActiveEditorGroup", "workbench.action.focusAboveGroupWithoutWrap",],
+    },
+
     // Bottom panel
     //  - Workaround for focus jumping to weird places on workbench.action.togglePanel
     {
