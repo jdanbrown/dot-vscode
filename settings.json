@@ -53,6 +53,7 @@
   "workbench.layoutControl.enabled": false,
   "workbench.layoutControl.type": "menu",
   "workbench.quickOpen.preserveInput": true,
+  // "workbench.quickOpen.closeOnFocusLost": false, // Uncomment to use element inspector on quick opens (for css stylesheet)
   "workbench.reduceMotion": "on", // On closing an editor/terminal, focus neighboring tab instead of last-selected tab
   "workbench.startupEditor": "none",
   "workbench.tips.enabled": false,
