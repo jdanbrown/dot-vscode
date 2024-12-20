@@ -1903,6 +1903,7 @@
     //  - Re-style titlebars
     "#workbench\\.parts\\.sidebar > .title": {
       "background-color": "#404040",
+      "border-bottom": "1px solid #666 !important",
     },
     "#workbench\\.parts\\.sidebar .pane-header": {
       "background-color": "#404040 !important",
@@ -2002,35 +2003,26 @@
     //   "font-weight": "bold",
     // },
 
+    // Sidebar: Source Control
     //  - Hide all action buttons except the few I actually (have to) use
     //    - I have to use +/- because there aren't yet keybindings for stage/unstage from scm view :/
     //    - https://github.com/microsoft/vscode/issues/194214 In Source Control view, add commands/keybindings for "Stage File" / "Unstage File"
     //    - https://github.com/microsoft/vscode/issues/24916 SCM: Support keyboard shortcuts
-    ".scm-view .monaco-list-row .actions-container .action-item[title$='Checkout Branch/Tag...'] .codicon": {
+    ".scm-view .monaco-list-row .actions .action-label[aria-label$='Checkout Branch/Tag...'] .codicon": {
+      "display": "none !important", // Hide the icon by the branch name
+    },
+    ".scm-view .monaco-list-row .actions .action-label[aria-label='Open File']": {
       "display": "none !important",
     },
-    ".scm-view .monaco-list-row .actions-container .action-item[title='Show Commit Graph']": {
+    ".scm-view .monaco-list-row .actions .action-label[aria-label='Discard Changes']": {
       "display": "none !important",
     },
-    ".scm-view .monaco-list-row .actions-container .action-item[title='Commit']": {
+    ".scm-view .monaco-list-row .actions .action-label[aria-label='Discard All Changes']": {
       "display": "none !important",
     },
-    ".scm-view .monaco-list-row .actions-container .action-item[title='Refresh']": {
-      // "display": "none !important",
-    },
-    ".scm-view .monaco-list-row .actions .action-item[title='Open File']": {
+    ".scm-view .monaco-list-row .actions .action-label[aria-label='Stash All Changes']": {
       "display": "none !important",
     },
-    ".scm-view .monaco-list-row .actions .action-item[title='Discard Changes']": {
-      "display": "none !important",
-    },
-    ".scm-view .monaco-list-row .actions .action-item[title='Discard All Changes']": {
-      "display": "none !important",
-    },
-    ".scm-view .monaco-list-row .actions .action-item[title='Stash All Changes']": {
-      "display": "none !important",
-    },
-
     //  - Color dirs blue
     ".scm-view .monaco-list-row .scm-provider .label .name": {
       "font-weight": "bold",
