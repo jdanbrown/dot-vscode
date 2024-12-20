@@ -849,5 +849,6 @@
   {"key": "shift+cmd+v", "command": "-markdown.showPreview", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
 
   // TODO Organize (automatically added)
+  {"key": ""},
 
 ]
