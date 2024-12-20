@@ -1864,11 +1864,34 @@
     // ".quick-input-widget .monaco-list-row[data-index='2']": { "top": "calc(13px * 2) !important" },
 
     // Advanced Open File (cmd+o)
+    //  - TODO Make advanced-open-file leave a signature on its .quick-input-widget that we can match on
+    //    - Currently there's no correct way to detect a .quick-input-widget from advanced-open-file vs. others
+    //    - For making it wide, we match on [aria-label='Type to narrow down results.'], which I think is the default
+    //      for any quick open that doesn't provide it's own text
+    //    - For hiding the icons, we additionally match on [aria-label^='file'][aria-label*='  '], which is brittle but
+    //      should at least avoid incorrectly matching on other quick opens
     //  - Make really wide (default 600px is too narrow for long paths)
-    ".quick-input-widget:has(.monaco-list[aria-label*='Type to narrow down results'])": {
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.'])": {
       "width": "1000px !important",
       "left": "calc((100% - 1000px) / 2) !important",
       "margin-left": "0px !important",
+    },
+    //  - Hide icons, and add '/' after dirs
+    //    - TODO Make advanced-open-file not show icons when "workbench.iconTheme":null, like the built-in file pickers
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.']) .monaco-list-row[aria-label^='file'][aria-label*='  '] .label-name": {
+      "margin-left": "-1ex", // Negate the leading ' ' char in the label (I guess injected by advanced-open-file to separate the label from the icon 🤷)
+    },
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.']) .monaco-list-row[aria-label^='file'][aria-label*='  '] .label-name .codicon": {
+      "display": "none !important", // Hide icon
+    },
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.']) .monaco-list-row[aria-label^='file'][aria-label*='  '] .label-name:has(.codicon-file-directory)::after": {
+      "content": "'/'",
+    },
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.']) .monaco-list-row[aria-label^='file'][aria-label*='  '] .label-name:has(.codicon-file-symlink-file)::after": {
+      "content": "' ->'",
+    },
+    ".quick-input-widget:has(.monaco-list[aria-label='Type to narrow down results.']) .monaco-list-row[aria-label^='file'][aria-label*='  '] .label-name:has(.codicon-file-symlink-directory)::after": {
+      "content": "'/ ->'",
     },
 
     // Activity Bar
