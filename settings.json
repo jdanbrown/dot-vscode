@@ -63,7 +63,8 @@
   "zenMode.restore": true,
 
   // Fonts
-  "workbench.fontAliasing": "default", // ("auto" was required for CGFontRenderingFontSmoothingDisabled, but not for -webkit-text-stroke-width)
+  // "workbench.fontAliasing": "default", // Works well on my home displays (laptop retina + external 4k)
+  "workbench.fontAliasing": "auto", // Works the same on my home displays and might work better on office displays with lower res (untested)
   "editor.fontFamily": "Consolas Nerd Font",
   // "editor.fontWeight": "normal", // Default: White text normal + colored text bold
   // "terminal.integrated.fontWeight": "normal", // Default: White text normal
@@ -1743,29 +1744,6 @@
   },
   // TODO TODO
   "custom-ui-style.stylesheet": {
-
-    // Fix font smoothing
-    //  - Solution
-    //    - Use css `-webkit-text-stroke-width` [https://github.com/atom/atom/issues/20052#issuecomment-546669675]
-    //    - For more archeology, see ~/.atom/styles.less
-    //  - Troubleshooting
-    //    - Try "workbench.fontAliasing":"default"->"auto" (this was required for the CGFontRenderingFontSmoothingDisabled approach)
-    //  - Non-solution
-    //    - `defaults write com.microsoft.VSCode.helper CGFontRenderingFontSmoothingDisabled -bool NO`
-    //      - Only works when you enable the global setting "System Preferences -> General -> Use font smoothing when available"
-    //      - But we don't want that enabled globally
-    //      - (Note that's the same as `defaults -currentHost ... AppleFontSmoothing`)
-    //    - https://github.com/microsoft/vscode/issues/82109#issuecomment-542086670
-    //    - https://github.com/microsoft/vscode/issues/51132
-    //    - https://github.com/microsoft/vscode/issues/59887
-    "*": {
-      "-webkit-text-stroke-width": ".35px", // Closest match to "Use font smoothing when available" (System Preferences -> General)
-      // "-webkit-text-stroke-width": ".3px",
-      // "-webkit-text-stroke-width": ".25px", // Tuned to taste
-      // "-webkit-text-stroke-width": ".2px",
-      // "-webkit-text-stroke-width": ".15px",
-      // "-webkit-text-stroke-width": ".1px",
-    },
 
     // Change default global font-size, affects basically everything that isn't an editor:
     //  - Settings editor
