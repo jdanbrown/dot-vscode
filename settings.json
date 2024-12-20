@@ -1780,13 +1780,13 @@
       "border-radius": "unset",
     },
     //  - Files
-    //    - Reorder "file dir" -> "dir/file"
     //    - Make really wide (default 600px is too narrow for long paths)
     ".quick-input-widget:has(.monaco-list[aria-label*='Search files'])": {
       "width": "1000px !important",
       "left": "calc((100% - 1000px) / 2) !important",
       "margin-left": "0px !important",
     },
+    //    - Reorder "file dir" -> "dir/file"
     ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container": {
       "display": "flex",
     },
@@ -1798,6 +1798,7 @@
     ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": {
       "font-size": "inherit !important",
       "opacity": "1 !important",
+      "margin-left": "0px !important",
     },
     ".quick-input-widget .monaco-list[aria-label*='Search files'] .monaco-icon-label-container .monaco-icon-name-container": {
       "order": "2",
@@ -1812,40 +1813,42 @@
     },
 
     // Quick search (shift+cmd+f)
-    //  - Reorder "file dir" -> "dir/file"
     //  - Make really wide (default 600px is too narrow for long paths)
     ".quick-input-widget:has(.monaco-list[aria-label*='Search for text in your workspace files'])": {
       "width": "1000px !important",
       "left": "calc((100% - 1000px) / 2) !important",
       "margin-left": "0px !important",
     },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container": {
-      "display": "flex",
-      "color": "#ffffff",  // Default has 70% opacity
+    //  - On header rows, add background color + remove top border
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border)": {
+      "background": "#404040",
     },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-description-container": {
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .quick-input-list-entry.quick-input-list-separator-border": {
+      "border-top-width": "0px", // Default: 1px
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .quick-input-list-entry.quick-input-list-separator-border .label-name": {
+      "font-weight": "inherit", // Default: 600 (bold)
+    },
+    //  - On header rows, reorder "file dir" -> "dir/file"
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .monaco-icon-label-container": {
+      "display": "flex",
+      "color": "#ffffff", // Default has 70% opacity
+    },
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .monaco-icon-label-container .monaco-icon-description-container": {
       "order": "1",
       "overflow-y": "hidden",
       "text-overflow": "ellipsis",
     },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-description-container .label-description": {
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .monaco-icon-label-container .monaco-icon-description-container .label-description": {
       "font-size": "inherit !important",
       "opacity": "1 !important",
+      "margin-left": "0px !important",
     },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container .monaco-icon-name-container": {
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .monaco-icon-label-container .monaco-icon-name-container": {
       "order": "2",
     },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": {
+    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border) .monaco-icon-label-container:has(.label-description .monaco-highlighted-label:not(:empty)) .label-name::before": {
       "content": "'/'",
-    },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .quick-input-list-entry.quick-input-list-separator-border": {
-      "border-top-width": "0px",
-    },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .quick-input-list-entry.quick-input-list-separator-border .label-name": {
-      "font-weight": "inherit",
-    },
-    ".quick-input-widget .monaco-list[aria-label*='Search for text in your workspace files'] .monaco-list-row:has(.quick-input-list-entry.quick-input-list-separator-border)": {
-      "background": "#404040",
     },
 
     // [nope] Quick input: Smaller row height
