@@ -141,9 +141,8 @@
   {"key": "cmd+'", "command": "multiCommand.workbench.action.togglePanel.focusBackOnEditor", "when": "!sideBarFocus"},
   {"key": "cmd+'", "command": "multiCommand.workbench.action.togglePanel.focusBackOnSidebar", "when": "sideBarFocus"},
   {"key": "cmd+'", "command": "-workbench.action.replaceInFiles"},
-  {"key": "shift+cmd+'", "command": "workbench.action.focusPanel", "when": "!panelFocus"},
-  {"key": "shift+cmd+'", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus"},
-  {"key": "shift+cmd+'", "command": "-workbench.action.search.toggleQueryDetails", "when": "inSearchEditor || searchViewletFocus"},
+  {"key": "ctrl+cmd+'", "command": "workbench.action.focusPanel", "when": "!panelFocus"},
+  {"key": "ctrl+cmd+'", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus"},
   {"key": "ctrl+tab", "command": "workbench.action.nextPanelView", "when": "panelFocus"},
   {"key": "ctrl+shift+tab", "command": "workbench.action.previousPanelView", "when": "panelFocus"},
   {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && !inputFocus"}, // Unfocus panel, but leave it open
@@ -156,18 +155,19 @@
   {"key": "cmd+j", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusBelowGroupWithoutWrap", "when": "panelFocus"},
   {"key": "cmd+k", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusAboveGroupWithoutWrap", "when": "panelFocus"},
   {"key": "ctrl+cmd+z", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus"}, // Maximize panel
-  {"key": "l", "command": "workbench.output.action.toggleAutoScroll", "when": "panelFocus && focusedView == 'workbench.panel.output'"},     // Which one do I use?
-  {"key": "cmd+l", "command": "workbench.output.action.toggleAutoScroll", "when": "panelFocus && focusedView == 'workbench.panel.output'"}, // Which one do I use?
-  {"key": "shift+cmd+m", "command": "workbench.actions.view.problems", "when": "workbench.panel.output.active && focusedView != 'workbench.panel.markers.view'"},
-  {"key": "shift+cmd+m", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.markers.view'"},
-  {"key": "shift+cmd+o", "command": "workbench.action.output.toggleOutput", "when": "workbench.panel.output.active && focusedView != 'workbench.panel.output'"},
-  {"key": "shift+cmd+o", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.output'"},
-  {"key": "shift+cmd+o", "command": "-workbench.action.gotoSymbol"},
+  {"key": "l", "command": "workbench.output.action.toggleAutoScroll", "when": "panelFocus && focusedView == 'workbench.panel.output'"},
+  {"key": "ctrl+cmd+1", "command": "workbench.actions.view.problems", "when": "focusedView != 'workbench.panel.markers.view'"},
+  {"key": "ctrl+cmd+1", "command": "workbench.action.focusActiveEditorGroup", "when": "focusedView == 'workbench.panel.markers.view'"},
+  {"key": "shift+cmd+m", "command": "-workbench.actions.view.problems", "when": "workbench.panel.markers.view.active"},
+  {"key": "ctrl+cmd+2", "command": "workbench.action.output.toggleOutput", "when": "focusedView != 'workbench.panel.output'"},
+  {"key": "ctrl+cmd+2", "command": "workbench.action.focusActiveEditorGroup", "when": "focusedView == 'workbench.panel.output'"},
   {"key": "shift+cmd+u", "command": "-workbench.action.output.toggleOutput", "when": "workbench.panel.output.active"},
-  {"key": "shift+cmd+d", "command": "workbench.debug.action.toggleRepl", "when": "workbench.panel.output.active && focusedView != 'workbench.panel.repl.view'"},
-  {"key": "shift+cmd+d", "command": "workbench.action.focusActiveEditorGroup", "when": "workbench.panel.output.active && focusedView == 'workbench.panel.repl.view'"},
+  {"key": "ctrl+cmd+3", "command": "workbench.debug.action.toggleRepl", "when": "focusedView != 'workbench.panel.repl.view'"},
+  {"key": "ctrl+cmd+3", "command": "workbench.action.focusActiveEditorGroup", "when": "focusedView == 'workbench.panel.repl.view'"},
   {"key": "shift+cmd+d", "command": "-workbench.view.debug", "when": "viewContainer.workbench.view.debug.enabled"},
   {"key": "shift+cmd+y", "command": "-workbench.debug.action.toggleRepl", "when": "workbench.panel.repl.view.active"},
+  {"key": "ctrl+cmd+4", "command": "workbench.action.focusCommentsPanel", "when": "focusedView != 'workbench.panel.comments'"},
+  {"key": "ctrl+cmd+4", "command": "workbench.action.focusActiveEditorGroup", "when": "focusedView == 'workbench.panel.comments'"},
 
   // Notifications
   {"key": "shift+cmd+\\", "command": "notifications.showList", "when": "!notificationFocus || notificationToastsVisible"},
