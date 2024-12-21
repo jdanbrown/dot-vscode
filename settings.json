@@ -2170,8 +2170,8 @@
     //  - https://github.com/microsoft/vscode/issues/42253#issuecomment-713816482 — based on this solution
     //  - Codicon references
     //    - https://microsoft.github.io/vscode-codicons/dist/codicon.html
-    //    - https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv -- shows hex values, but incomplete
-    //    - https://github.com/microsoft/vscode-codicons/blob/main/src/template/mapping.json -- complete, but shows decimal values (use python hex())
+    //    - https://github.com/microsoft/vscode-codicons/blob/0.0.30/dist/codicon.csv -- shows hex values, but incomplete
+    //    - https://github.com/microsoft/vscode-codicons/blob/0.0.30/src/template/mapping.json -- complete, but shows decimal values (use python hex())
 
     // Tabs: Font/height sizing
     ".tabs-and-actions-container": {
@@ -2179,7 +2179,7 @@
       "background": "#404040 !important",
     },
     ".tabs-and-actions-container .tab": {
-      "padding-right": "10px",
+      "padding-right": "10px !important", // Prevent the normal padding-right:10px changing to padding-right:0 when .dirty (probably for the dirty circle)
       "border-width": "0px !important", // Prevent jank when moving through wrapped tabs (when right border changes 0px->1px, which I don't need)
     },
     ".tabs-and-actions-container .tab .monaco-icon-label .monaco-icon-label-container": {
@@ -2226,7 +2226,7 @@
       "line-height": "17px !important",
     },
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab.sizing-fit": {
-      "width": "inherit;", // Let tab widths shrink to fit tab titles (default: 120px)
+      "width": "inherit", // Let tab widths shrink to fit tab titles (default: 120px)
     },
     ".monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a": {
       "font-size": "12px !important", // [Redundant with apc.header.fontSize -- safe to delete?]
@@ -2241,8 +2241,8 @@
       "color": "#de935f", // git orange (gitDecoration.modifiedResourceForeground)
     },
     ".tabs-and-actions-container .tab.dirty .tab-label::after": {
-      // XXX Nope, stop adding the solid circle to the right of dirty tabs, because it doesn't play
-      // well with the new wrapped tab bar. Instead, color the tab label (above).
+      // XXX Nope, don't show a solid circle to the right of dirty tabs, because it causes jank with the new wrapped tab
+      // bar. Instead, color the tab label (above).
       // "content": "'\\ea71'",
       // "font-family": "codicon",
       // "padding-right": "0px",
