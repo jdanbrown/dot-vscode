@@ -2117,36 +2117,36 @@
     "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item:hover .action-label": {
       "color": "#fff !important",
     },
-    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item .action-label": {
+    "#workbench\\.parts\\.panel .title .action-item .action-label": {
       "font-size": "12px",
       "color": "#a6a6a6 !important",
       "padding": "0px !important",
     },
-    "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item.checked .action-label": {
+    "#workbench\\.parts\\.panel .title .action-item.checked .action-label": { // Panel bar labels (left) focus like this
       "color": "#fff !important",
     },
     "#workbench\\.parts\\.panel .title .panel-switcher-container .action-item .active-item-indicator": {
       "display": "none",
     },
-    "#workbench\\.parts\\.panel .title .action-label": {
-      "color": "#a6a6a6 !important",
-    },
-    "#workbench\\.parts\\.panel .title .action-label:hover": {
+    "#workbench\\.parts\\.panel .title .action-item .action-label.checked": { // Panel bar buttons (right) toggle on like this
       "color": "#fff !important",
     },
-    //  - TODO Is there any way to add a border on the focused bottom panel? .focus doesn't work, and I don't see any custom selectors (e.g. .active)
-    // "#workbench\\.parts\\.panel:has(.active, .focus, .synthetic-focus, ...) .content::before": {
-    //   "content": "''",
-    //   "pointer-events": "none",
-    //   "position": "absolute",
-    //   "top": "0",
-    //   "left": "0",
-    //   "width": "100%",
-    //   "height": "100%",
-    //   "outline": "1px solid #fff",
-    //   "outline-offset": "-1px",
-    //   "z-index": "1",
-    // },
+    "#workbench\\.parts\\.panel .title .action-item .action-label:hover": {
+      "color": "#fff !important",
+    },
+    //  - Add border when focused
+    "#workbench\\.parts\\.panel:has(:focus) .content::before": {
+      "content": "''",
+      "pointer-events": "none",
+      "position": "absolute",
+      "top": "0",
+      "left": "0",
+      "width": "100%",
+      "height": "100%",
+      "outline": "1px solid #fff",
+      "outline-offset": "-1px",
+      "z-index": "1",
+    },
 
     // Notifications
     //  - Add border on focused view
