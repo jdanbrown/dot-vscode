@@ -639,11 +639,11 @@
   {"key": "cmd+i", "command": "-notebook.cell.chat.start", "when": "config.notebook.experimental.cellChat && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus || config.notebook.experimental.generate && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus"},
   {"key": "cmd+i", "command": "-workbench.action.chat.holdToVoiceChatInChatView", "when": "chatIsEnabled && hasSpeechProvider && !chatSessionRequestInProgress && !editorFocus && !inChatInput && !inlineChatFocused && !notebookEditorFocused"},
   //  - Inline chat
-  {"key": "ctrl+cmd+i", "command": "inlineChat.start", "when": "editorFocus && vim.mode == 'Normal' && inlineChatHasProvider && !editorReadonly"},
+  {"key": "ctrl+cmd+i", "command": "inlineChat.start", "when": "editorFocus && inlineChatHasProvider && !editorReadonly"},
   {"key": "ctrl+cmd+i", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"},
   {"key": "ctrl+cmd+i", "command": "notebook.cell.chat.start", "when": "config.notebook.experimental.cellChat && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus || config.notebook.experimental.generate && notebookChatAgentRegistered && notebookEditable && notebookEditorFocused && !inputFocus"},
   {"key": "ctrl+cmd+i", "command": "-workbench.panel.chat", "when": "workbench.panel.chat.view.copilot.active"},
-  {"key": "ctrl+cmd+i", "command": "-workbench.action.chat.open", "when": "chatPanelParticipantRegistered"},
+  {"key": "ctrl+cmd+i", "command": "-workbench.action.chat.open", "when": "chatPanelParticipantRegistered || chatSetupInstalled"},
   //  - Chat history ("Chat: Show Chats...")
   {"key": "shift+cmd+i", "command": "workbench.action.chat.history"},
   {"key": "shift+cmd+i", "command": "-workbench.action.chat.openEditSession", "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"},
