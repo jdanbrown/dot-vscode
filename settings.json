@@ -2326,22 +2326,24 @@
     },
 
     // Status bar: Git
-    //  - Hide branch icon next to branch name
+    //  - Reorder
     ".statusbar [id^='status.scm.']": {
       "order": "-9", // First
     },
+    //  - Hide branch icon next to branch name
     ".statusbar [id^='status.scm.'] .codicon-git-branch::before": {
       "display": "none",
     },
 
     // Status bar: Problems
-    //  - Numbers: Gray when no problems, white when problems
+    //  - Reorder
     ".statusbar #status\\.problems": {
       "order": "-8", // Second
     },
     ".statusbar #statusbar\\.currentProblem": {
       "order": "8", // Second-to-last (else it jerks all the middle stuff back and forth)
     },
+    //  - Numbers: Gray when no problems, white when problems
     ".statusbar #status\\.problems[aria-label='No Problems']": {
       "color": "#a6a6a6 !important",
     },
@@ -2366,6 +2368,7 @@
     },
 
     // Status bar: Vim
+    //  - Reorder
     ".statusbar #vscodevim\\.vim\\.primary": {
       "order": "9", // Last
     },
