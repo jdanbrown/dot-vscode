@@ -2316,12 +2316,7 @@
     ".monaco-breadcrumbs .monaco-breadcrumb-item:not(:last-of-type) .label-name::after": {
       "content": "'/'",
     },
-    //  - This used to work before the 1.83.0 upgrade, when it appears they removed .root_folder
-    // ".monaco-breadcrumbs .monaco-breadcrumb-item:not(.root_folder):first-of-type .label-name::before": {
-    //   "content": "'/'",
-    // },
-    //  - This is a very hacky hack for ≥1.83.0 that might work sometimes but doesn't really seem reliable at all
-    ".monaco-breadcrumbs .monaco-breadcrumb-item:first-of-type:has(.monaco-icon-label[title^='/']) .label-name::before": {
+    ".monaco-breadcrumbs .monaco-breadcrumb-item:not(.root_folder):first-of-type .label-name::before": {
       "content": "'/'",
     },
 
