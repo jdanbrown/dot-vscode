@@ -2480,8 +2480,7 @@
 
     // Copilot Chat
     ".interactive-item-container .value .rendered-markdown p": {
-      // "line-height": "1.5em", // Default
-      "line-height": "13px", // Tighter (13px/11px = 1.18em, with font-size:11px in ".monaco-workbench .part > .content")
+      "line-height": "1.18em", // Tighter: 1.18em = 13px/11px (default: 1.5em)
     },
 
     // Git: Diff editor
