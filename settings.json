@@ -2451,7 +2451,7 @@
       "border-width": "0px 1px 1px 1px",
       "border-style": "solid",
       "border-color": "#fff",
-      "z-index": "21", // z-index:21 to override notebook cells
+      "z-index": "40", // z-index:40 to override terminal things (.xterm-screen has z-index:31)
     },
     //  - Top: Use the bottom of .tabs-and-actions-container, which is above breadcrumbs (and below tabs/actions)
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor, div[id^='webview-editor-element-']) .tabs-and-actions-container::before": {
@@ -2463,11 +2463,11 @@
       "width": "100%",
       "height": "1px",
       "background-color": "#fff",
-      "z-index": "21",
+      "z-index": "40", // Match above, for simplicity
     },
     //  - Hack z-index to hide left/right overflow through tabs/actions (want it to stop after breadcrumbs)
     ".editor-group-container.active:not(.empty):has(:focus, .notebook-editor, div[id^='webview-editor-element-']) .tabs-and-actions-container": {
-      "z-index": "22", // z-index:22 to override z-index:21 above
+      "z-index": "41", // Bigger than z-index:40 above
     },
 
     // Disable underlines for detected links
