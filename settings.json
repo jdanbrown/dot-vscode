@@ -2360,9 +2360,9 @@
     },
     //  - Move cell execution counter from bottom to top
     ".notebook-editor .code-cell-row .cell-focus-indicator-left .execution-count-label": {
-      "top": "12.7px !important", // HACK Must match zoomLevel
-      "font-size": "12.7px !important", // HACK Must match zoomLevel
-      "line-height": "15px !important", // HACK Must match zoomLevel
+      "top": "12.7px !important", // NOTE Must match zoomLevel
+      "font-size": "12.7px !important", // NOTE Must match zoomLevel
+      "line-height": "15px !important", // NOTE Must match zoomLevel
     },
 
   },
