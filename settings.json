@@ -591,7 +591,6 @@
   // Filetypes
   //  - https://code.visualstudio.com/docs/languages/identifiers
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook",
     "git-rebase-todo": "default",
     // For images, use jdanbrown.imageViewer instead of the builtin media-preview
     //  - https://github.com/microsoft/vscode/tree/main/extensions/media-preview
