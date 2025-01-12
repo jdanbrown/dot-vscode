@@ -2619,32 +2619,31 @@
     ".notebook-editor .code-cell-row .cell .cell-editor-part:has(.monaco-progress-container:not([aria-hidden='true']))::before": {
       "outline": "solid 1px #ffd966 !important", // Add !important to override blue border when cell has inputFocus
     },
+    //  - Disable code folding controls in cell editors
+    ".notebook-editor .code-cell-row .cell .cell-editor-part .margin .codicon-folding-expanded": {
+      "display": "none",
+    },
     //  - Move cell execution counter from bottom to top
     ".notebook-editor .code-cell-row .cell-focus-indicator-left .execution-count-label": {
       "top": "12px !important",
       "font-size": "11px !important",
       "line-height": "13px !important",
     },
-    //  - Disable code folding controls in cell editors
-    ".notebook-editor .code-cell-row .cell .cell-editor-part .margin .codicon-folding-expanded": {
-      "display": "none",
-    },
 
   },
   "custom-ui-style.webview.stylesheet": {
 
-    // Override default WebView/iframe styles
-    //  - Code: https://github.com/microsoft/vscode/blob/main/extensions/markdown-language-features/media/markdown.css
+    // Markdown Preview
+    ".markdown-body ul": {
+      "padding-inline-start": "32px",
+    },
+    //  - Override default WebView/iframe styles
+    //    - https://github.com/microsoft/vscode/blob/main/extensions/markdown-language-features/media/markdown.css
     ".vscode-high-contrast.showEditorSelection .code-active-line:before": {
       "border-left-color": "#4f97d7b3 !important",
     },
     ".vscode-high-contrast.showEditorSelection .code-line:hover:before": {
       "border-left-color": "#4f97d7 !important",
-    },
-
-    // Markdown Preview
-    ".markdown-body ul": {
-      "padding-inline-start": "32px",
     },
 
     // Notebooks
