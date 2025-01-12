@@ -1743,7 +1743,6 @@
     //  - This is because these options are injected as a code string, and webPreferences get passed twice
     // "webPreferences": {...},
   },
-  // TODO TODO
   "custom-ui-style.stylesheet": {
 
     // Change default global font-size, affects basically everything that isn't an editor:
@@ -2690,7 +2689,7 @@
 
   },
 
-  // TODO Organize (automatically added)
+  // TODO Organize anything automatically added by vscode
   "": "",
 
 }
