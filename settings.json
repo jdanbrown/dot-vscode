@@ -2635,7 +2635,7 @@
 
     // Markdown Preview
     ".markdown-body ul": {
-      "padding-inline-start": "32px",
+      "padding-inline-start": "2em",
     },
     //  - Override default WebView/iframe styles
     //    - https://github.com/microsoft/vscode/blob/main/extensions/markdown-language-features/media/markdown.css
