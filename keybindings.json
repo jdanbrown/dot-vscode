@@ -848,7 +848,7 @@
   {"key": "shift+cmd+v", "command": "markdown.showPreviewToSide", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
   {"key": "shift+cmd+v", "command": "-markdown.showPreview", "when": "!notebookEditorFocused && editorLangId == 'markdown'"},
 
-  // TODO Organize anything automatically added by vscode
+  // Anything below was automatically added by vscode
   {"key": ""},
 
 ]
