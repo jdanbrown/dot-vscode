@@ -182,7 +182,7 @@
   {"key": "enter", "command": "notification.acceptPrimaryAction", "when": "notificationFocus"},
   {"key": "shift+cmd+a", "command": "-notification.acceptPrimaryAction", "when": "notificationToastsVisible"},
   {"key": "backspace", "command": "notification.clear", "when": "notificationFocus"},
-  {"key": "cmd+backspace", "command": "notifications.clearAll", "when": "notificationFocus"},
+  {"key": "shift+cmd+backspace", "command": "notifications.clearAll", "when": "notificationFocus"},
   {"key": "h", "command": "notification.collapse", "when": "notificationFocus"},
   {"key": "l", "command": "notification.expand", "when": "notificationFocus"},
   //  - Toasts are different that the notifications list view
