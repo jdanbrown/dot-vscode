@@ -268,10 +268,15 @@
   ],
   "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
-  // HACK Shell integration -- must do manually because fish + starship
-  //  - Part 1 in ~/.code/settings.json
-  //  - Part 2 in ~/.config/fish/config.fish
-  //  - https://github.com/microsoft/vscode/issues/208465
+
+  // Terminal shell integration
+  //  - https://code.visualstudio.com/docs/terminal/shell-integration
+  //  - HACK We enable:false in settings.json, and then init it manually in shell startup scripts, because vscode/fish/starship bugs
+  //    - Part 1 in ~/.code/settings.json
+  //    - Part 2 in ~/.config/fish/config.fish
+  //    - https://github.com/microsoft/vscode/issues/208465 Prepending using shell integration does not work for fish when using starship prompt
+  //    - https://github.com/microsoft/vscode/issues/220144 Starship status always shows command success with shell integration enabled
+  //    - https://github.com/microsoft/vscode/issues/245607 In fish, can't make shell integration and starship both work at the same time
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.showCommandGuide": false,
