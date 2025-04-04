@@ -332,6 +332,7 @@
   "git.enableStatusBarSync": false,
   "git.showCommitInput": false,
   "git.verboseCommit": true,
+  "git.blame.statusBarItem.enabled": false,
   "git.checkoutType": [
     "local",
     // "remote",
@@ -2154,6 +2155,24 @@
     //  - Reorder
     ".statusbar #vscodevim\\.vim\\.primary": {
       "order": "9", // Last
+    },
+
+    // Status bar: Copilot Chat
+    //  - Reorder
+    ".statusbar #chat\\.statusBarEntry": {
+      "order": "-1", // 3nd to last
+    },
+
+    // Status bar: Copilot Workspace
+    //  - Reorder
+    ".statusbar #github\\.copilot-workspace\\.copilot-workspace-vscode\\.statusBarItem": {
+      "order": "-2", // 2nd to last
+    },
+
+    // Status bar: Notifications
+    //  - Reorder
+    ".statusbar #status\\.notifications": {
+      "order": "-3", // Last (rightmost)
     },
 
     // Editor
