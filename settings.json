@@ -423,7 +423,7 @@
   //  - https://code.visualstudio.com/docs/copilot/overview
   "github.copilot.chat.welcomeMessage": "never",
   "github.copilot.editor.enableAutoCompletions": true,
-  "github.copilot.nextEditSuggestions.enabled": true,
+  // "github.copilot.nextEditSuggestions.enabled": true, // TODO Not yet, `escape` doesn't seem to work reliably for reject suggestion -- annoying :/
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
