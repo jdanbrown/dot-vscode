@@ -280,6 +280,7 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.showCommandGuide": false,
+  "terminal.integrated.environmentChangesRelaunch": false,
 
   // Search Editor / Search
   "search.searchEditor.defaultNumberOfContextLines": 0,
@@ -686,6 +687,7 @@
 
   // Python
   "python.showStartPage": false,
+  "python.terminal.activateEnvironment": false,
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": false, // Lots of FPs that I have to discover and delete later
   "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
