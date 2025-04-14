@@ -264,8 +264,9 @@
   "terminal.integrated.minimumContrastRatio": 1, // https://code.visualstudio.com/docs/terminal/basics#_why-are-the-colors-in-the-terminal-not-correct
   // "terminal.integrated.gpuAcceleration": "off", // https://code.visualstudio.com/docs/terminal/basics#_im-having-problems-with-the-terminal-rendering-what-can-i-do
   "terminal.integrated.commandsToSkipShell": [
-    "workbench.action.toggleKeybindingsLog"
+    "workbench.action.toggleKeybindingsLog",
   ],
+  // "terminal.integrated.sendKeybindingsToShell": true, // Nope, breaks ctrl-h/ctrl-l for switching tabs
   "terminal.integrated.wordSeparators": " ',\"`─‘’|[]", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
 

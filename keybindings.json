@@ -45,6 +45,9 @@
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
   {"key": "ctrl+shift+cmd+.", "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor"},
   // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"}, // Used by workbench.action.openGlobalKeybindingsFile
+  //  - Disable these so we can pass ctrl+q to the terminal (e.g. for fzf/fish)
+  {"key": "ctrl+q", "command": "-workbench.action.quickOpenView"},
+  {"key": "ctrl+q", "command": "-workbench.action.quickOpenNavigateNextInViewPicker", "when": "inQuickOpen && inViewsPicker"},
 
   // Command palettes
   // {"key": "shift+cmd+p", "command": "workbench.action.showCommands"}, // Default
