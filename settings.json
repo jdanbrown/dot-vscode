@@ -266,7 +266,7 @@
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog"
   ],
-  "terminal.integrated.wordSeparators": " ',\"`─‘’|", // Default: " ()[]{}',\"`─‘’|"
+  "terminal.integrated.wordSeparators": " ',\"`─‘’|[]", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
 
   // Terminal shell integration
