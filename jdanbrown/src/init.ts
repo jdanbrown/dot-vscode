@@ -171,7 +171,8 @@ export function registerCommandsTerminalRerunCommandInRecentTerminal(context: vs
         const enter = '\n';
         const keys = [
           // up, enter, // Oops, nope, I disabled up/down arrow keys in .inputrc
-          esc, 'k', enter, // This works if .inputrc uses `editing-mode vi`
+          // esc, 'k', enter, // This works if .inputrc uses `editing-mode vi`
+          up, enter, // [2025-04-15] Switched back since [esc,k,enter] doesn't work in fish (idk why, didn't investigate)
         ];
         terminal.sendText(keys.join(''), false); // false for no final newline
 
