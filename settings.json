@@ -190,6 +190,11 @@
   "editor.stickyScroll.enabled": true, // Default: true
   "editor.stickyScroll.maxLineCount": 5, // Default: 5
 
+  // Editor: Inlay hints
+  //  - https://code.visualstudio.com/docs/editing/editingevolved#_inlay-hints
+  //  - https://stackoverflow.com/a/68721151/397334
+  "editor.inlayHints.enabled": "offUnlessPressed", // Hold ctrl+opt to show
+
   // Editor: CodeLens
   //  - https://code.visualstudio.com/api/language-extensions/programmatic-language-features
   //  - https://code.visualstudio.com/blogs/2017/02/12/code-lens-roundup
@@ -1290,6 +1295,11 @@
     "editor.selectionHighlightBorder": "#0000",
     //  - No variable for this one, set below in css (".monaco-editor .selectionHighlight")
     // "editor.inactiveSelectionHighlightBackground": "#fff8", // (Default: Adds transparency on lost focus -- don't want)
+
+    // Editor: Inlay hints
+    //  - https://code.visualstudio.com/docs/editing/editingevolved#_inlay-hints
+    //  - https://stackoverflow.com/a/68721151/397334
+    "editorInlayHint.background": "#666",
 
     // Accent/highlight color in a _lot_ of places
     //  - e.g. autocomplete fuzzy text matching -- need a color muted enough so it doesn't burn your eyes here (99% case, always typing)
