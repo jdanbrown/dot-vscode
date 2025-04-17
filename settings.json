@@ -688,22 +688,33 @@
   },
 
   // Python
-  "python.showStartPage": false,
+  //  - https://code.visualstudio.com/docs/languages/python
+  //  - https://github.com/microsoft/vscode-python
+  //  - https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
+  //  - https://github.com/microsoft/pylance-release/wiki/Pylance-Configuration-Tips
   "python.terminal.activateEnvironment": false,
+  "python.interpreter.infoVisibility": "always",
+
+  // Python: Pylance/Pyright
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": false, // Lots of FPs that I have to discover and delete later
   "python.analysis.autoIndent": false, // Disable to stop double-indenting on `def foo(<enter>`
-  // "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  // "python.analysis.diagnosticMode": "workspace",
+  //  - Breakdown of which checks are enforced by each typeCheckingMode
+  //    - https://microsoft.github.io/pyright/#/configuration?id=diagnostic-settings-defaults
+  "python.analysis.typeCheckingMode": "strict",
   // "python.analysis.typeCheckingMode": "standard",
   // "python.analysis.typeCheckingMode": "basic",
   // "python.analysis.typeCheckingMode": "off",
-  "python.interpreter.infoVisibility": "always",
   "python.analysis.extraPaths": [],
   "python.analysis.ignore": [
     // Disable checking in notebooks
     //  - Because e.g. a single `from x import *` renders it completely useless
     "**/*.ipynb",
   ],
+
+  // Python: Notebooks
   "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
   "jupyter.interactiveWindow.viewColumn": "beside",
   "notebook.cellToolbarLocation": {
@@ -711,6 +722,10 @@
   },
   "notebook.showFoldingControls": "never",
   "notebook.markup.fontSize": 12,
+
+  // Python: Ruff
+  //  - https://github.com/astral-sh/ruff
+  //  - https://github.com/astral-sh/ruff-vscode
   "ruff.organizeImports": false,
 
   // Dart
