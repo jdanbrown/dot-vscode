@@ -898,6 +898,7 @@
     //  - Views
     {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
     {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "d"], "commands": ["magit.diff-file"]},
     {"before": ["g", "s"], "commands": ["magit.status"]},
     {"before": ["g", "c"], "commands": ["magit.commit"]},
     {"before": ["g", "P"], "commands": ["magit.pushing"]},
@@ -959,6 +960,7 @@
     // magit
     {"before": ["g", "m"], "commands": ["jdanbrown.workbench.action.quickOpen.magit"]},
     {"before": ["g", "M"], "commands": ["magit.file-popup"]},
+    {"before": ["g", "d"], "commands": ["magit.diff-file"]},
     {"before": ["g", "s"], "commands": ["magit.status"]},
     {"before": ["g", "c"], "commands": ["magit.commit"]},
     {"before": ["g", "P"], "commands": ["magit.pushing"]},

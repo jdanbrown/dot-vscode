@@ -543,10 +543,12 @@
     ]},
     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/",
   },
-  {"key": "ctrl+n",        "command": "magit.move-next-change",         "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  {"key": "ctrl+p",        "command": "magit.move-previous-change",     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  {"key": "ctrl+j",        "command": "magit.move-next-hunk",           "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  {"key": "ctrl+k",        "command": "magit.move-previous-hunk",       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+j",        "command": "magit.move-next-change",         "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+k",        "command": "magit.move-previous-change",     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  // {"key": "ctrl+n",        "command": "magit.move-next-hunk",           "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  // {"key": "ctrl+p",        "command": "magit.move-previous-hunk",       "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+n",        "command": "magit.move-next-entity",         "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+p",        "command": "magit.move-previous-entity",     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   //  - NOTE These steal from multi-key keybindings like gZ* (and idk how to fix)
   //    - https://github.com/VSCodeVim/Vim#vim-modes
   {"key": "a",             "command": "multiCommand.magit.stage",            "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
