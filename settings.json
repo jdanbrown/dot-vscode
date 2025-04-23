@@ -1982,6 +1982,10 @@
       "font-weight": "bold",
       "color": "#6871ff !important",
     },
+    ".scm-view .monaco-list-row:has(.folder-icon) .label-name .label-separator": {
+      "opacity": "1 !important",
+      "margin": "0px !important",
+    },
     //  - Color the expand/collapse dir icons blue
     //    - We can't apply orange/gray to the modified/ignored ones, so just color them all blue
     ".scm-view .monaco-list-row .monaco-tl-twistie.codicon": {
