@@ -561,6 +561,7 @@
   // {"key": "f",             "command": "magit.fetching",                      "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   // {"key": "b",             "command": "magit.branching",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "enter",         "command": "magit.visit-at-point",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
+  {"key": "ctrl+]",        "command": "magit.visit-at-point",                "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "shift+/",       "command": "magit.help",                          "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   //  - Defaults
   //    - Ignore dispatch, it's the same as help
