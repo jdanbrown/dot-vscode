@@ -298,6 +298,7 @@
   "search.exclude": {
     "build/**": true,
     "**/*.gz": true,
+    ".aider.*": true,
   },
   "search.mode": "newEditor",
   "search.seedWithNearestWord": true,
