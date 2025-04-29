@@ -415,6 +415,7 @@
   {"key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "canNavigateBack && vim.mode == 'Normal'"},
   {"key": "ctrl+i", "command": "-extension.vim_ctrl+i", "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"},
   {"key": "ctrl+o", "command": "-extension.vim_ctrl+o", "when": "editorTextFocus && vim.active && vim.use<C-o> && !inDebugRepl"},
+  {"key": "ctrl+o", "command": "-lineBreakInsert", "when": "textInputFocus && !editorReadonly"},
   {"key": "ctrl+]", "command": "editor.action.revealDefinition", "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"},
   {"key": "ctrl+[", "command": "multiCommand.addHighlightAnd.editor.action.goToReferences", "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"},
   {"key": "ctrl+'", "command": "editor.action.revealDeclaration", "when": "editorHasDeclarationProvider && editorTextFocus && !isInEmbeddedEditor"},
