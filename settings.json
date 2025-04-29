@@ -779,7 +779,7 @@
   //  - Basics
   "vim.disableAnnoyingNeovimMessage": true,
   "vim.hlsearch": true,
-  "vim.leader": ",",
+  // "vim.leader": ",", // Default: "\" [XXX Free up "," for "previous result on line"]
   "vim.showmodename": false,
   "vim.textwidth": 120,
   "vim.visualstar": true,
@@ -828,7 +828,7 @@
     {"before": ["\\", "\\"], "commands": [":nohl", "highlightwords.removeAllHighlights", ":"]},
 
     // Save
-    {"before": [",", ","], "commands": ["workbench.action.files.save"]},
+    // {"before": ["<leader>", ","], "commands": ["workbench.action.files.save"]}, // XXX Use cmd-s
 
     // Indent/unindent
     //  - NOTE <s-tab> broken until https://github.com/VSCodeVim/Vim/issues/4719
@@ -841,17 +841,17 @@
     // Search Editor
     //  - Relies on "search.seedWithNearestWord":true to search for the current word without selecting anything
     {"before": ["<c-f>"], "commands": ["search.action.openNewEditorToSide"]},
-    {"before": [",", "a"], "commands": ["search.action.openNewEditorToSide"]},
+    {"before": ["<leader>", "a"], "commands": ["search.action.openNewEditorToSide"]},
 
     // Peek
     //  - TODO(practice)
-    {"before": [",", "p", "r"], "commands": ["editor.action.referenceSearch.trigger"]},
-    {"before": [",", "p", "d"], "commands": ["editor.action.peekDefinition"]},
-    {"before": [",", "p", "i"], "commands": ["editor.action.peekImplementation"]},
-    {"before": [",", "p", "c"], "commands": ["editor.showCallHierarchy"]},
-    {"before": [",", "p", "l"], "commands": ["editor.action.peekDeclaration"]},
-    {"before": [",", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
-    {"before": [",", "p", "h"], "commands": ["editor.showTypeHierarchy"]},
+    {"before": ["<leader>", "p", "r"], "commands": ["editor.action.referenceSearch.trigger"]},
+    {"before": ["<leader>", "p", "d"], "commands": ["editor.action.peekDefinition"]},
+    {"before": ["<leader>", "p", "i"], "commands": ["editor.action.peekImplementation"]},
+    {"before": ["<leader>", "p", "c"], "commands": ["editor.showCallHierarchy"]},
+    {"before": ["<leader>", "p", "l"], "commands": ["editor.action.peekDeclaration"]},
+    {"before": ["<leader>", "p", "t"], "commands": ["editor.action.peekTypeDefinition"]},
+    {"before": ["<leader>", "p", "h"], "commands": ["editor.showTypeHierarchy"]},
 
     // Edge motion
     {"before": ["["], "after": ["<leader>", "["]},
@@ -931,7 +931,8 @@
 
     // Search
     //  - Relies on "search.seedWithNearestWord":true to search for the current word without selecting anything
-    {"before": [",", "a"], "commands": ["search.action.openNewEditorToSide"]},
+    {"before": ["<c-f>"], "commands": ["search.action.openNewEditorToSide"]},
+    {"before": ["<leader>", "a"], "commands": ["search.action.openNewEditorToSide"]},
 
     // textobj-arguments
     //  - https://github.com/VSCodeVim/Vim#vim-textobj-arguments
