@@ -497,6 +497,19 @@
     },
   },
 
+  // flash
+  //  - https://github.com/cunbidun/flash.vscode
+  //  - https://github.com/VSCodeVim/Vim/issues/8567 Implementing flash functionality in neovim
+  //  - https://github.com/cunbidun/flash.vscode/issues/5 Feature: Add settings for matchBackgroundColor + labelQuestionColor
+  "flash-vscode.caseSensitive": false,
+  "flash-vscode.matchFontWeight": "bold",
+  "flash-vscode.labelFontWeight": "bold",
+  "flash-vscode.dimColor": "#777777",
+  "flash-vscode.matchColor": "#fffc67",
+  "flash-vscode.labelColor": "#f00",
+  "flash-vscode.labelBackgroundColor": "#000",
+  "flash-vscode.labelQuestionBackgroundColor": "#000",
+
   // Emoji/unicode
   //  - https://github.com/brunnerh/insert-unicode -- shift+cmd+i
   //  - https://github.com/mattbierner/vscode-emojisense -- cmd+i
@@ -914,6 +927,15 @@
     {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
     {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
 
+    // flash
+    //  - TODO(practice)
+    //  - https://github.com/cunbidun/flash.vscode
+    //  - https://github.com/VSCodeVim/Vim/issues/8567 Implementing flash functionality in neovim
+    {"before": ["<bs>"], "commands": [ "flash-vscode.backspace" ]},
+    {"before": ["?"], "commands": ["flash-vscode.start"]},
+    // {"before": ["?"], "commands": ["flash-vscode.startSelection"]}, // Nope, use visual mode
+
+
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
 
@@ -972,6 +994,12 @@
     {"before": ["g", "p"], "commands": ["magit.pulling"]},
     {"before": ["g", "f"], "commands": ["magit.fetching"]},
     {"before": ["g", "b"], "commands": ["magit.branching"]},
+
+    // flash
+    //  - https://github.com/cunbidun/flash.vscode
+    //  - https://github.com/VSCodeVim/Vim/issues/8567 Implementing flash functionality in neovim
+    {"before": ["<bs>"], "commands": [ "flash-vscode.backspace" ]},
+    {"before": ["?"], "commands": ["flash-vscode.startSelection"]}, // Visual mode only (disabled in normal mode)
 
   ],
   "vim.operatorPendingModeKeyBindings": [
