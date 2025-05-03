@@ -669,6 +669,13 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[swift]": {
+    // Docs:
+    //  - https://github.com/swiftlang/vscode-swift
+    //  - https://docs.swift.org/vscode/documentation/userdocs/
+    //  - https://docs.swift.org/vscode/documentation/userdocs/settings
+    //  - https://github.com/swiftlang/swift-format
+    //  - https://github.com/swiftlang/swift-format/blob/main/Documentation/Configuration.md
+    //    - Config file: .swift-format
     "editor.defaultFormatter": "swiftlang.swift-vscode"
   },
   "[dart]": {
