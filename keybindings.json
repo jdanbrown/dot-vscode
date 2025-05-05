@@ -363,6 +363,7 @@
   {"key": "shift+cmd+f", "command": "-workbench.view.search", "when": "!searchViewletVisible"},
   {"key": "shift+cmd+f", "command": "-workbench.action.findInFiles"},
   {"key": "cmd+f", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !searchInputBoxFocus"},
+  {"key": "/", "command": "search.action.focusQueryEditorWidget", "when": "inSearchEditor && !inputBoxFocus && vim.mode =~ /^(Normal|Visual.*)$/ && !referenceSearchVisible"},
   {"key": "cmd+i", "command": "search.action.focusFilesToInclude", "when": "inSearchEditor"},
   {"key": "cmd+e", "command": "search.action.focusFilesToExclude", "when": "inSearchEditor"},
   {"key": "cmd+f", "command": "multiCommand:search.action.unfocusQueryEditorWidget", "when": "inSearchEditor && searchInputBoxFocus"},
