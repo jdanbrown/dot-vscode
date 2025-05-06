@@ -528,7 +528,7 @@
   {"key": "g b",           "command": "magit.branching",                "when": "!inputFocus"},
   {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
-  // {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
+  {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
   {"key": "shift+o",       "command": "magit.toggle-all-folds-for-change-views", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "r",             "command": "magit.refresh",                  "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {
