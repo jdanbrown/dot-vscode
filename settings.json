@@ -676,7 +676,11 @@
     //  - https://github.com/swiftlang/swift-format
     //  - https://github.com/swiftlang/swift-format/blob/main/Documentation/Configuration.md
     //    - Config file: .swift-format
-    "editor.defaultFormatter": "swiftlang.swift-vscode"
+    // "editor.defaultFormatter": "swiftlang.swift-vscode" // XXX Slow, flaky, bad cli (`swift format`) -- switched to swiftformat
+    // Docs:
+    //  - https://github.com/nicklockwood/SwiftFormat
+    //  - https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md
+    "editor.defaultFormatter": "vknabel.vscode-swiftformat", // cli: `swiftformat .`
   },
   "[dart]": {
     //
