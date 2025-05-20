@@ -681,6 +681,7 @@
     //  - https://github.com/nicklockwood/SwiftFormat
     //  - https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md
     "editor.defaultFormatter": "vknabel.vscode-swiftformat", // cli: `swiftformat .`
+    "editor.formatOnSave": true,
   },
   "[dart]": {
     //
