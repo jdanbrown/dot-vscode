@@ -695,6 +695,16 @@
   {"key": "cmd+e", "command": "-editor.action.toggleScreenReaderAccessibilityMode", "when": "accessibilityHelpIsShown"},
   {"key": "shift+cmd+e", "command": "insert-unicode.insertText", "when": "editorTextFocus && vim.mode == 'Insert'"},
 
+  // Formatting
+  {"key": "alt+cmd+f", "command": "editor.action.formatDocument", "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"},
+  {"key": "alt+cmd+f", "command": "editor.action.formatDocument.none", "when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"},
+  {"key": "alt+cmd+f", "command": "notebook.format", "when": "notebookEditable && !editorTextFocus && activeEditor == 'workbench.editor.notebook'"},
+  {"key": "alt+cmd+f", "command": "notebook.formatCell", "when": "editorHasDocumentFormattingProvider && editorTextFocus && inCompositeEditor && notebookEditable && !editorReadonly && activeEditor == 'workbench.editor.notebook'"},
+  {"key": "alt+cmd+f", "command": "-editor.action.startFindReplaceAction", "when": "editorFocus || editorIsOpen"},
+  {"key": "alt+cmd+s", "command": "workbench.action.files.saveWithoutFormatting"}, // Rhymes with alt+cmd+f
+  {"key": "alt+cmd+s", "command": "-saveAll"},
+  {"key": "shift+cmd+s", "command": "saveAll"}, // Keep a keybinding for this (instead of saveAs)
+
   // Terminal
   {"key": "cmd+t", "command": "workbench.action.createTerminalEditor", "when": "terminalProcessSupported"},
   {"key": "cmd+t", "command": "-workbench.action.showAllSymbols"},
