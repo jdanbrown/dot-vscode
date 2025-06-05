@@ -111,7 +111,7 @@
   // "terminal.integrated.lineHeight": 1, // 🟢 Not sure why this works, but empirically it does (terminal lines visually match editor lines)
 
   // Explorer
-  "workbench.tree.indent": 12,
+  "workbench.tree.indent": 14,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.tree.enableStickyScroll": true,
   "workbench.tree.stickyScrollMaxItemCount": 50,
