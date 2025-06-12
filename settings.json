@@ -734,6 +734,16 @@
   "python.terminal.activateEnvironment": false,
   "python.interpreter.infoVisibility": "always",
 
+  // Python: Notebooks
+  "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
+  "jupyter.interactiveWindow.viewColumn": "beside",
+  "notebook.cellToolbarLocation": {
+    "default": "hidden"
+  },
+  "notebook.showFoldingControls": "never",
+  "notebook.markup.fontSize": 12,
+  "notebook.formatOnSave.enabled": false,
+
   // Python: Pylance/Pyright
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": false, // Lots of FPs that I have to discover and delete later
@@ -761,16 +771,6 @@
   //  - https://github.com/astral-sh/ruff-vscode
   "ruff.enable": false, // Stick to pylance for now (e.g. afaict ruff can't resolve wildcard imports)
   "ruff.organizeImports": true, // Also need: "[python]"."editor.codeActionsOnSave"."source.organizeImports.ruff"
-
-  // Python: Notebooks
-  "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
-  "jupyter.interactiveWindow.viewColumn": "beside",
-  "notebook.cellToolbarLocation": {
-    "default": "hidden"
-  },
-  "notebook.showFoldingControls": "never",
-  "notebook.markup.fontSize": 12,
-  "notebook.formatOnSave.enabled": false,
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
