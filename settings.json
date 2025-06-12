@@ -658,7 +658,6 @@
     "editor.tabSize": 4,
     // "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.defaultFormatter": "charliermarsh.ruff",
-    // "editor.formatOnSave": false,
     "editor.formatOnSave": true,
     "editor.rulers": [120],
     "editor.codeActionsOnSave": {
@@ -771,7 +770,7 @@
   },
   "notebook.showFoldingControls": "never",
   "notebook.markup.fontSize": 12,
-  // "notebook.formatOnSave.enabled": true,
+  "notebook.formatOnSave.enabled": false,
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
