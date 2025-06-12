@@ -110,6 +110,8 @@
   {"key": "cmd+k", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusAboveGroupWithoutWrap", "when": "sideBarFocus"},
   //  - To discover these, use: "Developer: Inspect Context Keys" -> click activity bar -> open dev console -> expand object -> `activeViewlet: "..."`
   //    - To filter: { let x = temp1; Object.fromEntries(Object.entries(x).filter(([k,v]) => k === 'activeViewlet' || (v === true && k.match(/^view\.|sideBarFocus/i)))) }
+  //  - To open these without focusing them:
+  //    - https://code.visualstudio.com/updates/v1_100#_command-to-open-a-view-without-focus
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
   {"key": "shift+cmd+2", "command": "workbench.panel.chat",                          "when": "true"},
   {"key": "shift+cmd+3", "command": "workbench.view.extension.vscode-copilot-workspace", "when": "true"},
