@@ -658,8 +658,12 @@
     "editor.tabSize": 4,
     // "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": false,
-    "editor.rulers": [99],
+    // "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
+    "editor.rulers": [120],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.ruff": "always",
+    },
   },
   "[starlark]": {
     "editor.tabSize": 4,
@@ -747,8 +751,17 @@
   "python.analysis.ignore": [
     // Disable checking in notebooks
     //  - Because e.g. a single `from x import *` renders it completely useless
-    "**/*.ipynb",
+    // "**/*.ipynb",
   ],
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportWildcardImportFromLibrary": "none",
+  },
+
+  // Python: Ruff
+  //  - https://github.com/astral-sh/ruff
+  //  - https://github.com/astral-sh/ruff-vscode
+  "ruff.enable": false, // Stick to pylance for now (e.g. afaict ruff can't resolve wildcard imports)
+  "ruff.organizeImports": true, // Also need: "[python]"."editor.codeActionsOnSave"."source.organizeImports.ruff"
 
   // Python: Notebooks
   "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
@@ -758,11 +771,7 @@
   },
   "notebook.showFoldingControls": "never",
   "notebook.markup.fontSize": 12,
-
-  // Python: Ruff
-  //  - https://github.com/astral-sh/ruff
-  //  - https://github.com/astral-sh/ruff-vscode
-  "ruff.organizeImports": false,
+  // "notebook.formatOnSave.enabled": true,
 
   // Dart
   //  - https://dartcode.org/docs/recommended-settings/
