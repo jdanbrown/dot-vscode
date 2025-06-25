@@ -503,6 +503,9 @@
   //  - https://github.com/cunbidun/flash.vscode
   //  - https://github.com/VSCodeVim/Vim/issues/8567 Implementing flash functionality in neovim
   //  - https://github.com/cunbidun/flash.vscode/issues/5 Feature: Add settings for matchBackgroundColor + labelQuestionColor
+  //  - TODO Try this newer one:
+  //    - https://github.com/Sourav9063/flash.vscode
+  //    - From: https://github.com/VSCodeVim/Vim/issues/8567#issuecomment-3004409873
   "flash-vscode.caseSensitive": false,
   "flash-vscode.matchFontWeight": "bold",
   "flash-vscode.labelFontWeight": "bold",
