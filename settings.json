@@ -529,9 +529,17 @@
   //  - https://github.com/fabiospampinato/vscode-highlight
   "highlight.regexFlags": "g", // Default: "gi"
   "highlight.regexes": {
+    // "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING|AI[!?])\\b": { // TODO Why doesn't this work? (for aider watch-files)
+    // "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING|AI)\\b": { // XXX This works...
     "\\b(TODO|FIXME|XXX|HACK|NOTE|WARNING)\\b": {
       "decorations": [{"color": "#ff6e67", "fontWeight": "bold"}], // Same as "terminal.ansiBrightRed" (above)
     },
+    // TODO Why don't these work? (for aider watch-files)
+    // "\\b(AI[!?])": {
+    // "(?<=// )(AI)\\b": {
+    //   "regexFlags": "i",
+    //   "decorations": [{"color": "#ff6e67", "fontWeight": "bold"}], // Same as "terminal.ansiBrightRed" (above)
+    // },
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
       "filterFileRegex": ".*(?<!.gitconfig|COMMIT_EDITMSG|Makefile|.go)$",
