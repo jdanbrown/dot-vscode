@@ -683,6 +683,13 @@
   // aider
   {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
 
+  // opencode
+  //  - https://marketplace.visualstudio.com/items/?itemName=sst-dev.opencode
+  //  - Everything disabled for now
+  {"key": "cmd+escape", "command": "-opencode.openTerminal"},
+  {"key": "shift+cmd+escape", "command": "-opencode.openNewTerminal"},
+  {"key": "alt+cmd+k", "command": "-opencode.addFilepathToTerminal"},
+
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
   {"key": "alt+cmd+p", "command": "-projectManager.listProjects"}, // Remove to avoid confusion (this cmd blats over current workspace)
