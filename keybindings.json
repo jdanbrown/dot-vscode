@@ -114,8 +114,7 @@
   //    - https://code.visualstudio.com/updates/v1_100#_command-to-open-a-view-without-focus
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
   {"key": "shift+cmd+2", "command": "workbench.panel.chat",                          "when": "true"},
-  {"key": "shift+cmd+3", "command": "workbench.view.extension.vscode-copilot-workspace", "when": "true"},
-  {"key": "shift+cmd+4", "command": "workbench.view.extension.bookmarks",            "when": "true"},
+  {"key": "shift+cmd+3", "command": "workbench.view.extension.bookmarks",            "when": "true"},
   {"key": "shift+cmd+7", "command": "workbench.view.debug",                          "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
