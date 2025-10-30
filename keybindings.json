@@ -683,7 +683,7 @@
   // {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
 
   // opencode
-  {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.config/opencode/opencode.fish"},
+  {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.opencode/opencode.fish"},
 
   // opencode
   //  - https://marketplace.visualstudio.com/items/?itemName=sst-dev.opencode
