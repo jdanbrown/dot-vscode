@@ -256,8 +256,10 @@
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.showExitAlert": false,
-  "terminal.integrated.tabs.title": "${cwdFolder}/",
-  // "terminal.integrated.tabs.title": "${cwd}",
+  //  - TODO https://github.com/microsoft/vscode/issues/274200 Terminal tab title: Show "~" instead of $HOME (2025-10-30)
+  //    - I want to use "${cwd}/", but it shows '/Users/danb/' instead of '~/'
+  // "terminal.integrated.tabs.title": "${cwdFolder}/",
+  "terminal.integrated.tabs.title": "${cwd}/",
   // "terminal.integrated.tabs.title": "${process}",
   // "terminal.integrated.tabs.title": "term",
   // "terminal.integrated.tabs.title": "bash",
