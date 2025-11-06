@@ -686,6 +686,9 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
   "[swift]": {
     // Docs:
     //  - https://github.com/swiftlang/vscode-swift
