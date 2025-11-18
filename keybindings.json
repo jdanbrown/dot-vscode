@@ -751,8 +751,8 @@
   //    - NOTE Had to remove accessibilityModeEnabled from the `when`, because enabling editor.accessibilitySupport would probably affect a lot of things
   //    - XXX Disabled so I can use ctrl+k in fish (history-prefix-search-backward)
   // {"key": "ctrl+k", "command": "workbench.action.terminal.focusAccessibleBuffer", "when": "terminalFocus && terminalHasBeenCreated && terminalTabFocusMode || terminalFocus && terminalHasBeenCreated && !terminalAccessibleBufferFocus || terminalFocus && terminalProcessSupported && terminalTabFocusMode || terminalFocus && terminalProcessSupported && !terminalAccessibleBufferFocus"},
-  // Open detected links
-  //  - TODO(practice)
+  //  - Open detected links
+  //    - TODO(practice)
   {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalFocus"},
   {"key": "shift+cmd+o", "command": "-workbench.action.terminal.openDetectedLink", "when": "terminalFocus && terminalHasBeenCreated"},
   {"key": "shift+cmd+g", "command": "-workbench.action.terminal.openDetectedLink", "when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"},
