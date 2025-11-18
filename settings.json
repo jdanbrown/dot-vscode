@@ -256,11 +256,13 @@
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.showExitAlert": false,
-  //  - TODO https://github.com/microsoft/vscode/issues/274200 Terminal tab title: Show "~" instead of $HOME (2025-10-30)
+  //  - https://code.visualstudio.com/docs/terminal/appearance
   //    - I want to use "${cwd}/", but it shows '/Users/danb/' instead of '~/'
-  // "terminal.integrated.tabs.title": "${cwdFolder}/",
-  "terminal.integrated.tabs.title": "${cwd}/",
+  //    - TODO https://github.com/microsoft/vscode/issues/274200 Terminal tab title: Show "~" instead of $HOME (2025-10-30)
   // "terminal.integrated.tabs.title": "${process}",
+  // "terminal.integrated.tabs.title": "${cwdFolder}/",
+  // "terminal.integrated.tabs.title": "${cwd}/",
+  "terminal.integrated.tabs.title": "${sequence}", // Dynmically set by fish_title (in ~/.fish/config.fish.1-functions.fish)
   // "terminal.integrated.tabs.title": "term",
   // "terminal.integrated.tabs.title": "bash",
   // "terminal.integrated.tabs.title": "#",
