@@ -590,6 +590,7 @@
     // Enable my old atom syntax style files until I'm done migrating from them
     "**/atom-jdanbrown-syntax/styles/*.less",
     // Opencode themes
+    "**/opencode/packages/opencode/src/cli/cmd/tui/context/theme/*.json",
     "**/.config/opencode/themes/*.json", // (Doesn't work without .config/ 🤷)
   ],
 
