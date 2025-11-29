@@ -592,6 +592,7 @@
     // Opencode themes
     "**/opencode/packages/opencode/src/cli/cmd/tui/context/theme/*.json",
     "**/.config/opencode/themes/*.json", // (Doesn't work without .config/ 🤷)
+    "**/.opencode/themes/*.json", // (Duplicate entry for symlink)
   ],
 
   // Bookmarks
@@ -811,6 +812,9 @@
   "dart.enableSnippets": false,
   "dart.hotReloadProgress": "statusBar",
   "dart.flutterGutterIcons": false,
+
+  // Docker
+  "docker.extension.enableComposeLanguageServer": false, // [Something automatically added this -- maybe orbstack, somehow?]
 
   // Allow trailing commas in ~/.code/*.json
   //  - https://github.com/microsoft/vscode/issues/102061
