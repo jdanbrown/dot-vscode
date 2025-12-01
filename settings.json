@@ -447,6 +447,11 @@
   "chat.editor.fontSize": 11,
   "notebook.experimental.cellChat": true,
 
+  // Claude code
+  //  - https://code.claude.com/docs/
+  //  - https://code.claude.com/docs/en/vs-code
+  "claudeCode.preferredLocation": "panel",
+
   // Debug
   "debug.console.fontSize": 11,
   "debug.console.wordWrap": false,
