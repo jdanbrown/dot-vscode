@@ -820,6 +820,8 @@
 
   // Docker
   "docker.extension.enableComposeLanguageServer": false, // [Something automatically added this -- maybe orbstack, somehow?]
+  "docker.lsp.experimental.scout.criticalHighVulnerabilities": false,
+  "docker.lsp.experimental.scout.vulnerabilities": false,
 
   // Allow trailing commas in ~/.code/*.json
   //  - https://github.com/microsoft/vscode/issues/102061
