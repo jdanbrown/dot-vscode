@@ -280,6 +280,7 @@
   // "terminal.integrated.sendKeybindingsToShell": true, // Nope, breaks ctrl-h/ctrl-l for switching tabs
   "terminal.integrated.wordSeparators": " ',\"`─‘’|[]", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.stickyScroll.enabled": false,
 
   // Terminal shell integration
   //  - https://code.visualstudio.com/docs/terminal/shell-integration
