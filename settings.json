@@ -242,6 +242,7 @@
 
   // Terminal
   "terminal.integrated.defaultLocation": "editor", // Woo!
+  "terminal.integrated.suggest.enabled": false, // Ugh, no! Requires more escape keypresses which makes vim mode in my shell completly unusable
   // NOTE This all moved to init.ts
   // "terminal.integrated.defaultProfile.osx": "tmux-new-or-attach-vscode-term-uid",
   // "terminal.integrated.profiles.osx": {
