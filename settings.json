@@ -987,10 +987,11 @@
     {"before": ["g", "b"], "commands": ["magit.branching"]},
     {"before": ["g", "l"], "commands": ["magit.logging"]},
     {"before": ["g", "L"], "commands": ["magit.log-file"]},
-    //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
-    //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
-    {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
-    {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
+    // XXX Can I remove these? ctrl+k/j seem to work fine without going through gZ*
+    // //  - Expose vscode commands to vim.remap via gZ (see keybindings.json)
+    // //    - NOTE Use Q/W to avoid magit keybindings s/u, which I don't know how to make not steal from the middle of gZ*
+    // {"before": ["g", "Z", "Q"], "commands": ["magit.move-to-unstaged-changes"]},
+    // {"before": ["g", "Z", "W"], "commands": ["magit.move-to-staged-changes"]},
 
     // flash
     //  - TODO(practice)
