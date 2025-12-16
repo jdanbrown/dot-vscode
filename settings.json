@@ -863,7 +863,13 @@
   "vim.visualstar": true,
   "vim.joinspaces": false,
   "vim.matchpairs": "(:),{:},[:],<:>",
-  // "vim.mouseSelectionGoesIntoVisualMode": false, // Hmm, why did I set this to false? I think I like visual mode better
+  //  - Disable "Mouse Selection Goes Into Visual Mode"
+  //    - With this disabled, mouse selections only select for copy/paste, and leave vim in normal mode
+  //    - With this enabled (default), mouse selections also put vim in visual mode, which I basically never want
+  //      - But what _really_ annoys me is that many of my mouse clicks include a small amount of unintended drag, which
+  //        leaves vim in insert mode, which I really never want, and always confuses me when I expect to be in normal
+  //        mode and start unexpectedly typing into the buffer instead of moving around
+  "vim.mouseSelectionGoesIntoVisualMode": false,
   //  - ReplaceWithRegister
   //    - https://github.com/VSCodeVim/Vim#replacewithregister
   //    - yank -> gr<motion> to paste
