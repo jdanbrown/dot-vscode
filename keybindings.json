@@ -759,7 +759,7 @@
   {"key": "shift+cmd+o", "command": "-workbench.action.terminal.openDetectedLink", "when": "terminalFocus && terminalHasBeenCreated"},
   {"key": "shift+cmd+g", "command": "-workbench.action.terminal.openDetectedLink", "when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"},
 
-  // Manually emit CSI u control sequences for control keys
+  // Terminal: Manually emit CSI u control sequences for control keys
   //  - TODO Remove this once vscode/iterm.js adds proper support for Kitty (or CSI u):
   //    - https://github.com/microsoft/vscode/issues/243216 Integrated terminal support for the kitty keyboard protocol (2025-03-11)
   //    - https://github.com/xtermjs/xterm.js/issues/4198 Add support for CSI-U/Kitty protocol (2022-10-11)
@@ -770,26 +770,41 @@
   //      - "Report modifiers using CSI u" -- "This is not recommended. Applications should use the Kitty keyboard protocol instead."
   //  - NOTE Don't add for all [a-z], only for control chars, since older cli apps don't understand CSI u
   //    - Apps that understand CSI u send escape codes to the terminal to enable/disable receiving CSI u key sequences
-  {"key": "ctrl+[",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[91;5u"}},  // escape
-  {"key": "ctrl+h",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[104;5u"}}, // backspace
-  {"key": "ctrl+i",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[105;5u"}}, // tab
-  {"key": "ctrl+j",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[106;5u"}}, // linefeed
-  {"key": "ctrl+m",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[109;5u"}}, // enter
-  {"key": "ctrl+2",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[50;5u"}},  // ctrl+@
-  {"key": "ctrl+3",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[51;5u"}},  // escape
-  {"key": "ctrl+6",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[54;5u"}},  // ctrl+^
-  {"key": "ctrl+7",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[55;5u"}},  // ctrl+_
-  {"key": "ctrl+8",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[56;5u"}},  // delete
-  {"key": "ctrl+/",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[47;5u"}},  // ctrl+_
-  // {"key": "ctrl+tab",        "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[9;5u"}},   // tab [Nope, ctrl+tab swiches panes]
-  {"key": "ctrl+enter",      "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[13;5u"}},  // enter
-  {"key": "ctrl+space",      "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[32;5u"}},  // space
-  {"key": "ctrl+backspace",  "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[127;5u"}}, // backspace
-  {"key": "shift+tab",       "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[9;2u"}},   // tab
-  {"key": "shift+enter",     "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[13;2u"}},  // enter
-  {"key": "shift+space",     "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[32;2u"}},  // space
-  {"key": "shift+backspace", "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[127;2u"}}, // backspace
-  {"key": "ctrl+/",          "command": "-workbench.action.terminal.sendSequence", "when": "terminalFocus"}, // Built in (I can't tell which sequence it sends)
+  {"key": "ctrl+[",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[91;5u"}},  // escape
+  {"key": "ctrl+h",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[104;5u"}}, // backspace
+  {"key": "ctrl+i",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[105;5u"}}, // tab
+  {"key": "ctrl+j",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[106;5u"}}, // linefeed
+  {"key": "ctrl+m",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[109;5u"}}, // enter
+  {"key": "ctrl+2",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[50;5u"}},  // ctrl+@
+  {"key": "ctrl+3",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[51;5u"}},  // escape
+  {"key": "ctrl+6",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[54;5u"}},  // ctrl+^
+  {"key": "ctrl+7",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[55;5u"}},  // ctrl+_
+  {"key": "ctrl+8",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[56;5u"}},  // delete
+  {"key": "ctrl+/",             "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[47;5u"}},  // ctrl+_
+  {"key": "ctrl+/",             "command": "-workbench.action.terminal.sendSequence", "when": "terminalFocus"}, // System [how can I see which sequence it sends?]
+  // {"key": "ctrl+tab",           "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[9;5u"}},   // tab [Nope, ctrl+tab swiches panes]
+  {"key": "ctrl+enter",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[13;5u"}},  // enter
+  {"key": "ctrl+space",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[32;5u"}},  // space
+  {"key": "ctrl+backspace",     "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[127;5u"}}, // backspace
+  {"key": "ctrl+alt+[",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[91;7u"}},  // escape
+  {"key": "ctrl+alt+h",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[104;7u"}}, // backspace
+  {"key": "ctrl+alt+i",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[105;7u"}}, // tab
+  {"key": "ctrl+alt+j",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[106;7u"}}, // linefeed
+  {"key": "ctrl+alt+m",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[109;7u"}}, // enter
+  {"key": "ctrl+alt+2",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[50;7u"}},  // ctrl+@
+  {"key": "ctrl+alt+3",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[51;7u"}},  // escape
+  {"key": "ctrl+alt+6",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[54;7u"}},  // ctrl+^
+  {"key": "ctrl+alt+7",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[55;7u"}},  // ctrl+_
+  {"key": "ctrl+alt+8",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[56;7u"}},  // delete
+  {"key": "ctrl+alt+/",         "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[47;7u"}},  // ctrl+_
+  // {"key": "ctrl+alt+tab",       "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[9;7u"}},   // tab [Is this safe? Any conflicts?]
+  // {"key": "ctrl+alt+enter",     "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[13;7u"}},  // enter [Is this safe? Any conflicts?]
+  // {"key": "ctrl+alt+space",     "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[32;7u"}},  // space [Is this safe? Any conflicts?]
+  // {"key": "ctrl+alt+backspace", "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[127;7u"}}, // backspace [Is this safe? Any conflicts?]
+  {"key": "shift+tab",          "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[9;2u"}},   // tab
+  {"key": "shift+enter",        "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[13;2u"}},  // enter
+  {"key": "shift+space",        "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[32;2u"}},  // space
+  {"key": "shift+backspace",    "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": {"text": "\u001b[127;2u"}}, // backspace
 
   // Notebooks: ipynb
   //  - TODO Copy from atom: https://github.com/jdanbrown/atom-hydrogen-extras/blob/master/keymaps/notebook.cson
