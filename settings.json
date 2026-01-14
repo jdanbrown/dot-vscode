@@ -694,6 +694,9 @@
     // "editor.formatOnSave": true,
     // "editor.defaultFormatter": "ms-python.black-formatter",
     // "editor.defaultFormatter": "charliermarsh.ruff",
+    // HACK Something every now and then formats my .py files, even though I have formatOnSave:false
+    //  - I added this defaultFormatter:null to try to prevent this, until I can get things set up for real
+    "editor.defaultFormatter": null,
     "editor.rulers": [120],
     "editor.codeActionsOnSave": {
       "source.organizeImports.ruff": "always",
