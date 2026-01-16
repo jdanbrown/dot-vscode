@@ -148,6 +148,11 @@
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingOvertype": "never",
   "editor.autoClosingQuotes": "never",
+  //  - Globally disable formatOnType to prevent random extensions from adding format-on-type behavior
+  //    - Somehow yapf registers a formatOnType provider, which causes .py editors to auto-format when I press enter
+  //    - I'm not sure where in yapf this happens, but I afaik I don't want any extensions doing this for any languages
+  //      - https://github.com/EeyoreLee/vscode-extension-yapf
+  "editor.formatOnType": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.renderLineHighlight": "none",
   "editor.cursorBlinking": "solid",
