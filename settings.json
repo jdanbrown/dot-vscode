@@ -300,6 +300,7 @@
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.showCommandGuide": false,
   "terminal.integrated.environmentChangesRelaunch": false,
+  "terminal.integrated.initialHint": false,
 
   // Search Editor / Search
   "search.searchEditor.defaultNumberOfContextLines": 0,
