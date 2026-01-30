@@ -109,22 +109,26 @@ export function registerCommandsTerminalScrollHalfPage(context: vscode.Extension
       );
     }
     const rows = dims ? dims.rows : NUM_ROWS_IF_UNDEFINED;
-    // vscode.window.showInformationMessage(`Hello: dims[${JSON.stringify(dims)}], rows[${rows}]`); // XXX Debug
+    const rowsHalfPage = Math.floor(rows / 2);
+    // vscode.window.showInformationMessage(`Hello: dims[${JSON.stringify(dims)}], rows[${rows}], rowsHalfPage[${rowsHalfPage}]`); // XXX Debug
 
     // Scroll terminal
     //  - Terminal api doesn't expose scrolling/revealRange, so instead we resort to lots of scrollDown/scrollUp
+    //    - Perf: await once (fast), not N times (very slow)
     //    - Good details here on why:
     //      - https://github.com/microsoft/vscode/issues/79063
     //    - Compare with revealRange in TextEditor/NotebookEditor:
     //      - https://code.visualstudio.com/api/references/vscode-api#TextEditor -> revealRange
     //      - https://code.visualstudio.com/api/references/vscode-api#NotebookEditor -> revealRange
     //      - https://code.visualstudio.com/api/references/vscode-api#Terminal -> nope
-    for (let _ in range(Math.floor(rows / 2))) {
-      await vscode.commands.executeCommand({
-        'down': 'workbench.action.terminal.scrollDown',
-        'up': 'workbench.action.terminal.scrollUp',
-      }[direction]);
-    }
+    const command = {
+      'down': 'workbench.action.terminal.scrollDown',
+      'up': 'workbench.action.terminal.scrollUp',
+    }[direction];
+    await Promise.all(
+      [...Array(rowsHalfPage)]
+      .map(() => vscode.commands.executeCommand(command))
+    );
 
   }
 
