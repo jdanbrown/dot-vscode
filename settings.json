@@ -97,7 +97,9 @@
   "window.zoomLevel": -0.785, // 84.3% = 1-(0.785*.20) (window size = zoomLevel * 20% larger/smaller)
   "editor.lineHeight": 15,
   "editor.fontSize": 12.7,
-  "terminal.integrated.fontSize": 13, // 🟢 Weird, 13 is visually right and 12.7 is too small (test: llt ~/hack/birdgram/model/data/recordings/)
+  // 🟢 Weird, 13 is visually right and 12.7 is too small (test: llt ~/hack/birdgram/model/data/recordings/)
+  // "terminal.integrated.fontSize": 13, // HACK For "terminal.integrated.gpuAcceleration":"auto"
+  "terminal.integrated.fontSize": 12.7, // For "terminal.integrated.gpuAcceleration":"off"
   "terminal.integrated.lineHeight": 1, // 🟢 Not sure why this works, but empirically it does (terminal lines visually match editor lines)
   //
   // Set lineHeight:16, then tune zoomLevel + fontSize to match classic (11px/13px)
@@ -278,8 +280,14 @@
   "terminal.integrated.confirmOnExit": "always",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.persistentSessionScrollback": 10000,
-  "terminal.integrated.minimumContrastRatio": 1, // https://code.visualstudio.com/docs/terminal/basics#_why-are-the-colors-in-the-terminal-not-correct
-  // "terminal.integrated.gpuAcceleration": "off", // https://code.visualstudio.com/docs/terminal/basics#_im-having-problems-with-the-terminal-rendering-what-can-i-do
+  // https://code.visualstudio.com/docs/terminal/basics#_why-are-the-colors-in-the-terminal-not-correct
+  "terminal.integrated.minimumContrastRatio": 1,
+  // https://code.visualstudio.com/docs/terminal/basics#_im-having-problems-with-the-terminal-rendering-what-can-i-do
+  //  - FIXME gpuAcceleration works great except for "workbench.action.toggleMaximizeEditorGroup", which changes the terminal font size for no reason
+  //    - [2026-01-30] I changed "terminal.integrated.gpuAcceleration" from "auto" to "off" to avoid this
+  //      - Everything else seems to be working fine with "off", so I'm going with it for now 🤷
+  // "terminal.integrated.gpuAcceleration": "auto", // HACK Needs "terminal.integrated.fontSize":13 -- different from editor.fontSize
+  "terminal.integrated.gpuAcceleration": "off", // Good with  "terminal.integrated.fontSize":12.7 -- same as editor.fontSize
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog",
   ],
