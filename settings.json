@@ -656,6 +656,10 @@
 
   // Swift
   "swiftformat.path": "/opt/homebrew/bin/swiftformat",
+  //  - HACK Disable SPM integration: On projects that don't have Package.swift, at vscode startup/reload it opens a
+  //    terminal with a failed task saying "Executing task: swift: Describe Package" with "bin/swift package describe",
+  //    and this is the only way I've figured out to make that stop happening
+  "swift.disableSwiftPackageManagerIntegration": true,
 
   // yaml
   //  - HACK Force a dummy yaml schema on all *.yaml files to avoid incorrect autodetection
