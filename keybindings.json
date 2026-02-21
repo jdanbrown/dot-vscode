@@ -689,10 +689,21 @@
 
   // opencode
   //  - https://marketplace.visualstudio.com/items/?itemName=sst-dev.opencode
-  //  - Everything disabled for now
+  //  - XXX Disable all keybindings, I'm happy with cli only (and I can't uninstall the extension because opencode cli always reinstalls it)
   {"key": "cmd+escape", "command": "-opencode.openTerminal"},
   {"key": "shift+cmd+escape", "command": "-opencode.openNewTerminal"},
   {"key": "alt+cmd+k", "command": "-opencode.addFilepathToTerminal"},
+
+  // Claude Code
+  //  - https://code.claude.com/docs/en/vs-code
+  //  - XXX Disable all keybindings, I'm happy with cli only (and I can't uninstall the extension because claude cli always reinstalls it)
+  {"key": "cmd+escape", "command": "-claude-vscode.blur", "when": "!config.claudeCode.useTerminal && !editorTextFocus"},
+  {"key": "cmd+escape", "command": "-claude-vscode.focus", "when": "editorTextFocus && !config.claudeCode.useTerminal"},
+  {"key": "alt+k", "command": "-claude-vscode.insertAtMention", "when": "editorTextFocus"},
+  {"key": "alt+cmd+k", "command": "-claude-code.insertAtMentioned", "when": "editorTextFocus"},
+  {"key": "cmd+n", "command": "-claude-vscode.newConversation", "when": "config.claudeCode.enableNewConversationShortcut && activeWebviewPanelId == 'claudeVSCodePanel' || claude-vscode.sideBarActive && config.claudeCode.enableNewConversationShortcut && !editorFocus && !panelFocus"},
+  {"key": "shift+cmd+escape", "command": "-claude-vscode.editor.open", "when": "!config.claudeCode.useTerminal"},
+  {"key": "cmd+escape", "command": "-claude-vscode.terminal.open.keyboard", "when": "config.claudeCode.useTerminal"},
 
   // Project Manager
   {"key": "ctrl+cmd+p", "command": "projectManager.listProjectsNewWindow"},
