@@ -115,7 +115,8 @@
   {"key": "shift+cmd+1", "command": "workbench.view.explorer",                       "when": "true"},
   {"key": "shift+cmd+2", "command": "workbench.view.scm",                            "when": "true"},
   {"key": "shift+cmd+3", "command": "workbench.view.extension.github-pull-requests", "when": "true"},
-  {"key": "shift+cmd+4", "command": "workbench.view.extension.bookmarks",            "when": "true"},
+  {"key": "shift+cmd+4", "command": "workbench.view.extension.github-actions",       "when": "true"},
+  {"key": "shift+cmd+5", "command": "workbench.view.extension.bookmarks",            "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.gitlensInspect",       "when": "true"},
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
   // {"key": "shift+cmd+7", "command": "workbench.panel.chat.view.copilot.focus",       "when": "!(sideBarFocus && activeViewlet == 'workbench.panel.chat')"},
