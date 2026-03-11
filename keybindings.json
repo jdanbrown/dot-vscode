@@ -529,7 +529,7 @@
   {"key": "g f",           "command": "magit.fetching",                 "when": "!inputFocus"},
   {"key": "g b",           "command": "magit.branching",                "when": "!inputFocus"},
   {"key": "g l",           "command": "magit.logging",                  "when": "!inputFocus"},
-  {"key": "g w",           "command": "magit.worktree",                 "when": "!inputFocus"},
+  {"key": "g t",           "command": "magit.worktree",                 "when": "!inputFocus"},
   {"key": "q",             "command": "magit.quit",                     "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "o",             "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"},
   {"key": "ctrl+o",        "command": "magit.toggle-fold",              "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"}, // Conflicts with navigateBack
