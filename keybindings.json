@@ -778,6 +778,8 @@
   //  - TODO Remove this once vscode/iterm.js adds proper support for Kitty (or CSI u):
   //    - https://github.com/microsoft/vscode/issues/243216 Integrated terminal support for the kitty keyboard protocol (2025-03-11)
   //    - https://github.com/xtermjs/xterm.js/issues/4198 Add support for CSI-U/Kitty protocol (2022-10-11)
+  //    - TODO Kitty is now supported -- what can we simplify?
+  //      - [2026-01] v1.109.0: https://code.visualstudio.com/updates/v1_109#_new-vt-features
   //  - iTerm2 supports Kitty, and has an option to enable CSI u but discourages users from enabling it:
   //    - https://iterm2.com/documentation-csiu.html
   //      - "CSI u mode is no longer recommended. Applications should implement the Kitty key reporting protocol instead."

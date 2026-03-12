@@ -60,6 +60,7 @@
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workspace-path-status-bar.enable": false,
   "workbench.commandPalette.history": 0,
+  "workbench.settings.alwaysShowAdvancedSettings": true,
   "zenMode.hideLineNumbers": false,
   "zenMode.restore": true,
 
@@ -288,6 +289,7 @@
   //      - Everything else seems to be working fine with "off", so I'm going with it for now 🤷
   // "terminal.integrated.gpuAcceleration": "auto", // HACK Needs "terminal.integrated.fontSize":13 -- different from editor.fontSize
   "terminal.integrated.gpuAcceleration": "off", // Good with  "terminal.integrated.fontSize":12.7 -- same as editor.fontSize
+  // "terminal.integrated.enableImages": false, // TODO Enabling images requires enabling gpuAcceleration...
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleKeybindingsLog",
   ],
