@@ -311,6 +311,10 @@
   "terminal.integrated.shellIntegration.showCommandGuide": false,
   "terminal.integrated.environmentChangesRelaunch": false,
   "terminal.integrated.initialHint": false,
+  // HACK [2026-03-12, v1.111.0] Disable kitty keyboard protocol (KKP) until they fix more bugs
+  //  - e.g. enabling kitty causes terminals to capture cmd+[hjklnt] keys instead of letting vscode keybindings handle them
+  //    - https://claude.ai/share/889a86b1-8089-49ed-a47f-9cd44a7c22e9
+  "terminal.integrated.enableKittyKeyboardProtocol": false,
 
   // Search Editor / Search
   "search.searchEditor.defaultNumberOfContextLines": 0,
