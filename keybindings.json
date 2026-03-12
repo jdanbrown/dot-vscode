@@ -102,12 +102,10 @@
   {"key": "shift+cmd+;", "command": "-breadcrumbs.focus", "when": "breadcrumbsPossible"},
   {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus"}, // Unfocus sidebar, but leave it open
   {"key": "shift+escape", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
-  //  - HACK Workaround: Simplify to workbench.action.focus*GroupWithoutWrap after this bug is fixed
-  //    - https://github.com/microsoft/vscode/issues/236648 workbench.action.focus*GroupWithoutWrap commands fail to focus *-most group when sibebar/panel is focused
-  {"key": "cmd+h", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusLeftGroupWithoutWrap", "when": "sideBarFocus"},
-  {"key": "cmd+l", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusRightGroupWithoutWrap", "when": "sideBarFocus"},
-  {"key": "cmd+j", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusBelowGroupWithoutWrap", "when": "sideBarFocus"},
-  {"key": "cmd+k", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusAboveGroupWithoutWrap", "when": "sideBarFocus"},
+  {"key": "cmd+h", "command": "workbench.action.focusLeftGroupWithoutWrap", "when": "sideBarFocus"},
+  {"key": "cmd+l", "command": "workbench.action.focusRightGroupWithoutWrap", "when": "sideBarFocus"},
+  {"key": "cmd+j", "command": "workbench.action.focusBelowGroupWithoutWrap", "when": "sideBarFocus"},
+  {"key": "cmd+k", "command": "workbench.action.focusAboveGroupWithoutWrap", "when": "sideBarFocus"},
   //  - To discover these, use: "Developer: Inspect Context Keys" -> click activity bar -> open dev console -> expand object -> `activeViewlet: "..."`
   //    - To filter: { let x = temp1; Object.fromEntries(Object.entries(x).filter(([k,v]) => k === 'activeViewlet' || (v === true && k.match(/^view\.|sideBarFocus/i)))) }
   //  - To open these without focusing them:
@@ -153,12 +151,10 @@
   {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && !inputFocus"}, // Unfocus panel, but leave it open
   {"key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && focusedView == 'workbench.panel.output'"}, // Special case to override the weird editor
   {"key": "shift+escape", "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus"},
-  //  - HACK Workaround: Simplify to workbench.action.focus*GroupWithoutWrap after this bug is fixed
-  //    - https://github.com/microsoft/vscode/issues/236648 workbench.action.focus*GroupWithoutWrap commands fail to focus *-most group when sibebar/panel is focused
-  {"key": "cmd+h", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusLeftGroupWithoutWrap", "when": "panelFocus"},
-  {"key": "cmd+l", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusRightGroupWithoutWrap", "when": "panelFocus"},
-  {"key": "cmd+j", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusBelowGroupWithoutWrap", "when": "panelFocus"},
-  {"key": "cmd+k", "command": "multiCommand:workbench.action.focusActiveEditorGroup+workbench.action.focusAboveGroupWithoutWrap", "when": "panelFocus"},
+  {"key": "cmd+h", "command": "workbench.action.focusLeftGroupWithoutWrap", "when": "panelFocus"},
+  {"key": "cmd+l", "command": "workbench.action.focusRightGroupWithoutWrap", "when": "panelFocus"},
+  {"key": "cmd+j", "command": "workbench.action.focusBelowGroupWithoutWrap", "when": "panelFocus"},
+  {"key": "cmd+k", "command": "workbench.action.focusAboveGroupWithoutWrap", "when": "panelFocus"},
   {"key": "ctrl+cmd+z", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus"}, // Maximize panel
   {"key": "l", "command": "workbench.output.action.toggleAutoScroll", "when": "panelFocus && focusedView == 'workbench.panel.output'"},
   {"key": "ctrl+cmd+1", "command": "workbench.actions.view.problems", "when": "focusedView != 'workbench.panel.markers.view'"},
