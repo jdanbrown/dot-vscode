@@ -573,7 +573,7 @@
     // },
     "(\\t)": {
       "decorations": [{"backgroundColor": "#ff6e67"}], // Same as "terminal.ansiBrightRed" (above)
-      "filterFileRegex": ".*(?<!.gitconfig|COMMIT_EDITMSG|Makefile|.go)$",
+      "filterFileRegex": ".*(?<!.gitconfig|COMMIT_EDITMSG|Makefile|.go|Caddyfile)$",
       // language:'log' is for the Output bottom panel (discovered via Inspect Editor Tokens and Scopes)
       "filterLanguageRegex": "(?<!log)$",
     },
