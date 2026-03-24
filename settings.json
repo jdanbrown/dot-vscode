@@ -221,6 +221,10 @@
     "other": true, // ?
   },
 
+  // Comments
+  //  - https://code.visualstudio.com/updates/v1_74#_comments
+  "comments.visible": false,
+
   // Hide gutter (editor left margin)
   //  - https://github.com/microsoft/vscode/issues/30795
   //  - https://github.com/microsoft/vscode/issues/12543
