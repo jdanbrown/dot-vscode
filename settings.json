@@ -2358,6 +2358,9 @@
     ".xterm-viewport::-webkit-scrollbar": {
       "display": "none",
     },
+    ".xterm-scrollbar": {
+      "display": "none",
+    },
 
     // Add border on focused editor/terminal pane
     //  - Bugs/gotchas
