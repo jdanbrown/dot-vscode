@@ -883,7 +883,8 @@
   {"key": "h", "command": "multiCommand:notebook.fold+list.selectAndPreserveFocus", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   {"key": "l", "command": "multiCommand:notebook.unfold+list.selectAndPreserveFocus", "when": "notebookEditorFocused && !inputFocus && !notebookOutputInputFocused"},
   //  - Kernel management
-  {"key": "alt+up", "command": "_notebook.selectKernel", "when": "notebookEditorFocused"}, // alt+up = ctrl+opt+k
+  {"key": "ctrl+alt+k", "command": "_notebook.selectKernel", "when": "notebookEditorFocused"},
+  {"key": "ctrl+alt+k", "command": "python-envs.set", "when": "!notebookEditorFocused"},
   {"key": "ctrl+c", "command": "notebook.interruptExecution", "when": "notebookEditorFocused"},
   {"key": "ctrl+\\", "command": "jupyter.restartkernel", "when": "notebookEditorFocused"},
   {"key": "alt+down", "command": "-notebook.cell.moveDown", "when": "notebookEditorFocused && !inputFocus"},
