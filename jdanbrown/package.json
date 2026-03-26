@@ -29,7 +29,8 @@
       {"command": "jdanbrown.workbench.action.quickOpen.magit", "title": "[jdanbrown] Quick Open: Magit"},
       {"command": "jdanbrown.fixWorkspaceSetting.jupyter.cellMarker", "title": "[jdanbrown] Fix Workspace Setting: jupyter.interactiveWindow.cellMarker.default"},
       {"command": "jdanbrown.python.pylance.undisable", "title": "[jdanbrown] Pylance: Un-disable"},
-      {"command": "jdanbrown.python.pylance.disable", "title": "[jdanbrown] Pylance: Disable"}
+      {"command": "jdanbrown.python.pylance.disable", "title": "[jdanbrown] Pylance: Disable"},
+      {"command": "jdanbrown.vscode.openHome", "title": "[jdanbrown] Open File in Home"}
     ],
     "customEditors": [
       {

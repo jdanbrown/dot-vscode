@@ -1,6 +1,7 @@
 // Tracking
 //  - https://paper.dropbox.com/doc/atom-vscode--B_1pTajtClXUnlRg8vKINs~QAg-h1pVZyCsdouFUaDxCTofw
 
+import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
 import { spawn } from "child_process";
@@ -20,6 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsQuickOpenMagit(context);
   registerCommandsFixWorkspaceSettings(context);
   registerCommandsPylance(context);
+  registerCommandsVscodeOpenHome(context);
   registerImageViewer(context);
   console.info('[jdanbrown] activate: Done');
 }
@@ -254,6 +256,16 @@ export function registerCommandsPylance(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('jdanbrown.python.pylance.disable', async () => {
       const config = vscode.workspace.getConfiguration();
       await config.update('python.languageServer', 'None', vscode.ConfigurationTarget.Workspace);
+    }),
+  );
+}
+
+export function registerCommandsVscodeOpenHome(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsVscodeOpenHome');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.vscode.openHome', async (args: {path: string}) => {
+      const filePath = path.join(os.homedir(), args.path);
+      await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
     }),
   );
 }
