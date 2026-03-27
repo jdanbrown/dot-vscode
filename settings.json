@@ -61,6 +61,8 @@
   "workspace-path-status-bar.enable": false,
   "workbench.commandPalette.history": 0,
   "workbench.settings.alwaysShowAdvancedSettings": true,
+  "workbench.editor.useModal": "off",
+  "extensions.allowOpenInModalEditor": false,
   "zenMode.hideLineNumbers": false,
   "zenMode.restore": true,
 
@@ -678,6 +680,7 @@
   "yaml.schemas": {
     "https://json.schemastore.org/yamllint.json": "*.yaml",
   },
+  "redhat.telemetry.enabled": false,
 
   // Filetypes
   //  - https://code.visualstudio.com/docs/languages/identifiers
