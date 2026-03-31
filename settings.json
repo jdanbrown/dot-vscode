@@ -300,7 +300,7 @@
     "workbench.action.toggleKeybindingsLog",
   ],
   // "terminal.integrated.sendKeybindingsToShell": true, // Nope, breaks ctrl-h/ctrl-l for switching tabs
-  "terminal.integrated.wordSeparators": " ',\"`─‘’|[]", // Default: " ()[]{}',\"`─‘’|"
+  "terminal.integrated.wordSeparators": " ',\"`─‘’|[](){}", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.stickyScroll.enabled": false,
 
