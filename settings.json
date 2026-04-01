@@ -62,6 +62,7 @@
   "workbench.commandPalette.history": 0,
   "workbench.settings.alwaysShowAdvancedSettings": true,
   "workbench.editor.useModal": "off",
+  "extensions.ignoreRecommendations": true,
   "extensions.allowOpenInModalEditor": false,
   "zenMode.hideLineNumbers": false,
   "zenMode.restore": true,
