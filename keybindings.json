@@ -683,7 +683,7 @@
   // {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
 
   // opencode
-  {"key": "cmd+shift+a", "command": "jdanbrown.vscode.openHome", "args": {"path": ".opencode/opencode.jsonc.py"}},
+  {"key": "ctrl+cmd+shift+o", "command": "jdanbrown.vscode.openHome", "args": {"path": ".opencode/opencode.jsonc.py"}},
 
   // opencode
   //  - https://marketplace.visualstudio.com/items/?itemName=sst-dev.opencode
