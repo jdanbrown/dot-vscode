@@ -77,7 +77,7 @@
   {"key": "cmd+o", "command": "-workbench.action.files.openLocalFileFolder", "when": "remoteFileDialogVisible"},
   {"key": "ctrl+cmd+o", "command": "workbench.action.files.openFile"},
   {"key": "shift+cmd+backspace", "command": "fileutils.removeFile", "when": "editorFocus"},
-  {"key": "ctrl+m", "command": "fileutils.moveFile", "when": "editorFocus"},
+  {"key": "cmd+m", "command": "fileutils.moveFile", "when": "editorFocus"},
   {"key": "shift+cmd+c", "command": "copyRelativeFilePath", "when": "editorFocus || notebookEditorFocused"},
   {"key": "shift+cmd+c", "command": "-workbench.action.terminal.openNativeConsole", "when": "!terminalFocus"},
   {"key": "alt+cmd+c", "command": "-copyFilePath", "when": "!editorFocus"},
@@ -772,6 +772,8 @@
   {"key": "shift+cmd+.", "command": "workbench.action.terminal.openDetectedLink", "when": "terminalFocus"},
   {"key": "shift+cmd+o", "command": "-workbench.action.terminal.openDetectedLink", "when": "terminalFocus && terminalHasBeenCreated"},
   {"key": "shift+cmd+g", "command": "-workbench.action.terminal.openDetectedLink", "when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"},
+  //  - Manually name terminal tabs
+  {"key": "cmd+m", "command": "workbench.action.terminal.rename", "when": "terminalFocus || terminalTabsFocus"},
 
   // Terminal: Manually emit CSI u control sequences for control keys
   //  - TODO Remove this once vscode/iterm.js adds proper support for Kitty (or CSI u):
