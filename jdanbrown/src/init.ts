@@ -4,7 +4,10 @@
 import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
-import { spawn } from "child_process";
+import { execFile as execFileCb, spawn } from "child_process";
+import { promisify } from "util";
+
+const execFile = promisify(execFileCb);
 
 // Used to have these, add them back to package.json if we need them again
 // import * as CryptoJS from 'crypto-js';
@@ -22,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsFixWorkspaceSettings(context);
   registerCommandsPylance(context);
   registerCommandsVscodeOpenHome(context);
+  registerCommandsVscodeTouchAndOpen(context);
   registerImageViewer(context);
   console.info('[jdanbrown] activate: Done');
 }
@@ -265,6 +269,18 @@ export function registerCommandsVscodeOpenHome(context: vscode.ExtensionContext)
   context.subscriptions.push(
     vscode.commands.registerCommand('jdanbrown.vscode.openHome', async (args: {path: string}) => {
       const filePath = path.join(os.homedir(), args.path);
+      await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
+    }),
+  );
+}
+
+// Touch + vscode.open: Ensure the file exists (but don't overwrite it), then vscode.open it
+export function registerCommandsVscodeTouchAndOpen(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsVscodeTouchAndOpen');
+  context.subscriptions.push(
+    vscode.commands.registerCommand('jdanbrown.vscode.touchAndOpen', async (args: {path: string}) => {
+      const filePath = args.path;
+      await execFile('touch', [filePath]);
       await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
     }),
   );

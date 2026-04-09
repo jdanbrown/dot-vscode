@@ -43,7 +43,7 @@
   {"key": "alt+cmd+i", "command": "workbench.action.toggleDevTools"},
   {"key": "ctrl+cmd+t", "command": "workbench.action.openRecent"},
   // {"key": "cmd+.", "command": "workbench.action.toggleKeybindingsLog"},
-  {"key": "ctrl+shift+cmd+.", "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor"},
+  {"key": "ctrl+shift+cmd+'", "command": "multiCommand.workbench.action.toggleKeybindingsLog.focusBackOnEditor"},
   // {"key": "ctrl+shift+cmd+k", "command": "workbench.action.toggleKeybindingsLog"}, // Used by workbench.action.openGlobalKeybindingsFile
   //  - Disable these so we can pass ctrl+q to the terminal (e.g. for fzf/fish)
   {"key": "ctrl+q", "command": "-workbench.action.quickOpenView"},
@@ -678,6 +678,9 @@
   {"key": "ctrl+/", "command": "-github.copilot.acceptCursorPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
   {"key": "alt+]", "command": "-github.copilot.nextPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
   {"key": "alt+[", "command": "-github.copilot.previousPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
+
+  // Scratch files
+  {"key": "ctrl+cmd+shift+.", "command": "jdanbrown.vscode.touchAndOpen", "args": {"path": "/tmp/x"}},
 
   // // aider
   // {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
