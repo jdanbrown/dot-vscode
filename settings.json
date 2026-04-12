@@ -181,6 +181,7 @@
   "editor.linkedEditing": true,
   "editor.accessibilitySupport": "off",
   "editor.hideCursorInOverviewRuler": true,
+  "editor.hover.enabled": "onKeyboardModifier",
   "files.hotExit": "off",
   "files.refactoring.autoSave": false,
   "files.simpleDialog.enable": true,
@@ -304,6 +305,7 @@
   "terminal.integrated.wordSeparators": " ',\"`─‘’|[](){}", // Default: " ()[]{}',\"`─‘’|"
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.stickyScroll.enabled": false,
+  "terminal.integrated.showLinkHover": false,
 
   // Terminal shell integration
   //  - https://code.visualstudio.com/docs/terminal/shell-integration
