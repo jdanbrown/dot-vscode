@@ -680,7 +680,7 @@
   {"key": "alt+[", "command": "-github.copilot.previousPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
 
   // Scratch files
-  {"key": "ctrl+cmd+shift+.", "command": "jdanbrown.vscode.touchAndOpen", "args": {"path": "/tmp/x.md"}},
+  {"key": "ctrl+cmd+shift+.", "command": "jdanbrown.vscode.touchAndOpen", "args": {"path": "/tmp/x"}},
 
   // // aider
   // {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
