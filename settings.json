@@ -463,6 +463,10 @@
   "githubPullRequests.defaultMergeMethod": "squash",
   "githubPullRequests.focusedMode": "overview",
   "githubPullRequests.showPullRequestNumberInTree": true,
+  "githubPullRequests.postCreate": "none", // No, die! When claude in a terminal would create a PR, vscode would _sometimes_ open it. Stop stop stop!
+  "githubPullRequests.pullBranch": "never", // Disabled for good measure (with postCreate:none)
+  "githubPullRequests.pullPullRequestBranchBeforeCheckout": "never", // Disabled for good measure (with postCreate:none)
+  "githubPullRequests.fileAutoReveal": false, // Disabled for good measure (with postCreate:none)
 
   // Copilot
   //  - https://code.visualstudio.com/docs/copilot/overview
