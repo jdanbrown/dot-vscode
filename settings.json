@@ -2192,7 +2192,12 @@
     },
     ".tabs-and-actions-container .tab": {
       "padding-right": "10px !important", // Prevent the normal padding-right:10px changing to padding-right:0 when .dirty (probably for the dirty circle)
-      "border-width": "0px !important", // Prevent jank when moving through wrapped tabs (when right border changes 0px->1px, which I don't need)
+      "border-width": "0px !important", // Disable vscode's default borders + prevent jank when moving through wrapped tabs
+    },
+    ".tabs-and-actions-container .tab:not(:last-child)": {
+      // Thin vertical separator between tabs
+      //  - TODO TODO Test + tune color -- requires vscode restart
+      "border-right": "1px solid #666 !important",
     },
     ".tabs-and-actions-container .tab .monaco-icon-label .monaco-icon-label-container": {
       // When multiple tabs are open with the same name (.label-name), they gain a dir label too (.label-description),
