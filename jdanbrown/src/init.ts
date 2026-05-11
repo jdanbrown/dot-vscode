@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommandsQuickOpenMagit(context);
   registerCommandsFixWorkspaceSettings(context);
   registerCommandsPylance(context);
-  registerCommandsVscodeOpenHome(context);
+  registerCommandsVscodeOpen(context);
   registerCommandsVscodeTouchAndOpen(context);
   registerImageViewer(context);
   console.info('[jdanbrown] activate: Done');
@@ -264,11 +264,11 @@ export function registerCommandsPylance(context: vscode.ExtensionContext) {
   );
 }
 
-export function registerCommandsVscodeOpenHome(context: vscode.ExtensionContext) {
-  console.info('[jdanbrown] registerCommandsVscodeOpenHome');
+export function registerCommandsVscodeOpen(context: vscode.ExtensionContext) {
+  console.info('[jdanbrown] registerCommandsVscodeOpen');
   context.subscriptions.push(
-    vscode.commands.registerCommand('jdanbrown.vscode.openHome', async (args: {path: string}) => {
-      const filePath = path.join(os.homedir(), args.path);
+    vscode.commands.registerCommand('jdanbrown.vscode.open', async (args: {path: string}) => {
+      const filePath = expandPath(args.path);
       await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
     }),
   );
@@ -279,11 +279,23 @@ export function registerCommandsVscodeTouchAndOpen(context: vscode.ExtensionCont
   console.info('[jdanbrown] registerCommandsVscodeTouchAndOpen');
   context.subscriptions.push(
     vscode.commands.registerCommand('jdanbrown.vscode.touchAndOpen', async (args: {path: string}) => {
-      const filePath = args.path;
+      const filePath = expandPath(args.path);
       await execFile('touch', [filePath]);
       await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
     }),
   );
+}
+
+// Expand ~, $VAR, and ${VAR} in a path using process.env (and os.homedir() for ~)
+function expandPath(p: string): string {
+  let expanded = p.replace(/\$\{([^}]+)\}|\$([A-Za-z_][A-Za-z0-9_]*)/g, (_, braced, bare) => {
+    const name = braced ?? bare;
+    return process.env[name] ?? '';
+  });
+  if (expanded === '~' || expanded.startsWith('~/')) {
+    expanded = path.join(os.homedir(), expanded.slice(1));
+  }
+  return expanded;
 }
 
 //

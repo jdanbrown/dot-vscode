@@ -681,13 +681,13 @@
   {"key": "alt+[", "command": "-github.copilot.previousPanelSolution", "when": "github.copilot.activated && github.copilot.panelVisible"},
 
   // Scratch files
-  {"key": "ctrl+cmd+shift+.", "command": "jdanbrown.vscode.touchAndOpen", "args": {"path": "/tmp/x"}},
+  {"key": "ctrl+cmd+shift+.", "command": "jdanbrown.vscode.touchAndOpen", "args": {"path": "$HOME/tmp/x.md"}},
 
   // // aider
-  // {"key": "cmd+shift+a", "command": "vscode.open", "args": "/Users/danb/.aider.conf.yml"},
+  // {"key": "cmd+shift+a", "command": "jdanbrown.vscode.open", "args": {"path": "$HOME/.aider.conf.yml"}},
 
   // opencode
-  {"key": "ctrl+cmd+shift+o", "command": "jdanbrown.vscode.openHome", "args": {"path": ".opencode/opencode.jsonc.py"}},
+  {"key": "ctrl+cmd+shift+o", "command": "jdanbrown.vscode.open", "args": {"path": "$HOME/.opencode/opencode.jsonc.py"}},
 
   // opencode
   //  - https://marketplace.visualstudio.com/items/?itemName=sst-dev.opencode
