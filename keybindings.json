@@ -119,8 +119,9 @@
   // {"key": "shift+cmd+7", "command": "workbench.view.extension.test",                 "when": "true"}, // How to `when` on test view enabled? o/w focuses explorer view
   // {"key": "shift+cmd+7", "command": "workbench.panel.chat.view.copilot.focus",       "when": "!(sideBarFocus && activeViewlet == 'workbench.panel.chat')"},
   // {"key": "shift+cmd+7", "command": "workbench.action.focusActiveEditorGroup",       "when": "sideBarFocus && activeViewlet == 'workbench.panel.chat'"},
-  {"key": "shift+cmd+8", "command": "workbench.view.debug",                          "when": "true"},
-  {"key": "shift+cmd+9", "command": "workbench.panel.chat",                          "when": "true"},
+  {"key": "shift+cmd+7", "command": "workbench.view.debug",                          "when": "true"},
+  {"key": "shift+cmd+8", "command": "workbench.panel.chat",                          "when": "true"},
+  {"key": "shift+cmd+9", "command": "workbench.view.extension.starfolk",             "when": "true"},
   {"key": "shift+cmd+0", "command": "workbench.view.extensions",                     "when": "true"},
   {"key": "ctrl+tab", "command": "workbench.action.nextSideBarView", "when": "sideBarFocus"},
   {"key": "ctrl+shift+tab", "command": "workbench.action.previousSideBarView", "when": "sideBarFocus"},
